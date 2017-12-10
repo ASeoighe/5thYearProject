@@ -38,13 +38,17 @@ public class ImageViewer {
 	private JPanel outputPanel;
 	private JPanel imageViewPanel;
 	private JPanel textOutputPanel;
+	JProgressBar progressBar;
 	JTextPane outPutTextPane;
 	JLabel lblTextReadFrom;
+	JLabel errorLabel;
 	
 	JPanel progressBarPanel;
 	private static String IMG_PATH = null;
+	
 	ITesseract instance = new Tesseract();
 	writeToFile fileWriter = new writeToFile();
+	static sqlInsert mySQL ;
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +56,7 @@ public class ImageViewer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+					mySQL = new sqlInsert();
 					ImageViewer window = new ImageViewer();
 					window.frame.setVisible(true);
   
@@ -71,21 +75,41 @@ public class ImageViewer {
 		
 	}
 	public void displayImage() {
-		try {
-	         BufferedImage img = ImageIO.read(new File(IMG_PATH));
-	         ImageIcon image = new ImageIcon(img);
-	         inputImage.setIcon(image);
-	         result = instance.doOCR(chosenFile);
-	         
-	         lblTextReadFrom.setVisible(true);
-	         outPutTextPane.setVisible(true);
-	         outPutTextPane.setText(result);
+		SwingUtilities.invokeLater(new Runnable() {
+	      public void run() {
+	         //progressBar.updateBar(percent);
+			 try {     
+			 BufferedImage img;
+			
+				img = ImageIO.read(new File(IMG_PATH));
+			
+			 ImageIcon image = new ImageIcon(img);
+			 inputImage.setIcon(image);
+			 result = instance.doOCR(chosenFile);
+			 
+			 lblTextReadFrom.setVisible(true);
+			 outPutTextPane.setVisible(true);
+			 outPutTextPane.setText(result);
 			 System.out.println(result);
 			 fileWriter.writeToFile(result);
-	         
-	      } catch (IOException | TesseractException e) {
-	         e.printStackTrace();
-	      }
+			 if(mySQL.insertPlate(result)) {
+				 errorLabel.setVisible(true);
+				 errorLabel.setForeground(Color.GREEN);
+				 errorLabel.setText("Database Insert Succesful");
+			 }
+			 else {
+				 errorLabel.setVisible(true);
+				 errorLabel.setForeground(Color.RED);
+				 errorLabel.setText("Databse Insert Failed!");
+			 }
+			 
+		 } catch (IOException | TesseractException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+     
+		}
+      });
 	}
         
 	
@@ -173,7 +197,7 @@ public class ImageViewer {
 		error.setBounds(0, 0, 46, 14);
 		ErrorPanel.add(error);
 		
-		JLabel errorLabel = new JLabel("");
+		errorLabel = new JLabel("");
 		//errorLabel.setEnabled(false);
 		errorLabel.setVisible(false);
 		errorLabel.setBounds(54, 0, 210, 14);
@@ -189,9 +213,11 @@ public class ImageViewer {
 		progressLabel.setBounds(0, 0, 100, 14);
 		progressBarPanel.add(progressLabel);
 		
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
 		progressBar.setForeground(Color.GREEN);
 		progressBar.setBounds(110, 0, 146, 14);
+		progressBar.setMinimum(0);
+		progressBar.setMaximum(100);
 		progressBarPanel.add(progressBar);
 		
 		JLabel directoryLabel = new JLabel("Choose Your Picture Directory");

@@ -21,6 +21,7 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.List;
 import javax.imageio.IIOImage;
+import javax.swing.JProgressBar;
 
 /**
  * An interface represents common OCR methods.
@@ -63,6 +64,7 @@ public interface ITesseract {
      * @throws TesseractException
      */
     String doOCR(File imageFile, Rectangle rect) throws TesseractException;
+    //String doOCR(File imageFile, JProgressBar pb) throws TesseractException;
 
     /**
      * Performs OCR operation.

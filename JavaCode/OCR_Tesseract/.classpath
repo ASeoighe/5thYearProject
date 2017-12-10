@@ -37,5 +37,6 @@
 	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/GitHub/5thYearProject/JAR&apos;s/logback-core-1.2.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/GitHub/5thYearProject/JAR&apos;s/slf4j-api-1.7.25.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/GitHub/5thYearProject/JAR&apos;s/tess4j-3.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/GitHub/5thYearProject/JavaCode/OCR_Tesseract/mysql-connector-java-3.0.10-stable-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
