@@ -473,10 +473,17 @@ namespace cv
     // return image with center Parvo and peripheral Magno channels
     void RetinaFilter::_processRetinaParvoMagnoMapping()
     {
+<<<<<<< HEAD
         register float *hybridParvoMagnoPTR= &_retinaParvoMagnoMappedFrame[0];
         register const float *parvoOutputPTR= get_data(_ParvoRetinaFilter.getOutput());
         register const float *magnoXOutputPTR= get_data(_MagnoRetinaFilter.getOutput());
         register float *hybridParvoMagnoCoefTablePTR= &_retinaParvoMagnoMapCoefTable[0];
+=======
+        float *hybridParvoMagnoPTR= &_retinaParvoMagnoMappedFrame[0];
+        const float *parvoOutputPTR= get_data(_ParvoRetinaFilter.getOutput());
+        const float *magnoXOutputPTR= get_data(_MagnoRetinaFilter.getOutput());
+        float *hybridParvoMagnoCoefTablePTR= &_retinaParvoMagnoMapCoefTable[0];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         for (unsigned int i=0 ; i<_photoreceptorsPrefilter.getNBpixels() ; ++i, hybridParvoMagnoCoefTablePTR+=2)
         {
@@ -495,9 +502,15 @@ namespace cv
         if (parvoFovealResponse.size() != _ParvoRetinaFilter.getNBpixels())
             return false;
 
+<<<<<<< HEAD
         register const float *parvoOutputPTR= get_data(_ParvoRetinaFilter.getOutput());
         register float *fovealParvoResponsePTR= &parvoFovealResponse[0];
         register float *hybridParvoMagnoCoefTablePTR= &_retinaParvoMagnoMapCoefTable[0];
+=======
+        const float *parvoOutputPTR= get_data(_ParvoRetinaFilter.getOutput());
+        float *fovealParvoResponsePTR= &parvoFovealResponse[0];
+        float *hybridParvoMagnoCoefTablePTR= &_retinaParvoMagnoMapCoefTable[0];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         for (unsigned int i=0 ; i<_photoreceptorsPrefilter.getNBpixels() ; ++i, hybridParvoMagnoCoefTablePTR+=2)
         {
@@ -515,9 +528,15 @@ namespace cv
         if (magnoParafovealResponse.size() != _MagnoRetinaFilter.getNBpixels())
             return false;
 
+<<<<<<< HEAD
         register const float *magnoXOutputPTR= get_data(_MagnoRetinaFilter.getOutput());
         register float *parafovealMagnoResponsePTR=&magnoParafovealResponse[0];
         register float *hybridParvoMagnoCoefTablePTR=&_retinaParvoMagnoMapCoefTable[0]+1;
+=======
+        const float *magnoXOutputPTR= get_data(_MagnoRetinaFilter.getOutput());
+        float *parafovealMagnoResponsePTR=&magnoParafovealResponse[0];
+        float *hybridParvoMagnoCoefTablePTR=&_retinaParvoMagnoMapCoefTable[0]+1;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         for (unsigned int i=0 ; i<_photoreceptorsPrefilter.getNBpixels() ; ++i, hybridParvoMagnoCoefTablePTR+=2)
         {

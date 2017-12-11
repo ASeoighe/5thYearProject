@@ -1,8 +1,13 @@
 
 /* pngwutil.c - utilities to write a PNG file
  *
+<<<<<<< HEAD
  * Last changed in libpng 1.5.10 [March 8, 2012]
  * Copyright (c) 1998-2012 Glenn Randers-Pehrson
+=======
+ * Last changed in libpng 1.5.26 [December 17, 2015]
+ * Copyright (c) 1998-2002,2004,2006-2015 Glenn Randers-Pehrson
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
@@ -30,19 +35,35 @@ png_save_uint_32(png_bytep buf, png_uint_32 i)
 }
 
 #ifdef PNG_SAVE_INT_32_SUPPORTED
+<<<<<<< HEAD
 /* The png_save_int_32 function assumes integers are stored in two's
  * complement format.  If this isn't the case, then this routine needs to
  * be modified to write data in two's complement format.  Note that,
  * the following works correctly even if png_int_32 has more than 32 bits
  * (compare the more complex code required on read for sign extention.)
+=======
+/* PNG signed integers are saved in 32-bit 2's complement format.  ANSI C-90
+ * defines a cast of a signed integer to an unsigned integer either to preserve
+ * the value, if it is positive, or to calculate:
+ *
+ *     (UNSIGNED_MAX+1) + integer
+ *
+ * Where UNSIGNED_MAX is the appropriate maximum unsigned value, so when the
+ * negative integral value is added the result will be an unsigned value
+ * correspnding to the 2's complement representation.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  */
 void PNGAPI
 png_save_int_32(png_bytep buf, png_int_32 i)
 {
+<<<<<<< HEAD
    buf[0] = (png_byte)((i >> 24) & 0xff);
    buf[1] = (png_byte)((i >> 16) & 0xff);
    buf[2] = (png_byte)((i >> 8) & 0xff);
    buf[3] = (png_byte)(i & 0xff);
+=======
+   png_save_uint_32(buf, i);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 #endif
 
@@ -315,6 +336,10 @@ png_zlib_release(png_structp png_ptr)
 
       if (ret != Z_OK)
       {
+<<<<<<< HEAD
+=======
+#ifdef PNG_WARNINGS_SUPPORTED
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          png_const_charp err;
          PNG_WARNING_PARAMETERS(p)
 
@@ -349,6 +374,10 @@ png_zlib_release(png_structp png_ptr)
 
          png_formatted_warning(png_ptr, p,
             "zlib failed to reset compressor: @1(@2): @3");
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       }
    }
 
@@ -460,24 +489,39 @@ png_text_compress(png_structp png_ptr,
                old_ptr = comp->output_ptr;
 
                comp->output_ptr = (png_bytepp)png_malloc(png_ptr,
+<<<<<<< HEAD
                    (png_alloc_size_t)
                    (comp->max_output_ptr * png_sizeof(png_charpp)));
 
                png_memcpy(comp->output_ptr, old_ptr, old_max
                    * png_sizeof(png_charp));
+=======
+                   (comp->max_output_ptr * png_sizeof(png_bytep)));
+
+               png_memcpy(comp->output_ptr, old_ptr, old_max
+                   * png_sizeof(png_bytep));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
                png_free(png_ptr, old_ptr);
             }
             else
                comp->output_ptr = (png_bytepp)png_malloc(png_ptr,
+<<<<<<< HEAD
                    (png_alloc_size_t)
                    (comp->max_output_ptr * png_sizeof(png_charp)));
+=======
+                   (comp->max_output_ptr * png_sizeof(png_bytep)));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          }
 
          /* Save the data */
          comp->output_ptr[comp->num_output_ptr] =
+<<<<<<< HEAD
              (png_bytep)png_malloc(png_ptr,
              (png_alloc_size_t)png_ptr->zbuf_size);
+=======
+             (png_bytep)png_malloc(png_ptr, png_ptr->zbuf_size);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
          png_memcpy(comp->output_ptr[comp->num_output_ptr], png_ptr->zbuf,
              png_ptr->zbuf_size);
@@ -826,7 +870,11 @@ png_write_IHDR(png_structp png_ptr, png_uint_32 width, png_uint_32 height,
    png_ptr->zstream.zfree = png_zfree;
    png_ptr->zstream.opaque = (voidpf)png_ptr;
 
+<<<<<<< HEAD
    if (!(png_ptr->do_filter))
+=======
+   if ((png_ptr->do_filter) == PNG_NO_FILTERS)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    {
       if (png_ptr->color_type == PNG_COLOR_TYPE_PALETTE ||
           png_ptr->bit_depth < 8)
@@ -896,17 +944,31 @@ void /* PRIVATE */
 png_write_PLTE(png_structp png_ptr, png_const_colorp palette,
     png_uint_32 num_pal)
 {
+<<<<<<< HEAD
    png_uint_32 i;
+=======
+   png_uint_32 max_palette_length, i;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    png_const_colorp pal_ptr;
    png_byte buf[3];
 
    png_debug(1, "in png_write_PLTE");
 
+<<<<<<< HEAD
+=======
+   max_palette_length = (png_ptr->color_type == PNG_COLOR_TYPE_PALETTE) ?
+      (1 << png_ptr->bit_depth) : PNG_MAX_PALETTE_LENGTH;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    if ((
 #ifdef PNG_MNG_FEATURES_SUPPORTED
        !(png_ptr->mng_features_permitted & PNG_FLAG_MNG_EMPTY_PLTE) &&
 #endif
+<<<<<<< HEAD
        num_pal == 0) || num_pal > 256)
+=======
+       num_pal == 0) || num_pal > max_palette_length)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    {
       if (png_ptr->color_type == PNG_COLOR_TYPE_PALETTE)
       {
@@ -1096,7 +1158,10 @@ png_write_iCCP(png_structp png_ptr, png_const_charp name, int compression_type,
     png_const_charp profile, int profile_len)
 {
    png_size_t name_len;
+<<<<<<< HEAD
    png_charp new_name;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    compression_state comp;
    int embedded_profile_len = 0;
 
@@ -1108,8 +1173,12 @@ png_write_iCCP(png_structp png_ptr, png_const_charp name, int compression_type,
    comp.input = NULL;
    comp.input_len = 0;
 
+<<<<<<< HEAD
    if ((name_len = png_check_keyword(png_ptr, name, &new_name)) == 0)
       return;
+=======
+   name_len = png_strlen(name);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    if (compression_type != PNG_COMPRESSION_TYPE_BASE)
       png_warning(png_ptr, "Unknown compression type in iCCP chunk");
@@ -1128,8 +1197,11 @@ png_write_iCCP(png_structp png_ptr, png_const_charp name, int compression_type,
    {
       png_warning(png_ptr,
           "Embedded profile length in iCCP chunk is negative");
+<<<<<<< HEAD
 
       png_free(png_ptr, new_name);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       return;
    }
 
@@ -1137,8 +1209,11 @@ png_write_iCCP(png_structp png_ptr, png_const_charp name, int compression_type,
    {
       png_warning(png_ptr,
           "Embedded profile length too large in iCCP chunk");
+<<<<<<< HEAD
 
       png_free(png_ptr, new_name);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       return;
    }
 
@@ -1150,7 +1225,11 @@ png_write_iCCP(png_structp png_ptr, png_const_charp name, int compression_type,
       profile_len = embedded_profile_len;
    }
 
+<<<<<<< HEAD
    if (profile_len)
+=======
+   if (profile_len != 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       profile_len = png_text_compress(png_ptr, profile,
           (png_size_t)profile_len, PNG_COMPRESSION_TYPE_BASE, &comp);
 
@@ -1158,18 +1237,34 @@ png_write_iCCP(png_structp png_ptr, png_const_charp name, int compression_type,
    png_write_chunk_header(png_ptr, png_iCCP,
        (png_uint_32)(name_len + profile_len + 2));
 
+<<<<<<< HEAD
    new_name[name_len + 1] = 0x00;
 
    png_write_chunk_data(png_ptr, (png_bytep)new_name,
        (png_size_t)(name_len + 2));
 
    if (profile_len)
+=======
+   png_write_chunk_data(png_ptr, (png_bytep)name, name_len);
+
+   {
+      png_byte buffer[2];
+      buffer[0] = 0; /* terminate name */
+      buffer[1] = 0xFFU & compression_type;
+      png_write_chunk_data(png_ptr, buffer, 2);
+   }
+
+   if (profile_len != 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    {
       png_write_compressed_data_out(png_ptr, &comp, profile_len);
    }
 
    png_write_chunk_end(png_ptr);
+<<<<<<< HEAD
    png_free(png_ptr, new_name);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 #endif
 
@@ -1179,7 +1274,10 @@ void /* PRIVATE */
 png_write_sPLT(png_structp png_ptr, png_const_sPLT_tp spalette)
 {
    png_size_t name_len;
+<<<<<<< HEAD
    png_charp new_name;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    png_byte entrybuf[10];
    png_size_t entry_size = (spalette->depth == 8 ? 6 : 10);
    png_size_t palette_size = entry_size * spalette->nentries;
@@ -1190,14 +1288,22 @@ png_write_sPLT(png_structp png_ptr, png_const_sPLT_tp spalette)
 
    png_debug(1, "in png_write_sPLT");
 
+<<<<<<< HEAD
    if ((name_len = png_check_keyword(png_ptr,spalette->name, &new_name))==0)
       return;
+=======
+   name_len = png_strlen(spalette->name);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    /* Make sure we include the NULL after the name */
    png_write_chunk_header(png_ptr, png_sPLT,
        (png_uint_32)(name_len + 2 + palette_size));
 
+<<<<<<< HEAD
    png_write_chunk_data(png_ptr, (png_bytep)new_name,
+=======
+   png_write_chunk_data(png_ptr, (png_bytep)spalette->name,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
        (png_size_t)(name_len + 1));
 
    png_write_chunk_data(png_ptr, &spalette->depth, (png_size_t)1);
@@ -1253,7 +1359,10 @@ png_write_sPLT(png_structp png_ptr, png_const_sPLT_tp spalette)
 #endif
 
    png_write_chunk_end(png_ptr);
+<<<<<<< HEAD
    png_free(png_ptr, new_name);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 #endif
 
@@ -1370,7 +1479,12 @@ png_write_tRNS(png_structp png_ptr, png_const_bytep trans_alpha,
       }
 
       /* Write the chunk out as it is */
+<<<<<<< HEAD
       png_write_complete_chunk(png_ptr, png_tRNS, trans_alpha, (png_size_t)num_trans);
+=======
+      png_write_complete_chunk(png_ptr, png_tRNS, trans_alpha,
+         (png_size_t)num_trans);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    }
 
    else if (color_type == PNG_COLOR_TYPE_GRAY)
@@ -1508,6 +1622,7 @@ png_write_hIST(png_structp png_ptr, png_const_uint_16p hist, int num_hist)
 }
 #endif
 
+<<<<<<< HEAD
 #if defined(PNG_WRITE_TEXT_SUPPORTED) || defined(PNG_WRITE_pCAL_SUPPORTED) || \
     defined(PNG_WRITE_iCCP_SUPPORTED) || defined(PNG_WRITE_sPLT_SUPPORTED)
 /* Check that the tEXt or zTXt keyword is valid per PNG 1.0 specification,
@@ -1640,6 +1755,8 @@ png_check_keyword(png_structp png_ptr, png_const_charp key, png_charpp new_key)
 }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef PNG_WRITE_tEXt_SUPPORTED
 /* Write a tEXt chunk */
 void /* PRIVATE */
@@ -1647,12 +1764,19 @@ png_write_tEXt(png_structp png_ptr, png_const_charp key, png_const_charp text,
     png_size_t text_len)
 {
    png_size_t key_len;
+<<<<<<< HEAD
    png_charp new_key;
 
    png_debug(1, "in png_write_tEXt");
 
    if ((key_len = png_check_keyword(png_ptr, key, &new_key))==0)
       return;
+=======
+
+   png_debug(1, "in png_write_tEXt");
+
+   key_len = strlen(key);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    if (text == NULL || *text == '\0')
       text_len = 0;
@@ -1669,15 +1793,25 @@ png_write_tEXt(png_structp png_ptr, png_const_charp key, png_const_charp text,
     * any non-Latin-1 characters except for NEWLINE.  ISO PNG will forbid them.
     * The NUL character is forbidden by PNG-1.0 through PNG-1.2 and ISO PNG.
     */
+<<<<<<< HEAD
    png_write_chunk_data(png_ptr, (png_bytep)new_key,
        (png_size_t)(key_len + 1));
 
    if (text_len)
+=======
+   png_write_chunk_data(png_ptr, (png_bytep)key,
+       (png_size_t)(key_len + 1));
+
+   if (text_len != 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       png_write_chunk_data(png_ptr, (png_const_bytep)text,
           (png_size_t)text_len);
 
    png_write_chunk_end(png_ptr);
+<<<<<<< HEAD
    png_free(png_ptr, new_key);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 #endif
 
@@ -1689,7 +1823,10 @@ png_write_zTXt(png_structp png_ptr, png_const_charp key, png_const_charp text,
 {
    png_size_t key_len;
    png_byte buf;
+<<<<<<< HEAD
    png_charp new_key;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    compression_state comp;
 
    png_debug(1, "in png_write_zTXt");
@@ -1700,6 +1837,7 @@ png_write_zTXt(png_structp png_ptr, png_const_charp key, png_const_charp text,
    comp.input = NULL;
    comp.input_len = 0;
 
+<<<<<<< HEAD
    if ((key_len = png_check_keyword(png_ptr, key, &new_key)) == 0)
    {
       png_free(png_ptr, new_key);
@@ -1710,6 +1848,13 @@ png_write_zTXt(png_structp png_ptr, png_const_charp key, png_const_charp text,
    {
       png_write_tEXt(png_ptr, new_key, text, (png_size_t)0);
       png_free(png_ptr, new_key);
+=======
+   key_len = strlen(key);
+
+   if (text == NULL || *text == '\0' || compression==PNG_TEXT_COMPRESSION_NONE)
+   {
+      png_write_tEXt(png_ptr, key, text, (png_size_t)0);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       return;
    }
 
@@ -1724,11 +1869,17 @@ png_write_zTXt(png_structp png_ptr, png_const_charp key, png_const_charp text,
        (png_uint_32)(key_len+text_len + 2));
 
    /* Write key */
+<<<<<<< HEAD
    png_write_chunk_data(png_ptr, (png_bytep)new_key,
        (png_size_t)(key_len + 1));
 
    png_free(png_ptr, new_key);
 
+=======
+   png_write_chunk_data(png_ptr, (png_bytep)key,
+       (png_size_t)(key_len + 1));
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    buf = (png_byte)compression;
 
    /* Write compression */
@@ -1749,8 +1900,11 @@ png_write_iTXt(png_structp png_ptr, int compression, png_const_charp key,
     png_const_charp lang, png_const_charp lang_key, png_const_charp text)
 {
    png_size_t lang_len, key_len, lang_key_len, text_len;
+<<<<<<< HEAD
    png_charp new_lang;
    png_charp new_key = NULL;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    png_byte cbuf[2];
    compression_state comp;
 
@@ -1761,6 +1915,7 @@ png_write_iTXt(png_structp png_ptr, int compression, png_const_charp key,
    comp.output_ptr = NULL;
    comp.input = NULL;
 
+<<<<<<< HEAD
    if ((key_len = png_check_keyword(png_ptr, key, &new_key)) == 0)
       return;
 
@@ -1770,6 +1925,15 @@ png_write_iTXt(png_structp png_ptr, int compression, png_const_charp key,
       new_lang = NULL;
       lang_len = 0;
    }
+=======
+   key_len = png_strlen(key);
+
+   if (lang == NULL)
+      lang_len = 0;
+
+   else
+      lang_len = png_strlen(lang);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    if (lang_key == NULL)
       lang_key_len = 0;
@@ -1804,7 +1968,11 @@ png_write_iTXt(png_structp png_ptr, int compression, png_const_charp key,
     * any non-Latin-1 characters except for NEWLINE.  ISO PNG will forbid them.
     * The NUL character is forbidden by PNG-1.0 through PNG-1.2 and ISO PNG.
     */
+<<<<<<< HEAD
    png_write_chunk_data(png_ptr, (png_bytep)new_key, (png_size_t)(key_len + 1));
+=======
+   png_write_chunk_data(png_ptr, (png_bytep)key, (png_size_t)(key_len + 1));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    /* Set the compression flag */
    if (compression == PNG_ITXT_COMPRESSION_NONE ||
@@ -1820,7 +1988,11 @@ png_write_iTXt(png_structp png_ptr, int compression, png_const_charp key,
    png_write_chunk_data(png_ptr, cbuf, (png_size_t)2);
 
    cbuf[0] = 0;
+<<<<<<< HEAD
    png_write_chunk_data(png_ptr, (new_lang ? (png_const_bytep)new_lang : cbuf),
+=======
+   png_write_chunk_data(png_ptr, (lang ? (png_const_bytep)lang : cbuf),
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
        (png_size_t)(lang_len + 1));
 
    png_write_chunk_data(png_ptr, (lang_key ? (png_const_bytep)lang_key : cbuf),
@@ -1829,9 +2001,12 @@ png_write_iTXt(png_structp png_ptr, int compression, png_const_charp key,
    png_write_compressed_data_out(png_ptr, &comp, text_len);
 
    png_write_chunk_end(png_ptr);
+<<<<<<< HEAD
 
    png_free(png_ptr, new_key);
    png_free(png_ptr, new_lang);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 #endif
 
@@ -1865,7 +2040,10 @@ png_write_pCAL(png_structp png_ptr, png_charp purpose, png_int_32 X0,
    png_size_t purpose_len, units_len, total_len;
    png_size_tp params_len;
    png_byte buf[10];
+<<<<<<< HEAD
    png_charp new_purpose;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    int i;
 
    png_debug1(1, "in png_write_pCAL (%d parameters)", nparams);
@@ -1873,7 +2051,11 @@ png_write_pCAL(png_structp png_ptr, png_charp purpose, png_int_32 X0,
    if (type >= PNG_EQUATION_LAST)
       png_warning(png_ptr, "Unrecognized equation type for pCAL chunk");
 
+<<<<<<< HEAD
    purpose_len = png_check_keyword(png_ptr, purpose, &new_purpose) + 1;
+=======
+   purpose_len = strlen(purpose) + 1;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    png_debug1(3, "pCAL purpose length = %d", (int)purpose_len);
    units_len = png_strlen(units) + (nparams == 0 ? 0 : 1);
    png_debug1(3, "pCAL units length = %d", (int)units_len);
@@ -1895,7 +2077,11 @@ png_write_pCAL(png_structp png_ptr, png_charp purpose, png_int_32 X0,
 
    png_debug1(3, "pCAL total length = %d", (int)total_len);
    png_write_chunk_header(png_ptr, png_pCAL, (png_uint_32)total_len);
+<<<<<<< HEAD
    png_write_chunk_data(png_ptr, (png_const_bytep)new_purpose, purpose_len);
+=======
+   png_write_chunk_data(png_ptr, (png_const_bytep)purpose, purpose_len);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    png_save_int_32(buf, X0);
    png_save_int_32(buf + 4, X1);
    buf[8] = (png_byte)type;
@@ -1903,8 +2089,11 @@ png_write_pCAL(png_structp png_ptr, png_charp purpose, png_int_32 X0,
    png_write_chunk_data(png_ptr, buf, (png_size_t)10);
    png_write_chunk_data(png_ptr, (png_const_bytep)units, (png_size_t)units_len);
 
+<<<<<<< HEAD
    png_free(png_ptr, new_purpose);
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    for (i = 0; i < nparams; i++)
    {
       png_write_chunk_data(png_ptr, (png_const_bytep)params[i], params_len[i]);
@@ -2429,6 +2618,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
    png_uint_32 mins, bpp;
    png_byte filter_to_do = png_ptr->do_filter;
    png_size_t row_bytes = row_info->rowbytes;
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
    int num_p_filters = png_ptr->num_prev_filters;
 #endif
@@ -2443,6 +2633,11 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
   }
 #endif
 
+=======
+
+   png_debug(1, "in png_write_find_filter");
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    /* Find out how many bytes offset each pixel is */
    bpp = (row_info->pixel_depth + 7) >> 3;
 
@@ -2494,6 +2689,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
          sum += (v < 128) ? v : 256 - v;
       }
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       if (png_ptr->heuristic_method == PNG_FILTER_HEURISTIC_WEIGHTED)
       {
@@ -2532,6 +2728,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
             sum = (sumhi << PNG_HISHIFT) + sumlo;
       }
 #endif
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       mins = sum;
    }
 
@@ -2564,6 +2762,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       png_size_t i;
       int v;
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       /* We temporarily increase the "minimum sum" by the factor we
        * would reduce the sum of this filter, so that we can do the
@@ -2602,6 +2801,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       for (i = 0, rp = row_buf + 1, dp = png_ptr->sub_row + 1; i < bpp;
            i++, rp++, dp++)
       {
@@ -2621,6 +2822,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
             break;
       }
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       if (png_ptr->heuristic_method == PNG_FILTER_HEURISTIC_WEIGHTED)
       {
@@ -2655,6 +2857,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       if (sum < mins)
       {
          mins = sum;
@@ -2685,6 +2889,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       png_size_t i;
       int v;
 
+<<<<<<< HEAD
 
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       if (png_ptr->heuristic_method == PNG_FILTER_HEURISTIC_WEIGHTED)
@@ -2720,6 +2925,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       for (i = 0, rp = row_buf + 1, dp = png_ptr->up_row + 1,
           pp = prev_row + 1; i < row_bytes; i++)
       {
@@ -2731,6 +2938,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
             break;
       }
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       if (png_ptr->heuristic_method == PNG_FILTER_HEURISTIC_WEIGHTED)
       {
@@ -2765,6 +2973,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       if (sum < mins)
       {
          mins = sum;
@@ -2799,6 +3009,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       png_size_t i;
       int v;
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       if (png_ptr->heuristic_method == PNG_FILTER_HEURISTIC_WEIGHTED)
       {
@@ -2833,6 +3044,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       for (i = 0, rp = row_buf + 1, dp = png_ptr->avg_row + 1,
            pp = prev_row + 1; i < bpp; i++)
       {
@@ -2852,6 +3065,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
             break;
       }
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       if (png_ptr->heuristic_method == PNG_FILTER_HEURISTIC_WEIGHTED)
       {
@@ -2886,6 +3100,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       if (sum < mins)
       {
          mins = sum;
@@ -2940,6 +3156,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       png_size_t i;
       int v;
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       if (png_ptr->heuristic_method == PNG_FILTER_HEURISTIC_WEIGHTED)
       {
@@ -2974,6 +3191,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       for (i = 0, rp = row_buf + 1, dp = png_ptr->paeth_row + 1,
           pp = prev_row + 1; i < bpp; i++)
       {
@@ -3027,6 +3246,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
             break;
       }
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
       if (png_ptr->heuristic_method == PNG_FILTER_HEURISTIC_WEIGHTED)
       {
@@ -3061,6 +3281,8 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       }
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       if (sum < mins)
       {
          best_row = png_ptr->paeth_row;
@@ -3070,6 +3292,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
 
    /* Do the actual writing of the filtered row data from the chosen filter. */
    png_write_filtered_row(png_ptr, best_row, row_info->rowbytes+1);
+<<<<<<< HEAD
 
 #ifdef PNG_WRITE_FILTER_SUPPORTED
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
@@ -3090,6 +3313,10 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
 }
 
 
+=======
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 /* Do the actual writing of a previously filtered row. */
 static void
 png_write_filtered_row(png_structp png_ptr, png_bytep filtered_row,

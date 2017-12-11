@@ -43,6 +43,14 @@
 #ifndef __OPENCV_STITCHING_STITCHER_HPP__
 #define __OPENCV_STITCHING_STITCHER_HPP__
 
+<<<<<<< HEAD
+=======
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverloaded-virtual"
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include "opencv2/core/core.hpp"
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/stitching/warpers.hpp"
@@ -171,4 +179,11 @@ private:
 
 } // namespace cv
 
+<<<<<<< HEAD
+=======
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif // __OPENCV_STITCHING_STITCHER_HPP__

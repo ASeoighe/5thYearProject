@@ -232,8 +232,21 @@ class CV_EXPORTS GraphCutSeamFinderGpu : public GraphCutSeamFinderBase, public P
 public:
     GraphCutSeamFinderGpu(int cost_type = COST_COLOR_GRAD, float terminal_cost = 10000.f,
                           float bad_region_penalty = 1000.f)
+<<<<<<< HEAD
                           : cost_type_(cost_type), terminal_cost_(terminal_cost),
                             bad_region_penalty_(bad_region_penalty) {}
+=======
+#if defined(HAVE_OPENCV_GPU) && !defined(DYNAMIC_CUDA_SUPPORT)
+                          : cost_type_(cost_type),
+                            terminal_cost_(terminal_cost),
+                            bad_region_penalty_(bad_region_penalty)
+#endif
+    {
+        (void)cost_type;
+        (void)terminal_cost;
+        (void)bad_region_penalty;
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     void find(const std::vector<cv::Mat> &src, const std::vector<cv::Point> &corners,
               std::vector<cv::Mat> &masks);
@@ -246,9 +259,17 @@ private:
                                   const cv::Mat &dy1, const cv::Mat &dy2, const cv::Mat &mask1, const cv::Mat &mask2,
                                   cv::Mat &terminals, cv::Mat &leftT, cv::Mat &rightT, cv::Mat &top, cv::Mat &bottom);
     std::vector<Mat> dx_, dy_;
+<<<<<<< HEAD
     int cost_type_;
     float terminal_cost_;
     float bad_region_penalty_;
+=======
+#if defined(HAVE_OPENCV_GPU) && !defined(DYNAMIC_CUDA_SUPPORT)
+    int cost_type_;
+    float terminal_cost_;
+    float bad_region_penalty_;
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 };
 
 } // namespace detail

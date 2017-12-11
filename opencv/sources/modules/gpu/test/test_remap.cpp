@@ -169,6 +169,18 @@ GPU_TEST_P(Remap, Accuracy)
     EXPECT_MAT_NEAR(dst_gold, dst, src.depth() == CV_32F ? 1e-3 : 1.0);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Remap, testing::Combine(
+    ALL_DEVICES,
+    DIFFERENT_SIZES,
+    testing::Values(MatType(CV_8UC1), MatType(CV_8UC3), MatType(CV_8UC4), MatType(CV_32FC1), MatType(CV_32FC3), MatType(CV_32FC4)),
+    testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_LINEAR)),
+    testing::Values(BorderType(cv::BORDER_REFLECT101), BorderType(cv::BORDER_REPLICATE), BorderType(cv::BORDER_CONSTANT), BorderType(cv::BORDER_REFLECT)),
+    WHOLE_SUBMAT));
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Remap, testing::Combine(
     ALL_DEVICES,
     DIFFERENT_SIZES,
@@ -176,5 +188,9 @@ INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Remap, testing::Combine(
     testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_LINEAR), Interpolation(cv::INTER_CUBIC)),
     testing::Values(BorderType(cv::BORDER_REFLECT101), BorderType(cv::BORDER_REPLICATE), BorderType(cv::BORDER_CONSTANT), BorderType(cv::BORDER_REFLECT), BorderType(cv::BORDER_WRAP)),
     WHOLE_SUBMAT));
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #endif // HAVE_CUDA

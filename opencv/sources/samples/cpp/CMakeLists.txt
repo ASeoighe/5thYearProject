@@ -4,8 +4,14 @@
 # ----------------------------------------------------------------------------
 
 SET(OPENCV_CPP_SAMPLES_REQUIRED_DEPS opencv_core opencv_flann opencv_imgproc
+<<<<<<< HEAD
     opencv_highgui opencv_ml opencv_video opencv_objdetect opencv_photo opencv_nonfree
     opencv_features2d opencv_calib3d opencv_legacy opencv_contrib opencv_stitching opencv_videostab)
+=======
+    opencv_highgui opencv_ml opencv_video opencv_objdetect opencv_photo
+    opencv_features2d opencv_calib3d opencv_legacy opencv_contrib
+    opencv_stitching opencv_videostab)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 ocv_check_dependencies(${OPENCV_CPP_SAMPLES_REQUIRED_DEPS})
 
@@ -14,7 +20,11 @@ if(BUILD_EXAMPLES AND OCV_DEPENDENCIES_FOUND)
   project(cpp_samples)
 
   ocv_include_directories("${OpenCV_SOURCE_DIR}/include")#for opencv.hpp
+<<<<<<< HEAD
   ocv_include_modules(${OPENCV_CPP_SAMPLES_REQUIRED_DEPS})
+=======
+  ocv_include_modules(${OPENCV_CPP_SAMPLES_REQUIRED_DEPS} opencv_nonfree)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   if(HAVE_opencv_gpu)
     ocv_include_directories("${OpenCV_SOURCE_DIR}/modules/gpu/include")
@@ -90,9 +100,17 @@ if(BUILD_EXAMPLES AND OCV_DEPENDENCIES_FOUND)
   endforeach()
 endif()
 
+<<<<<<< HEAD
 if (INSTALL_C_EXAMPLES AND NOT WIN32)
   file(GLOB C_SAMPLES *.c *.cpp *.jpg *.png *.data makefile.* build_all.sh *.dsp *.cmd )
   install(FILES ${C_SAMPLES}
           DESTINATION ${OPENCV_SAMPLES_SRC_INSTALL_PATH}/cpp
           PERMISSIONS OWNER_READ GROUP_READ WORLD_READ COMPONENT samples)
+=======
+if (OCV_DEPENDENCIES_FOUND AND INSTALL_C_EXAMPLES AND NOT WIN32)
+  file(GLOB C_SAMPLES *.c *.cpp *.jpg *.png *.data makefile.* build_all.sh *.dsp *.cmd *.txt)
+  install(FILES ${C_SAMPLES}
+          DESTINATION "${OPENCV_SAMPLES_SRC_INSTALL_PATH}/cpp"
+          PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ COMPONENT samples)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 endif()

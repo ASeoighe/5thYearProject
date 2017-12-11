@@ -274,6 +274,20 @@ macro(add_android_project target path)
     file(GLOB_RECURSE android_proj_jni_files "${path}/jni/*.c" "${path}/jni/*.h" "${path}/jni/*.cpp" "${path}/jni/*.hpp")
     ocv_list_filterout(android_proj_jni_files "\\\\.svn")
 
+<<<<<<< HEAD
+=======
+    foreach(lib "opencv_java")
+      get_property(f TARGET ${lib} PROPERTY LOCATION)
+      get_filename_component(f_name ${f} NAME)
+      add_custom_command(
+        OUTPUT "${android_proj_bin_dir}/libs/${ANDROID_NDK_ABI_NAME}/${f_name}"
+        COMMAND ${CMAKE_COMMAND} -E copy "${f}" "${android_proj_bin_dir}/libs/${ANDROID_NDK_ABI_NAME}/${f_name}"
+        DEPENDS "${lib}" VERBATIM
+        COMMENT "Embedding ${f}")
+        list(APPEND android_proj_file_deps "${android_proj_bin_dir}/libs/${ANDROID_NDK_ABI_NAME}/${f_name}")
+    endforeach()
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if(android_proj_jni_files AND EXISTS ${path}/jni/Android.mk AND NOT DEFINED JNI_LIB_NAME)
       # find local module name in Android.mk file to build native lib
       file(STRINGS "${path}/jni/Android.mk" JNI_LIB_NAME REGEX "LOCAL_MODULE[ ]*:=[ ]*.*" )
@@ -290,7 +304,11 @@ macro(add_android_project target path)
           set(android_proj_NATIVE_DEPS ${android_proj_NATIVE_DEPS} android)
         endif()
 
+<<<<<<< HEAD
         add_library(${JNI_LIB_NAME} MODULE ${android_proj_jni_files})
+=======
+        add_library(${JNI_LIB_NAME} SHARED ${android_proj_jni_files})
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         target_link_libraries(${JNI_LIB_NAME} ${OPENCV_LINKER_LIBS} ${android_proj_NATIVE_DEPS})
 
         set_target_properties(${JNI_LIB_NAME} PROPERTIES
@@ -307,6 +325,10 @@ macro(add_android_project target path)
       # copy opencv_java, tbb if it is shared and dynamicuda if present if FORCE_EMBED_OPENCV flag is set
       if(android_proj_FORCE_EMBED_OPENCV)
         set(native_deps ${android_proj_NATIVE_DEPS})
+<<<<<<< HEAD
+=======
+        list(REMOVE_ITEM native_deps "opencv_java")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         # filter out gpu module as it is always static library on Android
         list(REMOVE_ITEM native_deps "opencv_gpu")
         if(ENABLE_DYNAMIC_CUDA)
@@ -349,7 +371,11 @@ macro(add_android_project target path)
     if(android_proj_IGNORE_JAVA)
       add_custom_command(
          OUTPUT "${android_proj_bin_dir}/bin/${target}-debug.apk"
+<<<<<<< HEAD
          COMMAND ${ANT_EXECUTABLE} -q -noinput -k debug
+=======
+         COMMAND ${ANT_EXECUTABLE} -q -noinput -k debug -Djava.target=1.6 -Djava.source=1.6
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          COMMAND ${CMAKE_COMMAND} -E touch "${android_proj_bin_dir}/bin/${target}-debug.apk" # needed because ant does not update the timestamp of updated apk
          WORKING_DIRECTORY "${android_proj_bin_dir}"
          MAIN_DEPENDENCY "${android_proj_bin_dir}/${ANDROID_MANIFEST_FILE}"
@@ -357,7 +383,11 @@ macro(add_android_project target path)
     else()
       add_custom_command(
          OUTPUT "${android_proj_bin_dir}/bin/${target}-debug.apk"
+<<<<<<< HEAD
          COMMAND ${ANT_EXECUTABLE} -q -noinput -k debug
+=======
+         COMMAND ${ANT_EXECUTABLE} -q -noinput -k debug -Djava.target=1.6 -Djava.source=1.6
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          COMMAND ${CMAKE_COMMAND} -E touch "${android_proj_bin_dir}/bin/${target}-debug.apk" # needed because ant does not update the timestamp of updated apk
          WORKING_DIRECTORY "${android_proj_bin_dir}"
          MAIN_DEPENDENCY "${android_proj_bin_dir}/${ANDROID_MANIFEST_FILE}"

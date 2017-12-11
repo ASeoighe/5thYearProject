@@ -61,6 +61,10 @@ CV_IMPL int cvCreateTrackbar2(const char* trackbar_name,const char* window_name,
 CV_IMPL void cvSetMouseCallback( const char* name, CvMouseCallback function, void* info) {}
 CV_IMPL int cvGetTrackbarPos( const char* trackbar_name, const char* window_name ) {return 0;}
 CV_IMPL void cvSetTrackbarPos(const char* trackbar_name, const char* window_name, int pos) {}
+<<<<<<< HEAD
+=======
+CV_IMPL void cvSetTrackbarMax(const char* trackbar_name, const char* window_name, int maxval) {}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 CV_IMPL void* cvGetWindowHandle( const char* name ) {return NULL;}
 CV_IMPL const char* cvGetWindowName( void* window_handle ) {return NULL;}
 CV_IMPL int cvNamedWindow( const char* name, int flags ) {return 0; }
@@ -151,11 +155,20 @@ CV_IMPL int cvInitSystem( int , char** )
 #define NSAppKitVersionNumber10_5 949
 #endif
     if( floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_5 )
+<<<<<<< HEAD
         [application setActivationPolicy:0/*NSApplicationActivationPolicyRegular*/];
+=======
+        [application setActivationPolicy:NSApplicationActivationPolicyRegular];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
     //[application finishLaunching];
     //atexit(icvCocoaCleanup);
 
+<<<<<<< HEAD
+=======
+    setlocale(LC_NUMERIC,"C");
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return 0;
 }
 
@@ -253,7 +266,11 @@ CV_IMPL void cvResizeWindow( const char* name, int width, int height)
     //cout << "cvResizeWindow" << endl;
     NSAutoreleasePool* localpool = [[NSAutoreleasePool alloc] init];
     CVWindow *window = cvGetWindow(name);
+<<<<<<< HEAD
     if(window) {
+=======
+    if(window && ![window autosize]) {
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         NSRect frame = [window frame];
         frame.size.width = width;
         frame.size.height = height;
@@ -422,6 +439,39 @@ CV_IMPL void cvSetTrackbarPos(const char* trackbar_name, const char* window_name
     __END__;
 }
 
+<<<<<<< HEAD
+=======
+CV_IMPL void cvSetTrackbarMax(const char* trackbar_name, const char* window_name, int maxval)
+{
+    CV_FUNCNAME("cvSetTrackbarPos");
+
+    CVWindow *window = nil;
+    CVSlider *slider = nil;
+    NSAutoreleasePool* localpool5 = nil;
+
+    __BEGIN__;
+    //cout << "cvSetTrackbarPos" << endl;
+    if(trackbar_name == NULL || window_name == NULL)
+        CV_ERROR( CV_StsNullPtr, "NULL trackbar or window name" );
+
+    if (localpool5 != nil) [localpool5 drain];
+    localpool5 = [[NSAutoreleasePool alloc] init];
+
+    window = cvGetWindow(window_name);
+    if(window) {
+        slider = [[window sliders] valueForKey:[NSString stringWithFormat:@"%s", trackbar_name]];
+        if(slider) {
+            if(maxval >= 0) {
+                [[slider slider] setMaxValue:maxval];
+            }
+        }
+    }
+    [localpool5 drain];
+
+    __END__;
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 CV_IMPL void* cvGetWindowHandle( const char* name )
 {
     //cout << "cvGetWindowHandle" << endl;

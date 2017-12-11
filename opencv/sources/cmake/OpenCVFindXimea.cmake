@@ -31,6 +31,15 @@ if(WIN32)
   else()
     set(XIMEA_FOUND 0)
   endif()
+<<<<<<< HEAD
+=======
+elseif(APPLE)
+  if(EXISTS /Library/Frameworks/m3api.framework)
+    set(XIMEA_FOUND 1)
+  else()
+    set(XIMEA_FOUND 0)
+  endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 else()
   if(EXISTS /opt/XIMEA)
     set(XIMEA_FOUND 1)

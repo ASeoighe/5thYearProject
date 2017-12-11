@@ -125,7 +125,11 @@ Code
         * Draw a rectangle around the area corresponding to the highest match
 
    * **Downloadable code**:
+<<<<<<< HEAD
      Click `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/Histograms_Matching/MatchTemplate_Demo.cpp>`_
+=======
+     Click `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/Histograms_Matching/MatchTemplate_Demo.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    * **Code at glance:**
 
@@ -185,7 +189,11 @@ Code
      int result_cols =  img.cols - templ.cols + 1;
      int result_rows = img.rows - templ.rows + 1;
 
+<<<<<<< HEAD
      result.create( result_cols, result_rows, CV_32FC1 );
+=======
+     result.create( result_rows, result_cols, CV_32FC1 );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
      /// Do the Matching and Normalize
      matchTemplate( img, templ, result, match_method );
@@ -271,7 +279,11 @@ Explanation
       int result_cols =  img.cols - templ.cols + 1;
       int result_rows = img.rows - templ.rows + 1;
 
+<<<<<<< HEAD
       result.create( result_cols, result_rows, CV_32FC1 );
+=======
+      result.create( result_rows, result_cols, CV_32FC1 );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #. Perform the template matching operation:
 

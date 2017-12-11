@@ -41,6 +41,10 @@
 //M*/
 
 #include "perf_precomp.hpp"
+<<<<<<< HEAD
+=======
+#include "opencv2/ts/gpu_perf.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace std;
 using namespace testing;
@@ -330,7 +334,11 @@ PERF_TEST_P(Sz_Depth, Calib3D_ReprojectImageTo3D,
 
         TEST_CYCLE() cv::gpu::reprojectImageTo3D(d_src, dst, Q);
 
+<<<<<<< HEAD
         GPU_SANITY_CHECK(dst);
+=======
+        GPU_SANITY_CHECK(dst, 1e-1, ERROR_RELATIVE);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     else
     {

@@ -977,12 +977,20 @@ minMaxLoc_(const _Tp* src, size_t total, size_t startidx,
         for( size_t i = 0; i < total; i++ )
         {
             _Tp val = src[i];
+<<<<<<< HEAD
             if( minval > val )
+=======
+            if( minval > val || !minpos )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             {
                 minval = val;
                 minpos = startidx + i;
             }
+<<<<<<< HEAD
             if( maxval < val )
+=======
+            if( maxval < val || !maxpos )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             {
                 maxval = val;
                 maxpos = startidx + i;
@@ -994,12 +1002,20 @@ minMaxLoc_(const _Tp* src, size_t total, size_t startidx,
         for( size_t i = 0; i < total; i++ )
         {
             _Tp val = src[i];
+<<<<<<< HEAD
             if( minval > val && mask[i] )
+=======
+            if( (minval > val || !minpos) && mask[i] )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             {
                 minval = val;
                 minpos = startidx + i;
             }
+<<<<<<< HEAD
             if( maxval < val && mask[i] )
+=======
+            if( (maxval < val || !maxpos) && mask[i] )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             {
                 maxval = val;
                 maxpos = startidx + i;
@@ -1046,8 +1062,13 @@ void minMaxLoc(const Mat& src, double* _minval, double* _maxval,
     size_t startidx = 1, total = planes[0].total();
     size_t i, nplanes = it.nplanes;
     int depth = src.depth();
+<<<<<<< HEAD
     double maxval = depth < CV_32F ? INT_MIN : depth == CV_32F ? -FLT_MAX : -DBL_MAX;
     double minval = depth < CV_32F ? INT_MAX : depth == CV_32F ? FLT_MAX : DBL_MAX;
+=======
+    double minval = 0;
+    double maxval = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     size_t maxidx = 0, minidx = 0;
 
     for( i = 0; i < nplanes; i++, ++it, startidx += total )
@@ -1090,9 +1111,12 @@ void minMaxLoc(const Mat& src, double* _minval, double* _maxval,
         }
     }
 
+<<<<<<< HEAD
     if( minidx == 0 )
         minval = maxval = 0;
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if( _maxval )
         *_maxval = maxval;
     if( _minval )
@@ -1760,7 +1784,11 @@ cmpUlpsFlt_(const int* src1, const int* src2, size_t total, int imaxdiff, size_t
     for( i = 0; i < total; i++ )
     {
         int a = src1[i], b = src2[i];
+<<<<<<< HEAD
         if( a < 0 ) a ^= C; if( b < 0 ) b ^= C;
+=======
+        if( a < 0 ) { a ^= C; } if( b < 0 ) { b ^= C; }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         int diff = std::abs(a - b);
         if( realmaxdiff < diff )
         {
@@ -1782,7 +1810,11 @@ cmpUlpsFlt_(const int64* src1, const int64* src2, size_t total, int imaxdiff, si
     for( i = 0; i < total; i++ )
     {
         int64 a = src1[i], b = src2[i];
+<<<<<<< HEAD
         if( a < 0 ) a ^= C; if( b < 0 ) b ^= C;
+=======
+        if( a < 0 ) { a ^= C; } if( b < 0 ) { b ^= C; }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         double diff = fabs((double)a - (double)b);
         if( realmaxdiff < diff )
         {
@@ -3005,6 +3037,12 @@ void printVersionInfo(bool useStdOut)
 #if CV_AVX
     if (checkHardwareSupport(CV_CPU_AVX)) cpu_features += " avx";
 #endif
+<<<<<<< HEAD
+=======
+#if CV_AVX2
+    if (checkHardwareSupport(CV_CPU_AVX2)) cpu_features += " avx2";
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #if CV_NEON
     cpu_features += " neon"; // NEON is currently not checked at runtime
 #endif

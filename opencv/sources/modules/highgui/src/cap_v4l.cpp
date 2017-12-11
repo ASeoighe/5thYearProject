@@ -16,7 +16,11 @@ For Release:  OpenCV-Linux Beta4  opencv-0.9.6
 Tested On:    LMLBT44 with 8 video inputs
 Problems?     Post your questions at answers.opencv.org,
               Report bugs at code.opencv.org,
+<<<<<<< HEAD
               Submit your fixes at https://github.com/Itseez/opencv/
+=======
+              Submit your fixes at https://github.com/opencv/opencv/
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Patched Comments:
 
 TW: The cv cam utils that came with the initial release of OpenCV for LINUX Beta4
@@ -102,7 +106,11 @@ I modified the following:
     autosetup_capture_mode_v4l2 -> autodetect capture modes for v4l2
   - Modifications are according with Video4Linux old codes
   - Video4Linux handling is automatically if it does not recognize a Video4Linux2 device
+<<<<<<< HEAD
   - Tested succesful with Logitech Quickcam Express (V4L), Creative Vista (V4L) and Genius VideoCam Notebook (V4L2)
+=======
+  - Tested successfully with Logitech Quickcam Express (V4L), Creative Vista (V4L) and Genius VideoCam Notebook (V4L2)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   - Correct source lines with compiler warning messages
   - Information message from v4l/v4l2 detection
 
@@ -113,7 +121,11 @@ I modified the following:
   - SN9C10x chip based webcams support
   - New methods are internal:
     bayer2rgb24, sonix_decompress -> decoder routines for SN9C10x decoding from Takafumi Mizuno <taka-qce@ls-a.jp> with his pleasure :)
+<<<<<<< HEAD
   - Tested succesful with Genius VideoCam Notebook (V4L2)
+=======
+  - Tested successfully with Genius VideoCam Notebook (V4L2)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 Sixth Patch: Sept 10, 2005 Csaba Kertesz sign@freemail.hu
 For Release:  OpenCV-Linux Beta5 OpenCV-0.9.7
@@ -123,7 +135,11 @@ I added the following:
   - Get and change V4L capture controls (hue, saturation, brightness, contrast)
   - New method is internal:
     icvSetControl -> set capture controls
+<<<<<<< HEAD
   - Tested succesful with Creative Vista (V4L)
+=======
+  - Tested successfully with Creative Vista (V4L)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 Seventh Patch: Sept 10, 2005 Csaba Kertesz sign@freemail.hu
 For Release:  OpenCV-Linux Beta5 OpenCV-0.9.7
@@ -132,7 +148,11 @@ I added the following:
   - Detect, get and change V4L2 capture controls (hue, saturation, brightness, contrast, gain)
   - New methods are internal:
     v4l2_scan_controls_enumerate_menu, v4l2_scan_controls -> detect capture control intervals
+<<<<<<< HEAD
   - Tested succesful with Genius VideoCam Notebook (V4L2)
+=======
+  - Tested successfully with Genius VideoCam Notebook (V4L2)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 8th patch: Jan 5, 2006, Olivier.Bornet@idiap.ch
 Add support of V4L2_PIX_FMT_YUYV and V4L2_PIX_FMT_MJPEG.
@@ -380,12 +400,20 @@ static void icvInitCapture_V4L() {
       deviceHandle = open(deviceName, O_RDONLY);
       if (deviceHandle != -1) {
          /* This device does indeed exist - add it to the total so far */
+<<<<<<< HEAD
     // add indexList
     indexList|=(1 << CameraNumber);
         numCameras++;
     }
     if (deviceHandle != -1)
       close(deviceHandle);
+=======
+         // add indexList
+         indexList|=(1 << CameraNumber);
+         numCameras++;
+         close(deviceHandle);
+      }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       /* Set up to test the next /dev/video source in line */
       CameraNumber++;
    } /* End while */
@@ -491,8 +519,11 @@ static int try_init_v4l2(CvCaptureCAM_V4L* capture, char *deviceName)
   //  0 then detected nothing
   //  1 then V4L2 device
 
+<<<<<<< HEAD
   int deviceIndex;
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   /* Open and test V4L2 device */
   capture->deviceHandle = open (deviceName, O_RDWR /* required */ | O_NONBLOCK, 0);
   if (-1 == capture->deviceHandle)
@@ -514,6 +545,7 @@ static int try_init_v4l2(CvCaptureCAM_V4L* capture, char *deviceName)
     return 0;
   }
 
+<<<<<<< HEAD
   /* Query channels number */
   if (-1 == ioctl (capture->deviceHandle, VIDIOC_G_INPUT, &deviceIndex))
   {
@@ -536,6 +568,8 @@ static int try_init_v4l2(CvCaptureCAM_V4L* capture, char *deviceName)
     return 0;
   }
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   return 1;
 
 }
@@ -834,6 +868,7 @@ static int _capture_V4L2 (CvCaptureCAM_V4L *capture, char *deviceName)
       return -1;
    }
 
+<<<<<<< HEAD
    /* The following code sets the CHANNEL_NUMBER of the video input.  Some video sources
    have sub "Channel Numbers".  For a typical V4L TV capture card, this is usually 1.
    I myself am using a simple NTSC video input capture card that uses the value of 1.
@@ -854,6 +889,8 @@ static int _capture_V4L2 (CvCaptureCAM_V4L *capture, char *deviceName)
        }
    } /* End if */
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    /* Find Window info */
    CLEAR (capture->form);
    capture->form.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -1157,6 +1194,12 @@ static CvCaptureCAM_V4L * icvCaptureFromCAM_V4L (int index)
        }
 #endif  /* HAVE_CAMV4L */
 #ifdef HAVE_CAMV4L2
+<<<<<<< HEAD
+=======
+#ifndef HAVE_CAMV4L
+       return NULL;
+#endif  /* !HAVE_CAMV4L */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    } else {
        V4L2_SUPPORT = 1;
    }
@@ -1206,12 +1249,21 @@ static int read_frame_v4l2(CvCaptureCAM_V4L* capture) {
    //printf("got data in buff %d, len=%d, flags=0x%X, seq=%d, used=%d)\n",
    //	  buf.index, buf.length, buf.flags, buf.sequence, buf.bytesused);
 
+<<<<<<< HEAD
    if (-1 == ioctl (capture->deviceHandle, VIDIOC_QBUF, &buf))
        perror ("VIDIOC_QBUF");
 
    //set timestamp in capture struct to be timestamp of most recent frame
    capture->timestamp = buf.timestamp;
 
+=======
+   //set timestamp in capture struct to be timestamp of most recent frame
+   capture->timestamp = buf.timestamp;
+
+   if (-1 == ioctl (capture->deviceHandle, VIDIOC_QBUF, &buf))
+       perror ("VIDIOC_QBUF");
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    return 1;
 }
 

@@ -150,6 +150,10 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+<<<<<<< HEAD
+=======
+    [super dealloc];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 
@@ -193,6 +197,17 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 
+<<<<<<< HEAD
+=======
+    for (AVCaptureInput *input in self.captureSession.inputs) {
+        [self.captureSession removeInput:input];
+    }
+
+    for (AVCaptureOutput *output in self.captureSession.outputs) {
+        [self.captureSession removeOutput:output];
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     [self.captureSession stopRunning];
     self.captureSession = nil;
     self.captureVideoPreviewLayer = nil;
@@ -226,6 +241,10 @@
 
 - (void)deviceOrientationDidChange:(NSNotification*)notification
 {
+<<<<<<< HEAD
+=======
+    (void)notification;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
 
     switch (orientation)
@@ -242,7 +261,11 @@
         default:
             break;
     }
+<<<<<<< HEAD
     NSLog(@"deviceOrientationDidChange: %d", orientation);
+=======
+    NSLog(@"deviceOrientationDidChange: %d", (int)orientation);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     [self updateOrientation];
 }
@@ -316,7 +339,11 @@
 
             // support for autofocus
             if ([device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+<<<<<<< HEAD
                 NSError *error = nil;
+=======
+                error = nil;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 if ([device lockForConfiguration:&error]) {
                     device.focusMode = AVCaptureFocusModeContinuousAutoFocus;
                     [device unlockForConfiguration];

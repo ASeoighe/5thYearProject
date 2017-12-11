@@ -1209,6 +1209,7 @@ private:
 
 cv::TickMeter::TickMeter() { reset(); }
 int64 cv::TickMeter::getTimeTicks() const { return sumTime; }
+<<<<<<< HEAD
 double cv::TickMeter::getTimeMicro() const { return (double)getTimeTicks()/cvGetTickFrequency(); }
 double cv::TickMeter::getTimeMilli() const { return getTimeMicro()*1e-3; }
 double cv::TickMeter::getTimeSec()   const { return getTimeMilli()*1e-3; }
@@ -1219,6 +1220,18 @@ void cv::TickMeter::start(){ startTime = cvGetTickCount(); }
 void cv::TickMeter::stop()
 {
     int64 time = cvGetTickCount();
+=======
+double cv::TickMeter::getTimeSec()   const { return (double)getTimeTicks()/getTickFrequency(); }
+double cv::TickMeter::getTimeMilli() const { return getTimeSec()*1e3; }
+double cv::TickMeter::getTimeMicro() const { return getTimeMilli()*1e3; }
+int64 cv::TickMeter::getCounter() const { return counter; }
+void  cv::TickMeter::reset() {startTime = 0; sumTime = 0; counter = 0; }
+
+void cv::TickMeter::start(){ startTime = getTickCount(); }
+void cv::TickMeter::stop()
+{
+    int64 time = getTickCount();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if ( startTime == 0 )
         return;
 

@@ -31,11 +31,19 @@
             opencl_module = GetModuleHandleA("OpenCL.dll");
             if (!opencl_module)
             {
+<<<<<<< HEAD
                 const char* name = "OpenCL.dll";
                 const char* envOpenCLBinary = getenv("OPENCV_OPENCL_BINARY");
                 if (envOpenCLBinary)
                     name = envOpenCLBinary;
                 opencl_module = LoadLibraryA(name);
+=======
+                const char* libName = "OpenCL.dll";
+                const char* envOpenCLBinary = getenv("OPENCV_OPENCL_BINARY");
+                if (envOpenCLBinary)
+                    libName = envOpenCLBinary;
+                opencl_module = LoadLibraryA(libName);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 if (!opencl_module)
                     return NULL;
             }

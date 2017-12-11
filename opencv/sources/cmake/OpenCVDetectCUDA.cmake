@@ -15,6 +15,7 @@ endif()
 
 set(CMAKE_MODULE_PATH "${OpenCV_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
+<<<<<<< HEAD
 foreach(var INCLUDE LIBRARY PROGRAM)
   set(__old_frpm_${var} "${CMAKE_FIND_ROOT_PATH_MODE_${var}}")
 endforeach()
@@ -28,6 +29,12 @@ find_package(CUDA 4.2 QUIET)
 foreach(var INCLUDE LIBRARY PROGRAM)
   set(CMAKE_FIND_ROOT_PATH_MODE_${var} "${__old_frpm_${var}}")
 endforeach()
+=======
+if(ANDROID AND "${CUDA_VERSION}" VERSION_LESS "7.0")
+  set(CUDA_TARGET_OS_VARIANT "Android")
+endif()
+find_host_package(CUDA 4.2 QUIET)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 list(REMOVE_AT CMAKE_MODULE_PATH 0)
 
@@ -44,7 +51,22 @@ if(CUDA_FOUND)
 
   if(WITH_NVCUVID)
     find_cuda_helper_libs(nvcuvid)
+<<<<<<< HEAD
     set(HAVE_NVCUVID 1)
+=======
+
+    if(WIN32)
+      find_cuda_helper_libs(nvcuvenc)
+    endif()
+
+    if(CUDA_nvcuvid_LIBRARY)
+      set(HAVE_NVCUVID 1)
+    endif()
+
+    if(CUDA_nvcuvenc_LIBRARY)
+      set(HAVE_NVCUVENC 1)
+    endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   endif()
 
   message(STATUS "CUDA detected: " ${CUDA_VERSION})
@@ -91,11 +113,26 @@ if(CUDA_FOUND)
 
   if(NOT DEFINED __cuda_arch_bin)
     if(ANDROID)
+<<<<<<< HEAD
       set(__cuda_arch_bin "3.2")
       set(__cuda_arch_ptx "")
     else()
       if(${CUDA_VERSION} VERSION_LESS "5.0")
         set(__cuda_arch_bin "1.1 1.2 1.3 2.0 2.1(2.0) 3.0")
+=======
+      if (ARM)
+        set(__cuda_arch_bin "3.2")
+        set(__cuda_arch_ptx "")
+      elseif(AARCH64)
+        set(__cuda_arch_bin "5.3")
+        set(__cuda_arch_ptx "")
+      endif()
+    else()
+      if(${CUDA_VERSION} VERSION_LESS "5.0")
+        set(__cuda_arch_bin "1.1 1.2 1.3 2.0 2.1(2.0) 3.0")
+      elseif(${CUDA_VERSION} VERSION_GREATER "6.5")
+        set(__cuda_arch_bin "2.0 2.1(2.0) 3.0 3.5")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       else()
         set(__cuda_arch_bin "1.1 1.2 1.3 2.0 2.1(2.0) 3.0 3.5")
       endif()
@@ -154,7 +191,10 @@ if(CUDA_FOUND)
 
   if(ANDROID)
     set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} "-Xptxas;-dlcm=ca")
+<<<<<<< HEAD
     set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} "-target-os-variant=Android")
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   endif()
 
   message(STATUS "CUDA NVCC target flags: ${CUDA_NVCC_FLAGS}")
@@ -221,6 +261,7 @@ else()
 endif()
 
 if(HAVE_CUDA)
+<<<<<<< HEAD
   set(CUDA_LIBS_PATH "")
   foreach(p ${CUDA_LIBRARIES} ${CUDA_npp_LIBRARY})
     get_filename_component(_tmp ${p} PATH)
@@ -251,10 +292,26 @@ if(HAVE_CUDA)
   if(HAVE_CUBLAS)
     set(CUDA_cublas_LIBRARY_ABS ${CUDA_cublas_LIBRARY})
     ocv_convert_to_lib_name(CUDA_cublas_LIBRARY ${CUDA_cublas_LIBRARY})
+=======
+  set(CUDA_LIBRARIES_ABS ${CUDA_LIBRARIES})
+  ocv_create_imported_targets(CUDA_LIBRARIES ${CUDA_LIBRARIES})
+  set(CUDA_npp_LIBRARY_ABS ${CUDA_npp_LIBRARY})
+  ocv_create_imported_targets(CUDA_npp_LIBRARY ${CUDA_npp_LIBRARY})
+
+  if(HAVE_CUBLAS)
+    set(CUDA_cublas_LIBRARY_ABS ${CUDA_cublas_LIBRARY})
+    ocv_create_imported_targets(CUDA_cublas_LIBRARY ${CUDA_cublas_LIBRARY})
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   endif()
 
   if(HAVE_CUFFT)
     set(CUDA_cufft_LIBRARY_ABS ${CUDA_cufft_LIBRARY})
+<<<<<<< HEAD
     ocv_convert_to_lib_name(CUDA_cufft_LIBRARY ${CUDA_cufft_LIBRARY})
   endif()
 endif()
+=======
+    ocv_create_imported_targets(CUDA_cufft_LIBRARY ${CUDA_cufft_LIBRARY})
+  endif()
+endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

@@ -11,7 +11,11 @@
 //                For Open Source Computer Vision Library
 //
 // Copyright (C) 2010-2012, Institute Of Software Chinese Academy Of Science, all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010-2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Copyright (C) 2010-2012, Multicoreware, Inc., all rights reserved.
 // Third party copyrights are property of their respective owners.
 //
@@ -70,6 +74,7 @@ struct __Module
     cv::Mutex initializationMutex;
     cv::Mutex currentContextMutex;
 };
+<<<<<<< HEAD
 static __Module __module;
 
 cv::Mutex& getInitializationMutex()
@@ -81,6 +86,8 @@ static cv::Mutex& getCurrentContextMutex()
 {
     return __module.currentContextMutex;
 }
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 static bool parseOpenCLVersion(const std::string& versionStr, int& major, int& minor)
 {
@@ -178,6 +185,7 @@ struct DeviceInfoImpl: public DeviceInfo
         parseOpenCLVersion(this->deviceVersion,
                 this->deviceVersionMajor, this->deviceVersionMinor);
 
+<<<<<<< HEAD
         size_t maxWorkGroupSize = 0;
         openCLSafeCall(getScalarInfo(clGetDeviceInfo, device, CL_DEVICE_MAX_WORK_GROUP_SIZE, maxWorkGroupSize));
         this->maxWorkGroupSize = maxWorkGroupSize;
@@ -200,6 +208,30 @@ struct DeviceInfoImpl: public DeviceInfo
         cl_ulong maxMemAllocSize = 0;
         openCLSafeCall(getScalarInfo(clGetDeviceInfo, device, CL_DEVICE_MAX_MEM_ALLOC_SIZE, maxMemAllocSize));
         this->maxMemAllocSize = (size_t)maxMemAllocSize;
+=======
+        size_t maxWGS = 0;
+        openCLSafeCall(getScalarInfo(clGetDeviceInfo, device, CL_DEVICE_MAX_WORK_GROUP_SIZE, maxWGS));
+        this->maxWorkGroupSize = maxWGS;
+
+        cl_uint maxDimensions = 0;
+        openCLSafeCall(getScalarInfo(clGetDeviceInfo, device, CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS, maxDimensions));
+        std::vector<size_t> maxWIS(maxDimensions);
+        openCLSafeCall(clGetDeviceInfo(device, CL_DEVICE_MAX_WORK_ITEM_SIZES, sizeof(size_t) * maxDimensions,
+                (void *)&maxWIS[0], 0));
+        this->maxWorkItemSizes = maxWIS;
+
+        cl_uint maxCU = 0;
+        openCLSafeCall(getScalarInfo(clGetDeviceInfo, device, CL_DEVICE_MAX_COMPUTE_UNITS, maxCU));
+        this->maxComputeUnits = maxCU;
+
+        cl_ulong localMS = 0;
+        openCLSafeCall(getScalarInfo(clGetDeviceInfo, device, CL_DEVICE_LOCAL_MEM_SIZE, localMS));
+        this->localMemorySize = (size_t)localMS;
+
+        cl_ulong maxMAS = 0;
+        openCLSafeCall(getScalarInfo(clGetDeviceInfo, device, CL_DEVICE_MAX_MEM_ALLOC_SIZE, maxMAS));
+        this->maxMemAllocSize = (size_t)maxMAS;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         cl_bool unifiedMemory = false;
         openCLSafeCall(getScalarInfo(clGetDeviceInfo, device, CL_DEVICE_HOST_UNIFIED_MEMORY, unifiedMemory));
@@ -245,6 +277,21 @@ struct DeviceInfoImpl: public DeviceInfo
 
 static std::vector<PlatformInfoImpl> global_platforms;
 static std::vector<DeviceInfoImpl> global_devices;
+<<<<<<< HEAD
+=======
+static __Module __module;
+
+cv::Mutex& getInitializationMutex()
+{
+    return __module.initializationMutex;
+}
+
+static cv::Mutex& getCurrentContextMutex()
+{
+    return __module.currentContextMutex;
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 static void split(const std::string &s, char delim, std::vector<std::string> &elems) {
     std::stringstream ss(s);

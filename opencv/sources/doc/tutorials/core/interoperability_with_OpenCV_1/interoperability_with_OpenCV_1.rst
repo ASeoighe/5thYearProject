@@ -87,7 +87,11 @@ Here you can observe that with the new structure we have no pointer problems, al
    :tab-width: 4
    :lines: 46-51
 
+<<<<<<< HEAD
 Because, we want to mess around with the images luma component we first convert from the default RGB to the YUV color space and then split the result up into separate planes. Here the program splits: in the first example it processes each plane using one of the three major image scanning algorithms in OpenCV (C [] operator, iterator, individual element access). In a second variant we add to the image some Gaussian noise and then mix together the channels according to some formula.
+=======
+Because, we want to mess around with the images luma component we first convert from the default BGR to the YUV color space and then split the result up into separate planes. Here the program splits: in the first example it processes each plane using one of the three major image scanning algorithms in OpenCV (C [] operator, iterator, individual element access). In a second variant we add to the image some Gaussian noise and then mix together the channels according to some formula.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 The scanning version looks like:
 

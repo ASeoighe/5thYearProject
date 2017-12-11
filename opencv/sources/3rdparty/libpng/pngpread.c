@@ -1,8 +1,13 @@
 
 /* pngpread.c - read a png file in push mode
  *
+<<<<<<< HEAD
  * Last changed in libpng 1.5.11 [June 14, 2012]
  * Copyright (c) 1998-2012 Glenn Randers-Pehrson
+=======
+ * Last changed in libpng 1.5.23 [July 23, 2015]
+ * Copyright (c) 1998-2002,2004,2006-2015 Glenn Randers-Pehrson
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
@@ -19,7 +24,10 @@
 #define PNG_READ_SIG_MODE   0
 #define PNG_READ_CHUNK_MODE 1
 #define PNG_READ_IDAT_MODE  2
+<<<<<<< HEAD
 #define PNG_SKIP_MODE       3
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #define PNG_READ_tEXt_MODE  4
 #define PNG_READ_zTXt_MODE  5
 #define PNG_READ_DONE_MODE  6
@@ -49,7 +57,11 @@ png_process_data_pause(png_structp png_ptr, int save)
       /* It's easiest for the caller if we do the save, then the caller doesn't
        * have to supply the same data again:
        */
+<<<<<<< HEAD
       if (save)
+=======
+      if (save != 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          png_push_save_buffer(png_ptr);
       else
       {
@@ -71,6 +83,7 @@ png_process_data_pause(png_structp png_ptr, int save)
 png_uint_32 PNGAPI
 png_process_data_skip(png_structp png_ptr)
 {
+<<<<<<< HEAD
    png_uint_32 remaining = 0;
 
    if (png_ptr != NULL && png_ptr->process_mode == PNG_SKIP_MODE &&
@@ -97,6 +110,17 @@ png_process_data_skip(png_structp png_ptr)
    }
 
    return remaining;
+=======
+    /* TODO: Deprecate and remove this API.
+     * Somewhere the implementation of this seems to have been lost,
+     * or abandoned.  It was only to support some internal back-door access
+     * to png_struct) in libpng-1.4.x.
+     */
+   png_warning(png_ptr,
+       "png_process_data_skip is not implemented in any current version"
+       " of libpng");
+   return 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 /* What we do with the incoming data depends on what we were previously
@@ -128,12 +152,15 @@ png_process_some_data(png_structp png_ptr, png_infop info_ptr)
          break;
       }
 
+<<<<<<< HEAD
       case PNG_SKIP_MODE:
       {
          png_push_crc_finish(png_ptr);
          break;
       }
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       default:
       {
          png_ptr->buffer_size = 0;
@@ -151,7 +178,11 @@ png_process_some_data(png_structp png_ptr, png_infop info_ptr)
 void /* PRIVATE */
 png_push_read_sig(png_structp png_ptr, png_infop info_ptr)
 {
+<<<<<<< HEAD
    png_size_t num_checked = png_ptr->sig_bytes,
+=======
+   png_size_t num_checked = png_ptr->sig_bytes, /* SAFE, does not exceed 8 */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
        num_to_check = 8 - num_checked;
 
    if (png_ptr->buffer_size < num_to_check)
@@ -564,6 +595,7 @@ png_push_read_chunk(png_structp png_ptr, png_infop info_ptr)
    png_ptr->mode &= ~PNG_HAVE_CHUNK_HEADER;
 }
 
+<<<<<<< HEAD
 void /* PRIVATE */
 png_push_crc_skip(png_structp png_ptr, png_uint_32 skip)
 {
@@ -634,6 +666,8 @@ png_push_crc_finish(png_structp png_ptr)
    }
 }
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 void PNGCBAPI
 png_push_fill_buffer(png_structp png_ptr, png_bytep buffer, png_size_t length)
 {
@@ -897,6 +931,15 @@ png_process_IDAT_data(png_structp png_ptr, png_bytep buffer,
        */
       ret = inflate(&png_ptr->zstream, Z_SYNC_FLUSH);
 
+<<<<<<< HEAD
+=======
+      /* Hack, added in 1.5.18: the progressive reader does not reset
+       * png_ptr->zstream, so any attempt to use it after the last IDAT fails
+       * (silently).  This allows the read code to do the reset when required.
+       */
+      png_ptr->flags |= PNG_FLAG_ZSTREAM_PROGRESSIVE;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       /* Check for any failure before proceeding. */
       if (ret != Z_OK && ret != Z_STREAM_END)
       {
@@ -1285,7 +1328,11 @@ png_progressive_combine_row (png_structp png_ptr, png_bytep old_row,
     * it must be png_ptr->row_buf+1
     */
    if (new_row != NULL)
+<<<<<<< HEAD
       png_combine_row(png_ptr, old_row, 1/*display*/);
+=======
+      png_combine_row(png_ptr, old_row, 1/*blocky display*/);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 #endif /* PNG_READ_INTERLACING_SUPPORTED */
 

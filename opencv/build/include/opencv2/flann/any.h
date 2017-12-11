@@ -80,7 +80,11 @@ struct big_any_policy : typed_base_any_policy<T>
 {
     virtual void static_delete(void** x)
     {
+<<<<<<< HEAD
         if (* x) delete (* reinterpret_cast<T**>(x)); *x = NULL;
+=======
+        if (* x) { delete (* reinterpret_cast<T**>(x)); *x = NULL; }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     virtual void copy_from_value(void const* src, void** dest)
     {
@@ -150,6 +154,7 @@ SMALL_POLICY(bool);
 
 #undef SMALL_POLICY
 
+<<<<<<< HEAD
 /// This function will return a different policy for each type.
 template<typename T>
 base_any_policy* get_policy()
@@ -157,6 +162,29 @@ base_any_policy* get_policy()
     static typename choose_policy<T>::type policy;
     return &policy;
 }
+=======
+template <typename T>
+class SinglePolicy
+{
+    SinglePolicy();
+    SinglePolicy(const SinglePolicy& other);
+    SinglePolicy& operator=(const SinglePolicy& other);
+
+public:
+    static base_any_policy* get_policy();
+
+private:
+    static typename choose_policy<T>::type policy;
+};
+
+template <typename T>
+typename choose_policy<T>::type SinglePolicy<T>::policy;
+
+/// This function will return a different policy for each type.
+template <typename T>
+inline base_any_policy* SinglePolicy<T>::get_policy() { return &policy; }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 } // namespace anyimpl
 
 struct any
@@ -170,26 +198,42 @@ public:
     /// Initializing constructor.
     template <typename T>
     any(const T& x)
+<<<<<<< HEAD
         : policy(anyimpl::get_policy<anyimpl::empty_any>()), object(NULL)
+=======
+        : policy(anyimpl::SinglePolicy<anyimpl::empty_any>::get_policy()), object(NULL)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
         assign(x);
     }
 
     /// Empty constructor.
     any()
+<<<<<<< HEAD
         : policy(anyimpl::get_policy<anyimpl::empty_any>()), object(NULL)
+=======
+        : policy(anyimpl::SinglePolicy<anyimpl::empty_any>::get_policy()), object(NULL)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     { }
 
     /// Special initializing constructor for string literals.
     any(const char* x)
+<<<<<<< HEAD
         : policy(anyimpl::get_policy<anyimpl::empty_any>()), object(NULL)
+=======
+        : policy(anyimpl::SinglePolicy<anyimpl::empty_any>::get_policy()), object(NULL)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
         assign(x);
     }
 
     /// Copy constructor.
     any(const any& x)
+<<<<<<< HEAD
         : policy(anyimpl::get_policy<anyimpl::empty_any>()), object(NULL)
+=======
+        : policy(anyimpl::SinglePolicy<anyimpl::empty_any>::get_policy()), object(NULL)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
         assign(x);
     }
@@ -214,7 +258,11 @@ public:
     any& assign(const T& x)
     {
         reset();
+<<<<<<< HEAD
         policy = anyimpl::get_policy<T>();
+=======
+        policy = anyimpl::SinglePolicy<T>::get_policy();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         policy->copy_from_value(&x, &object);
         return *this;
     }
@@ -269,7 +317,11 @@ public:
     void reset()
     {
         policy->static_delete(&object);
+<<<<<<< HEAD
         policy = anyimpl::get_policy<anyimpl::empty_any>();
+=======
+        policy = anyimpl::SinglePolicy<anyimpl::empty_any>::get_policy();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
     /// Returns true if the two types are the same.

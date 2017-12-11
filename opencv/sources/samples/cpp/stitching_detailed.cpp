@@ -46,6 +46,7 @@
 #include <string>
 #include "opencv2/opencv_modules.hpp"
 #include "opencv2/highgui/highgui.hpp"
+<<<<<<< HEAD
 #include "opencv2/stitching/detail/autocalib.hpp"
 #include "opencv2/stitching/detail/blenders.hpp"
 #include "opencv2/stitching/detail/camera.hpp"
@@ -56,6 +57,9 @@
 #include "opencv2/stitching/detail/util.hpp"
 #include "opencv2/stitching/detail/warpers.hpp"
 #include "opencv2/stitching/warpers.hpp"
+=======
+#include "opencv2/stitching.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace std;
 using namespace cv;
@@ -516,7 +520,11 @@ int main(int argc, char* argv[])
     {
         vector<Mat> rmats;
         for (size_t i = 0; i < cameras.size(); ++i)
+<<<<<<< HEAD
             rmats.push_back(cameras[i].R);
+=======
+            rmats.push_back(cameras[i].R.clone());
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         waveCorrect(rmats, wave_correct);
         for (size_t i = 0; i < cameras.size(); ++i)
             cameras[i].R = rmats[i];

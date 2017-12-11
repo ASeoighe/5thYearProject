@@ -60,12 +60,19 @@ int main( int argc, char** argv )
     namedWindow( "LK Demo", 1 );
     setMouseCallback( "LK Demo", onMouse, 0 );
 
+<<<<<<< HEAD
     Mat gray, prevGray, image;
+=======
+    Mat gray, prevGray, image, frame;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     vector<Point2f> points[2];
 
     for(;;)
     {
+<<<<<<< HEAD
         Mat frame;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cap >> frame;
         if( frame.empty() )
             break;

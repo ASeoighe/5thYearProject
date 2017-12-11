@@ -480,9 +480,19 @@ CV_IMPL int cvStartWindowThread(){
     // conditional that indicates a key has been pressed
     cond_have_key = g_cond_new();
 
+<<<<<<< HEAD
     // this is the window update thread
     window_thread = g_thread_create((GThreadFunc) icvWindowThreadLoop,
                     NULL, TRUE, NULL);
+=======
+#if !GLIB_CHECK_VERSION(2, 32, 0)
+    // this is the window update thread
+    window_thread = g_thread_create((GThreadFunc) icvWindowThreadLoop,
+                    NULL, TRUE, NULL);
+#else
+    window_thread = g_thread_new("OpenCV window update", (GThreadFunc)icvWindowThreadLoop, NULL);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     thread_started = window_thread!=NULL;
     return thread_started;
@@ -1007,6 +1017,7 @@ static void icvDeleteWindow( CvWindow* window )
     }
 
     cvFree( &window );
+<<<<<<< HEAD
 #ifdef HAVE_GTHREAD
     // if last window, send key press signal
     // to jump out of any waiting cvWaitKey's
@@ -1014,6 +1025,35 @@ static void icvDeleteWindow( CvWindow* window )
         g_cond_broadcast(cond_have_key);
     }
 #endif
+=======
+
+    // if last window...
+    if( hg_windows == 0 )
+    {
+#ifdef HAVE_GTHREAD
+        if( thread_started )
+        {
+            // send key press signal to jump out of any waiting cvWaitKey's
+            g_cond_broadcast( cond_have_key );
+        }
+        else
+        {
+#endif
+            // Some GTK+ modules (like the Unity module) use GDBusConnection,
+            // which has a habit of postponing cleanup by performing it via
+            // idle sources added to the main loop. Since this was the last window,
+            // we can assume that no event processing is going to happen in the
+            // nearest future, so we should force that cleanup (by handling all pending
+            // events) while we still have the chance.
+            // This is not needed if thread_started is true, because the background
+            // thread will process events continuously.
+            while( gtk_events_pending() )
+                gtk_main_iteration();
+#ifdef HAVE_GTHREAD
+        }
+#endif
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 
@@ -1381,6 +1421,46 @@ CV_IMPL void cvSetTrackbarPos( const char* trackbar_name, const char* window_nam
 }
 
 
+<<<<<<< HEAD
+=======
+CV_IMPL void cvSetTrackbarMax(const char* trackbar_name, const char* window_name, int maxval)
+{
+    CV_FUNCNAME("cvSetTrackbarMax");
+
+    __BEGIN__;
+
+    if (maxval >= 0)
+    {
+        CvWindow* window = 0;
+        CvTrackbar* trackbar = 0;
+
+        if (trackbar_name == 0 || window_name == 0)
+        {
+            CV_ERROR( CV_StsNullPtr, "NULL trackbar or window name");
+        }
+
+        window = icvFindWindowByName( window_name );
+        if (window)
+        {
+            trackbar = icvFindTrackbarByName(window, trackbar_name);
+            if (trackbar)
+            {
+                trackbar->maxval = maxval;
+
+                CV_LOCK_MUTEX();
+
+                gtk_range_set_range(GTK_RANGE(trackbar->widget), 0, trackbar->maxval);
+
+                CV_UNLOCK_MUTEX();
+            }
+        }
+    }
+
+    __END__;
+}
+
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 CV_IMPL void* cvGetWindowHandle( const char* window_name )
 {
     void* widget = 0;

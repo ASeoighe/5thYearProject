@@ -115,7 +115,11 @@ The function ``imread`` loads an image from the specified file and returns it. I
 .. note:: In the case of color images, the decoded images will have the channels stored in ``B G R`` order.
 
 imwrite
+<<<<<<< HEAD
 -----------
+=======
+-------
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Saves an image to a specified file.
 
 .. ocv:function:: bool imwrite( const string& filename, InputArray img, const vector<int>& params=vector<int>() )
@@ -141,7 +145,11 @@ Saves an image to a specified file.
 The function ``imwrite`` saves the image to the specified file. The image format is chosen based on the ``filename`` extension (see
 :ocv:func:`imread` for the list of extensions). Only 8-bit (or 16-bit unsigned (``CV_16U``) in case of PNG, JPEG 2000, and TIFF) single-channel or 3-channel (with 'BGR' channel order) images can be saved using this function. If the format, depth or channel order is different, use
 :ocv:func:`Mat::convertTo` , and
+<<<<<<< HEAD
 :ocv:func:`cvtColor` to convert it before saving. Or, use the universal XML I/O functions to save the image to XML or YAML format.
+=======
+:ocv:func:`cvtColor` to convert it before saving. Or, use the universal :ocv:class:`FileStorage` I/O functions to save the image to XML or YAML format.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 It is possible to store PNG images with an alpha channel using this function. To do this, create 8-bit (or 16-bit) 4-channel image BGRA, where the alpha channel goes last. Fully transparent pixels should have alpha set to 0, fully opaque pixels should have alpha set to 255/65535. The sample below shows how to create such a BGRA image and store to PNG file. It also demonstrates how to set custom compression parameters ::
 
@@ -154,6 +162,7 @@ It is possible to store PNG images with an alpha channel using this function. To
 
     void createAlphaMat(Mat &mat)
     {
+<<<<<<< HEAD
         for (int i = 0; i < mat.rows; ++i) {
             for (int j = 0; j < mat.cols; ++j) {
                 Vec4b& rgba = mat.at<Vec4b>(i, j);
@@ -161,6 +170,16 @@ It is possible to store PNG images with an alpha channel using this function. To
                 rgba[1] = saturate_cast<uchar>((float (mat.cols - j)) / ((float)mat.cols) * UCHAR_MAX);
                 rgba[2] = saturate_cast<uchar>((float (mat.rows - i)) / ((float)mat.rows) * UCHAR_MAX);
                 rgba[3] = saturate_cast<uchar>(0.5 * (rgba[1] + rgba[2]));
+=======
+        CV_Assert(mat.channels() == 4);
+        for (int i = 0; i < mat.rows; ++i) {
+            for (int j = 0; j < mat.cols; ++j) {
+                Vec4b& bgra = mat.at<Vec4b>(i, j);
+                bgra[0] = UCHAR_MAX; // Blue
+                bgra[1] = saturate_cast<uchar>((float (mat.cols - j)) / ((float)mat.cols) * UCHAR_MAX); // Green
+                bgra[2] = saturate_cast<uchar>((float (mat.rows - i)) / ((float)mat.rows) * UCHAR_MAX); // Red
+                bgra[3] = saturate_cast<uchar>(0.5 * (bgra[1] + bgra[2])); // Alpha
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
         }
     }
@@ -192,8 +211,13 @@ VideoCapture
 ------------
 .. ocv:class:: VideoCapture
 
+<<<<<<< HEAD
 Class for video capturing from video files or cameras.
 The class provides C++ API for capturing video from cameras or for reading video files. Here is how the class can be used: ::
+=======
+Class for video capturing from video files, image sequences or cameras.
+The class provides C++ API for capturing video from cameras or for reading video files and image sequences. Here is how the class can be used: ::
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     #include "opencv2/opencv.hpp"
 
@@ -235,7 +259,11 @@ The class provides C++ API for capturing video from cameras or for reading video
 
 
 VideoCapture::VideoCapture
+<<<<<<< HEAD
 ------------------------------
+=======
+--------------------------
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 VideoCapture constructors.
 
 .. ocv:function:: VideoCapture::VideoCapture()
@@ -261,7 +289,11 @@ VideoCapture constructors.
 
 
 VideoCapture::open
+<<<<<<< HEAD
 ---------------------
+=======
+------------------
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Open video file or a capturing device for video capturing
 
 .. ocv:function:: bool VideoCapture::open(const string& filename)
@@ -303,7 +335,11 @@ The C function also deallocates memory and clears ``*capture`` pointer.
 
 
 VideoCapture::grab
+<<<<<<< HEAD
 ---------------------
+=======
+------------------
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Grabs the next frame from video file or capturing device.
 
 .. ocv:function:: bool VideoCapture::grab()
@@ -318,7 +354,11 @@ The methods/functions grab the next frame from video file or camera and return t
 
 The primary use of the function is in multi-camera environments, especially when the cameras do not have hardware synchronization. That is, you call ``VideoCapture::grab()`` for each camera and after that call the slower method ``VideoCapture::retrieve()`` to decode and get frame from each camera. This way the overhead on demosaicing or motion jpeg decompression etc. is eliminated and the retrieved frames from different cameras will be closer in time.
 
+<<<<<<< HEAD
 Also, when a connected camera is multi-head (for example, a stereo camera or a Kinect device), the correct way of retrieving data from it is to call `VideoCapture::grab` first and then call :ocv:func:`VideoCapture::retrieve` one or more times with different values of the ``channel`` parameter. See https://github.com/Itseez/opencv/tree/master/samples/cpp/openni_capture.cpp
+=======
+Also, when a connected camera is multi-head (for example, a stereo camera or a Kinect device), the correct way of retrieving data from it is to call `VideoCapture::grab` first and then call :ocv:func:`VideoCapture::retrieve` one or more times with different values of the ``channel`` parameter. See https://github.com/opencv/opencv/tree/master/samples/cpp/openni_capture.cpp
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 
 VideoCapture::retrieve
@@ -331,7 +371,11 @@ Decodes and returns the grabbed video frame.
 
 .. ocv:cfunction:: IplImage* cvRetrieveFrame( CvCapture* capture, int streamIdx=0 )
 
+<<<<<<< HEAD
 .. ocv:pyoldfunction:: cv.RetrieveFrame(capture) -> image
+=======
+.. ocv:pyoldfunction:: cv.RetrieveFrame(capture [, index]) -> image
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 The methods/functions decode and return the just grabbed frame. If no frames has been grabbed (camera has been disconnected, or there are no more frames in video file), the methods return false and the functions return NULL pointer.
 
@@ -339,7 +383,11 @@ The methods/functions decode and return the just grabbed frame. If no frames has
 
 
 VideoCapture::read
+<<<<<<< HEAD
 ----------------------
+=======
+------------------
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Grabs, decodes and returns the next video frame.
 
 .. ocv:function:: VideoCapture& VideoCapture::operator >> (Mat& image)
@@ -358,7 +406,11 @@ The methods/functions combine :ocv:func:`VideoCapture::grab` and :ocv:func:`Vide
 
 
 VideoCapture::get
+<<<<<<< HEAD
 ---------------------
+=======
+-----------------
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Returns the specified ``VideoCapture`` property
 
 .. ocv:function:: double VideoCapture::get(int propId)
@@ -406,15 +458,32 @@ Returns the specified ``VideoCapture`` property
 
         * **CV_CAP_PROP_CONVERT_RGB** Boolean flags indicating whether images should be converted to RGB.
 
+<<<<<<< HEAD
         * **CV_CAP_PROP_WHITE_BALANCE** Currently not supported
 
         * **CV_CAP_PROP_RECTIFICATION** Rectification flag for stereo cameras (note: only supported by DC1394 v 2.x backend currently)
 
+=======
+        * **CV_CAP_PROP_WHITE_BALANCE_U** The U value of the whitebalance setting (note: only supported by DC1394 v 2.x backend currently)
+
+        * **CV_CAP_PROP_WHITE_BALANCE_V** The V value of the whitebalance setting (note: only supported by DC1394 v 2.x backend currently)
+
+        * **CV_CAP_PROP_RECTIFICATION** Rectification flag for stereo cameras (note: only supported by DC1394 v 2.x backend currently)
+
+        * **CV_CAP_PROP_ISO_SPEED** The ISO speed of the camera (note: only supported by DC1394 v 2.x backend currently)
+
+        * **CV_CAP_PROP_BUFFERSIZE** Amount of frames stored in internal buffer memory (note: only supported by DC1394 v 2.x backend currently)
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 **Note**: When querying a property that is not supported by the backend used by the ``VideoCapture`` class, value 0 is returned.
 
 VideoCapture::set
+<<<<<<< HEAD
 ---------------------
+=======
+-----------------
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Sets a property in the ``VideoCapture``.
 
 .. ocv:function:: bool VideoCapture::set( int propId, double value )
@@ -461,10 +530,23 @@ Sets a property in the ``VideoCapture``.
 
         * **CV_CAP_PROP_CONVERT_RGB** Boolean flags indicating whether images should be converted to RGB.
 
+<<<<<<< HEAD
         * **CV_CAP_PROP_WHITE_BALANCE** Currently unsupported
 
         * **CV_CAP_PROP_RECTIFICATION** Rectification flag for stereo cameras (note: only supported by DC1394 v 2.x backend currently)
 
+=======
+        * **CV_CAP_PROP_WHITE_BALANCE_U** The U value of the whitebalance setting (note: only supported by DC1394 v 2.x backend currently)
+
+        * **CV_CAP_PROP_WHITE_BALANCE_V** The V value of the whitebalance setting (note: only supported by DC1394 v 2.x backend currently)
+
+        * **CV_CAP_PROP_RECTIFICATION** Rectification flag for stereo cameras (note: only supported by DC1394 v 2.x backend currently)
+
+        * **CV_CAP_PROP_ISO_SPEED** The ISO speed of the camera (note: only supported by DC1394 v 2.x backend currently)
+
+        * **CV_CAP_PROP_BUFFERSIZE** Amount of frames stored in internal buffer memory (note: only supported by DC1394 v 2.x backend currently)
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     :param value: Value of the property.
 
 

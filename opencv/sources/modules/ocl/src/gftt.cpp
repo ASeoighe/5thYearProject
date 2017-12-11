@@ -75,8 +75,13 @@ static void sortCorners_caller(oclMat& corners, const int count)
     Context * cxt = Context::getContext();
     int     GS = count/2;
     int     LS = min(255,GS);
+<<<<<<< HEAD
     size_t  globalThreads[3] = {GS, 1, 1};
     size_t  localThreads[3]  = {LS, 1, 1};
+=======
+    size_t  globalThreads[3] = {(size_t)GS, 1, 1};
+    size_t  localThreads[3]  = {(size_t)LS, 1, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     // 2^numStages should be equal to count or the output is invalid
     int numStages = 0;
@@ -130,7 +135,11 @@ static void findCorners_caller(
     args.push_back(make_pair( sizeof(cl_int),   (void*)&corners.cols ));
     args.push_back(make_pair( sizeof(cl_mem),   (void*)&counter.data ));
 
+<<<<<<< HEAD
     size_t globalThreads[3] = {eig_mat.cols, eig_mat.rows, 1};
+=======
+    size_t globalThreads[3] = {(size_t)eig_mat.cols, (size_t)eig_mat.rows, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     size_t localThreads[3]  = {16, 16, 1};
     if(!mask.empty())
         opt += " -D WITH_MASK=1";
@@ -164,7 +173,11 @@ static void minMaxEig_caller(const oclMat &src, oclMat &dst, oclMat & tozero)
         args.push_back( make_pair( sizeof(cl_int) , (void *)&total));
         args.push_back( make_pair( sizeof(cl_int) , (void *)&groupnum));
         args.push_back( make_pair( sizeof(cl_mem) , (void *)&dst_data ));
+<<<<<<< HEAD
         size_t globalThreads[3] = {groupnum * 256, 1, 1};
+=======
+        size_t globalThreads[3] = {(size_t)groupnum * 256, 1, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         size_t localThreads[3] = {256, 1, 1};
         openCLExecuteKernel(src.clCxt, &arithm_minMax, "arithm_op_minMax", globalThreads, localThreads,
                             args, -1, -1, "-D T=float -D DEPTH_5 -D vlen=1");

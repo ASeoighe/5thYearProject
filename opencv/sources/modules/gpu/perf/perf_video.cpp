@@ -41,6 +41,10 @@
 //M*/
 
 #include "perf_precomp.hpp"
+<<<<<<< HEAD
+=======
+#include "opencv2/ts/gpu_perf.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace std;
 using namespace testing;
@@ -143,7 +147,11 @@ PERF_TEST_P(ImagePair, Video_CreateOpticalFlowNeedleMap,
 
         TEST_CYCLE() cv::gpu::createOpticalFlowNeedleMap(u, v, vertex, colors);
 
+<<<<<<< HEAD
         GPU_SANITY_CHECK(vertex, 1e-6);
+=======
+        GPU_SANITY_CHECK(vertex, 1e-5);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         GPU_SANITY_CHECK(colors);
     }
     else
@@ -307,7 +315,12 @@ PERF_TEST_P(ImagePair_Gray_NPts_WinSz_Levels_Iters, Video_PyrLKOpticalFlowSparse
 
 DEF_PARAM_TEST(ImagePair_WinSz_Levels_Iters, pair_string, int, int, int);
 
+<<<<<<< HEAD
 PERF_TEST_P(ImagePair_WinSz_Levels_Iters, Video_PyrLKOpticalFlowDense,
+=======
+// Sanity test fails on Maxwell and CUDA 7.0
+PERF_TEST_P(ImagePair_WinSz_Levels_Iters, DISABLED_Video_PyrLKOpticalFlowDense,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             Combine(Values<pair_string>(make_pair("gpu/opticalflow/frame0.png", "gpu/opticalflow/frame1.png")),
                     Values(3, 5, 7, 9, 13, 17, 21),
                     Values(1, 3),
@@ -340,8 +353,13 @@ PERF_TEST_P(ImagePair_WinSz_Levels_Iters, Video_PyrLKOpticalFlowDense,
 
         TEST_CYCLE() d_pyrLK.dense(d_frame0, d_frame1, u, v);
 
+<<<<<<< HEAD
         GPU_SANITY_CHECK(u);
         GPU_SANITY_CHECK(v);
+=======
+        GPU_SANITY_CHECK(u, 0.5);
+        GPU_SANITY_CHECK(v, 0.5);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     else
     {
@@ -427,8 +445,13 @@ PERF_TEST_P(ImagePair, Video_OpticalFlowDual_TVL1,
 
         TEST_CYCLE() d_alg(d_frame0, d_frame1, u, v);
 
+<<<<<<< HEAD
         GPU_SANITY_CHECK(u, 1e-1);
         GPU_SANITY_CHECK(v, 1e-1);
+=======
+        GPU_SANITY_CHECK(u, 0.12);
+        GPU_SANITY_CHECK(v, 0.12);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     else
     {
@@ -463,7 +486,12 @@ void calcOpticalFlowBM(const cv::Mat& prev, const cv::Mat& curr,
     cvCalcOpticalFlowBM(&cvprev, &cvcurr, bSize, shiftSize, maxRange, usePrevious, &cvvelx, &cvvely);
 }
 
+<<<<<<< HEAD
 PERF_TEST_P(ImagePair, Video_OpticalFlowBM,
+=======
+// disabled, since it takes too much time
+PERF_TEST_P(ImagePair, DISABLED_Video_OpticalFlowBM,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             Values<pair_string>(make_pair("gpu/opticalflow/frame0.png", "gpu/opticalflow/frame1.png")))
 {
     declare.time(400);
@@ -541,7 +569,12 @@ PERF_TEST_P(ImagePair, DISABLED_Video_FastOpticalFlowBM,
 
 DEF_PARAM_TEST_1(Video, string);
 
+<<<<<<< HEAD
 PERF_TEST_P(Video, Video_FGDStatModel,
+=======
+// disabled, since it takes too much time
+PERF_TEST_P(Video, DISABLED_Video_FGDStatModel,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             Values(string("gpu/video/768x576.avi")))
 {
     const int numIters = 10;

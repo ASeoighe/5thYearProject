@@ -1632,7 +1632,11 @@ bool CvSVM::train( const CvMat* _train_data, const CvMat* _responses,
     if( !do_train( svm_type, sample_count, var_count, samples, responses, temp_storage, alpha ))
         EXIT;
 
+<<<<<<< HEAD
     ok = true; // model has been trained succesfully
+=======
+    ok = true; // model has been trained successfully
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     __END__;
 
@@ -1880,7 +1884,11 @@ bool CvSVM::train_auto( const CvMat* _train_data, const CvMat* _responses,
         qsort(ratios, k_fold, sizeof(ratios[0]), icvCmpIndexedratio);
         double old_dist = 0.0;
         for (int k=0; k<k_fold; ++k)
+<<<<<<< HEAD
             old_dist += abs(ratios[k].val-class_ratio);
+=======
+            old_dist += std::abs(ratios[k].val-class_ratio);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         double new_dist = 1.0;
         // iterate to make the folds more balanced
         while (new_dist > 0.0)
@@ -1897,7 +1905,11 @@ bool CvSVM::train_auto( const CvMat* _train_data, const CvMat* _responses,
             qsort(ratios, k_fold, sizeof(ratios[0]), icvCmpIndexedratio);
             new_dist = 0.0;
             for (int k=0; k<k_fold; ++k)
+<<<<<<< HEAD
                 new_dist += abs(ratios[k].val-class_ratio);
+=======
+                new_dist += std::abs(ratios[k].val-class_ratio);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             if (new_dist < old_dist)
             {
                 // swapping really improves, so swap the samples
@@ -2315,7 +2327,16 @@ void CvSVM::write( CvFileStorage* fs, const char* name ) const
                       params.svm_type == CvSVM::ONE_CLASS ? 1 : 0;
     const CvSVMDecisionFunc* df = decision_func;
     if( !isSvmModelApplicable(sv_total, var_all, var_count, class_count) )
+<<<<<<< HEAD
         CV_ERROR( CV_StsParseError, "SVM model data is invalid, check sv_count, var_* and class_count tags" );
+=======
+    {
+        cvReleaseFileStorage( &fs );
+        fs = NULL;
+
+        CV_ERROR( CV_StsParseError, "SVM model data is invalid, check sv_count, var_* and class_count tags" );
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     cvStartWriteStruct( fs, name, CV_NODE_MAP, CV_TYPE_NAME_ML_SVM );
 

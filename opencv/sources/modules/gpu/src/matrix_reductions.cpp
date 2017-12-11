@@ -132,7 +132,11 @@ void cv::gpu::meanStdDev(const GpuMat& src, Scalar& mean, Scalar& stddev, GpuMat
     DeviceBuffer dbuf(2);
 
     int bufSize;
+<<<<<<< HEAD
 #if (CUDA_VERSION <= 4020)
+=======
+#if (CUDART_VERSION <= 4020)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     nppSafeCall( nppiMeanStdDev8uC1RGetBufferHostSize(sz, &bufSize) );
 #else
     nppSafeCall( nppiMeanStdDevGetBufferHostSize_8u_C1R(sz, &bufSize) );
@@ -187,7 +191,11 @@ double cv::gpu::norm(const GpuMat& src1, const GpuMat& src2, int normType)
     CV_Assert(src1.size() == src2.size() && src1.type() == src2.type());
     CV_Assert(normType == NORM_INF || normType == NORM_L1 || normType == NORM_L2);
 
+<<<<<<< HEAD
 #if CUDA_VERSION < 5050
+=======
+#if CUDART_VERSION < 5050
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     typedef NppStatus (*func_t)(const Npp8u* pSrc1, int nSrcStep1, const Npp8u* pSrc2, int nSrcStep2, NppiSize oSizeROI, Npp64f* pRetVal);
 
     static const func_t funcs[] = {nppiNormDiff_Inf_8u_C1R, nppiNormDiff_L1_8u_C1R, nppiNormDiff_L2_8u_C1R};
@@ -212,7 +220,11 @@ double cv::gpu::norm(const GpuMat& src1, const GpuMat& src2, int normType)
 
     DeviceBuffer dbuf;
 
+<<<<<<< HEAD
 #if CUDA_VERSION < 5050
+=======
+#if CUDART_VERSION < 5050
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     nppSafeCall( funcs[funcIdx](src1.ptr<Npp8u>(), static_cast<int>(src1.step), src2.ptr<Npp8u>(), static_cast<int>(src2.step), sz, dbuf) );
 #else
     int bufSize;
@@ -261,6 +273,21 @@ Scalar cv::gpu::sum(const GpuMat& src, GpuMat& buf)
 Scalar cv::gpu::sum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
 {
     typedef void (*func_t)(PtrStepSzb src, void* buf, double* sum, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[7][5] =
+    {
+        {0, ::sum::run<uchar , 1>, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, ::sum::run<float , 1>, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[7][5] =
     {
         {0, ::sum::run<uchar , 1>, ::sum::run<uchar , 2>, ::sum::run<uchar , 3>, ::sum::run<uchar , 4>},
@@ -271,6 +298,10 @@ Scalar cv::gpu::sum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
         {0, ::sum::run<float , 1>, ::sum::run<float , 2>, ::sum::run<float , 3>, ::sum::run<float , 4>},
         {0, ::sum::run<double, 1>, ::sum::run<double, 2>, ::sum::run<double, 3>, ::sum::run<double, 4>}
     };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert( mask.empty() || (mask.type() == CV_8UC1 && mask.size() == src.size()) );
 
@@ -286,6 +317,11 @@ Scalar cv::gpu::sum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
     buf.setTo(Scalar::all(0));
 
     const func_t func = funcs[src.depth()][src.channels()];
+<<<<<<< HEAD
+=======
+    if (!func)
+        CV_Error(CV_StsUnsupportedFormat, "Unsupported combination of source and destination types");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     double result[4];
     func(src, buf.data, result, mask);
@@ -307,6 +343,21 @@ Scalar cv::gpu::absSum(const GpuMat& src, GpuMat& buf)
 Scalar cv::gpu::absSum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
 {
     typedef void (*func_t)(PtrStepSzb src, void* buf, double* sum, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[7][5] =
+    {
+        {0, ::sum::runAbs<uchar , 1>, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, ::sum::runAbs<float , 1>, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[7][5] =
     {
         {0, ::sum::runAbs<uchar , 1>, ::sum::runAbs<uchar , 2>, ::sum::runAbs<uchar , 3>, ::sum::runAbs<uchar , 4>},
@@ -317,6 +368,10 @@ Scalar cv::gpu::absSum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
         {0, ::sum::runAbs<float , 1>, ::sum::runAbs<float , 2>, ::sum::runAbs<float , 3>, ::sum::runAbs<float , 4>},
         {0, ::sum::runAbs<double, 1>, ::sum::runAbs<double, 2>, ::sum::runAbs<double, 3>, ::sum::runAbs<double, 4>}
     };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert( mask.empty() || (mask.type() == CV_8UC1 && mask.size() == src.size()) );
 
@@ -332,6 +387,11 @@ Scalar cv::gpu::absSum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
     buf.setTo(Scalar::all(0));
 
     const func_t func = funcs[src.depth()][src.channels()];
+<<<<<<< HEAD
+=======
+    if (!func)
+        CV_Error(CV_StsUnsupportedFormat, "Unsupported combination of source and destination types");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     double result[4];
     func(src, buf.data, result, mask);
@@ -353,6 +413,21 @@ Scalar cv::gpu::sqrSum(const GpuMat& src, GpuMat& buf)
 Scalar cv::gpu::sqrSum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
 {
     typedef void (*func_t)(PtrStepSzb src, void* buf, double* sum, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[7][5] =
+    {
+        {0, ::sum::runSqr<uchar , 1>, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, ::sum::runSqr<float , 1>, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[7][5] =
     {
         {0, ::sum::runSqr<uchar , 1>, ::sum::runSqr<uchar , 2>, ::sum::runSqr<uchar , 3>, ::sum::runSqr<uchar , 4>},
@@ -363,6 +438,10 @@ Scalar cv::gpu::sqrSum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
         {0, ::sum::runSqr<float , 1>, ::sum::runSqr<float , 2>, ::sum::runSqr<float , 3>, ::sum::runSqr<float , 4>},
         {0, ::sum::runSqr<double, 1>, ::sum::runSqr<double, 2>, ::sum::runSqr<double, 3>, ::sum::runSqr<double, 4>}
     };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert( mask.empty() || (mask.type() == CV_8UC1 && mask.size() == src.size()) );
 
@@ -378,6 +457,11 @@ Scalar cv::gpu::sqrSum(const GpuMat& src, const GpuMat& mask, GpuMat& buf)
     buf.setTo(Scalar::all(0));
 
     const func_t func = funcs[src.depth()][src.channels()];
+<<<<<<< HEAD
+=======
+    if (!func)
+        CV_Error(CV_StsUnsupportedFormat, "Unsupported combination of source and destination types");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     double result[4];
     func(src, buf.data, result, mask);
@@ -405,6 +489,21 @@ void cv::gpu::minMax(const GpuMat& src, double* minVal, double* maxVal, const Gp
 void cv::gpu::minMax(const GpuMat& src, double* minVal, double* maxVal, const GpuMat& mask, GpuMat& buf)
 {
     typedef void (*func_t)(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[] =
+    {
+        ::minMax::run<uchar>,
+        0/*::minMax::run<schar>*/,
+        0/*::minMax::run<ushort>*/,
+        0/*::minMax::run<short>*/,
+        0/*::minMax::run<int>*/,
+        ::minMax::run<float>,
+        0/*::minMax::run<double>*/,
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[] =
     {
         ::minMax::run<uchar>,
@@ -413,8 +512,14 @@ void cv::gpu::minMax(const GpuMat& src, double* minVal, double* maxVal, const Gp
         ::minMax::run<short>,
         ::minMax::run<int>,
         ::minMax::run<float>,
+<<<<<<< HEAD
         ::minMax::run<double>
     };
+=======
+        ::minMax::run<double>,
+    };
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert( src.channels() == 1 );
     CV_Assert( mask.empty() || (mask.size() == src.size() && mask.type() == CV_8U) );
@@ -430,6 +535,11 @@ void cv::gpu::minMax(const GpuMat& src, double* minVal, double* maxVal, const Gp
     ensureSizeIsEnough(buf_size, CV_8U, buf);
 
     const func_t func = funcs[src.depth()];
+<<<<<<< HEAD
+=======
+    if (!func)
+        CV_Error(CV_StsUnsupportedFormat, "Unsupported combination of source and destination types");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     double temp1, temp2;
     func(src, mask, minVal ? minVal : &temp1, maxVal ? maxVal : &temp2, buf);
@@ -456,6 +566,21 @@ void cv::gpu::minMaxLoc(const GpuMat& src, double* minVal, double* maxVal, Point
                         const GpuMat& mask, GpuMat& valBuf, GpuMat& locBuf)
 {
     typedef void (*func_t)(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[] =
+    {
+        ::minMaxLoc::run<uchar>,
+        0/*::minMaxLoc::run<schar>*/,
+        0/*::minMaxLoc::run<ushort>*/,
+        0/*::minMaxLoc::run<short>*/,
+        ::minMaxLoc::run<int>,
+        ::minMaxLoc::run<float>,
+        0/*::minMaxLoc::run<double>*/,
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[] =
     {
         ::minMaxLoc::run<uchar>,
@@ -464,8 +589,14 @@ void cv::gpu::minMaxLoc(const GpuMat& src, double* minVal, double* maxVal, Point
         ::minMaxLoc::run<short>,
         ::minMaxLoc::run<int>,
         ::minMaxLoc::run<float>,
+<<<<<<< HEAD
         ::minMaxLoc::run<double>
     };
+=======
+        ::minMaxLoc::run<double>,
+    };
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert( src.channels() == 1 );
     CV_Assert( mask.empty() || (mask.size() == src.size() && mask.type() == CV_8U) );
@@ -482,6 +613,11 @@ void cv::gpu::minMaxLoc(const GpuMat& src, double* minVal, double* maxVal, Point
     ensureSizeIsEnough(locbuf_size, CV_8U, locBuf);
 
     const func_t func = funcs[src.depth()];
+<<<<<<< HEAD
+=======
+    if (!func)
+        CV_Error(CV_StsUnsupportedFormat, "Unsupported combination of source and destination types");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     double temp1, temp2;
     Point temp3, temp4;
@@ -508,6 +644,21 @@ int cv::gpu::countNonZero(const GpuMat& src)
 int cv::gpu::countNonZero(const GpuMat& src, GpuMat& buf)
 {
     typedef int (*func_t)(const PtrStepSzb src, PtrStep<unsigned int> buf);
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[] =
+    {
+        ::countNonZero::run<uchar>,
+        0/*::countNonZero::run<schar>*/,
+        0/*::countNonZero::run<ushort>*/,
+        0/*::countNonZero::run<short>*/,
+        0/*::countNonZero::run<int>*/,
+        ::countNonZero::run<float>,
+        0/*::countNonZero::run<double>*/,
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[] =
     {
         ::countNonZero::run<uchar>,
@@ -516,8 +667,14 @@ int cv::gpu::countNonZero(const GpuMat& src, GpuMat& buf)
         ::countNonZero::run<short>,
         ::countNonZero::run<int>,
         ::countNonZero::run<float>,
+<<<<<<< HEAD
         ::countNonZero::run<double>
     };
+=======
+        ::countNonZero::run<double>,
+    };
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert(src.channels() == 1);
 
@@ -532,6 +689,11 @@ int cv::gpu::countNonZero(const GpuMat& src, GpuMat& buf)
     ensureSizeIsEnough(buf_size, CV_8U, buf);
 
     const func_t func = funcs[src.depth()];
+<<<<<<< HEAD
+=======
+    if (!func)
+        CV_Error(CV_StsUnsupportedFormat, "Unsupported combination of source and destination types");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     return func(src, buf);
 }
@@ -562,6 +724,77 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
     if (dim == 0)
     {
         typedef void (*func_t)(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+        static const func_t funcs[7][7] =
+        {
+            {
+                ::reduce::rows<unsigned char, int, unsigned char>,
+                0/*::reduce::rows<unsigned char, int, signed char>*/,
+                0/*::reduce::rows<unsigned char, int, unsigned short>*/,
+                0/*::reduce::rows<unsigned char, int, short>*/,
+                0/*::reduce::rows<unsigned char, int, int>*/,
+                ::reduce::rows<unsigned char, float, float>,
+                0/*::reduce::rows<unsigned char, double, double>*/,
+            },
+            {
+                0/*::reduce::rows<signed char, int, unsigned char>*/,
+                0/*::reduce::rows<signed char, int, signed char>*/,
+                0/*::reduce::rows<signed char, int, unsigned short>*/,
+                0/*::reduce::rows<signed char, int, short>*/,
+                0/*::reduce::rows<signed char, int, int>*/,
+                0/*::reduce::rows<signed char, float, float>*/,
+                0/*::reduce::rows<signed char, double, double>*/,
+            },
+            {
+                0/*::reduce::rows<unsigned short, int, unsigned char>*/,
+                0/*::reduce::rows<unsigned short, int, signed char>*/,
+                0/*::reduce::rows<unsigned short, int, unsigned short>*/,
+                0/*::reduce::rows<unsigned short, int, short>*/,
+                0/*::reduce::rows<unsigned short, int, int>*/,
+                0/*::reduce::rows<unsigned short, float, float>*/,
+                0/*::reduce::rows<unsigned short, double, double>*/,
+            },
+            {
+                0/*::reduce::rows<short, int, unsigned char>*/,
+                0/*::reduce::rows<short, int, signed char>*/,
+                0/*::reduce::rows<short, int, unsigned short>*/,
+                0/*::reduce::rows<short, int, short>*/,
+                0/*::reduce::rows<short, int, int>*/,
+                0/*::reduce::rows<short, float, float>*/,
+                0/*::reduce::rows<short, double, double>*/,
+            },
+            {
+                0/*::reduce::rows<int, int, unsigned char>*/,
+                0/*::reduce::rows<int, int, signed char>*/,
+                0/*::reduce::rows<int, int, unsigned short>*/,
+                0/*::reduce::rows<int, int, short>*/,
+                0/*::reduce::rows<int, int, int>*/,
+                0/*::reduce::rows<int, float, float>*/,
+                0/*::reduce::rows<int, double, double>*/,
+            },
+            {
+                0/*::reduce::rows<float, float, unsigned char>*/,
+                0/*::reduce::rows<float, float, signed char>*/,
+                0/*::reduce::rows<float, float, unsigned short>*/,
+                0/*::reduce::rows<float, float, short>*/,
+                0/*::reduce::rows<float, float, int>*/,
+                ::reduce::rows<float, float, float>,
+                0/*::reduce::rows<float, double, double>*/,
+            },
+            {
+                0/*::reduce::rows<double, double, unsigned char>*/,
+                0/*::reduce::rows<double, double, signed char>*/,
+                0/*::reduce::rows<double, double, unsigned short>*/,
+                0/*::reduce::rows<double, double, short>*/,
+                0/*::reduce::rows<double, double, int>*/,
+                0/*::reduce::rows<double, double, float>*/,
+                0/*::reduce::rows<double, double, double>*/,
+            }
+        };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         static const func_t funcs[7][7] =
         {
             {
@@ -571,7 +804,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::rows<unsigned char, int, short>*/,
                 ::reduce::rows<unsigned char, int, int>,
                 ::reduce::rows<unsigned char, float, float>,
+<<<<<<< HEAD
                 ::reduce::rows<unsigned char, double, double>
+=======
+                ::reduce::rows<unsigned char, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::rows<signed char, int, unsigned char>*/,
@@ -580,7 +817,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::rows<signed char, int, short>*/,
                 0/*::reduce::rows<signed char, int, int>*/,
                 0/*::reduce::rows<signed char, float, float>*/,
+<<<<<<< HEAD
                 0/*::reduce::rows<signed char, double, double>*/
+=======
+                0/*::reduce::rows<signed char, double, double>*/,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::rows<unsigned short, int, unsigned char>*/,
@@ -589,7 +830,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::rows<unsigned short, int, short>*/,
                 ::reduce::rows<unsigned short, int, int>,
                 ::reduce::rows<unsigned short, float, float>,
+<<<<<<< HEAD
                 ::reduce::rows<unsigned short, double, double>
+=======
+                ::reduce::rows<unsigned short, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::rows<short, int, unsigned char>*/,
@@ -598,7 +843,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 ::reduce::rows<short, int, short>,
                 ::reduce::rows<short, int, int>,
                 ::reduce::rows<short, float, float>,
+<<<<<<< HEAD
                 ::reduce::rows<short, double, double>
+=======
+                ::reduce::rows<short, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::rows<int, int, unsigned char>*/,
@@ -607,7 +856,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::rows<int, int, short>*/,
                 ::reduce::rows<int, int, int>,
                 ::reduce::rows<int, float, float>,
+<<<<<<< HEAD
                 ::reduce::rows<int, double, double>
+=======
+                ::reduce::rows<int, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::rows<float, float, unsigned char>*/,
@@ -616,7 +869,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::rows<float, float, short>*/,
                 0/*::reduce::rows<float, float, int>*/,
                 ::reduce::rows<float, float, float>,
+<<<<<<< HEAD
                 ::reduce::rows<float, double, double>
+=======
+                ::reduce::rows<float, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::rows<double, double, unsigned char>*/,
@@ -625,9 +882,16 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::rows<double, double, short>*/,
                 0/*::reduce::rows<double, double, int>*/,
                 0/*::reduce::rows<double, double, float>*/,
+<<<<<<< HEAD
                 ::reduce::rows<double, double, double>
             }
         };
+=======
+                ::reduce::rows<double, double, double>,
+            }
+        };
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         const func_t func = funcs[src.depth()][dst.depth()];
 
@@ -639,6 +903,77 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
     else
     {
         typedef void (*func_t)(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+        static const func_t funcs[7][7] =
+        {
+            {
+                ::reduce::cols<unsigned char, int, unsigned char>,
+                0/*::reduce::cols<unsigned char, int, signed char>*/,
+                0/*::reduce::cols<unsigned char, int, unsigned short>*/,
+                0/*::reduce::cols<unsigned char, int, short>*/,
+                0/*::reduce::cols<unsigned char, int, int>*/,
+                ::reduce::cols<unsigned char, float, float>,
+                0/*::reduce::cols<unsigned char, double, double>*/,
+            },
+            {
+                0/*::reduce::cols<signed char, int, unsigned char>*/,
+                0/*::reduce::cols<signed char, int, signed char>*/,
+                0/*::reduce::cols<signed char, int, unsigned short>*/,
+                0/*::reduce::cols<signed char, int, short>*/,
+                0/*::reduce::cols<signed char, int, int>*/,
+                0/*::reduce::cols<signed char, float, float>*/,
+                0/*::reduce::cols<signed char, double, double>*/,
+            },
+            {
+                0/*::reduce::cols<unsigned short, int, unsigned char>*/,
+                0/*::reduce::cols<unsigned short, int, signed char>*/,
+                0/*::reduce::cols<unsigned short, int, unsigned short>*/,
+                0/*::reduce::cols<unsigned short, int, short>*/,
+                0/*::reduce::cols<unsigned short, int, int>*/,
+                0/*::reduce::cols<unsigned short, float, float>*/,
+                0/*::reduce::cols<unsigned short, double, double>*/,
+            },
+            {
+                0/*::reduce::cols<short, int, unsigned char>*/,
+                0/*::reduce::cols<short, int, signed char>*/,
+                0/*::reduce::cols<short, int, unsigned short>*/,
+                0/*::reduce::cols<short, int, short>*/,
+                0/*::reduce::cols<short, int, int>*/,
+                0/*::reduce::cols<short, float, float>*/,
+                0/*::reduce::cols<short, double, double>*/,
+            },
+            {
+                0/*::reduce::cols<int, int, unsigned char>*/,
+                0/*::reduce::cols<int, int, signed char>*/,
+                0/*::reduce::cols<int, int, unsigned short>*/,
+                0/*::reduce::cols<int, int, short>*/,
+                0/*::reduce::cols<int, int, int>*/,
+                0/*::reduce::cols<int, float, float>*/,
+                0/*::reduce::cols<int, double, double>*/,
+            },
+            {
+                0/*::reduce::cols<float, float, unsigned char>*/,
+                0/*::reduce::cols<float, float, signed char>*/,
+                0/*::reduce::cols<float, float, unsigned short>*/,
+                0/*::reduce::cols<float, float, short>*/,
+                0/*::reduce::cols<float, float, int>*/,
+                ::reduce::cols<float, float, float>,
+                0/*::reduce::cols<float, double, double>*/,
+            },
+            {
+                0/*::reduce::cols<double, double, unsigned char>*/,
+                0/*::reduce::cols<double, double, signed char>*/,
+                0/*::reduce::cols<double, double, unsigned short>*/,
+                0/*::reduce::cols<double, double, short>*/,
+                0/*::reduce::cols<double, double, int>*/,
+                0/*::reduce::cols<double, double, float>*/,
+                0/*::reduce::cols<double, double, double>*/,
+            }
+        };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         static const func_t funcs[7][7] =
         {
             {
@@ -648,7 +983,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::cols<unsigned char, int, short>*/,
                 ::reduce::cols<unsigned char, int, int>,
                 ::reduce::cols<unsigned char, float, float>,
+<<<<<<< HEAD
                 ::reduce::cols<unsigned char, double, double>
+=======
+                ::reduce::cols<unsigned char, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::cols<signed char, int, unsigned char>*/,
@@ -657,7 +996,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::cols<signed char, int, short>*/,
                 0/*::reduce::cols<signed char, int, int>*/,
                 0/*::reduce::cols<signed char, float, float>*/,
+<<<<<<< HEAD
                 0/*::reduce::cols<signed char, double, double>*/
+=======
+                0/*::reduce::cols<signed char, double, double>*/,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::cols<unsigned short, int, unsigned char>*/,
@@ -666,7 +1009,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::cols<unsigned short, int, short>*/,
                 ::reduce::cols<unsigned short, int, int>,
                 ::reduce::cols<unsigned short, float, float>,
+<<<<<<< HEAD
                 ::reduce::cols<unsigned short, double, double>
+=======
+                ::reduce::cols<unsigned short, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::cols<short, int, unsigned char>*/,
@@ -675,7 +1022,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 ::reduce::cols<short, int, short>,
                 ::reduce::cols<short, int, int>,
                 ::reduce::cols<short, float, float>,
+<<<<<<< HEAD
                 ::reduce::cols<short, double, double>
+=======
+                ::reduce::cols<short, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::cols<int, int, unsigned char>*/,
@@ -684,7 +1035,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::cols<int, int, short>*/,
                 ::reduce::cols<int, int, int>,
                 ::reduce::cols<int, float, float>,
+<<<<<<< HEAD
                 ::reduce::cols<int, double, double>
+=======
+                ::reduce::cols<int, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::cols<float, float, unsigned char>*/,
@@ -693,7 +1048,11 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::cols<float, float, short>*/,
                 0/*::reduce::cols<float, float, int>*/,
                 ::reduce::cols<float, float, float>,
+<<<<<<< HEAD
                 ::reduce::cols<float, double, double>
+=======
+                ::reduce::cols<float, double, double>,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             },
             {
                 0/*::reduce::cols<double, double, unsigned char>*/,
@@ -702,9 +1061,16 @@ void cv::gpu::reduce(const GpuMat& src, GpuMat& dst, int dim, int reduceOp, int 
                 0/*::reduce::cols<double, double, short>*/,
                 0/*::reduce::cols<double, double, int>*/,
                 0/*::reduce::cols<double, double, float>*/,
+<<<<<<< HEAD
                 ::reduce::cols<double, double, double>
             }
         };
+=======
+                ::reduce::cols<double, double, double>,
+            }
+        };
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         const func_t func = funcs[src.depth()][dst.depth()];
 

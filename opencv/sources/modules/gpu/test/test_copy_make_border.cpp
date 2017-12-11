@@ -87,6 +87,23 @@ GPU_TEST_P(CopyMakeBorder, Accuracy)
     EXPECT_MAT_NEAR(dst_gold, dst, 0.0);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+INSTANTIATE_TEST_CASE_P(GPU_ImgProc, CopyMakeBorder, testing::Combine(
+    ALL_DEVICES,
+    DIFFERENT_SIZES,
+    testing::Values(MatType(CV_8UC1),
+                    MatType(CV_8UC3),
+                    MatType(CV_8UC4),
+                    MatType(CV_32FC1),
+                    MatType(CV_32FC3),
+                    MatType(CV_32FC4)),
+    testing::Values(Border(1), Border(10), Border(50)),
+    ALL_BORDER_TYPES,
+    WHOLE_SUBMAT));
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 INSTANTIATE_TEST_CASE_P(GPU_ImgProc, CopyMakeBorder, testing::Combine(
     ALL_DEVICES,
     DIFFERENT_SIZES,
@@ -102,5 +119,9 @@ INSTANTIATE_TEST_CASE_P(GPU_ImgProc, CopyMakeBorder, testing::Combine(
     testing::Values(Border(1), Border(10), Border(50)),
     ALL_BORDER_TYPES,
     WHOLE_SUBMAT));
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #endif // HAVE_CUDA

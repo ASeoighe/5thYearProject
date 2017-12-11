@@ -12,14 +12,22 @@ Required Packages
 Getting the Cutting-edge OpenCV from Git Repository
 ---------------------------------------------------
 
+<<<<<<< HEAD
 Launch GIT client and clone OpenCV repository from `here <http://github.com/itseez/opencv>`_
+=======
+Launch GIT client and clone OpenCV repository from `here <http://github.com/opencv/opencv>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 In MacOS it can be done using the following command in Terminal:
 
 .. code-block:: bash
 
    cd ~/<my_working _directory>
+<<<<<<< HEAD
    git clone https://github.com/Itseez/opencv.git
+=======
+   git clone https://github.com/opencv/opencv.git
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 
 Building OpenCV from Source, using CMake and Command Line

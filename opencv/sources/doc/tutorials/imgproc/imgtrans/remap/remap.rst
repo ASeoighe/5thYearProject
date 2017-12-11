@@ -59,7 +59,11 @@ Code
    * Each second, apply 1 of 4 different remapping processes to the image and display them indefinitely in a window.
    * Wait for the user to exit the program
 
+<<<<<<< HEAD
 #. The tutorial code's is shown lines below. You can also download it from `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/ImgTrans/Remap_Demo.cpp>`_
+=======
+#. The tutorial code's is shown lines below. You can also download it from `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/ImgTrans/Remap_Demo.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. code-block:: cpp
 

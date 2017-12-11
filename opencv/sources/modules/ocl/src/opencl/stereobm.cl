@@ -11,7 +11,11 @@
 //                For Open Source Computer Vision Library
 //
 // Copyright (C) 2010-2012, Institute Of Software Chinese Academy Of Science, all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010,2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // @Authors
@@ -56,7 +60,11 @@
 #define radius 64
 #endif
 
+<<<<<<< HEAD
 inline unsigned int CalcSSD(__local unsigned int *col_ssd)
+=======
+unsigned int CalcSSD(__local unsigned int *col_ssd)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     unsigned int cache = col_ssd[0];
 
@@ -67,7 +75,11 @@ inline unsigned int CalcSSD(__local unsigned int *col_ssd)
     return cache;
 }
 
+<<<<<<< HEAD
 inline uint2 MinSSD(__local unsigned int *col_ssd)
+=======
+uint2 MinSSD(__local unsigned int *col_ssd)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     unsigned int ssd[N_DISPARITIES];
     const int win_size = (radius << 1);
@@ -95,7 +107,11 @@ inline uint2 MinSSD(__local unsigned int *col_ssd)
     return (uint2)(mssd, bestIdx);
 }
 
+<<<<<<< HEAD
 inline void StepDown(int idx1, int idx2, __global unsigned char* imageL,
+=======
+void StepDown(int idx1, int idx2, __global unsigned char* imageL,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
               __global unsigned char* imageR, int d,   __local unsigned int *col_ssd)
 {
     uint8 imgR1 = convert_uint8(vload8(0, imageR + (idx1 - d - 7)));
@@ -114,7 +130,11 @@ inline void StepDown(int idx1, int idx2, __global unsigned char* imageL,
     col_ssd[7 * (BLOCK_W + win_size)] += res.s0;
 }
 
+<<<<<<< HEAD
 inline void InitColSSD(int x_tex, int y_tex, int im_pitch, __global unsigned char* imageL,
+=======
+void InitColSSD(int x_tex, int y_tex, int im_pitch, __global unsigned char* imageL,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 __global unsigned char* imageR, int d,
                  __local unsigned int *col_ssd)
 {
@@ -241,7 +261,11 @@ __kernel void prefilter_xsobel(__global unsigned char *input, __global unsigned 
 /////////////////////////////////// Textureness filtering ////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 inline float sobel(__global unsigned char *input, int x, int y, int rows, int cols)
+=======
+float sobel(__global unsigned char *input, int x, int y, int rows, int cols)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     float conv = 0;
     int y1 = y==0? 0 : y-1;
@@ -256,7 +280,11 @@ inline float sobel(__global unsigned char *input, int x, int y, int rows, int co
     return fabs(conv);
 }
 
+<<<<<<< HEAD
 inline float CalcSums(__local float *cols, __local float *cols_cache, int winsz)
+=======
+float CalcSums(__local float *cols, __local float *cols_cache, int winsz)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     unsigned int cache = cols[0];
 

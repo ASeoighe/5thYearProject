@@ -21,10 +21,17 @@ static void help()
         "\tleft mouse button - set rectangle\n"
         "\n"
         "\tCTRL+left mouse button - set GC_BGD pixels\n"
+<<<<<<< HEAD
         "\tSHIFT+left mouse button - set CG_FGD pixels\n"
         "\n"
         "\tCTRL+right mouse button - set GC_PR_BGD pixels\n"
         "\tSHIFT+right mouse button - set CG_PR_FGD pixels\n" << endl;
+=======
+        "\tSHIFT+left mouse button - set GC_FGD pixels\n"
+        "\n"
+        "\tCTRL+right mouse button - set GC_PR_BGD pixels\n"
+        "\tSHIFT+right mouse button - set GC_PR_FGD pixels\n" << endl;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 const Scalar RED = Scalar(0,0,255);

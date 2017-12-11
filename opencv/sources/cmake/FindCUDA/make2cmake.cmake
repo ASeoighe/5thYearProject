@@ -37,12 +37,20 @@
 
 file(READ ${input_file} depend_text)
 
+<<<<<<< HEAD
 if (${depend_text} MATCHES ".+")
 
   # message("FOUND DEPENDS")
 
   # Remember, four backslashes is escaped to one backslash in the string.
   string(REGEX REPLACE "\\\\ " " " depend_text ${depend_text})
+=======
+if (NOT "${depend_text}" STREQUAL "")
+
+  # message("FOUND DEPENDS")
+
+  string(REPLACE "\\ " " " depend_text ${depend_text})
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   # This works for the nvcc -M generated dependency files.
   string(REGEX REPLACE "^.* : " "" depend_text ${depend_text})

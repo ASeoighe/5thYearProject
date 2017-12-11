@@ -255,7 +255,11 @@ namespace cv { namespace gpu { namespace device
         ///////////////////////////////////////////////////////////////
 
         template <typename T>
+<<<<<<< HEAD
         __global__ void data_step_down(int dst_cols, int dst_rows, int src_rows, const PtrStep<T> src, PtrStep<T> dst)
+=======
+        __global__ void data_step_down(int dst_cols, int dst_rows, int src_cols, int src_rows, const PtrStep<T> src, PtrStep<T> dst)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             const int x = blockIdx.x * blockDim.x + threadIdx.x;
             const int y = blockIdx.y * blockDim.y + threadIdx.y;
@@ -264,10 +268,17 @@ namespace cv { namespace gpu { namespace device
             {
                 for (int d = 0; d < cndisp; ++d)
                 {
+<<<<<<< HEAD
                     float dst_reg  = src.ptr(d * src_rows + (2*y+0))[(2*x+0)];
                           dst_reg += src.ptr(d * src_rows + (2*y+1))[(2*x+0)];
                           dst_reg += src.ptr(d * src_rows + (2*y+0))[(2*x+1)];
                           dst_reg += src.ptr(d * src_rows + (2*y+1))[(2*x+1)];
+=======
+                    float dst_reg  = src.ptr(d * src_rows + ::min(2*y+0, src_rows-1))[::min(2*x+0, src_cols-1)];
+                          dst_reg += src.ptr(d * src_rows + ::min(2*y+1, src_rows-1))[::min(2*x+0, src_cols-1)];
+                          dst_reg += src.ptr(d * src_rows + ::min(2*y+0, src_rows-1))[::min(2*x+1, src_cols-1)];
+                          dst_reg += src.ptr(d * src_rows + ::min(2*y+1, src_rows-1))[::min(2*x+1, src_cols-1)];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
                     dst.ptr(d * dst_rows + y)[x] = saturate_cast<T>(dst_reg);
                 }
@@ -275,7 +286,11 @@ namespace cv { namespace gpu { namespace device
         }
 
         template<typename T>
+<<<<<<< HEAD
         void data_step_down_gpu(int dst_cols, int dst_rows, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream)
+=======
+        void data_step_down_gpu(int dst_cols, int dst_rows, int src_cols, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             dim3 threads(32, 8, 1);
             dim3 grid(1, 1, 1);
@@ -283,15 +298,24 @@ namespace cv { namespace gpu { namespace device
             grid.x = divUp(dst_cols, threads.x);
             grid.y = divUp(dst_rows, threads.y);
 
+<<<<<<< HEAD
             data_step_down<T><<<grid, threads, 0, stream>>>(dst_cols, dst_rows, src_rows, (PtrStepSz<T>)src, (PtrStepSz<T>)dst);
+=======
+            data_step_down<T><<<grid, threads, 0, stream>>>(dst_cols, dst_rows, src_cols, src_rows, (PtrStepSz<T>)src, (PtrStepSz<T>)dst);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             cudaSafeCall( cudaGetLastError() );
 
             if (stream == 0)
                 cudaSafeCall( cudaDeviceSynchronize() );
         }
 
+<<<<<<< HEAD
         template void data_step_down_gpu<short>(int dst_cols, int dst_rows, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream);
         template void data_step_down_gpu<float>(int dst_cols, int dst_rows, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream);
+=======
+        template void data_step_down_gpu<short>(int dst_cols, int dst_rows, int src_cols, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream);
+        template void data_step_down_gpu<float>(int dst_cols, int dst_rows, int src_cols, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         ///////////////////////////////////////////////////////////////
         /////////////////// level up messages  ////////////////////////

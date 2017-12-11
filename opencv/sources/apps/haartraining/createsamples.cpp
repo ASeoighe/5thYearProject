@@ -50,10 +50,23 @@
 #include <cstdlib>
 #include <cmath>
 #include <ctime>
+<<<<<<< HEAD
+=======
+#include <memory>
+
+// std::auto_ptr
+#if defined(__GNUC__) && __GNUC__ >= 6
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace std;
 
 #include "cvhaartraining.h"
+<<<<<<< HEAD
+=======
+#include "ioutput.h"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 int main( int argc, char* argv[] )
 {
@@ -71,11 +84,19 @@ int main( int argc, char* argv[] )
     double maxxangle = 1.1;
     double maxyangle = 1.1;
     double maxzangle = 0.5;
+<<<<<<< HEAD
     int showsamples = 0;
+=======
+    bool showsamples = false;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     /* the samples are adjusted to this scale in the sample preview window */
     double scale = 4.0;
     int width  = 24;
     int height = 24;
+<<<<<<< HEAD
+=======
+    bool pngoutput = false; /* whether to make the samples in png or in jpg*/
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     srand((unsigned int)time(0));
 
@@ -92,7 +113,12 @@ int main( int argc, char* argv[] )
                 "  [-maxyangle <max_y_rotation_angle = %f>]\n"
                 "  [-maxzangle <max_z_rotation_angle = %f>]\n"
                 "  [-show [<scale = %f>]]\n"
+<<<<<<< HEAD
                 "  [-w <sample_width = %d>]\n  [-h <sample_height = %d>]\n",
+=======
+                "  [-w <sample_width = %d>]\n  [-h <sample_height = %d>]\n"
+                "  [-pngoutput]",
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 argv[0], num, bgcolor, bgthreshold, maxintensitydev,
                 maxxangle, maxyangle, maxzangle, scale, width, height );
 
@@ -155,7 +181,11 @@ int main( int argc, char* argv[] )
         }
         else if( !strcmp( argv[i], "-show" ) )
         {
+<<<<<<< HEAD
             showsamples = 1;
+=======
+            showsamples = true;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             if( i+1 < argc && strlen( argv[i+1] ) > 0 && argv[i+1][0] != '-' )
             {
                 double d;
@@ -172,6 +202,13 @@ int main( int argc, char* argv[] )
         {
             height = atoi( argv[++i] );
         }
+<<<<<<< HEAD
+=======
+        else if( !strcmp( argv[i], "-pngoutput" ) )
+        {
+            pngoutput = true;
+        }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
     printf( "Info file name: %s\n", ((infoname == NULL) ?   nullname : infoname ) );
@@ -190,10 +227,21 @@ int main( int argc, char* argv[] )
     printf( "Show samples: %s\n", (showsamples) ? "TRUE" : "FALSE" );
     if( showsamples )
     {
+<<<<<<< HEAD
         printf( "Scale: %g\n", scale );
     }
     printf( "Width: %d\n", width );
     printf( "Height: %d\n", height );
+=======
+        printf( "Scale applied to display : %g\n", scale );
+    }
+    if( !pngoutput)
+    {
+        printf( "Original image will be scaled to:\n");
+        printf( "\tWidth: $backgroundWidth / %d\n", width );
+        printf( "\tHeight: $backgroundHeight / %d\n", height );
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     /* determine action */
     if( imagename && vecname )
@@ -207,6 +255,7 @@ int main( int argc, char* argv[] )
 
         printf( "Done\n" );
     }
+<<<<<<< HEAD
     else if( imagename && bgfilename && infoname )
     {
         printf( "Create test samples from single image applying distortions...\n" );
@@ -214,6 +263,26 @@ int main( int argc, char* argv[] )
         cvCreateTestSamples( infoname, imagename, bgcolor, bgthreshold, bgfilename, num,
             invert, maxintensitydev,
             maxxangle, maxyangle, maxzangle, showsamples, width, height );
+=======
+    else if( imagename && bgfilename && infoname)
+    {
+        printf( "Create data set from single image applying distortions...\n"
+                "Output format: %s\n",
+                (( pngoutput ) ? "PNG" : "JPG") );
+
+        std::auto_ptr<DatasetGenerator> creator;
+        if( pngoutput )
+        {
+            creator = std::auto_ptr<DatasetGenerator>( new PngDatasetGenerator( infoname ) );
+        }
+        else
+        {
+            creator = std::auto_ptr<DatasetGenerator>( new JpgDatasetGenerator( infoname ) );
+        }
+        creator->create( imagename, bgcolor, bgthreshold, bgfilename, num,
+                        invert, maxintensitydev, maxxangle, maxyangle, maxzangle,
+                        showsamples, width, height );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         printf( "Done\n" );
     }

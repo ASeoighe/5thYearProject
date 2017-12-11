@@ -52,9 +52,12 @@ using namespace std;
 
 #define sign(a) a > 0 ? 1 : a == 0 ? 0 : -1
 
+<<<<<<< HEAD
 const int FLOAT_TYPE [2] = {CV_32F, CV_64F};
 const int INT_TYPE [5] = {CV_8U, CV_8S, CV_16U, CV_16S, CV_32S};
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #define MAX_WIDTH 100
 #define MAX_HEIGHT 100
 

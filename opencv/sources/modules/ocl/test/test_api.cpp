@@ -64,7 +64,11 @@ TEST(TestAPI, openCLExecuteKernelInterop)
     args.push_back( make_pair( sizeof(cl_mem), (void *) &gpuMat.data ));
     args.push_back( make_pair( sizeof(cl_mem), (void *) &gpuMatDst.data ));
 
+<<<<<<< HEAD
     size_t globalThreads[3] = { sz.width, 1, 1 };
+=======
+    size_t globalThreads[3] = { (size_t)sz.width, 1, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     cv::ocl::openCLExecuteKernelInterop(
         gpuMat.clCxt,
         program,

@@ -79,16 +79,31 @@ T get_param(const IndexParams& params, std::string name)
     }
 }
 
+<<<<<<< HEAD
 inline void print_params(const IndexParams& params)
+=======
+inline void print_params(const IndexParams& params, std::ostream& stream)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     IndexParams::const_iterator it;
 
     for(it=params.begin(); it!=params.end(); ++it) {
+<<<<<<< HEAD
         std::cout << it->first << " : " << it->second << std::endl;
     }
 }
 
 
+=======
+        stream << it->first << " : " << it->second << std::endl;
+    }
+}
+
+inline void print_params(const IndexParams& params)
+{
+    print_params(params, std::cout);
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 }
 

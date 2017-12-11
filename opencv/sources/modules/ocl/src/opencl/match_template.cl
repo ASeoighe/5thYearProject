@@ -11,7 +11,11 @@
 //                For Open Source Computer Vision Library
 //
 // Copyright (C) 2010-2012, Multicoreware, Inc., all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010,2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // @Authors
@@ -66,7 +70,11 @@
 #define SUMS_PTR(ox, oy) mad24(gidy + oy, img_sums_step, gidx + img_sums_offset + ox)
 // normAcc* are accurate normalization routines which make GPU matchTemplate
 // consistent with CPU one
+<<<<<<< HEAD
 inline float normAcc(float num, float denum)
+=======
+float normAcc(float num, float denum)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     if(fabs(num) < denum)
     {
@@ -79,7 +87,11 @@ inline float normAcc(float num, float denum)
     return 0;
 }
 
+<<<<<<< HEAD
 inline float normAcc_SQDIFF(float num, float denum)
+=======
+float normAcc_SQDIFF(float num, float denum)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     if(fabs(num) < denum)
     {

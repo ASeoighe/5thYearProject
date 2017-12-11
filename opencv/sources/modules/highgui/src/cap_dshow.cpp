@@ -213,7 +213,11 @@ DEFINE_GUID(MEDIASUBTYPE_RGB24,0xe436eb7d,0x524f,0x11ce,0x9f,0x53,0x00,0x20,0xaf
 DEFINE_GUID(MEDIASUBTYPE_RGB32,0xe436eb7e,0x524f,0x11ce,0x9f,0x53,0x00,0x20,0xaf,0x0b,0xa7,0x70);
 DEFINE_GUID(MEDIASUBTYPE_RGB555,0xe436eb7c,0x524f,0x11ce,0x9f,0x53,0x00,0x20,0xaf,0x0b,0xa7,0x70);
 DEFINE_GUID(MEDIASUBTYPE_RGB565,0xe436eb7b,0x524f,0x11ce,0x9f,0x53,0x00,0x20,0xaf,0x0b,0xa7,0x70);
+<<<<<<< HEAD
 DEFINE_GUID(MEDIASUBTYPE_I420,0x49343230,0x0000,0x0010,0x80,0x00,0x00,0xaa,0x00,0x38,0x9b,0x71);
+=======
+DEFINE_GUID(MEDIASUBTYPE_I420,0x30323449,0x0000,0x0010,0x80,0x00,0x00,0xaa,0x00,0x38,0x9b,0x71);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 DEFINE_GUID(MEDIASUBTYPE_UYVY,0x59565955,0x0000,0x0010,0x80,0x00,0x00,0xaa,0x00,0x38,0x9b,0x71);
 DEFINE_GUID(MEDIASUBTYPE_Y211,0x31313259,0x0000,0x0010,0x80,0x00,0x00,0xaa,0x00,0x38,0x9b,0x71);
 DEFINE_GUID(MEDIASUBTYPE_Y411,0x31313459,0x0000,0x0010,0x80,0x00,0x00,0xaa,0x00,0x38,0x9b,0x71);
@@ -1825,6 +1829,11 @@ bool videoInput::setVideoSettingCamera(int deviceID, long Property, long lValue,
         hr = VDList[deviceID]->pVideoInputFilter->QueryInterface(IID_IAMCameraControl, (void**)&pIAMCameraControl);
         if (FAILED(hr)) {
             printf("Error\n");
+<<<<<<< HEAD
+=======
+            if(VDList[deviceID]->pVideoInputFilter)VDList[deviceID]->pVideoInputFilter->Release();
+            if(VDList[deviceID]->pVideoInputFilter)VDList[deviceID]->pVideoInputFilter = NULL;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             return false;
         }
         else
@@ -1843,6 +1852,11 @@ bool videoInput::setVideoSettingCamera(int deviceID, long Property, long lValue,
                 pIAMCameraControl->Set(Property, lValue, Flags);
             }
             pIAMCameraControl->Release();
+<<<<<<< HEAD
+=======
+            if(VDList[deviceID]->pVideoInputFilter)VDList[deviceID]->pVideoInputFilter->Release();
+            if(VDList[deviceID]->pVideoInputFilter)VDList[deviceID]->pVideoInputFilter = NULL;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             return true;
         }
     }
@@ -2245,7 +2259,11 @@ int videoInput::getVideoPropertyFromCV(int cv_property){
         case CV_CAP_PROP_MONOCROME:
             return VideoProcAmp_ColorEnable;
 
+<<<<<<< HEAD
         case CV_CAP_PROP_WHITE_BALANCE_BLUE_U:
+=======
+        case CV_CAP_PROP_WHITE_BALANCE_U:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             return VideoProcAmp_WhiteBalance;
 
         case  CV_CAP_PROP_BACKLIGHT:
@@ -2423,7 +2441,19 @@ static bool setSizeAndSubtype(videoDevice * VD, int attemptWidth, int attemptHei
     VD->pAmMediaType->subtype     = mediatype;
 
     //buffer size
+<<<<<<< HEAD
     VD->pAmMediaType->lSampleSize = attemptWidth*attemptHeight*3;
+=======
+    if (mediatype == MEDIASUBTYPE_RGB24)
+    {
+        VD->pAmMediaType->lSampleSize = attemptWidth*attemptHeight*3;
+    }
+    else
+    {
+        // For compressed data, the value can be zero.
+        VD->pAmMediaType->lSampleSize = 0;
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     //set fps if requested
     if( VD->requestedFrameTime != -1){
@@ -2566,6 +2596,10 @@ int videoInput::start(int deviceID, videoDevice *VD){
 
             if( setSizeAndSubtype(VD, VD->tryWidth, VD->tryHeight, VD->tryVideoType) ){
                 VD->setSize(VD->tryWidth, VD->tryHeight);
+<<<<<<< HEAD
+=======
+                VD->videoType = VD->tryVideoType;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 foundSize = true;
             } else {
                 // try specified size with all formats
@@ -2576,6 +2610,10 @@ int videoInput::start(int deviceID, videoDevice *VD){
                     if(verbose)printf("SETUP: trying format %s @ %i by %i\n", guidStr, VD->tryWidth, VD->tryHeight);
                     if( setSizeAndSubtype(VD, VD->tryWidth, VD->tryHeight, mediaSubtypes[i]) ){
                         VD->setSize(VD->tryWidth, VD->tryHeight);
+<<<<<<< HEAD
+=======
+                        VD->videoType = mediaSubtypes[i];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                         foundSize = true;
                         break;
                     }
@@ -3232,7 +3270,11 @@ double CvCaptureCAM_DShow::getProperty( int property_id )
     case CV_CAP_PROP_SHARPNESS:
     case CV_CAP_PROP_GAMMA:
     case CV_CAP_PROP_MONOCROME:
+<<<<<<< HEAD
     case CV_CAP_PROP_WHITE_BALANCE_BLUE_U:
+=======
+    case CV_CAP_PROP_WHITE_BALANCE_U:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     case CV_CAP_PROP_BACKLIGHT:
     case CV_CAP_PROP_GAIN:
         if (VI.getVideoSettingFilter(index,VI.getVideoPropertyFromCV(property_id),min_value,max_value,stepping_delta,current_value,flags,defaultValue) ) return (double)current_value;
@@ -3336,7 +3378,11 @@ bool CvCaptureCAM_DShow::setProperty( int property_id, double value )
     case CV_CAP_PROP_SHARPNESS:
     case CV_CAP_PROP_GAMMA:
     case CV_CAP_PROP_MONOCROME:
+<<<<<<< HEAD
     case CV_CAP_PROP_WHITE_BALANCE_BLUE_U:
+=======
+    case CV_CAP_PROP_WHITE_BALANCE_U:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     case CV_CAP_PROP_BACKLIGHT:
     case CV_CAP_PROP_GAIN:
         return VI.setVideoSettingFilter(index,VI.getVideoPropertyFromCV(property_id),(long)value);

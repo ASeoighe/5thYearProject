@@ -13,6 +13,12 @@
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #else
+<<<<<<< HEAD
+=======
+#if defined _MSC_VER && _MSC_VER >= 1600
+#include <windows.h>
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <GL/gl.h>
 #endif
 
@@ -27,7 +33,11 @@ static void help()
             "Using OpenCV version " << CV_VERSION << "\n\n"
 
             " 1) This demo is mainly based on work from Javier Barandiaran Martirena\n"
+<<<<<<< HEAD
             "    See this page http://code.opencv.org/projects/opencv/wiki/Posit.\n"
+=======
+            "    See this page https://github.com/opencv/opencv/wiki/Posit .\n"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             " 2) This is a demo to illustrate how to use **OpenGL Callback**.\n"
             " 3) You need Qt binding to compile this sample with OpenGL support enabled.\n"
             " 4) The features' detection is very basic and could highly be improved\n"

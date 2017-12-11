@@ -26,11 +26,20 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 ocv_warnings_disable(CMAKE_C_FLAGS -Wcast-align -Wshadow -Wunused)
+<<<<<<< HEAD
 ocv_warnings_disable(CMAKE_C_FLAGS -Wunused-parameter) # clang
+=======
+ocv_warnings_disable(CMAKE_C_FLAGS -Wunused-parameter -Wshift-negative-value) # clang
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 set_target_properties(${JPEG_LIBRARY}
   PROPERTIES OUTPUT_NAME ${JPEG_LIBRARY}
   DEBUG_POSTFIX "${OPENCV_DEBUG_POSTFIX}"
+<<<<<<< HEAD
+=======
+  COMPILE_PDB_NAME ${JPEG_LIBRARY}
+  COMPILE_PDB_NAME_DEBUG "${JPEG_LIBRARY}${OPENCV_DEBUG_POSTFIX}"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   ARCHIVE_OUTPUT_DIRECTORY ${3P_LIBRARY_OUTPUT_PATH}
   )
 

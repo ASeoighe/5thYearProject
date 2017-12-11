@@ -37,16 +37,33 @@ endif()
 source_group("Include" FILES ${lib_hdrs} )
 source_group("Src" FILES ${lib_srcs})
 
+<<<<<<< HEAD
 ocv_warnings_disable(CMAKE_CXX_FLAGS -Wshadow -Wunused -Wsign-compare -Wundef -Wmissing-declarations -Wuninitialized -Wswitch -Wparentheses -Warray-bounds -Wextra)
+=======
+ocv_warnings_disable(CMAKE_CXX_FLAGS -Wshadow -Wunused -Wsign-compare -Wundef -Wmissing-declarations -Wuninitialized -Wswitch -Wparentheses -Warray-bounds -Wextra
+                                     -Wdeprecated-declarations -Wmisleading-indentation)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 ocv_warnings_disable(CMAKE_CXX_FLAGS /wd4018 /wd4099 /wd4100 /wd4101 /wd4127 /wd4189 /wd4245 /wd4305 /wd4389 /wd4512 /wd4701 /wd4702 /wd4706 /wd4800) # vs2005
 ocv_warnings_disable(CMAKE_CXX_FLAGS /wd4334) # vs2005 Win64
 ocv_warnings_disable(CMAKE_CXX_FLAGS /wd4244) # vs2008
 ocv_warnings_disable(CMAKE_CXX_FLAGS /wd4267) # vs2008 Win64
+<<<<<<< HEAD
+=======
+ocv_warnings_disable(CMAKE_CXX_FLAGS /wd4456 /wd4457 /wd4312) # vs2015
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 if(UNIX AND (CMAKE_COMPILER_IS_GNUCXX OR CV_ICC))
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 endif()
 
+<<<<<<< HEAD
+=======
+if(MSVC AND CV_ICC)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Qrestrict")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /Qrestrict")
+endif()
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 add_library(IlmImf STATIC ${lib_hdrs} ${lib_srcs})
 target_link_libraries(IlmImf ${ZLIB_LIBRARIES})
 
@@ -54,6 +71,11 @@ set_target_properties(IlmImf
     PROPERTIES
     OUTPUT_NAME "IlmImf"
     DEBUG_POSTFIX "${OPENCV_DEBUG_POSTFIX}"
+<<<<<<< HEAD
+=======
+    COMPILE_PDB_NAME "IlmImf"
+    COMPILE_PDB_NAME_DEBUG "IlmImf${OPENCV_DEBUG_POSTFIX}"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     ARCHIVE_OUTPUT_DIRECTORY ${3P_LIBRARY_OUTPUT_PATH}
     )
 

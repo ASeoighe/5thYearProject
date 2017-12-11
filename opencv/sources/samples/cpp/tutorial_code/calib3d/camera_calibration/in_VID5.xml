@@ -16,7 +16,11 @@
 		To use an input video  -> give the path of the input video, like "/tmp/x.avi"
 		To use an image list   -> give the path to the XML or YAML file containing the list of the images, like "/tmp/circles_list.xml"
 		-->
+<<<<<<< HEAD
   <Input>"images/CameraCalibraation/VID5/VID5.xml"</Input>
+=======
+  <Input>"images/CameraCalibration/VID5/VID5.xml"</Input>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   <!--  If true (non-zero) we flip the input images around the horizontal axis.-->
   <Input_FlipAroundHorizontalAxis>0</Input_FlipAroundHorizontalAxis>
   
@@ -43,4 +47,8 @@
   <Show_UndistortedImage>1</Show_UndistortedImage>
  
 </Settings>
+<<<<<<< HEAD
 </opencv_storage>
+=======
+</opencv_storage>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

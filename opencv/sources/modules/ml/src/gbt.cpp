@@ -10,6 +10,11 @@ using namespace std;
 
 #define CV_CMP_FLOAT(a,b) ((a) < (b))
 static CV_IMPLEMENT_QSORT_EX( icvSortFloat, float, CV_CMP_FLOAT, float)
+<<<<<<< HEAD
+=======
+#define CV_CMP_INT(a,b) ((a) < (b))
+static CV_IMPLEMENT_QSORT_EX( icvSortInt, int, CV_CMP_INT, int)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 //===========================================================================
 static string ToString(int i)
@@ -257,7 +262,11 @@ CvGBTrees::train( const CvMat* _train_data, int _tflag,
         for (int i=1; i<n; ++i)
         {
             int k = 0;
+<<<<<<< HEAD
             while ((int(orig_response->data.fl[i]) - class_labels->data.i[k]) && (k<j))
+=======
+            while ((k<j) && (int(orig_response->data.fl[i]) - class_labels->data.i[k]))
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 k++;
             if (k == j)
             {
@@ -282,6 +291,10 @@ CvGBTrees::train( const CvMat* _train_data, int _tflag,
                 sample_idx = cvCreateMat( 1, sample_idx_len, CV_32S );
                 for (int i=0; i<sample_idx_len; ++i)
                     sample_idx->data.i[i] = _sample_idx->data.i[i];
+<<<<<<< HEAD
+=======
+                icvSortInt(sample_idx->data.i, sample_idx_len, 0);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             } break;
             case CV_8S:
             case CV_8U:
@@ -298,7 +311,10 @@ CvGBTrees::train( const CvMat* _train_data, int _tflag,
             } break;
             default: CV_Error(CV_StsUnmatchedFormats, "_sample_idx should be a 32sC1, 8sC1 or 8uC1 vector.");
         }
+<<<<<<< HEAD
         icvSortFloat(sample_idx->data.fl, sample_idx_len, 0);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     else
     {
@@ -1290,13 +1306,25 @@ CvGBTrees::calc_error( CvMLData* _data, int type, std::vector<float> *resp )
         return -FLT_MAX;
 
     float* pred_resp = 0;
+<<<<<<< HEAD
+=======
+    bool needsFreeing = false;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if (resp)
     {
         resp->resize(n);
         pred_resp = &((*resp)[0]);
     }
     else
+<<<<<<< HEAD
         pred_resp = new float[n];
+=======
+    {
+        pred_resp = new float[n];
+        needsFreeing = true;
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     Sample_predictor predictor = Sample_predictor(this, pred_resp, _data->get_values(),
             _data->get_missing(), _sample_idx);
@@ -1329,6 +1357,12 @@ CvGBTrees::calc_error( CvMLData* _data, int type, std::vector<float> *resp )
         err = err / (float)n;
     }
 
+<<<<<<< HEAD
+=======
+    if (needsFreeing)
+        delete[]pred_resp;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return err;
 }
 

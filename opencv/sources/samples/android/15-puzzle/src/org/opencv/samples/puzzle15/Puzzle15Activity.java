@@ -56,7 +56,11 @@ public class Puzzle15Activity extends Activity implements CvCameraViewListener, 
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+<<<<<<< HEAD
         Log.d(TAG, "Creating and seting view");
+=======
+        Log.d(TAG, "Creating and setting view");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         mOpenCvCameraView = (CameraBridgeViewBase) new JavaCameraView(this, -1);
         setContentView(mOpenCvCameraView);
         mOpenCvCameraView.setCvCameraViewListener(this);

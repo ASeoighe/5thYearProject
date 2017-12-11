@@ -210,8 +210,16 @@ private:
         assert(index >=0 && index < n);
         centers[0] = dsindices[index];
 
+<<<<<<< HEAD
         for (int i = 0; i < n; i++) {
             closestDistSq[i] = distance(dataset[dsindices[i]], dataset[dsindices[index]], dataset.cols);
+=======
+        // Computing distance^2 will have the advantage of even higher probability further to pick new centers
+        // far from previous centers (and this complies to "k-means++: the advantages of careful seeding" article)
+        for (int i = 0; i < n; i++) {
+            closestDistSq[i] = distance(dataset[dsindices[i]], dataset[dsindices[index]], dataset.cols);
+            closestDistSq[i] = ensureSquareDistance<Distance>( closestDistSq[i] );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             currentPot += closestDistSq[i];
         }
 
@@ -237,7 +245,14 @@ private:
 
                 // Compute the new potential
                 double newPot = 0;
+<<<<<<< HEAD
                 for (int i = 0; i < n; i++) newPot += std::min( distance(dataset[dsindices[i]], dataset[dsindices[index]], dataset.cols), closestDistSq[i] );
+=======
+                for (int i = 0; i < n; i++) {
+                    DistanceType dist = distance(dataset[dsindices[i]], dataset[dsindices[index]], dataset.cols);
+                    newPot += std::min( ensureSquareDistance<Distance>(dist), closestDistSq[i] );
+                }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
                 // Store the best result
                 if ((bestNewPot < 0)||(newPot < bestNewPot)) {
@@ -249,7 +264,14 @@ private:
             // Add the appropriate center
             centers[centerCount] = dsindices[bestNewIndex];
             currentPot = bestNewPot;
+<<<<<<< HEAD
             for (int i = 0; i < n; i++) closestDistSq[i] = std::min( distance(dataset[dsindices[i]], dataset[dsindices[bestNewIndex]], dataset.cols), closestDistSq[i] );
+=======
+            for (int i = 0; i < n; i++) {
+                DistanceType dist = distance(dataset[dsindices[i]], dataset[dsindices[bestNewIndex]], dataset.cols);
+                closestDistSq[i] = std::min( ensureSquareDistance<Distance>(dist), closestDistSq[i] );
+            }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         centers_length = centerCount;
@@ -369,6 +391,17 @@ public:
         return pool.usedMemory+pool.wastedMemory+memoryCounter;
     }
 
+<<<<<<< HEAD
+=======
+
+    /**
+     * Dummy implementation for other algorithms of addable indexes after that.
+     */
+    void addIndex(const Matrix<ElementType>& /*wholeData*/, const Matrix<ElementType>& /*additionalData*/)
+    {
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     /**
      * Builds the index
      */

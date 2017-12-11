@@ -43,7 +43,10 @@ namespace cv
 {
 
 const float HARRIS_K = 0.04f;
+<<<<<<< HEAD
 const int DESCRIPTOR_SIZE = 32;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 /**
  * Function that computes the Harris responses in a
@@ -737,7 +740,13 @@ void ORB::operator()( InputArray _image, InputArray _mask, vector<KeyPoint>& _ke
     //ROI handling
     const int HARRIS_BLOCK_SIZE = 9;
     int halfPatchSize = patchSize / 2;
+<<<<<<< HEAD
     int border = std::max(edgeThreshold, std::max(halfPatchSize, HARRIS_BLOCK_SIZE/2))+1;
+=======
+    // sqrt(2.0) is for handling patch rotation
+    int descPatchSize = cvCeil(halfPatchSize*sqrt(2.0));
+    int border = std::max(edgeThreshold, std::max(descPatchSize, HARRIS_BLOCK_SIZE/2))+1;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     Mat image = _image.getMat(), mask = _mask.getMat();
     if( image.type() != CV_8UC1 )

@@ -13,6 +13,7 @@ import os
 import getopt
 import operator
 import functools
+<<<<<<< HEAD
 
 import cv2.cv as cv
 
@@ -95,6 +96,21 @@ class OpenCVTests(unittest.TestCase):
     def hashimg(self, im):
         """ Compute a hash for an image, useful for image comparisons """
         return hashlib.md5(im.tostring()).digest()
+=======
+import argparse
+
+import cv2.cv as cv
+
+from tests_common import OpenCVTests, NewOpenCVTests
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+def load_tests(loader, tests, pattern):
+    tests.addTests(loader.discover(basedir, pattern='nonfree_*.py'))
+    tests.addTests(loader.discover(basedir, pattern='test_*.py'))
+    tests.addTests(loader.discover(basedir, pattern='test2.py'))
+    return tests
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 # Tests to run first; check the handful of basic operations that the later tests rely on
 
@@ -396,6 +412,7 @@ class FunctionTests(OpenCVTests):
         cv.SetZero(im)
         cv.DrawChessboardCorners(im, (5, 5), [ ((i/5)*100+50,(i%5)*100+50) for i in range(5 * 5) ], 1)
 
+<<<<<<< HEAD
     def test_ExtractSURF(self):
         img = self.get_sample("samples/c/lena.jpg", 0)
         w,h = cv.GetSize(img)
@@ -413,6 +430,8 @@ class FunctionTests(OpenCVTests):
                         self.assert_((0 <= dir) and (dir <= 360))
                         self.assert_(hessian >= hessthresh)
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     def test_FillPoly(self):
         scribble = cv.CreateImage((640,480), cv.IPL_DEPTH_8U, 1)
         random.seed(0)
@@ -1603,7 +1622,11 @@ class AreaTests(OpenCVTests):
                             (0,255,0))
         self.snap(scribble)
 
+<<<<<<< HEAD
     def test_calibration(self):
+=======
+    def xxx_test_calibration(self):
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         def get_corners(mono, refine = False):
             (ok, corners) = cv.FindChessboardCorners(mono, (num_x_ints, num_y_ints), cv.CV_CALIB_CB_ADAPTIVE_THRESH | cv.CV_CALIB_CB_NORMALIZE_IMAGE)
@@ -1646,8 +1669,13 @@ class AreaTests(OpenCVTests):
             cv.SetData(imagefiledata, filedata, len(filedata))
             return cv.DecodeImageM(imagefiledata)
 
+<<<<<<< HEAD
         urllib.urlretrieve("http://docs.opencv.org/data/camera_calibration.tar.gz", "camera_calibration.tar.gz")
         tf = tarfile.open("camera_calibration.tar.gz")
+=======
+        filename = self.get_data("camera_calibration.tar.gz", OpenCVTests.dataUrl)
+        tf = tarfile.open(filename)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         num_x_ints = 8
         num_y_ints = 6
@@ -2203,6 +2231,7 @@ class DocumentFragmentTests(OpenCVTests):
         self.assertNotEqual(self.hashimg(h1), self.hashimg(h2))
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     print "testing", cv.__version__
     random.seed(0)
     unittest.main()
@@ -2235,3 +2264,33 @@ if __name__ == '__main__':
 #        for tc,t in args:
 #            suite.addTest(tc(t))
 #	    unittest.TextTestRunner(verbosity=2).run(suite)
+=======
+    parser = argparse.ArgumentParser(description='run OpenCV python tests')
+    parser.add_argument('--repo', help='use sample image files from local git repository (path to folder), '
+                                       'if not set, samples will be downloaded from github.com')
+    parser.add_argument('--data', help='use data files from local folder (path to folder), '
+                                        'if not set, data files will be downloaded from docs.opencv.org')
+    args, other = parser.parse_known_args()
+    print "testing", cv.__version__
+    print "Local repo path:", args.repo
+    print "Local data path:", args.data
+    OpenCVTests.repoPath = args.repo
+    NewOpenCVTests.repoPath = args.repo
+    if args.repo is None:
+        try:
+            OpenCVTests.repoPath = os.environ['OPENCV_TEST_DATA_PATH']
+            NewOpenCVTests.repoPath = OpenCVTests.repoPath
+        except KeyError:
+            print('Missing opencv samples data. Some of tests may fail.')
+    try:
+        OpenCVTests.dataPath = os.environ['OPENCV_TEST_DATA_PATH']
+        NewOpenCVTests.extraTestDataPath = OpenCVTests.dataPath
+    except KeyError:
+        OpenCVTests.dataPath = args.data
+        NewOpenCVTests.extraTestDataPath = args.data
+        if args.data is None:
+            print('Missing opencv extra repository. Some of tests may fail.')
+    random.seed(0)
+    unit_argv = [sys.argv[0]] + other;
+    unittest.main(argv=unit_argv)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

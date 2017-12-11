@@ -4,7 +4,11 @@
 # ----------------------------------------------------------------------------
 
 SET(OPENCV_C_SAMPLES_REQUIRED_DEPS opencv_core opencv_flann opencv_imgproc
+<<<<<<< HEAD
     opencv_highgui opencv_ml opencv_video opencv_objdetect opencv_photo opencv_nonfree
+=======
+    opencv_highgui opencv_ml opencv_video opencv_objdetect opencv_photo
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     opencv_features2d opencv_calib3d opencv_legacy opencv_contrib)
 
 ocv_check_dependencies(${OPENCV_C_SAMPLES_REQUIRED_DEPS})
@@ -16,7 +20,11 @@ if(BUILD_EXAMPLES AND OCV_DEPENDENCIES_FOUND)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-function")
   endif()
 
+<<<<<<< HEAD
   ocv_include_modules(${OPENCV_C_SAMPLES_REQUIRED_DEPS})
+=======
+  ocv_include_modules(${OPENCV_C_SAMPLES_REQUIRED_DEPS} opencv_nonfree)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   # ---------------------------------------------
   #      Define executable targets
@@ -51,9 +59,18 @@ if(BUILD_EXAMPLES AND OCV_DEPENDENCIES_FOUND)
   endforeach()
 endif()
 
+<<<<<<< HEAD
 if (INSTALL_C_EXAMPLES AND NOT WIN32)
   file(GLOB C_SAMPLES *.c *.cpp *.jpg *.png *.data makefile.* build_all.sh *.dsp *.cmd )
   install(FILES ${C_SAMPLES}
           DESTINATION ${OPENCV_SAMPLES_SRC_INSTALL_PATH}/c
           PERMISSIONS OWNER_READ GROUP_READ WORLD_READ COMPONENT samples)
+=======
+if (OCV_DEPENDENCIES_FOUND AND INSTALL_C_EXAMPLES AND NOT WIN32)
+  file(GLOB C_SAMPLES *.c *.cpp *.jpg *.png *.data makefile.* *.cmd *.txt)
+  install(FILES ${C_SAMPLES}
+          DESTINATION "${OPENCV_SAMPLES_SRC_INSTALL_PATH}/c"
+          PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ COMPONENT samples)
+  install(PROGRAMS build_all.sh DESTINATION "${OPENCV_SAMPLES_SRC_INSTALL_PATH}/c" COMPONENT samples)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 endif ()

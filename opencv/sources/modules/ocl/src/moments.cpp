@@ -54,11 +54,16 @@ namespace cv
     namespace ocl
     {
         // The function calculates center of gravity and the central second order moments
+<<<<<<< HEAD
         static void icvCompleteMomentState( CvMoments* moments )
+=======
+        static void icvCompleteMomentState( CvMoments* lmoments )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             double cx = 0, cy = 0;
             double mu20, mu11, mu02;
 
+<<<<<<< HEAD
             assert( moments != 0 );
             moments->inv_sqrt_m00 = 0;
 
@@ -90,6 +95,39 @@ namespace cv
             moments->mu12 = moments->m12 - cy * (mu11 + cy * moments->m10) - cx * mu02;
             // mu03 = m03 - cy*(3*mu02 + cy*m01)
             moments->mu03 = moments->m03 - cy * (3 * mu02 + cy * moments->m01);
+=======
+            assert( lmoments != 0 );
+            lmoments->inv_sqrt_m00 = 0;
+
+            if( fabs(lmoments->m00) > DBL_EPSILON )
+            {
+                double inv_m00 = 1. / lmoments->m00;
+                cx = lmoments->m10 * inv_m00;
+                cy = lmoments->m01 * inv_m00;
+                lmoments->inv_sqrt_m00 = std::sqrt( fabs(inv_m00) );
+            }
+
+            // mu20 = m20 - m10*cx
+            mu20 = lmoments->m20 - lmoments->m10 * cx;
+            // mu11 = m11 - m10*cy
+            mu11 = lmoments->m11 - lmoments->m10 * cy;
+            // mu02 = m02 - m01*cy
+            mu02 = lmoments->m02 - lmoments->m01 * cy;
+
+            lmoments->mu20 = mu20;
+            lmoments->mu11 = mu11;
+            lmoments->mu02 = mu02;
+
+            // mu30 = m30 - cx*(3*mu20 + cx*m10)
+            lmoments->mu30 = lmoments->m30 - cx * (3 * mu20 + cx * lmoments->m10);
+            mu11 += mu11;
+            // mu21 = m21 - cx*(2*mu11 + cx*m01) - cy*mu20
+            lmoments->mu21 = lmoments->m21 - cx * (mu11 + cx * lmoments->m01) - cy * mu20;
+            // mu12 = m12 - cy*(2*mu11 + cy*m10) - cx*mu02
+            lmoments->mu12 = lmoments->m12 - cy * (mu11 + cy * lmoments->m10) - cx * mu02;
+            // mu03 = m03 - cy*(3*mu02 + cy*m01)
+            lmoments->mu03 = lmoments->m03 - cy * (3 * mu02 + cy * lmoments->m01);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
 
@@ -135,8 +173,13 @@ namespace cv
                 cv::ocl::oclMat dst_a(10, lpt, CV_64FC1);
                 cv::ocl::oclMat reader_oclmat(reader_mat);
                 int llength = std::min(lpt,128);
+<<<<<<< HEAD
                 size_t localThreads[3]  = { llength, 1, 1};
                 size_t globalThreads[3] = { lpt, 1, 1};
+=======
+                size_t localThreads[3]  = { (size_t)llength, 1, 1};
+                size_t globalThreads[3] = { (size_t)lpt, 1, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 vector<pair<size_t , const void *> > args;
                 args.push_back( make_pair( sizeof(cl_int) , (void *)&contour->total ));
                 args.push_back( make_pair( sizeof(cl_mem) , (void *)&reader_oclmat.data ));
@@ -252,8 +295,13 @@ namespace cv
             oclMat dst_m;
             int tile_height = TILE_SIZE;
 
+<<<<<<< HEAD
             size_t localThreads[3]  = {1, tile_height, 1};
             size_t globalThreads[3] = {blockx, size.height, 1};
+=======
+            size_t localThreads[3]  = {1, (size_t)tile_height, 1};
+            size_t globalThreads[3] = {(size_t)blockx, (size_t)size.height, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             if(Context::getContext()->supportsFeature(FEATURE_CL_DOUBLE))
             {

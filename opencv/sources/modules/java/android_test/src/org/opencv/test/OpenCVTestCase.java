@@ -26,6 +26,14 @@ import org.opencv.highgui.Highgui;
 import android.util.Log;
 
 public class OpenCVTestCase extends TestCase {
+<<<<<<< HEAD
+=======
+
+    public static class TestSkipException extends RuntimeException {
+        public TestSkipException() {}
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     //change to 'true' to unblock fail on fail("Not yet implemented")
     public static final boolean passNYI = true;
 
@@ -182,12 +190,47 @@ public class OpenCVTestCase extends TestCase {
     protected void runTest() throws Throwable {
         // Do nothing if the precondition does not hold.
         if (isTestCaseEnabled) {
+<<<<<<< HEAD
             super.runTest();
+=======
+            try {
+                super.runTest();
+            } catch (TestSkipException ex) {
+                Log.w(TAG, "Test case \"" + this.getClass().getName() + "\" skipped!");
+                assertTrue(true);
+            }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         } else {
             Log.e(TAG, "Test case \"" + this.getClass().getName() + "\" disabled!");
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void runBare() throws Throwable {
+        Throwable exception = null;
+        try {
+            setUp();
+        } catch (TestSkipException ex) {
+            Log.w(TAG, "Test case \"" + this.getClass().getName() + "\" skipped!");
+            assertTrue(true);
+            return;
+        }
+        try {
+            runTest();
+        } catch (Throwable running) {
+            exception = running;
+        } finally {
+            try {
+                tearDown();
+            } catch (Throwable tearingDown) {
+                if (exception == null) exception = tearingDown;
+            }
+        }
+        if (exception != null) throw exception;
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     protected Mat getMat(int type, double... vals)
     {
         return new Mat(matSize, matSize, type, new Scalar(vals));
@@ -205,6 +248,13 @@ public class OpenCVTestCase extends TestCase {
         TestCase.fail(msg);
     }
 
+<<<<<<< HEAD
+=======
+    public static void assertGE(double v1, double v2) {
+        assertTrue("Failed: " + v1 + " >= " + v2, v1 >= v2);
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     public static <E extends Number> void assertListEquals(List<E> list1, List<E> list2) {
         if (list1.size() != list2.size()) {
             throw new UnsupportedOperationException();
@@ -419,10 +469,17 @@ public class OpenCVTestCase extends TestCase {
 
         if (isEqualityMeasured)
             assertTrue("Max difference between expected and actiual Mats is "+ maxDiff + ", that bigger than " + eps,
+<<<<<<< HEAD
                     Core.checkRange(diff, true, 0.0, eps));
         else
             assertFalse("Max difference between expected and actiual Mats is "+ maxDiff + ", that less than " + eps,
                     Core.checkRange(diff, true, 0.0, eps));
+=======
+                    maxDiff <= eps);
+        else
+            assertFalse("Max difference between expected and actiual Mats is "+ maxDiff + ", that less than " + eps,
+                    maxDiff <= eps);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
     protected static String readFile(String path) {

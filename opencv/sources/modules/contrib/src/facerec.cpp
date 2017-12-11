@@ -98,10 +98,91 @@ inline vector<_Tp> remove_dups(const vector<_Tp>& src) {
     return elems;
 }
 
+<<<<<<< HEAD
 
 // Turk, M., and Pentland, A. "Eigenfaces for recognition.". Journal of
 // Cognitive Neuroscience 3 (1991), 71–86.
 class Eigenfaces : public FaceRecognizer
+=======
+// The FaceRecognizer2 class is introduced to keep the FaceRecognizer binary backward compatibility in 2.4
+// In master setLabelInfo/getLabelInfo/getLabelsByString should be virtual and _labelsInfo should be moved
+// to FaceRecognizer, that allows to avoid FaceRecognizer2 in master
+class FaceRecognizer2 : public FaceRecognizer
+{
+protected:
+    // Stored pairs "label id - string info"
+    std::map<int, string> _labelsInfo;
+
+public:
+    // Sets additional information as pairs label - info.
+    virtual void setLabelsInfo(const std::map<int, string>& labelsInfo)
+    {
+        _labelsInfo = labelsInfo;
+    }
+
+    // Gets string information by label
+    virtual string getLabelInfo(int label) const
+    {
+        std::map<int, string>::const_iterator iter(_labelsInfo.find(label));
+        return iter != _labelsInfo.end() ? iter->second : "";
+    }
+
+    // Gets labels by string
+    virtual vector<int> getLabelsByString(const string& str)
+    {
+        vector<int> labels;
+        for(std::map<int,string>::const_iterator it = _labelsInfo.begin(); it != _labelsInfo.end(); it++)
+        {
+            size_t found = (it->second).find(str);
+            if(found != string::npos)
+                labels.push_back(it->first);
+        }
+        return labels;
+    }
+
+};
+
+// Utility structure to load/save face label info (a pair of int and string) via FileStorage
+struct LabelInfo
+{
+    LabelInfo():label(-1), value("") {}
+    LabelInfo(int _label, const std::string &_value): label(_label), value(_value) {}
+    int label;
+    std::string value;
+    void write(cv::FileStorage& fs) const
+    {
+        fs << "{" << "label" << label << "value" << value << "}";
+    }
+    void read(const cv::FileNode& node)
+    {
+        label = (int)node["label"];
+        value = (std::string)node["value"];
+    }
+    std::ostream& operator<<(std::ostream& out)
+    {
+        out << "{ label = " << label << ", " << "value = " << value << "}";
+        return out;
+    }
+};
+
+static void write(cv::FileStorage& fs, const std::string&, const LabelInfo& x)
+{
+    x.write(fs);
+}
+
+static void read(const cv::FileNode& node, LabelInfo& x, const LabelInfo& default_value = LabelInfo())
+{
+    if(node.empty())
+        x = default_value;
+    else
+        x.read(node);
+}
+
+
+// Turk, M., and Pentland, A. "Eigenfaces for recognition.". Journal of
+// Cognitive Neuroscience 3 (1991), 71–86.
+class Eigenfaces : public FaceRecognizer2
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
 private:
     int _num_components;
@@ -154,7 +235,11 @@ public:
 // faces: Recognition using class specific linear projection.". IEEE
 // Transactions on Pattern Analysis and Machine Intelligence 19, 7 (1997),
 // 711–720.
+<<<<<<< HEAD
 class Fisherfaces: public FaceRecognizer
+=======
+class Fisherfaces: public FaceRecognizer2
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
 private:
     int _num_components;
@@ -211,7 +296,11 @@ public:
 //  patterns: Application to face recognition." IEEE Transactions on Pattern
 //  Analysis and Machine Intelligence, 28(12):2037-2041.
 //
+<<<<<<< HEAD
 class LBPH : public FaceRecognizer
+=======
+class LBPH : public FaceRecognizer2
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
 private:
     int _grid_x;
@@ -228,7 +317,10 @@ private:
     // old model data.
     void train(InputArrayOfArrays src, InputArray labels, bool preserveData);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 public:
     using FaceRecognizer::save;
     using FaceRecognizer::load;
@@ -327,6 +419,30 @@ void FaceRecognizer::load(const string& filename) {
     fs.release();
 }
 
+<<<<<<< HEAD
+=======
+void FaceRecognizer::setLabelsInfo(const std::map<int, string>& labelsInfo)
+{
+    FaceRecognizer2* base = dynamic_cast<FaceRecognizer2*>(this);
+    CV_Assert(base != 0);
+    base->setLabelsInfo(labelsInfo);
+}
+
+string FaceRecognizer::getLabelInfo(const int &label)
+{
+    FaceRecognizer2* base = dynamic_cast<FaceRecognizer2*>(this);
+    CV_Assert(base != 0);
+    return base->getLabelInfo(label);
+}
+
+vector<int> FaceRecognizer::getLabelsByString(const string& str)
+{
+    FaceRecognizer2* base = dynamic_cast<FaceRecognizer2*>(this);
+    CV_Assert(base != 0);
+    return base->getLabelsByString(str);
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 //------------------------------------------------------------------------------
 // Eigenfaces
 //------------------------------------------------------------------------------
@@ -423,6 +539,20 @@ void Eigenfaces::load(const FileStorage& fs) {
     // read sequences
     readFileNodeList(fs["projections"], _projections);
     fs["labels"] >> _labels;
+<<<<<<< HEAD
+=======
+    const FileNode& fn = fs["labelsInfo"];
+    if (fn.type() == FileNode::SEQ)
+    {
+        _labelsInfo.clear();
+        for (FileNodeIterator it = fn.begin(); it != fn.end();)
+        {
+            LabelInfo item;
+            it >> item;
+            _labelsInfo.insert(std::make_pair(item.label, item.value));
+        }
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 void Eigenfaces::save(FileStorage& fs) const {
@@ -434,6 +564,13 @@ void Eigenfaces::save(FileStorage& fs) const {
     // write sequences
     writeFileNodeList(fs, "projections", _projections);
     fs << "labels" << _labels;
+<<<<<<< HEAD
+=======
+    fs << "labelsInfo" << "[";
+    for (std::map<int, string>::const_iterator it = _labelsInfo.begin(); it != _labelsInfo.end(); it++)
+        fs << LabelInfo(it->first, it->second);
+    fs << "]";
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //------------------------------------------------------------------------------
@@ -544,6 +681,20 @@ void Fisherfaces::load(const FileStorage& fs) {
     // read sequences
     readFileNodeList(fs["projections"], _projections);
     fs["labels"] >> _labels;
+<<<<<<< HEAD
+=======
+    const FileNode& fn = fs["labelsInfo"];
+    if (fn.type() == FileNode::SEQ)
+    {
+        _labelsInfo.clear();
+        for (FileNodeIterator it = fn.begin(); it != fn.end();)
+        {
+            LabelInfo item;
+            it >> item;
+            _labelsInfo.insert(std::make_pair(item.label, item.value));
+        }
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 // See FaceRecognizer::save.
@@ -556,6 +707,13 @@ void Fisherfaces::save(FileStorage& fs) const {
     // write sequences
     writeFileNodeList(fs, "projections", _projections);
     fs << "labels" << _labels;
+<<<<<<< HEAD
+=======
+    fs << "labelsInfo" << "[";
+    for (std::map<int, string>::const_iterator it = _labelsInfo.begin(); it != _labelsInfo.end(); it++)
+        fs << LabelInfo(it->first, it->second);
+    fs << "]";
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //------------------------------------------------------------------------------
@@ -743,6 +901,20 @@ void LBPH::load(const FileStorage& fs) {
     //read matrices
     readFileNodeList(fs["histograms"], _histograms);
     fs["labels"] >> _labels;
+<<<<<<< HEAD
+=======
+    const FileNode& fn = fs["labelsInfo"];
+    if (fn.type() == FileNode::SEQ)
+    {
+        _labelsInfo.clear();
+        for (FileNodeIterator it = fn.begin(); it != fn.end();)
+        {
+            LabelInfo item;
+            it >> item;
+            _labelsInfo.insert(std::make_pair(item.label, item.value));
+        }
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 // See FaceRecognizer::save.
@@ -754,6 +926,13 @@ void LBPH::save(FileStorage& fs) const {
     // write matrices
     writeFileNodeList(fs, "histograms", _histograms);
     fs << "labels" << _labels;
+<<<<<<< HEAD
+=======
+    fs << "labelsInfo" << "[";
+    for (std::map<int, string>::const_iterator it = _labelsInfo.begin(); it != _labelsInfo.end(); it++)
+        fs << LabelInfo(it->first, it->second);
+    fs << "]";
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 void LBPH::train(InputArrayOfArrays _in_src, InputArray _in_labels) {
@@ -849,7 +1028,10 @@ int LBPH::predict(InputArray _src) const {
     return label;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Ptr<FaceRecognizer> createEigenFaceRecognizer(int num_components, double threshold)
 {
     return new Eigenfaces(num_components, threshold);

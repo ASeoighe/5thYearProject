@@ -58,7 +58,11 @@ int main(int argc, char** argv)
                 "{ h | help ?            | false | Print help}"
                 "{ i | info              | false | Print information about system and exit }"
                 "{ d | device            | -1   | Device on which tests will be executed (-1 means all devices) }"
+<<<<<<< HEAD
                 "{ nvtest_output_level | nvtest_output_level | none | NVidia test verbosity level (none, compact, full) }"
+=======
+                "{ nvtest_output_level | nvtest_output_level | full | NVidia test verbosity level (none, compact, full) }"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 ;
 
         CommandLineParser cmd(argc, (const char**)argv, keys);

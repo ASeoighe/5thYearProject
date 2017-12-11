@@ -159,7 +159,22 @@ int main(int argc, char** argv)
     Mat img1 = imread(img1_filename, color_mode);
     Mat img2 = imread(img2_filename, color_mode);
 
+<<<<<<< HEAD
     if( scale != 1.f )
+=======
+    if (img1.empty())
+    {
+        printf("Command-line parameter error: could not load the first input image file\n");
+        return -1;
+    }
+    if (img2.empty())
+    {
+        printf("Command-line parameter error: could not load the second input image file\n");
+        return -1;
+    }
+
+    if (scale != 1.f)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
         Mat temp1, temp2;
         int method = scale < 1 ? INTER_AREA : INTER_CUBIC;

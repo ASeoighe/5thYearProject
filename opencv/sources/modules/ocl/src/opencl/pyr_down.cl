@@ -11,7 +11,11 @@
 //                For Open Source Computer Vision Library
 //
 // Copyright (C) 2010-2012, Multicoreware, Inc., all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010,2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // @Authors
@@ -43,32 +47,56 @@
 //
 //M*/
 
+<<<<<<< HEAD
 inline int idx_row_low(int y, int last_row)
+=======
+int idx_row_low(int y, int last_row)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return abs(y) % (last_row + 1);
 }
 
+<<<<<<< HEAD
 inline int idx_row_high(int y, int last_row)
+=======
+int idx_row_high(int y, int last_row)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return abs(last_row - (int)abs(last_row - y)) % (last_row + 1);
 }
 
+<<<<<<< HEAD
 inline int idx_row(int y, int last_row)
+=======
+int idx_row(int y, int last_row)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return idx_row_low(idx_row_high(y, last_row), last_row);
 }
 
+<<<<<<< HEAD
 inline int idx_col_low(int x, int last_col)
+=======
+int idx_col_low(int x, int last_col)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return abs(x) % (last_col + 1);
 }
 
+<<<<<<< HEAD
 inline int idx_col_high(int x, int last_col)
+=======
+int idx_col_high(int x, int last_col)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return abs(last_col - (int)abs(last_col - x)) % (last_col + 1);
 }
 
+<<<<<<< HEAD
 inline int idx_col(int x, int last_col)
+=======
+int idx_col(int x, int last_col)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return idx_col_low(idx_col_high(x, last_col), last_col);
 }

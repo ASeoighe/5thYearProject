@@ -11,7 +11,11 @@
 //                For Open Source Computer Vision Library
 //
 // Copyright (C) 2010-2012, Multicoreware, Inc., all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010,2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // @Authors
@@ -47,7 +51,11 @@
 #define WAVE_SIZE 1
 #endif
 
+<<<<<<< HEAD
 inline int calc_lut(__local int* smem, int val, int tid)
+=======
+int calc_lut(__local int* smem, int val, int tid)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     smem[tid] = val;
     barrier(CLK_LOCAL_MEM_FENCE);
@@ -61,7 +69,11 @@ inline int calc_lut(__local int* smem, int val, int tid)
 }
 
 #ifdef CPU
+<<<<<<< HEAD
 inline void reduce(volatile __local int* smem, int val, int tid)
+=======
+void reduce(volatile __local int* smem, int val, int tid)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     smem[tid] = val;
     barrier(CLK_LOCAL_MEM_FENCE);
@@ -101,7 +113,11 @@ inline void reduce(volatile __local int* smem, int val, int tid)
 
 #else
 
+<<<<<<< HEAD
 inline void reduce(__local volatile int* smem, int val, int tid)
+=======
+void reduce(__local volatile int* smem, int val, int tid)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     smem[tid] = val;
     barrier(CLK_LOCAL_MEM_FENCE);

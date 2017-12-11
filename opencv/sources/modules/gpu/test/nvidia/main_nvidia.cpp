@@ -323,7 +323,12 @@ static void devNullOutput(const std::string& msg)
 bool nvidia_NPPST_Integral_Image(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path.c_str();
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerII("NPPST Integral Image", outputLevel);
 
@@ -339,7 +344,12 @@ bool nvidia_NPPST_Integral_Image(const std::string& test_data_path, OutputLevel 
 bool nvidia_NPPST_Squared_Integral_Image(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerSII("NPPST Squared Integral Image", outputLevel);
 
@@ -353,7 +363,12 @@ bool nvidia_NPPST_Squared_Integral_Image(const std::string& test_data_path, Outp
 bool nvidia_NPPST_RectStdDev(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerRStdDev("NPPST RectStdDev", outputLevel);
 
@@ -367,7 +382,12 @@ bool nvidia_NPPST_RectStdDev(const std::string& test_data_path, OutputLevel outp
 bool nvidia_NPPST_Resize(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerResize("NPPST Resize", outputLevel);
 
@@ -383,7 +403,12 @@ bool nvidia_NPPST_Resize(const std::string& test_data_path, OutputLevel outputLe
 bool nvidia_NPPST_Vector_Operations(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerNPPSTVectorOperations("NPPST Vector Operations", outputLevel);
 
@@ -397,7 +422,12 @@ bool nvidia_NPPST_Vector_Operations(const std::string& test_data_path, OutputLev
 bool nvidia_NPPST_Transpose(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerTranspose("NPPST Transpose", outputLevel);
 
@@ -413,7 +443,12 @@ bool nvidia_NPPST_Transpose(const std::string& test_data_path, OutputLevel outpu
 bool nvidia_NCV_Vector_Operations(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerVectorOperations("Vector Operations", outputLevel);
 
@@ -428,7 +463,12 @@ bool nvidia_NCV_Vector_Operations(const std::string& test_data_path, OutputLevel
 bool nvidia_NCV_Haar_Cascade_Loader(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerHaarLoader("Haar Cascade Loader", outputLevel);
 
@@ -440,7 +480,12 @@ bool nvidia_NCV_Haar_Cascade_Loader(const std::string& test_data_path, OutputLev
 bool nvidia_NCV_Haar_Cascade_Application(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerHaarAppl("Haar Cascade Application", outputLevel);
 
@@ -454,7 +499,12 @@ bool nvidia_NCV_Haar_Cascade_Application(const std::string& test_data_path, Outp
 bool nvidia_NCV_Hypotheses_Filtration(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerHypFiltration("Hypotheses Filtration", outputLevel);
 
@@ -468,7 +518,12 @@ bool nvidia_NCV_Hypotheses_Filtration(const std::string& test_data_path, OutputL
 bool nvidia_NCV_Visualization(const std::string& test_data_path, OutputLevel outputLevel)
 {
     path = test_data_path;
+<<<<<<< HEAD
     ncvSetDebugOutputHandler(devNullOutput);
+=======
+    if (outputLevel != OutputLevelFull)
+        ncvSetDebugOutputHandler(devNullOutput);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     NCVAutoTestLister testListerVisualize("Visualization", outputLevel);
 

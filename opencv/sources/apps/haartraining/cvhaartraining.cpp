@@ -48,6 +48,11 @@
 #include "cvhaartraining.h"
 #include "_cvhaartraining.h"
 
+<<<<<<< HEAD
+=======
+#include "ioutput.h"
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
@@ -2841,14 +2846,21 @@ void cvCreateTreeCascadeClassifier( const char* dirname,
     cvReleaseMat( &features_idx );
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 void cvCreateTrainingSamples( const char* filename,
                               const char* imgfilename, int bgcolor, int bgthreshold,
                               const char* bgfilename, int count,
                               int invert, int maxintensitydev,
                               double maxxangle, double maxyangle, double maxzangle,
+<<<<<<< HEAD
                               int showsamples,
+=======
+                              bool showsamples,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                               int winwidth, int winheight )
 {
     CvSampleDistortionData data;
@@ -2915,7 +2927,11 @@ void cvCreateTrainingSamples( const char* filename,
                     cvShowImage( "Sample", &sample );
                     if( cvWaitKey( 0 ) == 27 )
                     {
+<<<<<<< HEAD
                         showsamples = 0;
+=======
+                        showsamples = false;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     }
                 }
 
@@ -2942,6 +2958,7 @@ void cvCreateTrainingSamples( const char* filename,
 
 }
 
+<<<<<<< HEAD
 #define CV_INFO_FILENAME "info.dat"
 
 
@@ -2974,13 +2991,51 @@ void cvCreateTestSamples( const char* infoname,
         char* filename;
         CvMat win;
         FILE* info;
+=======
+DatasetGenerator::DatasetGenerator( IOutput* _writer )
+    :writer(_writer)
+{
+
+}
+
+void DatasetGenerator::showSamples(bool* show, CvMat *img) const
+{
+    if( *show )
+    {
+        cvShowImage( "Image", img);
+        if( cvWaitKey( 0 ) == 27 )
+        {
+            *show = false;
+        }
+    }
+}
+
+void DatasetGenerator::create(const char* imgfilename, int bgcolor, int bgthreshold,
+                              const char* bgfilename, int count,
+                              int invert, int maxintensitydev,
+                              double maxxangle, double maxyangle, double maxzangle,
+                              bool showsamples,
+                              int winwidth, int winheight )
+{
+    CvSampleDistortionData data;
+
+    assert( imgfilename != NULL );
+    assert( bgfilename != NULL );
+
+    if( icvStartSampleDistortion( imgfilename, bgcolor, bgthreshold, &data ) )
+    {
+        CvMat win;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         if( icvInitBackgroundReaders( bgfilename, cvSize( 10, 10 ) ) )
         {
             int i;
+<<<<<<< HEAD
             int x, y, width, height;
             float scale;
             float maxscale;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             int inverse;
 
             if( showsamples )
@@ -2988,6 +3043,7 @@ void cvCreateTestSamples( const char* infoname,
                 cvNamedWindow( "Image", CV_WINDOW_AUTOSIZE );
             }
 
+<<<<<<< HEAD
             info = fopen( infoname, "w" );
             strcpy( fullname, infoname );
             filename = strrchr( fullname, '\\' );
@@ -3006,10 +3062,16 @@ void cvCreateTestSamples( const char* infoname,
 
             count = MIN( count, cvbgdata->count );
             inverse = invert;
+=======
+            count = MIN( count, cvbgdata->count );
+            inverse = invert;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for( i = 0; i < count; i++ )
             {
                 icvGetNextFromBackgroundData( cvbgdata, cvbgreader );
 
+<<<<<<< HEAD
                 maxscale = MIN( 0.7F * cvbgreader->src.cols / winwidth,
                                    0.7F * cvbgreader->src.rows / winheight );
                 if( maxscale < 1.0F ) continue;
@@ -3021,14 +3083,32 @@ void cvCreateTestSamples( const char* infoname,
                 y = (int) ((0.1+0.8 * rand()/RAND_MAX) * (cvbgreader->src.rows - height));
 
                 cvGetSubArr( &cvbgreader->src, &win, cvRect( x, y ,width, height ) );
+=======
+                CvRect boundingBox = getObjectPosition( cvSize( cvbgreader->src.cols,
+                                                                cvbgreader->src.rows ),
+                                                        cvGetSize(data.img),
+                                                        cvSize( winwidth, winheight ) );
+                if(boundingBox.width <= 0 || boundingBox.height <= 0)
+                {
+                    continue;
+                }
+
+                cvGetSubArr( &cvbgreader->src, &win, boundingBox );
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 if( invert == CV_RANDOM_INVERT )
                 {
                     inverse = (rand() > (RAND_MAX/2));
                 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 icvPlaceDistortedSample( &win, inverse, maxintensitydev,
                                          maxxangle, maxyangle, maxzangle,
                                          1, 0.0, 0.0, &data );
 
+<<<<<<< HEAD
 
                 sprintf( filename, "%04d_%04d_%04d_%04d_%04d.jpg",
                          (i + 1), x, y, width, height );
@@ -3050,11 +3130,90 @@ void cvCreateTestSamples( const char* infoname,
                 }
             }
             if( info ) fclose( info );
+=======
+                writer->write( cvbgreader->src, boundingBox );
+
+                showSamples(&showsamples, &cvbgreader->src);
+            }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             icvDestroyBackgroundReaders();
         }
         icvEndSampleDistortion( &data );
     }
 }
 
+<<<<<<< HEAD
+=======
+DatasetGenerator::~DatasetGenerator()
+{
+    delete writer;
+}
+
+
+JpgDatasetGenerator::JpgDatasetGenerator( const char* filename )
+    :DatasetGenerator( IOutput::createOutput( filename, IOutput::JPG_DATASET ) )
+{
+}
+
+CvSize JpgDatasetGenerator::scaleObjectSize( const CvSize& bgImgSize,
+                                             const CvSize& ,
+                                             const CvSize& sampleSize) const
+{
+    float scale;
+    float maxscale;
+
+    maxscale = MIN( 0.7F * bgImgSize.width / sampleSize.width,
+                    0.7F * bgImgSize.height / sampleSize.height );
+    if( maxscale < 1.0F )
+    {
+        scale = -1.f;
+    }
+    else
+    {
+        scale = (maxscale - 1.0F) * rand() / RAND_MAX + 1.0F;
+    }
+
+    int width = (int) (scale * sampleSize.width);
+    int height = (int) (scale * sampleSize.height);
+
+    return cvSize( width, height );
+}
+
+CvRect DatasetGenerator::getObjectPosition(const CvSize& bgImgSize,
+                                           const CvSize& imgSize,
+                                           const CvSize& sampleSize) const
+{
+    CvSize size = scaleObjectSize( bgImgSize, imgSize, sampleSize );
+
+    int width = size.width;
+    int height = size.height;
+    int x = (int) ((0.1 + 0.8 * rand() / RAND_MAX) * (bgImgSize.width - width));
+    int y = (int) ((0.1 + 0.8 * rand() / RAND_MAX) * (bgImgSize.height - height));
+
+    return cvRect( x, y, width, height );
+}
+
+
+PngDatasetGenerator::PngDatasetGenerator(const char* filename)
+    :DatasetGenerator( IOutput::createOutput( filename, IOutput::PNG_DATASET ) )
+{
+}
+
+CvSize PngDatasetGenerator::scaleObjectSize( const CvSize& bgImgSize,
+                                             const CvSize& imgSize,
+                                             const CvSize& ) const
+{
+    float scale;
+
+    scale = MIN( 0.3F * bgImgSize.width / imgSize.width,
+                 0.3F * bgImgSize.height / imgSize.height );
+
+
+    int width = (int) (scale * imgSize.width);
+    int height = (int) (scale * imgSize.height);
+
+    return cvSize( width, height );
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 /* End of file. */

@@ -130,7 +130,11 @@ Threshold to Zero, Inverted
 Code
 ======
 
+<<<<<<< HEAD
 The tutorial code's is shown lines below. You can also download it from `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/ImgProc/Threshold.cpp>`_
+=======
+The tutorial code's is shown lines below. You can also download it from `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/ImgProc/Threshold.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. code-block:: cpp
 
@@ -167,7 +171,11 @@ The tutorial code's is shown lines below. You can also download it from `here <h
      src = imread( argv[1], 1 );
 
      /// Convert the image to Gray
+<<<<<<< HEAD
      cvtColor( src, src_gray, CV_RGB2GRAY );
+=======
+     cvtColor( src, src_gray, CV_BGR2GRAY );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
      /// Create a window to display results
      namedWindow( window_name, CV_WINDOW_AUTOSIZE );
@@ -221,14 +229,22 @@ Explanation
 
 #. Let's check the general structure of the program:
 
+<<<<<<< HEAD
    * Load an image. If it is RGB we convert it to Grayscale. For this, remember that we can use the function :cvt_color:`cvtColor <>`:
+=======
+   * Load an image. If it is BGR we convert it to Grayscale. For this, remember that we can use the function :cvt_color:`cvtColor <>`:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
      .. code-block:: cpp
 
         src = imread( argv[1], 1 );
 
         /// Convert the image to Gray
+<<<<<<< HEAD
         cvtColor( src, src_gray, CV_RGB2GRAY );
+=======
+        cvtColor( src, src_gray, CV_BGR2GRAY );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 
    * Create a window to display the result

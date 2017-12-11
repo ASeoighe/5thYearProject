@@ -241,7 +241,11 @@ class CppHeaderParser(object):
             l = l[:npos] + l[npos3+1:]
 
         l = self.batch_replace(l, [("CV_EXPORTS_W", ""), ("CV_EXPORTS", ""), ("public virtual ", " "), ("public ", " "), ("::", ".")]).strip()
+<<<<<<< HEAD
         ll = re.split(r'\s*[,:]?\s*', l)
+=======
+        ll = re.split(r'\s+|\s*[,:]\s*', l)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         ll = [le for le in ll if le]
         classname = ll[1]
         bases = ll[2:]

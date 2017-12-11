@@ -12,6 +12,7 @@ endif(WITH_VFW)
 
 # --- GStreamer ---
 ocv_clear_vars(HAVE_GSTREAMER)
+<<<<<<< HEAD
 if(WITH_GSTREAMER)
   CHECK_MODULE(gstreamer-base-0.10 HAVE_GSTREAMER)
   if(HAVE_GSTREAMER)
@@ -21,6 +22,52 @@ if(WITH_GSTREAMER)
     CHECK_MODULE(gstreamer-video-0.10 HAVE_GSTREAMER)
   endif()
 endif(WITH_GSTREAMER)
+=======
+# try to find gstreamer 1.x first if 0.10 was not requested
+if(WITH_GSTREAMER AND NOT WITH_GSTREAMER_0_10)
+  CHECK_MODULE(gstreamer-base-1.0 HAVE_GSTREAMER_BASE)
+  CHECK_MODULE(gstreamer-video-1.0 HAVE_GSTREAMER_VIDEO)
+  CHECK_MODULE(gstreamer-app-1.0 HAVE_GSTREAMER_APP)
+  CHECK_MODULE(gstreamer-riff-1.0 HAVE_GSTREAMER_RIFF)
+  CHECK_MODULE(gstreamer-pbutils-1.0 HAVE_GSTREAMER_PBUTILS)
+
+  if(HAVE_GSTREAMER_BASE AND HAVE_GSTREAMER_VIDEO AND HAVE_GSTREAMER_APP AND HAVE_GSTREAMER_RIFF AND HAVE_GSTREAMER_PBUTILS)
+      set(HAVE_GSTREAMER TRUE)
+      set(GSTREAMER_BASE_VERSION ${ALIASOF_gstreamer-base-1.0_VERSION})
+      set(GSTREAMER_VIDEO_VERSION ${ALIASOF_gstreamer-video-1.0_VERSION})
+      set(GSTREAMER_APP_VERSION ${ALIASOF_gstreamer-app-1.0_VERSION})
+      set(GSTREAMER_RIFF_VERSION ${ALIASOF_gstreamer-riff-1.0_VERSION})
+      set(GSTREAMER_PBUTILS_VERSION ${ALIASOF_gstreamer-pbutils-1.0_VERSION})
+  endif()
+
+endif()
+
+# gstreamer support was requested but could not find gstreamer 1.x,
+# so fallback/try to find gstreamer 0.10
+if(WITH_GSTREAMER AND NOT HAVE_GSTREAMER)
+  set(WITH_GSTREAMER_0_10 ON)
+endif()
+
+# if gstreamer 1.x was not found (fallback on gstreamer 0.10), or we specified
+# we wanted gstreamer 0.10 support,
+# then try to find it if not gstreamer support has not been found so far.
+if(WITH_GSTREAMER_0_10 AND NOT HAVE_GSTREAMER)
+  CHECK_MODULE(gstreamer-base-0.10 HAVE_GSTREAMER_BASE)
+  CHECK_MODULE(gstreamer-video-0.10 HAVE_GSTREAMER_VIDEO)
+  CHECK_MODULE(gstreamer-app-0.10 HAVE_GSTREAMER_APP)
+  CHECK_MODULE(gstreamer-riff-0.10 HAVE_GSTREAMER_RIFF)
+  CHECK_MODULE(gstreamer-pbutils-0.10 HAVE_GSTREAMER_PBUTILS)
+
+  if(HAVE_GSTREAMER_BASE AND HAVE_GSTREAMER_VIDEO AND HAVE_GSTREAMER_APP AND HAVE_GSTREAMER_RIFF AND HAVE_GSTREAMER_PBUTILS)
+      set(HAVE_GSTREAMER TRUE)
+      set(GSTREAMER_BASE_VERSION ${ALIASOF_gstreamer-base-0.10_VERSION})
+      set(GSTREAMER_VIDEO_VERSION ${ALIASOF_gstreamer-video-0.10_VERSION})
+      set(GSTREAMER_APP_VERSION ${ALIASOF_gstreamer-app-0.10_VERSION})
+      set(GSTREAMER_RIFF_VERSION ${ALIASOF_gstreamer-riff-0.10_VERSION})
+      set(GSTREAMER_PBUTILS_VERSION ${ALIASOF_gstreamer-pbutils-0.10_VERSION})
+  endif()
+endif(WITH_GSTREAMER_0_10 AND NOT HAVE_GSTREAMER)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 # --- unicap ---
 ocv_clear_vars(HAVE_UNICAP)
@@ -126,7 +173,17 @@ endif(WITH_XINE)
 ocv_clear_vars(HAVE_LIBV4L HAVE_CAMV4L HAVE_CAMV4L2 HAVE_VIDEOIO)
 if(WITH_V4L)
   if(WITH_LIBV4L)
+<<<<<<< HEAD
     CHECK_MODULE(libv4l1 HAVE_LIBV4L)
+=======
+    CHECK_MODULE(libv4l1 HAVE_LIBV4L1)
+    CHECK_MODULE(libv4l2 HAVE_LIBV4L2)
+    if(HAVE_LIBV4L1 AND HAVE_LIBV4L2)
+      set(HAVE_LIBV4L YES)
+    else()
+      set(HAVE_LIBV4L NO)
+    endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   endif()
   CHECK_INCLUDE_FILE(linux/videodev.h HAVE_CAMV4L)
   CHECK_INCLUDE_FILE(linux/videodev2.h HAVE_CAMV4L2)
@@ -149,6 +206,7 @@ if(WITH_XIMEA)
 endif(WITH_XIMEA)
 
 # --- FFMPEG ---
+<<<<<<< HEAD
 ocv_clear_vars(HAVE_FFMPEG HAVE_FFMPEG_CODEC HAVE_FFMPEG_FORMAT HAVE_FFMPEG_UTIL HAVE_FFMPEG_SWSCALE HAVE_GENTOO_FFMPEG HAVE_FFMPEG_FFMPEG)
 if(WITH_FFMPEG)
   if(WIN32 AND NOT ARM)
@@ -213,6 +271,39 @@ if(WITH_FFMPEG)
       ocv_include_directories(${FFMPEG_INCLUDE_DIR})
     endif()
   endif(APPLE)
+=======
+ocv_clear_vars(HAVE_FFMPEG)
+if(WITH_FFMPEG)
+  if(WIN32 AND NOT ARM)
+    include("${OpenCV_SOURCE_DIR}/3rdparty/ffmpeg/ffmpeg_version.cmake")
+    set(HAVE_FFMPEG TRUE)
+  elseif(PKG_CONFIG_FOUND)
+    ocv_check_modules(FFMPEG libavcodec libavformat libavutil libswscale)
+    ocv_check_modules(FFMPEG_libavresample libavresample)
+    if(FFMPEG_libavresample_FOUND)
+      ocv_append_build_options(FFMPEG FFMPEG_libavresample)
+    endif()
+    if(HAVE_FFMPEG)
+      try_compile(__VALID_FFMPEG
+          "${OpenCV_BINARY_DIR}"
+          "${OpenCV_SOURCE_DIR}/cmake/checks/ffmpeg_test.cpp"
+          CMAKE_FLAGS "-DINCLUDE_DIRECTORIES:STRING=${FFMPEG_INCLUDE_DIRS}"
+                      "-DLINK_DIRECTORIES:STRING=${FFMPEG_LIBRARY_DIRS}"
+                      "-DLINK_LIBRARIES:STRING=${FFMPEG_LIBRARIES}"
+          OUTPUT_VARIABLE TRY_OUT
+      )
+      if(NOT __VALID_FFMPEG)
+        #message(FATAL_ERROR "FFMPEG: test check build log:\n${TRY_OUT}")
+        message(STATUS "WARNING: Can't build ffmpeg test code")
+        set(HAVE_FFMPEG FALSE)
+      else()
+        ocv_append_build_options(HIGHGUI FFMPEG)
+      endif()
+    endif()
+  else()
+    message(STATUS "Can't find ffmpeg - 'pkg-config' utility is missing")
+  endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 endif(WITH_FFMPEG)
 
 # --- VideoInput/DirectShow ---
@@ -222,6 +313,10 @@ if(WITH_DSHOW)
 endif(WITH_DSHOW)
 
 # --- VideoInput/Microsoft Media Foundation ---
+<<<<<<< HEAD
+=======
+ocv_clear_vars(HAVE_MSMF)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 if(WITH_MSMF)
   check_include_file(Mfapi.h HAVE_MSMF)
 endif(WITH_MSMF)
@@ -237,6 +332,7 @@ if(WIN32)
   endif()
 endif(WIN32)
 
+<<<<<<< HEAD
 # --- Apple AV Foundation ---
 if(WITH_AVFOUNDATION)
   set(HAVE_AVFOUNDATION YES)
@@ -250,6 +346,20 @@ if (NOT IOS)
     set(HAVE_QTKIT YES)
   endif()
 endif()
+=======
+if(APPLE)
+  if(WITH_AVFOUNDATION)
+    set(HAVE_AVFOUNDATION YES)
+  endif()
+  if(NOT IOS)
+    if(WITH_QUICKTIME)
+      set(HAVE_QUICKTIME YES)
+    elseif(WITH_QTKIT)
+      set(HAVE_QTKIT YES)
+    endif()
+  endif()
+endif(APPLE)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 # --- Intel Perceptual Computing SDK ---
 if(WITH_INTELPERC)

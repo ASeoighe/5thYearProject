@@ -264,6 +264,7 @@ void cv::render(const string&, const Ptr<GlFont>&, Scalar, Point2d)
 ////////////////////////////////////////////////////////////////////////
 // GlCamera
 
+<<<<<<< HEAD
 cv::GlCamera::GlCamera() :
     eye_(0.0, 0.0, -5.0), center_(0.0, 0.0, 0.0), up_(0.0, 1.0, 0.0),
     pos_(0.0, 0.0, -5.0), yaw_(0.0), pitch_(0.0), roll_(0.0),
@@ -276,6 +277,9 @@ cv::GlCamera::GlCamera() :
     left_(0.0), right_(1.0), bottom_(1.0), top_(0.0),
     zNear_(-1.0), zFar_(1.0),
     perspectiveProjection_(false)
+=======
+cv::GlCamera::GlCamera()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     CV_Error(CV_StsNotImplemented, "This function in deprecated, do not use it");
 }

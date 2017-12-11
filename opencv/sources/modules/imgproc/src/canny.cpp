@@ -230,7 +230,11 @@ void cv::Canny( InputArray _src, OutputArray _dst,
         if ((stack_top - stack_bottom) + src.cols > maxsize)
         {
             int sz = (int)(stack_top - stack_bottom);
+<<<<<<< HEAD
             maxsize = maxsize * 3/2;
+=======
+            maxsize = std::max(sz + src.cols, maxsize * 3/2);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             stack.resize(maxsize);
             stack_bottom = &stack[0];
             stack_top = stack_bottom + sz;

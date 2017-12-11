@@ -26,8 +26,18 @@ void thresh_callback(int, void* );
  */
 int main( int, char** argv )
 {
+<<<<<<< HEAD
   /// Load source image and convert it to gray
   src = imread( argv[1], 1 );
+=======
+  /// Load source image
+  src = imread(argv[1]);
+  if (src.empty())
+  {
+    cerr << "No image supplied ..." << endl;
+    return -1;
+  }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   /// Convert image to gray and blur it
   cvtColor( src, src_gray, COLOR_BGR2GRAY );

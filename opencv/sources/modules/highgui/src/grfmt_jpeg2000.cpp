@@ -45,6 +45,10 @@
 #ifdef HAVE_JASPER
 
 #include "grfmt_jpeg2000.hpp"
+<<<<<<< HEAD
+=======
+#include "opencv2/imgproc.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #ifdef WIN32
 #define JAS_WIN_MSVC_BUILD 1
@@ -159,6 +163,24 @@ bool  Jpeg2KDecoder::readData( Mat& img )
     jas_stream_t* stream = (jas_stream_t*)m_stream;
     jas_image_t* image = (jas_image_t*)m_image;
 
+<<<<<<< HEAD
+=======
+#ifndef WIN32
+    // At least on some Linux instances the
+    // system libjasper segfaults when
+    // converting color to grey.
+    // We do this conversion manually at the end.
+    Mat clr;
+    if (CV_MAT_CN(img.type()) < CV_MAT_CN(this->type()))
+    {
+        clr.create(img.size().height, img.size().width, this->type());
+        color = true;
+        data = clr.ptr();
+        step = (int)clr.step;
+    }
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if( stream && image )
     {
         bool convert;
@@ -171,7 +193,11 @@ bool  Jpeg2KDecoder::readData( Mat& img )
         else
         {
             convert = (jas_clrspc_fam( jas_image_clrspc( image ) ) != JAS_CLRSPC_FAM_GRAY);
+<<<<<<< HEAD
             colorspace = JAS_CLRSPC_SGRAY; // TODO GENGRAY or SGRAY?
+=======
+            colorspace = JAS_CLRSPC_SGRAY; // TODO GENGRAY or SGRAY? (GENGRAY fails on Win.)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         // convert to the desired colorspace
@@ -256,6 +282,16 @@ bool  Jpeg2KDecoder::readData( Mat& img )
 
     close();
 
+<<<<<<< HEAD
+=======
+#ifndef WIN32
+    if (!clr.empty())
+    {
+        cv::cvtColor(clr, img, COLOR_BGR2GRAY);
+    }
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return result;
 }
 
@@ -502,7 +538,11 @@ bool  Jpeg2KEncoder::writeComponent16u( void *__img, const Mat& _img )
 
     for( int y = 0; y < h; y++ )
     {
+<<<<<<< HEAD
         uchar* data = _img.data + _img.step*y;
+=======
+        const ushort* data = _img.ptr<ushort>(y);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         for( int i = 0; i < ncmpts; i++ )
         {
             for( int x = 0; x < w; x++)

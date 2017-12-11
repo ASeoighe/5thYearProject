@@ -2,6 +2,7 @@
 #include "opencv2/highgui/highgui.hpp"
 #include <stdio.h>
 
+<<<<<<< HEAD
 #ifdef HAVE_CVCONFIG_H
 #include <cvconfig.h>
 #endif
@@ -9,6 +10,8 @@
 #include "tbb/task_scheduler_init.h"
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 using namespace cv;
 
 static void help()
@@ -31,6 +34,7 @@ static void detect_and_draw_objects( IplImage* image, CvLatentSvmDetector* detec
     CvSeq* detections = 0;
     int i = 0;
     int64 start = 0, finish = 0;
+<<<<<<< HEAD
 #ifdef HAVE_TBB
     tbb::task_scheduler_init init(tbb::task_scheduler_init::deferred);
     if (numThreads > 0)
@@ -44,15 +48,21 @@ static void detect_and_draw_objects( IplImage* image, CvLatentSvmDetector* detec
         return;
     }
 #endif
+=======
+    cv::setNumThreads(numThreads);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     start = cvGetTickCount();
     detections = cvLatentSvmDetectObjects(image, detector, storage, 0.5f, numThreads);
     finish = cvGetTickCount();
     printf("detection time = %.3f\n", (float)(finish - start) / (float)(cvGetTickFrequency() * 1000000.0));
 
+<<<<<<< HEAD
 #ifdef HAVE_TBB
     init.terminate();
 #endif
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     for( i = 0; i < detections->total; i++ )
     {
         CvObjectDetection detection = *(CvObjectDetection*)cvGetSeqElem( detections, i );

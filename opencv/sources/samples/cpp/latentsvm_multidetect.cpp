@@ -9,6 +9,7 @@
 #include <dirent.h>
 #endif
 
+<<<<<<< HEAD
 #ifdef HAVE_CVCONFIG_H
 #include <cvconfig.h>
 #endif
@@ -17,13 +18,19 @@
 #include "tbb/task_scheduler_init.h"
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 using namespace std;
 using namespace cv;
 
 static void help()
 {
     cout << "This program demonstrated the use of the latentSVM detector." << endl <<
+<<<<<<< HEAD
             "It reads in a trained object models and then uses them to detect the objects in an images." << endl <<
+=======
+            "It reads in trained object models and then uses them to detect the objects in images." << endl <<
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
              endl <<
             "Call:" << endl <<
             "./latentsvm_multidetect <imagesFolder> <modelsFolder> [<overlapThreshold>][<threadsNumber>]" << endl <<
@@ -132,7 +139,11 @@ int main(int argc, char* argv[])
     LatentSvmDetector detector( models_filenames );
     if( detector.empty() )
     {
+<<<<<<< HEAD
         cout << "Models cann't be loaded" << endl;
+=======
+        cout << "Models can't be loaded" << endl;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         exit(-1);
     }
 

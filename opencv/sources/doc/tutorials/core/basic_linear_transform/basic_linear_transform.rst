@@ -151,7 +151,11 @@ Explanation
 
    We observe that :mat_zeros:`Mat::zeros <>` returns a Matlab-style zero initializer based on *image.size()* and *image.type()*
 
+<<<<<<< HEAD
 #. Now, to perform the operation :math:`g(i,j) = \alpha \cdot f(i,j) + \beta` we will access to each pixel in image. Since we are operating with RGB images, we will have three values per pixel (R, G and B), so we will also access them separately. Here is the piece of code:
+=======
+#. Now, to perform the operation :math:`g(i,j) = \alpha \cdot f(i,j) + \beta` we will access to each pixel in image. Since we are operating with BGR images, we will have three values per pixel (B, G and R), so we will also access them separately. Here is the piece of code:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    .. code-block:: cpp
 
@@ -192,7 +196,11 @@ Explanation
 
       image.convertTo(new_image, -1, alpha, beta);
 
+<<<<<<< HEAD
    where :convert_to:`convertTo <>` would effectively perform *new_image = a*image + beta*. However, we wanted to show you how to access each pixel. In any case, both methods give the same result.
+=======
+   where :convert_to:`convertTo <>` would effectively perform *new_image = a*image + beta*. However, we wanted to show you how to access each pixel. In any case, both methods give the same result but convertTo is more optimized and works a lot faster.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 Result
 =======

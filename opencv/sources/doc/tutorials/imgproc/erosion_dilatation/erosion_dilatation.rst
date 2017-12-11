@@ -53,6 +53,17 @@ Dilation
 
 The background (bright) dilates around the black regions of the letter.
 
+<<<<<<< HEAD
+=======
+To better grasp the idea and avoid possible confusion, in this another example we have inverted the original image such as the object in white is now the letter. We have performed two dilatations with a rectangular structuring element of size :math:`3x3`.
+
+  .. image:: images/Morphology_1_Tutorial_Theory_Dilatation_2.png
+     :alt: Left image: original image inverted, right image: resulting dilatation
+     :align: center
+
+The dilatation makes the object in white bigger.
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Erosion
 ^^^^^^^^
 
@@ -66,11 +77,25 @@ Erosion
      :alt: Erosion result - Theory example
      :align: center
 
+<<<<<<< HEAD
+=======
+In the same manner, the corresponding image resulting of the erosion operation on the inverted original image (two erosions with a rectangular structuring element of size :math:`3x3`.
+
+  .. image:: images/Morphology_1_Tutorial_Theory_Erosion_2.png
+     :alt: Left image: original image inverted, right image: resulting erosion
+     :align: center
+
+The erosion makes the object in white smaller.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 Code
 ======
 
+<<<<<<< HEAD
 This tutorial code's is shown lines below. You can also download it from `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/ImgProc/Morphology_1.cpp>`_
+=======
+This tutorial code's is shown lines below. You can also download it from `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/ImgProc/Morphology_1.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. code-block:: cpp
 
@@ -177,7 +202,11 @@ Explanation
 
    .. container:: enumeratevisibleitemswithsquare
 
+<<<<<<< HEAD
       * Load an image (can be RGB or grayscale)
+=======
+      * Load an image (can be BGR or grayscale)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       * Create two windows (one for dilation output, the other for erosion)
       * Create a set of 02 Trackbars for each operation:
 

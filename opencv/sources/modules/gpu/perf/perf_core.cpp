@@ -41,12 +41,24 @@
 //M*/
 
 #include "perf_precomp.hpp"
+<<<<<<< HEAD
+=======
+#include "opencv2/ts/gpu_perf.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace std;
 using namespace testing;
 using namespace perf;
 
+<<<<<<< HEAD
 #define ARITHM_MAT_DEPTH Values(CV_8U, CV_16U, CV_32F, CV_64F)
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+#define ARITHM_MAT_DEPTH Values(CV_8U, CV_32F)
+#else
+#define ARITHM_MAT_DEPTH Values(CV_8U, CV_16U, CV_32F, CV_64F)
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 //////////////////////////////////////////////////////////////////////
 // Merge
@@ -524,9 +536,23 @@ PERF_TEST_P(Sz_Depth, Core_AbsDiffScalar,
 //////////////////////////////////////////////////////////////////////
 // Abs
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_Abs,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_16S, CV_32F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_Abs, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_32F))
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_Abs, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_16S, CV_32F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -552,9 +578,23 @@ PERF_TEST_P(Sz_Depth, Core_Abs,
 //////////////////////////////////////////////////////////////////////
 // Sqr
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_Sqr,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16S, CV_32F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_Sqr, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_32F))
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_Sqr, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16S, CV_32F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -580,9 +620,23 @@ PERF_TEST_P(Sz_Depth, Core_Sqr,
 //////////////////////////////////////////////////////////////////////
 // Sqrt
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_Sqrt,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16S, CV_32F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_Sqrt, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_32F))
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_Sqrt, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16S, CV_32F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -597,7 +651,11 @@ PERF_TEST_P(Sz_Depth, Core_Sqrt,
 
         TEST_CYCLE() cv::gpu::sqrt(d_src, dst);
 
+<<<<<<< HEAD
         GPU_SANITY_CHECK(dst);
+=======
+        GPU_SANITY_CHECK(dst, 1e-2);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     else
     {
@@ -612,9 +670,23 @@ PERF_TEST_P(Sz_Depth, Core_Sqrt,
 //////////////////////////////////////////////////////////////////////
 // Log
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_Log,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16S, CV_32F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_Log, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_32F))
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_Log, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16S, CV_32F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -629,7 +701,11 @@ PERF_TEST_P(Sz_Depth, Core_Log,
 
         TEST_CYCLE() cv::gpu::log(d_src, dst);
 
+<<<<<<< HEAD
         GPU_SANITY_CHECK(dst);
+=======
+        GPU_SANITY_CHECK(dst, 1e-1);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     else
     {
@@ -644,9 +720,23 @@ PERF_TEST_P(Sz_Depth, Core_Log,
 //////////////////////////////////////////////////////////////////////
 // Exp
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_Exp,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16S, CV_32F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_Exp, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_32F))
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_Exp, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16S, CV_32F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -661,7 +751,11 @@ PERF_TEST_P(Sz_Depth, Core_Exp,
 
         TEST_CYCLE() cv::gpu::exp(d_src, dst);
 
+<<<<<<< HEAD
         GPU_SANITY_CHECK(dst);
+=======
+        GPU_SANITY_CHECK(dst, 1e-2);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     else
     {
@@ -678,10 +772,26 @@ PERF_TEST_P(Sz_Depth, Core_Exp,
 
 DEF_PARAM_TEST(Sz_Depth_Power, cv::Size, MatDepth, double);
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Power, Core_Pow,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16S, CV_32F),
                     Values(0.3, 2.0, 2.4)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Power, Core_Pow, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_32F)),
+    Values(0.3, 2.0, 2.4)
+))
+#else
+PERF_TEST_P(Sz_Depth_Power, Core_Pow, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16S, CV_32F),
+    Values(0.3, 2.0, 2.4)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -859,10 +969,26 @@ PERF_TEST_P(Sz_Depth, Core_BitwiseAndMat,
 //////////////////////////////////////////////////////////////////////
 // BitwiseAndScalar
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseAndScalar,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32S),
                     GPU_CHANNELS_1_3_4))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseAndScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_8U)),
+    testing::Values(MatCn(Gray))
+))
+#else
+PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseAndScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32S),
+    GPU_CHANNELS_1_3_4
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -935,10 +1061,26 @@ PERF_TEST_P(Sz_Depth, Core_BitwiseOrMat,
 //////////////////////////////////////////////////////////////////////
 // BitwiseOrScalar
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseOrScalar,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32S),
                     GPU_CHANNELS_1_3_4))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseOrScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_8U)),
+    testing::Values(MatCn(Gray))
+))
+#else
+PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseOrScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32S),
+    GPU_CHANNELS_1_3_4
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -1011,10 +1153,26 @@ PERF_TEST_P(Sz_Depth, Core_BitwiseXorMat,
 //////////////////////////////////////////////////////////////////////
 // BitwiseXorScalar
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseXorScalar,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32S),
                     GPU_CHANNELS_1_3_4))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseXorScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_8U)),
+    testing::Values(MatCn(Gray))
+))
+#else
+PERF_TEST_P(Sz_Depth_Cn, Core_BitwiseXorScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32S),
+    GPU_CHANNELS_1_3_4
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -1155,9 +1313,23 @@ PERF_TEST_P(Sz_Depth, Core_MinMat,
 //////////////////////////////////////////////////////////////////////
 // MinScalar
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_MinScalar,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_MinScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F)
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_MinScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -1226,9 +1398,23 @@ PERF_TEST_P(Sz_Depth, Core_MaxMat,
 //////////////////////////////////////////////////////////////////////
 // MaxScalar
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_MaxScalar,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_MaxScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F)
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_MaxScalar, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -1263,11 +1449,29 @@ PERF_TEST_P(Sz_Depth, Core_MaxScalar,
 
 DEF_PARAM_TEST(Sz_3Depth, cv::Size, MatDepth, MatDepth, MatDepth);
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_3Depth, Core_AddWeighted,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F, CV_64F),
                     Values(CV_8U, CV_16U, CV_32F, CV_64F),
                     Values(CV_8U, CV_16U, CV_32F, CV_64F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_3Depth, Core_AddWeighted, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(MatDepth(CV_32F)),
+    Values(MatDepth(CV_32F)),
+    Values(MatDepth(CV_32F))
+))
+#else
+PERF_TEST_P(Sz_3Depth, Core_AddWeighted, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F, CV_64F),
+    Values(CV_8U, CV_16U, CV_32F, CV_64F),
+    Values(CV_8U, CV_16U, CV_32F, CV_64F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth1 = GET_PARAM(1);
@@ -1782,10 +1986,26 @@ PERF_TEST_P(Sz, Core_MeanStdDev,
 
 DEF_PARAM_TEST(Sz_Depth_Norm, cv::Size, MatDepth, NormType);
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Norm, Core_Norm,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32S, CV_32F),
                     Values(NormType(cv::NORM_INF), NormType(cv::NORM_L1), NormType(cv::NORM_L2))))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Norm, Core_Norm, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F),
+    Values(NormType(cv::NORM_INF), NormType(cv::NORM_L1), NormType(cv::NORM_L2))
+))
+#else
+PERF_TEST_P(Sz_Depth_Norm, Core_Norm, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32S, CV_32F),
+    Values(NormType(cv::NORM_INF), NormType(cv::NORM_L1), NormType(cv::NORM_L2))
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -1859,10 +2079,26 @@ PERF_TEST_P(Sz_Norm, Core_NormDiff,
 //////////////////////////////////////////////////////////////////////
 // Sum
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn, Core_Sum,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F),
                     GPU_CHANNELS_1_3_4))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Cn, Core_Sum, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F),
+    testing::Values(MatCn(Gray))
+))
+#else
+PERF_TEST_P(Sz_Depth_Cn, Core_Sum, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F),
+    GPU_CHANNELS_1_3_4
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -1896,10 +2132,26 @@ PERF_TEST_P(Sz_Depth_Cn, Core_Sum,
 //////////////////////////////////////////////////////////////////////
 // SumAbs
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn, Core_SumAbs,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F),
                     GPU_CHANNELS_1_3_4))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Cn, Core_SumAbs, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F),
+    testing::Values(MatCn(Gray))
+))
+#else
+PERF_TEST_P(Sz_Depth_Cn, Core_SumAbs, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F),
+    GPU_CHANNELS_1_3_4
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -1929,10 +2181,26 @@ PERF_TEST_P(Sz_Depth_Cn, Core_SumAbs,
 //////////////////////////////////////////////////////////////////////
 // SumSqr
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn, Core_SumSqr,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values<MatDepth>(CV_8U, CV_16U, CV_32F),
                     GPU_CHANNELS_1_3_4))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Cn, Core_SumSqr, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F),
+    testing::Values(MatCn(Gray))
+))
+#else
+PERF_TEST_P(Sz_Depth_Cn, Core_SumSqr, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F),
+    GPU_CHANNELS_1_3_4
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -1962,9 +2230,23 @@ PERF_TEST_P(Sz_Depth_Cn, Core_SumSqr,
 //////////////////////////////////////////////////////////////////////
 // MinMax
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_MinMax,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F, CV_64F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_MinMax, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F)
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_MinMax, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F, CV_64F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -2000,9 +2282,23 @@ PERF_TEST_P(Sz_Depth, Core_MinMax,
 //////////////////////////////////////////////////////////////////////
 // MinMaxLoc
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_MinMaxLoc,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F, CV_64F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_MinMaxLoc, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F)
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_MinMaxLoc, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F, CV_64F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -2040,9 +2336,23 @@ PERF_TEST_P(Sz_Depth, Core_MinMaxLoc,
 //////////////////////////////////////////////////////////////////////
 // CountNonZero
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth, Core_CountNonZero,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F, CV_64F)))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth, Core_CountNonZero, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F)
+))
+#else
+PERF_TEST_P(Sz_Depth, Core_CountNonZero, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F, CV_64F)
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -2079,12 +2389,32 @@ CV_ENUM(ReduceDim, Rows, Cols)
 
 DEF_PARAM_TEST(Sz_Depth_Cn_Code_Dim, cv::Size, MatDepth, MatCn, ReduceCode, ReduceDim);
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn_Code_Dim, Core_Reduce,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_16S, CV_32F),
                     Values(1, 2, 3, 4),
                     ReduceCode::all(),
                     ReduceDim::all()))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_Cn_Code_Dim, Core_Reduce, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F),
+    Values(1, 2, 3, 4),
+    ReduceCode::all(),
+    ReduceDim::all()
+))
+#else
+PERF_TEST_P(Sz_Depth_Cn_Code_Dim, Core_Reduce, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_16S, CV_32F),
+    Values(1, 2, 3, 4),
+    ReduceCode::all(),
+    ReduceDim::all()
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int depth = GET_PARAM(1);
@@ -2120,6 +2450,7 @@ PERF_TEST_P(Sz_Depth_Cn_Code_Dim, Core_Reduce,
 
 DEF_PARAM_TEST(Sz_Depth_NormType, cv::Size, MatDepth, NormType);
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_NormType, Core_Normalize,
             Combine(GPU_TYPICAL_MAT_SIZES,
                     Values(CV_8U, CV_16U, CV_32F, CV_64F),
@@ -2127,6 +2458,27 @@ PERF_TEST_P(Sz_Depth_NormType, Core_Normalize,
                            NormType(cv::NORM_L1),
                            NormType(cv::NORM_L2),
                            NormType(cv::NORM_MINMAX))))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(Sz_Depth_NormType, Core_Normalize, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_32F),
+    Values(NormType(cv::NORM_INF),
+           NormType(cv::NORM_L1),
+           NormType(cv::NORM_L2),
+           NormType(cv::NORM_MINMAX))
+))
+#else
+PERF_TEST_P(Sz_Depth_NormType, Core_Normalize, Combine(
+    GPU_TYPICAL_MAT_SIZES,
+    Values(CV_8U, CV_16U, CV_32F, CV_64F),
+    Values(NormType(cv::NORM_INF),
+           NormType(cv::NORM_L1),
+           NormType(cv::NORM_L2),
+           NormType(cv::NORM_MINMAX))
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     const cv::Size size = GET_PARAM(0);
     const int type = GET_PARAM(1);

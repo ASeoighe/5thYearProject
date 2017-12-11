@@ -164,7 +164,11 @@ namespace cv
             args.push_back( make_pair(sizeof(cl_int), (void *)&cols));
 
             size_t localThreads[3] = { 16, 16, 1 };
+<<<<<<< HEAD
             size_t globalThreads[3] = { cols, dst.rows, 1 };
+=======
+            size_t globalThreads[3] = { (size_t)cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             openCLExecuteKernel(src.clCxt, &imgproc_threshold, "threshold", globalThreads, localThreads, args,
                                 -1, -1, buildOptions.c_str());
@@ -229,7 +233,11 @@ namespace cv
                 CV_Error(CV_StsBadArg, "Unsupported map types");
 
             int ocn = dst.oclchannels();
+<<<<<<< HEAD
             size_t globalThreads[3] = { dst.cols, dst.rows, 1 };
+=======
+            size_t globalThreads[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             Mat scalar(1, 1, CV_MAKE_TYPE(dst.depth(), ocn), borderValue);
             std::string buildOptions = format("-D %s -D %s -D T=%s%s", interMap[interpolation],
@@ -422,7 +430,11 @@ namespace cv
                 }
             }
 
+<<<<<<< HEAD
             size_t globalThreads[3] = { glbSizeX, dst.rows, 1 };
+=======
+            size_t globalThreads[3] = { glbSizeX, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             size_t localThreads[3] = { blkSizeX, blkSizeY, 1 };
 
             std::vector< std::pair<size_t, const void *> > args;
@@ -521,7 +533,11 @@ namespace cv
             args.push_back( make_pair( sizeof(cl_int), (void *)&srcStep));
             args.push_back( make_pair( sizeof(cl_int), (void *)&dstStep));
 
+<<<<<<< HEAD
             size_t globalThreads[3] = {(src.cols + 18) / 16 * 16, (src.rows + 15) / 16 * 16, 1};
+=======
+            size_t globalThreads[3] = {((size_t)src.cols + 18) / 16 * 16, ((size_t)src.rows + 15) / 16 * 16, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             size_t localThreads[3] = {16, 16, 1};
 
             if (m == 3)
@@ -589,7 +605,11 @@ namespace cv
                 CV_Error(CV_StsBadArg, "Unsupported border type");
 
             size_t localThreads[3] = { 16, 16, 1 };
+<<<<<<< HEAD
             size_t globalThreads[3] = { dst.cols, dst.rows, 1 };
+=======
+            size_t globalThreads[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             vector< pair<size_t, const void *> > args;
             args.push_back( make_pair( sizeof(cl_mem), (void *)&_src.data));
@@ -936,7 +956,11 @@ namespace cv
             args.push_back( make_pair( sizeof(cl_int) , (void *)&src.cols ));
             args.push_back( make_pair( sizeof(cl_int) , (void *)&src.step ));
             args.push_back( make_pair( sizeof(cl_int) , (void *)&t_sum.step));
+<<<<<<< HEAD
             size_t gt[3] = {((vcols + 1) / 2) * 256, 1, 1}, lt[3] = {256, 1, 1};
+=======
+            size_t gt[3] = {(((size_t)vcols + 1) / 2) * 256, 1, 1}, lt[3] = {256, 1, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             openCLExecuteKernel(src.clCxt, &imgproc_integral, "integral_cols", gt, lt, args, -1, depth);
 
             args.clear();
@@ -951,7 +975,11 @@ namespace cv
             args.push_back( make_pair( sizeof(cl_int) , (void *)&sqsum.step));
             args.push_back( make_pair( sizeof(cl_int) , (void *)&sum_offset));
             args.push_back( make_pair( sizeof(cl_int) , (void *)&sqsum_offset));
+<<<<<<< HEAD
             size_t gt2[3] = {t_sum.cols  * 32, 1, 1}, lt2[3] = {256, 1, 1};
+=======
+            size_t gt2[3] = {(size_t)t_sum.cols  * 32, 1, 1}, lt2[3] = {256, 1, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             openCLExecuteKernel(src.clCxt, &imgproc_integral, "integral_rows", gt2, lt2, args, -1, depth);
         }
 
@@ -981,7 +1009,11 @@ namespace cv
             args.push_back( make_pair( sizeof(cl_int) , (void *)&src.cols ));
             args.push_back( make_pair( sizeof(cl_int) , (void *)&src.step ));
             args.push_back( make_pair( sizeof(cl_int) , (void *)&t_sum.step));
+<<<<<<< HEAD
             size_t gt[3] = {((vcols + 1) / 2) * 256, 1, 1}, lt[3] = {256, 1, 1};
+=======
+            size_t gt[3] = {(((size_t)vcols + 1) / 2) * 256, 1, 1}, lt[3] = {256, 1, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             openCLExecuteKernel(src.clCxt, &imgproc_integral_sum, "integral_sum_cols", gt, lt, args, -1, depth);
 
             args.clear();
@@ -992,7 +1024,11 @@ namespace cv
             args.push_back( make_pair( sizeof(cl_int) , (void *)&t_sum.step ));
             args.push_back( make_pair( sizeof(cl_int) , (void *)&sum.step));
             args.push_back( make_pair( sizeof(cl_int) , (void *)&sum_offset));
+<<<<<<< HEAD
             size_t gt2[3] = {t_sum.cols  * 32, 1, 1}, lt2[3] = {256, 1, 1};
+=======
+            size_t gt2[3] = {(size_t)t_sum.cols  * 32, 1, 1}, lt2[3] = {256, 1, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             openCLExecuteKernel(src.clCxt, &imgproc_integral_sum, "integral_sum_rows", gt2, lt2, args, -1, depth);
         }
 
@@ -1025,7 +1061,11 @@ namespace cv
 
                 CV_Assert(Dx.rows == Dy.rows && Dx.cols == Dy.cols);
 
+<<<<<<< HEAD
                 size_t lt2[3] = {sobel_lsz, sobel_lsz, 1};
+=======
+                size_t lt2[3] = {(size_t)sobel_lsz, (size_t)sobel_lsz, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 size_t gt2[3] = {lt2[0]*(1 + (src.cols-1) / lt2[0]), lt2[1]*(1 + (src.rows-1) / lt2[1]), 1};
 
                 unsigned int src_pitch = src.step;
@@ -1247,8 +1287,13 @@ namespace cv
             if (src.rows % lty != 0)
                 row = (row / lty + 1) * lty;
 
+<<<<<<< HEAD
             size_t globalThreads[3] = {col, row, 1};
             size_t localThreads[3]  = {ltx, lty, 1};
+=======
+            size_t globalThreads[3] = {(size_t)col, (size_t)row, 1};
+            size_t localThreads[3]  = {(size_t)ltx, (size_t)lty, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             //set args
             vector<pair<size_t , const void *> > args;
@@ -1306,8 +1351,13 @@ namespace cv
             if (src.rows % lty != 0)
                 row = (row / lty + 1) * lty;
 
+<<<<<<< HEAD
             size_t globalThreads[3] = {col, row, 1};
             size_t localThreads[3]  = {ltx, lty, 1};
+=======
+            size_t globalThreads[3] = {(size_t)col, (size_t)row, 1};
+            size_t localThreads[3]  = {(size_t)ltx, (size_t)lty, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             //set args
             vector<pair<size_t , const void *> > args;
@@ -1567,7 +1617,11 @@ namespace cv
                 args.push_back( std::make_pair( sizeof(cl_int), (void *)&lut.offset ));
 
                 size_t localThreads[3]  = { 32, 8, 1 };
+<<<<<<< HEAD
                 size_t globalThreads[3] = { src.cols, src.rows, 1 };
+=======
+                size_t globalThreads[3] = { (size_t)src.cols, (size_t)src.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
                 openCLExecuteKernel(Context::getContext(), &imgproc_clahe, "transform", globalThreads, localThreads, args, -1, -1);
             }
@@ -1754,7 +1808,11 @@ namespace cv
 #else
             size_t localThreads[3]  = { 16, 16, 1 };
 #endif
+<<<<<<< HEAD
             size_t globalThreads[3] = { dst.cols, dst.rows, 1 };
+=======
+            size_t globalThreads[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             if ((dst.type() == CV_8UC1) && ((dst.offset & 3) == 0) && ((dst.cols & 3) == 0))
             {
@@ -1799,7 +1857,11 @@ static void convolve_run(const oclMat &src, const oclMat &temp1, oclMat &dst, st
     dst.create(src.size(), src.type());
 
     size_t localThreads[3]  = { 16, 16, 1 };
+<<<<<<< HEAD
     size_t globalThreads[3] = { dst.cols, dst.rows, 1 };
+=======
+    size_t globalThreads[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     int src_step = src.step / src.elemSize(), src_offset = src.offset / src.elemSize();
     int dst_step = dst.step / dst.elemSize(), dst_offset = dst.offset / dst.elemSize();

@@ -53,6 +53,14 @@
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/ml/ml.hpp"
 
+<<<<<<< HEAD
+=======
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverloaded-virtual"
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 namespace cv
 {
     namespace ocl
@@ -477,7 +485,11 @@ namespace cv
         // supports all data types
         CV_EXPORTS void max(const oclMat &src1, const oclMat &src2, oclMat &dst);
 
+<<<<<<< HEAD
         //! compares elements of two arrays (dst = src1 <cmpop> src2)
+=======
+        //! compares elements of two arrays (dst = src1 \verbatim<cmpop>\endverbatim src2)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         // supports all data types
         CV_EXPORTS void compare(const oclMat &src1, const oclMat &src2, oclMat &dst, int cmpop);
 
@@ -1092,6 +1104,12 @@ namespace cv
             oclMat image_scale;
             // effect size of input image (might be different from original size after scaling)
             Size effect_size;
+<<<<<<< HEAD
+=======
+
+        private:
+            oclMat gauss_w_lut;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         };
 
 
@@ -1470,6 +1488,19 @@ namespace cv
             void releaseMemory();
 
         private:
+<<<<<<< HEAD
+=======
+            void setGaussianBlurKernel(const float *c_gKer, int ksizeHalf);
+
+            void gaussianBlurOcl(const oclMat &src, int ksizeHalf, oclMat &dst);
+
+            void polynomialExpansionOcl(
+                const oclMat &src, int polyN, oclMat &dst);
+
+            void gaussianBlur5Ocl(
+                const oclMat &src, int ksizeHalf, oclMat &dst);
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             void prepareGaussian(
                 int n, double sigma, float *g, float *xg, float *xxg,
                 double &ig11, double &ig03, double &ig33, double &ig55);
@@ -1487,6 +1518,14 @@ namespace cv
             oclMat frames_[2];
             oclMat pyrLevel_[2], M_, bufM_, R_[2], blurredFrame_[2];
             std::vector<oclMat> pyramid0_, pyramid1_;
+<<<<<<< HEAD
+=======
+            float ig[4];
+            oclMat gMat;
+            oclMat xgMat;
+            oclMat xxgMat;
+            oclMat gKerMat;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         };
 
         //////////////// build warping maps ////////////////////
@@ -1977,4 +2016,11 @@ namespace cv
 #  pragma warning( pop)
 #endif
 
+<<<<<<< HEAD
+=======
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif /* __OPENCV_OCL_HPP__ */

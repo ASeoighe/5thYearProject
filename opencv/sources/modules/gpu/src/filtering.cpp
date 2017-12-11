@@ -789,12 +789,20 @@ Ptr<BaseFilter_GPU> cv::gpu::getLinearFilter_GPU(int srcType, int dstType, const
     case CV_8UC4:
         func = filter2D_gpu<uchar4, uchar4>;
         break;
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     case CV_16UC1:
         func = filter2D_gpu<ushort, ushort>;
         break;
     case CV_16UC4:
         func = filter2D_gpu<ushort4, ushort4>;
         break;
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     case CV_32FC1:
         func = filter2D_gpu<float, float>;
         break;
@@ -893,6 +901,21 @@ namespace
 
 Ptr<BaseRowFilter_GPU> cv::gpu::getLinearRowFilter_GPU(int srcType, int bufType, const Mat& rowKernel, int anchor, int borderType)
 {
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const gpuFilter1D_t funcs[7][4] =
+    {
+        {filter::linearRow<uchar, float>, 0, filter::linearRow<uchar3, float3>, filter::linearRow<uchar4, float4>},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {filter::linearRow<float, float>, 0, filter::linearRow<float3, float3>, filter::linearRow<float4, float4>},
+        {0, 0, 0, 0}
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const gpuFilter1D_t funcs[7][4] =
     {
         {filter::linearRow<uchar, float>, 0, filter::linearRow<uchar3, float3>, filter::linearRow<uchar4, float4>},
@@ -903,6 +926,10 @@ Ptr<BaseRowFilter_GPU> cv::gpu::getLinearRowFilter_GPU(int srcType, int bufType,
         {filter::linearRow<float, float>, 0, filter::linearRow<float3, float3>, filter::linearRow<float4, float4>},
         {0, 0, 0, 0}
     };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const nppFilter1D_t npp_funcs[] =
     {
         0, nppiFilterRow_8u_C1R, 0, 0, nppiFilterRow_8u_C4R
@@ -998,6 +1025,21 @@ namespace
 
 Ptr<BaseColumnFilter_GPU> cv::gpu::getLinearColumnFilter_GPU(int bufType, int dstType, const Mat& columnKernel, int anchor, int borderType)
 {
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const gpuFilter1D_t funcs[7][4] =
+    {
+        {filter::linearColumn<float, uchar>, 0, filter::linearColumn<float3, uchar3>, filter::linearColumn<float4, uchar4>},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {filter::linearColumn<float, float>, 0, filter::linearColumn<float3, float3>, filter::linearColumn<float4, float4>},
+        {0, 0, 0, 0}
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const gpuFilter1D_t funcs[7][4] =
     {
         {filter::linearColumn<float, uchar>, 0, filter::linearColumn<float3, uchar3>, filter::linearColumn<float4, uchar4>},
@@ -1008,6 +1050,10 @@ Ptr<BaseColumnFilter_GPU> cv::gpu::getLinearColumnFilter_GPU(int bufType, int ds
         {filter::linearColumn<float, float>, 0, filter::linearColumn<float3, float3>, filter::linearColumn<float4, float4>},
         {0, 0, 0, 0}
     };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const nppFilter1D_t npp_funcs[] =
     {
         0, nppiFilterColumn_8u_C1R, 0, 0, nppiFilterColumn_8u_C4R

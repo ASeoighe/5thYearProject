@@ -397,16 +397,26 @@ struct ProgramFileCache
                                             sizeof(size_t),
                                             &binarySize, NULL));
 
+<<<<<<< HEAD
                     std::vector<char> binary(binarySize);
 
                     char* ptr = &binary[0];
+=======
+                    std::vector<char> localBinary(binarySize);
+
+                    char* ptr = &localBinary[0];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     openCLSafeCall(clGetProgramInfo(program,
                                             CL_PROGRAM_BINARIES,
                                             sizeof(char*),
                                             &ptr,
                                             NULL));
 
+<<<<<<< HEAD
                     if (!writeConfigurationToFile(options, binary))
+=======
+                    if (!writeConfigurationToFile(options, localBinary))
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     {
                         std::cerr << "Can't write data to file: " << fileName_ << std::endl;
                     }
@@ -463,7 +473,11 @@ cl_program ProgramCache::getProgram(const Context *ctx, const cv::ocl::ProgramEn
         }
 
         {
+<<<<<<< HEAD
             cv::AutoLock lockCache(mutexCache);
+=======
+            cv::AutoLock localLockCache(mutexCache);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             cl_program program = ProgramCache::getProgramCache()->progLookup(src_sign.str());
             if (!!program)
             {
@@ -478,7 +492,11 @@ cl_program ProgramCache::getProgram(const Context *ctx, const cv::ocl::ProgramEn
     // second check
     if (source->name)
     {
+<<<<<<< HEAD
         cv::AutoLock lockCache(mutexCache);
+=======
+        cv::AutoLock localLockCache(mutexCache);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cl_program program = ProgramCache::getProgramCache()->progLookup(src_sign.str());
         if (!!program)
         {
@@ -504,7 +522,11 @@ cl_program ProgramCache::getProgram(const Context *ctx, const cv::ocl::ProgramEn
     //Cache the binary for future use if build_options is null
     if (source->name)
     {
+<<<<<<< HEAD
         cv::AutoLock lockCache(mutexCache);
+=======
+        cv::AutoLock localLockCache(mutexCache);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         this->addProgram(src_sign.str(), program);
     }
     return program;

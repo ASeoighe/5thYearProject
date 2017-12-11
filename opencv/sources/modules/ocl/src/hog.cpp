@@ -55,7 +55,10 @@ using namespace cv::ocl;
 #define CELLS_PER_BLOCK_Y 2
 #define NTHREADS 256
 
+<<<<<<< HEAD
 static oclMat gauss_w_lut;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 static bool hog_device_cpu;
 
 namespace cv
@@ -243,7 +246,11 @@ void cv::ocl::HOGDescriptor::init_buffer(const oclMat &img, Size win_stride)
     gauss_w_lut.upload(gaussian_lut);
 }
 
+<<<<<<< HEAD
 void cv::ocl::HOGDescriptor::computeGradient(const oclMat &img, oclMat &grad, oclMat &qangle)
+=======
+void cv::ocl::HOGDescriptor::computeGradient(const oclMat &img, oclMat &lgrad, oclMat &lqangle)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     CV_Assert(img.type() == CV_8UC1 || img.type() == CV_8UC4);
 
@@ -252,11 +259,19 @@ void cv::ocl::HOGDescriptor::computeGradient(const oclMat &img, oclMat &grad, oc
     {
     case CV_8UC1:
         hog::compute_gradients_8UC1(effect_size.height, effect_size.width, img,
+<<<<<<< HEAD
             angleScale, grad, qangle, gamma_correction);
         break;
     case CV_8UC4:
         hog::compute_gradients_8UC4(effect_size.height, effect_size.width, img,
             angleScale, grad, qangle, gamma_correction);
+=======
+            angleScale, lgrad, lqangle, gamma_correction);
+        break;
+    case CV_8UC4:
+        hog::compute_gradients_8UC4(effect_size.height, effect_size.width, img,
+            angleScale, lgrad, lqangle, gamma_correction);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         break;
     }
 }
@@ -1647,7 +1662,11 @@ void cv::ocl::device::hog::compute_hists(int nbins,
     int qangle_step = qangle.step >> qangle_step_shift;
 
     int blocks_in_group = 4;
+<<<<<<< HEAD
     size_t localThreads[3] = { blocks_in_group * 24, 2, 1 };
+=======
+    size_t localThreads[3] = { (size_t)blocks_in_group * 24, 2, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     size_t globalThreads[3] = {
         divUp(img_block_width * img_block_height, blocks_in_group) * localThreads[0], 2, 1 };
 
@@ -1792,8 +1811,13 @@ void cv::ocl::device::hog::classify_hists(int win_height, int win_width,
     int img_block_width = (width - CELLS_PER_BLOCK_X * CELL_WIDTH + block_stride_x) /
         block_stride_x;
 
+<<<<<<< HEAD
     size_t globalThreads[3] = { img_win_width * nthreads, img_win_height, 1 };
     size_t localThreads[3] = { nthreads, 1, 1 };
+=======
+    size_t globalThreads[3] = { (size_t)img_win_width * nthreads, (size_t)img_win_height, 1 };
+    size_t localThreads[3] = { (size_t)nthreads, 1, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     args.push_back( make_pair( sizeof(cl_int), (void *)&cblock_hist_size));
     args.push_back( make_pair( sizeof(cl_int), (void *)&img_win_width));
     args.push_back( make_pair( sizeof(cl_int), (void *)&img_block_width));
@@ -1838,7 +1862,11 @@ void cv::ocl::device::hog::extract_descrs_by_rows(int win_height, int win_width,
         block_stride_x;
     int descriptors_quadstep = descriptors.step >> 2;
 
+<<<<<<< HEAD
     size_t globalThreads[3] = { img_win_width * NTHREADS, img_win_height, 1 };
+=======
+    size_t globalThreads[3] = { (size_t)img_win_width * NTHREADS, (size_t)img_win_height, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     size_t localThreads[3] = { NTHREADS, 1, 1 };
 
     args.push_back( make_pair( sizeof(cl_int), (void *)&cblock_hist_size));
@@ -1874,7 +1902,11 @@ void cv::ocl::device::hog::extract_descrs_by_cols(int win_height, int win_width,
         block_stride_x;
     int descriptors_quadstep = descriptors.step >> 2;
 
+<<<<<<< HEAD
     size_t globalThreads[3] = { img_win_width * NTHREADS, img_win_height, 1 };
+=======
+    size_t globalThreads[3] = { (size_t)img_win_width * NTHREADS, (size_t)img_win_height, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     size_t localThreads[3] = { NTHREADS, 1, 1 };
 
     args.push_back( make_pair( sizeof(cl_int), (void *)&cblock_hist_size));
@@ -1904,7 +1936,11 @@ void cv::ocl::device::hog::compute_gradients_8UC1(int height, int width,
     vector< pair<size_t, const void *> > args;
 
     size_t localThreads[3] = { NTHREADS, 1, 1 };
+<<<<<<< HEAD
     size_t globalThreads[3] = { width, height, 1 };
+=======
+    size_t globalThreads[3] = { (size_t)width, (size_t)height, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     char correctGamma = (correct_gamma) ? 1 : 0;
     int img_step = img.step;
     int grad_quadstep = grad.step >> 3;
@@ -1938,7 +1974,11 @@ void cv::ocl::device::hog::compute_gradients_8UC4(int height, int width,
     vector< pair<size_t, const void *> > args;
 
     size_t localThreads[3] = { NTHREADS, 1, 1 };
+<<<<<<< HEAD
     size_t globalThreads[3] = { width, height, 1 };
+=======
+    size_t globalThreads[3] = { (size_t)width, (size_t)height, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     char correctGamma = (correct_gamma) ? 1 : 0;
     int img_step = img.step >> 2;

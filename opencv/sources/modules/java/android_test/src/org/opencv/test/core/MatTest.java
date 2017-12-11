@@ -488,13 +488,21 @@ public class MatTest extends OpenCVTestCase {
     public void testIsContinuous() {
         assertTrue(gray0.isContinuous());
 
+<<<<<<< HEAD
         Mat subMat = gray0.submat(0, 0, gray0.rows() / 2, gray0.cols() / 2);
+=======
+        Mat subMat = gray0.submat(0, gray0.rows() / 2, 0, gray0.cols() / 2);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         assertFalse(subMat.isContinuous());
     }
 
     public void testIsSubmatrix() {
         assertFalse(gray0.isSubmatrix());
+<<<<<<< HEAD
         Mat subMat = gray0.submat(0, 0, gray0.rows() / 2, gray0.cols() / 2);
+=======
+        Mat subMat = gray0.submat(0, gray0.rows() / 2, 0, gray0.cols() / 2);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         assertTrue(subMat.isSubmatrix());
     }
 

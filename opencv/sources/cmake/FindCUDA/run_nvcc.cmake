@@ -62,7 +62,11 @@ set(cmake_dependency_file "@cmake_dependency_file@") # path
 set(CUDA_make2cmake "@CUDA_make2cmake@") # path
 set(CUDA_parse_cubin "@CUDA_parse_cubin@") # path
 set(build_cubin @build_cubin@) # bool
+<<<<<<< HEAD
 set(CUDA_HOST_COMPILER "@CUDA_HOST_COMPILER@") # bool
+=======
+set(CUDA_HOST_COMPILER "@CUDA_HOST_COMPILER@") # path
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 # We won't actually use these variables for now, but we need to set this, in
 # order to force this file to be run again if it changes.
 set(generated_file_path "@generated_file_path@") # path
@@ -106,7 +110,11 @@ list(APPEND CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS_${build_configuration}})
 # Any -ccbin existing in CUDA_NVCC_FLAGS gets highest priority
 list( FIND CUDA_NVCC_FLAGS "-ccbin" ccbin_found0 )
 list( FIND CUDA_NVCC_FLAGS "--compiler-bindir" ccbin_found1 )
+<<<<<<< HEAD
 if( ccbin_found0 LESS 0 AND ccbin_found1 LESS 0 )
+=======
+if( ccbin_found0 LESS 0 AND ccbin_found1 LESS 0 AND CUDA_HOST_COMPILER )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   if (CUDA_HOST_COMPILER STREQUAL "$(VCInstallDir)bin" AND DEFINED CCBIN)
     set(CCBIN -ccbin "${CCBIN}")
   else()
@@ -126,7 +134,11 @@ endif()
 # and other return variables are present after executing the process.
 macro(cuda_execute_process status command)
   set(_command ${command})
+<<<<<<< HEAD
   if(NOT _command STREQUAL "COMMAND")
+=======
+  if(NOT "x${_command}" STREQUAL "xCOMMAND")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     message(FATAL_ERROR "Malformed call to cuda_execute_process.  Missing COMMAND as second argument. (command = ${command})")
   endif()
   if(verbose)

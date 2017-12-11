@@ -22,7 +22,11 @@ Theory
 Code
 ====
 
+<<<<<<< HEAD
 This tutorial code's is shown lines below. You can also download it from `here <http://code.opencv.org/projects/opencv/repository/revisions/master/raw/samples/cpp/tutorial_code/features2D/SURF_detector.cpp>`_
+=======
+This tutorial code's is shown lines below. You can also download it from `here <https://github.com/opencv/opencv/blob/2.4/samples/cpp/tutorial_code/features2D/SURF_detector.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. code-block:: cpp
 

@@ -907,10 +907,17 @@ b = b > 255 ? 255 : b
 uyv2bgr(const unsigned char *src, unsigned char *dest,
         unsigned long long int NumPixels)
 {
+<<<<<<< HEAD
     register int i = NumPixels + (NumPixels << 1) - 1;
     register int j = NumPixels + (NumPixels << 1) - 1;
     register int y, u, v;
     register int r, g, b;
+=======
+    int i = NumPixels + (NumPixels << 1) - 1;
+    int j = NumPixels + (NumPixels << 1) - 1;
+    int y, u, v;
+    int r, g, b;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     while (i > 0) {
         v = src[i--] - 128;
@@ -927,10 +934,17 @@ uyv2bgr(const unsigned char *src, unsigned char *dest,
 uyvy2bgr(const unsigned char *src, unsigned char *dest,
         unsigned long long int NumPixels)
 {
+<<<<<<< HEAD
     register int i = (NumPixels << 1) - 1;
     register int j = NumPixels + (NumPixels << 1) - 1;
     register int y0, y1, u, v;
     register int r, g, b;
+=======
+    int i = (NumPixels << 1) - 1;
+    int j = NumPixels + (NumPixels << 1) - 1;
+    int y0, y1, u, v;
+    int r, g, b;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     while (i > 0) {
         y1 = src[i--];
@@ -953,10 +967,17 @@ uyvy2bgr(const unsigned char *src, unsigned char *dest,
 uyyvyy2bgr(const unsigned char *src, unsigned char *dest,
         unsigned long long int NumPixels)
 {
+<<<<<<< HEAD
     register int i = NumPixels + (NumPixels >> 1) - 1;
     register int j = NumPixels + (NumPixels << 1) - 1;
     register int y0, y1, y2, y3, u, v;
     register int r, g, b;
+=======
+    int i = NumPixels + (NumPixels >> 1) - 1;
+    int j = NumPixels + (NumPixels << 1) - 1;
+    int y0, y1, y2, y3, u, v;
+    int r, g, b;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     while (i > 0) {
         y3 = src[i--];
@@ -988,9 +1009,15 @@ uyyvyy2bgr(const unsigned char *src, unsigned char *dest,
 y2bgr(const unsigned char *src, unsigned char *dest,
         unsigned long long int NumPixels)
 {
+<<<<<<< HEAD
     register int i = NumPixels - 1;
     register int j = NumPixels + (NumPixels << 1) - 1;
     register int y;
+=======
+    int i = NumPixels - 1;
+    int j = NumPixels + (NumPixels << 1) - 1;
+    int y;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     while (i > 0) {
         y = src[i--];
@@ -1004,9 +1031,15 @@ y2bgr(const unsigned char *src, unsigned char *dest,
 y162bgr(const unsigned char *src, unsigned char *dest,
         unsigned long long int NumPixels, int bits)
 {
+<<<<<<< HEAD
     register int i = (NumPixels << 1) - 1;
     register int j = NumPixels + (NumPixels << 1) - 1;
     register int y;
+=======
+    int i = (NumPixels << 1) - 1;
+    int j = NumPixels + (NumPixels << 1) - 1;
+    int y;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     while (i > 0) {
         y = src[i--];
@@ -1022,9 +1055,15 @@ y162bgr(const unsigned char *src, unsigned char *dest,
 rgb482bgr(const unsigned char *src, unsigned char *dest,
         unsigned long long int NumPixels, int bits)
 {
+<<<<<<< HEAD
     register int i = (NumPixels << 1) - 1;
     register int j = NumPixels + (NumPixels << 1) - 1;
     register int y;
+=======
+    int i = (NumPixels << 1) - 1;
+    int j = NumPixels + (NumPixels << 1) - 1;
+    int y;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     while (i > 0) {
         y = src[i--];

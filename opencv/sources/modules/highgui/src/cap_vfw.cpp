@@ -318,7 +318,11 @@ public:
     virtual bool open( int index );
     virtual void close();
     virtual double getProperty(int);
+<<<<<<< HEAD
     virtual bool setProperty(int, double) { return false; }
+=======
+    virtual bool setProperty(int, double);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     virtual bool grabFrame();
     virtual IplImage* retrieveFrame(int);
     virtual int getCaptureDomain() { return CV_CAP_VFW; } // Return the type of the capture object: CV_CAP_VFW, etc...
@@ -332,6 +336,11 @@ protected:
     HWND   capWnd;
     VIDEOHDR* hdr;
     DWORD  fourcc;
+<<<<<<< HEAD
+=======
+    int width, height;
+    int widthSet, heightSet;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     HIC    hic;
     IplImage* frame;
 };
@@ -345,6 +354,11 @@ void CvCaptureCAM_VFW::init()
     fourcc = 0;
     hic = 0;
     frame = 0;
+<<<<<<< HEAD
+=======
+    width = height = -1;
+    widthSet = heightSet = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 void CvCaptureCAM_VFW::closeHIC()
@@ -407,16 +421,54 @@ bool CvCaptureCAM_VFW::open( int wIndex )
 
         memset( &caps, 0, sizeof(caps));
         capDriverGetCaps( hWndC, &caps, sizeof(caps));
+<<<<<<< HEAD
         ::MoveWindow( hWndC, 0, 0, 320, 240, TRUE );
+=======
+        CAPSTATUS status = {};
+        capGetStatus(hWndC, &status, sizeof(status));
+        ::SetWindowPos(hWndC, NULL, 0, 0, status.uiImageWidth, status.uiImageHeight, SWP_NOZORDER|SWP_NOMOVE);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         capSetUserData( hWndC, (size_t)this );
         capSetCallbackOnFrame( hWndC, frameCallback );
         CAPTUREPARMS p;
         capCaptureGetSetup(hWndC,&p,sizeof(CAPTUREPARMS));
+<<<<<<< HEAD
         p.dwRequestMicroSecPerFrame = 66667/2;
+=======
+        p.dwRequestMicroSecPerFrame = 66667/2; // 30 FPS
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         capCaptureSetSetup(hWndC,&p,sizeof(CAPTUREPARMS));
         //capPreview( hWndC, 1 );
         capPreviewScale(hWndC,FALSE);
         capPreviewRate(hWndC,1);
+<<<<<<< HEAD
+=======
+
+        // Get frame initial parameters.
+        const DWORD size = capGetVideoFormatSize(capWnd);
+        if( size > 0 )
+        {
+            unsigned char *pbi = new unsigned char[size];
+            if( pbi )
+            {
+                if( capGetVideoFormat(capWnd, pbi, size) == size )
+                {
+                    BITMAPINFOHEADER& vfmt = ((BITMAPINFO*)pbi)->bmiHeader;
+                    widthSet = vfmt.biWidth;
+                    heightSet = vfmt.biHeight;
+                    fourcc = vfmt.biCompression;
+                }
+                delete []pbi;
+            }
+        }
+        // And alternative way in case of failure.
+        if( widthSet == 0 || heightSet == 0 )
+        {
+            widthSet = status.uiImageWidth;
+            heightSet = status.uiImageHeight;
+        }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     return capWnd != 0;
 }
@@ -439,10 +491,15 @@ void CvCaptureCAM_VFW::close()
 bool CvCaptureCAM_VFW::grabFrame()
 {
     if( capWnd )
+<<<<<<< HEAD
     {
         SendMessage( capWnd, WM_CAP_GRAB_FRAME_NOSTOP, 0, 0 );
         return true;
     }
+=======
+        return capGrabFrameNoStop(capWnd) == TRUE;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return false;
 }
 
@@ -452,14 +509,23 @@ IplImage* CvCaptureCAM_VFW::retrieveFrame(int)
     BITMAPINFO vfmt;
     memset( &vfmt, 0, sizeof(vfmt));
     BITMAPINFOHEADER& vfmt0 = vfmt.bmiHeader;
+<<<<<<< HEAD
     int sz, prevWidth, prevHeight;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     if( !capWnd )
         return 0;
 
+<<<<<<< HEAD
     sz = capGetVideoFormat( capWnd, &vfmt, sizeof(vfmt));
     prevWidth = frame ? frame->width : 0;
     prevHeight = frame ? frame->height : 0;
+=======
+    const DWORD sz = capGetVideoFormat( capWnd, &vfmt, sizeof(vfmt));
+    const int prevWidth = frame ? frame->width : 0;
+    const int prevHeight = frame ? frame->height : 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     if( !hdr || hdr->lpData == 0 || sz == 0 )
         return 0;
@@ -470,8 +536,13 @@ IplImage* CvCaptureCAM_VFW::retrieveFrame(int)
         frame = cvCreateImage( cvSize( vfmt0.biWidth, vfmt0.biHeight ), 8, 3 );
     }
 
+<<<<<<< HEAD
     if( vfmt.bmiHeader.biCompression != BI_RGB ||
         vfmt.bmiHeader.biBitCount != 24 )
+=======
+    if( vfmt0.biCompression != BI_RGB ||
+        vfmt0.biBitCount != 24 )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
         BITMAPINFOHEADER vfmt1 = icvBitmapHeader( vfmt0.biWidth, vfmt0.biHeight, 24 );
 
@@ -518,15 +589,117 @@ double CvCaptureCAM_VFW::getProperty( int property_id )
     switch( property_id )
     {
     case CV_CAP_PROP_FRAME_WIDTH:
+<<<<<<< HEAD
         return frame ? frame->width : 0;
     case CV_CAP_PROP_FRAME_HEIGHT:
         return frame ? frame->height : 0;
     case CV_CAP_PROP_FOURCC:
         return fourcc;
+=======
+        return widthSet;
+    case CV_CAP_PROP_FRAME_HEIGHT:
+        return heightSet;
+    case CV_CAP_PROP_FOURCC:
+        return fourcc;
+    case CV_CAP_PROP_FPS:
+        {
+            CAPTUREPARMS params = {};
+            if( capCaptureGetSetup(capWnd, &params, sizeof(params)) )
+                return 1e6 / params.dwRequestMicroSecPerFrame;
+        }
+        break;
+    default:
+        break;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     return 0;
 }
 
+<<<<<<< HEAD
+=======
+bool CvCaptureCAM_VFW::setProperty(int property_id, double value)
+{
+    bool handledSize = false;
+
+    switch( property_id )
+    {
+    case CV_CAP_PROP_FRAME_WIDTH:
+        width = cvRound(value);
+        handledSize = true;
+        break;
+    case CV_CAP_PROP_FRAME_HEIGHT:
+        height = cvRound(value);
+        handledSize = true;
+        break;
+    case CV_CAP_PROP_FOURCC:
+        break;
+    case CV_CAP_PROP_FPS:
+        if( value > 0 )
+        {
+            CAPTUREPARMS params;
+            if( capCaptureGetSetup(capWnd, &params, sizeof(params)) )
+            {
+                params.dwRequestMicroSecPerFrame = cvRound(1e6/value);
+                return capCaptureSetSetup(capWnd, &params, sizeof(params)) == TRUE;
+            }
+        }
+        break;
+    default:
+        break;
+    }
+
+    if ( handledSize )
+    {
+        // If both width and height are set then change frame size.
+        if( width > 0 && height > 0 )
+        {
+            const DWORD size = capGetVideoFormatSize(capWnd);
+            if( size == 0 )
+                return false;
+
+            unsigned char *pbi = new unsigned char[size];
+            if( !pbi )
+                return false;
+
+            if( capGetVideoFormat(capWnd, pbi, size) != size )
+            {
+                delete []pbi;
+                return false;
+            }
+
+            BITMAPINFOHEADER& vfmt = ((BITMAPINFO*)pbi)->bmiHeader;
+            bool success = true;
+            if( width != vfmt.biWidth || height != vfmt.biHeight )
+            {
+                // Change frame size.
+                vfmt.biWidth = width;
+                vfmt.biHeight = height;
+                vfmt.biSizeImage = height * ((width * vfmt.biBitCount + 31) / 32) * 4;
+                vfmt.biCompression = BI_RGB;
+                success = capSetVideoFormat(capWnd, pbi, size) == TRUE;
+            }
+            if( success )
+            {
+                // Adjust capture window size.
+                CAPSTATUS status = {};
+                capGetStatus(capWnd, &status, sizeof(status));
+                ::SetWindowPos(capWnd, NULL, 0, 0, status.uiImageWidth, status.uiImageHeight, SWP_NOZORDER|SWP_NOMOVE);
+                // Store frame size.
+                widthSet = width;
+                heightSet = height;
+            }
+            delete []pbi;
+            width = height = -1;
+
+            return success;
+        }
+
+        return true;
+    }
+
+    return false;
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 CvCapture* cvCreateCameraCapture_VFW( int index )
 {

@@ -308,7 +308,11 @@ SearchParams::SearchParams( int checks, float eps, bool sorted )
 
 
 template<typename Distance, typename IndexType> void
+<<<<<<< HEAD
 buildIndex_(void*& index, const Mat& data, const IndexParams& params, const Distance& dist = Distance())
+=======
+buildIndex_(void*& index, const Mat& wholedata, const Mat& data, const IndexParams& params, const Distance& dist = Distance())
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     typedef typename Distance::ElementType ElementType;
     if(DataType<ElementType>::type != data.type())
@@ -317,6 +321,7 @@ buildIndex_(void*& index, const Mat& data, const IndexParams& params, const Dist
         CV_Error(CV_StsBadArg, "Only continuous arrays are supported");
 
     ::cvflann::Matrix<ElementType> dataset((ElementType*)data.data, data.rows, data.cols);
+<<<<<<< HEAD
     IndexType* _index = new IndexType(dataset, get_params(params), dist);
     _index->buildIndex();
     index = _index;
@@ -326,6 +331,29 @@ template<typename Distance> void
 buildIndex(void*& index, const Mat& data, const IndexParams& params, const Distance& dist = Distance())
 {
     buildIndex_<Distance, ::cvflann::Index<Distance> >(index, data, params, dist);
+=======
+
+    // currently, additional index support is the lsh algorithm only.
+    if( !index || getParam<flann_algorithm_t>(params, "algorithm", FLANN_INDEX_LINEAR) != FLANN_INDEX_LSH)
+    {
+        Ptr<IndexType> _index = makePtr<IndexType>(dataset, get_params(params), dist);
+        _index->buildIndex();
+        index = _index;
+        // HACK to prevent object destruction
+        _index.obj = NULL;
+    }
+    else // build additional lsh index
+    {
+        ::cvflann::Matrix<ElementType> wholedataset((ElementType*)wholedata.data, wholedata.rows, wholedata.cols);
+        ((IndexType*)index)->addIndex(wholedataset, dataset);
+    }
+}
+
+template<typename Distance> void
+buildIndex(void*& index, const Mat& wholedata, const Mat& data, const IndexParams& params, const Distance& dist = Distance())
+{
+    buildIndex_<Distance, ::cvflann::Index<Distance> >(index, wholedata, data, params, dist);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 #if CV_NEON
@@ -348,6 +376,7 @@ Index::Index(InputArray _data, const IndexParams& params, flann_distance_t _dist
     featureType = CV_32F;
     algo = FLANN_INDEX_LINEAR;
     distType = FLANN_DIST_L2;
+<<<<<<< HEAD
     build(_data, params, _distType);
 }
 
@@ -356,13 +385,34 @@ void Index::build(InputArray _data, const IndexParams& params, flann_distance_t 
     release();
     algo = getParam<flann_algorithm_t>(params, "algorithm", FLANN_INDEX_LINEAR);
     if( algo == FLANN_INDEX_SAVED )
+=======
+    build(_data, _data, params, _distType);
+}
+
+void Index::build(InputArray _wholedata, InputArray _data, const IndexParams& params, flann_distance_t _distType)
+{
+    algo = getParam<flann_algorithm_t>(params, "algorithm", FLANN_INDEX_LINEAR);
+
+    if (algo != FLANN_INDEX_LSH)    // do not release if algo == FLANN_INDEX_LSH
+    {
+        release();
+    }
+    if (algo == FLANN_INDEX_SAVED)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
         load(_data, getParam<std::string>(params, "filename", std::string()));
         return;
     }
 
     Mat data = _data.getMat();
+<<<<<<< HEAD
     index = 0;
+=======
+    if (algo != FLANN_INDEX_LSH)    // do not clear if algo == FLANN_INDEX_LSH
+    {
+        index = 0;
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     featureType = data.type();
     distType = _distType;
 
@@ -374,6 +424,7 @@ void Index::build(InputArray _data, const IndexParams& params, flann_distance_t 
     switch( distType )
     {
     case FLANN_DIST_HAMMING:
+<<<<<<< HEAD
         buildIndex< HammingDistance >(index, data, params);
         break;
     case FLANN_DIST_L2:
@@ -397,6 +448,31 @@ void Index::build(InputArray _data, const IndexParams& params, flann_distance_t 
         break;
     case FLANN_DIST_KL:
         buildIndex< ::cvflann::KL_Divergence<float> >(index, data, params);
+=======
+        buildIndex< HammingDistance >(index, _wholedata.getMat(), data, params);
+        break;
+    case FLANN_DIST_L2:
+        buildIndex< ::cvflann::L2<float> >(index, _wholedata.getMat(), data, params);
+        break;
+    case FLANN_DIST_L1:
+        buildIndex< ::cvflann::L1<float> >(index, _wholedata.getMat(), data, params);
+        break;
+#if MINIFLANN_SUPPORT_EXOTIC_DISTANCE_TYPES
+    case FLANN_DIST_MAX:
+        buildIndex< ::cvflann::MaxDistance<float> >(index, _wholedata.getMat(), data, params);
+        break;
+    case FLANN_DIST_HIST_INTERSECT:
+        buildIndex< ::cvflann::HistIntersectionDistance<float> >(index, _wholedata.getMat(), data, params);
+        break;
+    case FLANN_DIST_HELLINGER:
+        buildIndex< ::cvflann::HellingerDistance<float> >(index, _wholedata.getMat(), data, params);
+        break;
+    case FLANN_DIST_CHI_SQUARE:
+        buildIndex< ::cvflann::ChiSquareDistance<float> >(index, _wholedata.getMat(), data, params);
+        break;
+    case FLANN_DIST_KL:
+        buildIndex< ::cvflann::KL_Divergence<float> >(index, _wholedata.getMat(), data, params);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         break;
 #endif
     default:

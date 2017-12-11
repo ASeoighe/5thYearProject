@@ -1346,7 +1346,11 @@ Copies the matrix to another one.
 
     :param m: Destination matrix. If it does not have a proper size or type before the operation, it is reallocated.
 
+<<<<<<< HEAD
     :param mask: Operation mask. Its non-zero elements indicate which matrix elements need to be copied.
+=======
+    :param mask: Operation mask. Its non-zero elements indicate which matrix elements need to be copied. Keep in mind that the mask needs to be of type CV_8U and can have 1 or multiple channels.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 The method copies the matrix data to another matrix. Before copying the data, the method invokes ::
 
@@ -2246,7 +2250,11 @@ n-ary multi-dimensional array iterator. ::
 
 
 Use the class to implement unary, binary, and, generally, n-ary element-wise operations on multi-dimensional arrays. Some of the arguments of an n-ary function may be continuous arrays, some may be not. It is possible to use conventional
+<<<<<<< HEAD
 ``MatIterator`` 's for each array but incrementing all of the iterators after each small operations may be a big overhead. In this case consider using ``NAryMatIterator`` to iterate through several matrices simultaneously as long as they have the same geometry (dimensionality and all the dimension sizes are the same). On each iteration ``it.planes[0]``, ``it.planes[1]`` , ... will be the slices of the corresponding matrices.
+=======
+``MatIterator`` 's for each array but incrementing all of the iterators after each small operations may be a big overhead. In this case consider using ``NAryMatIterator`` to iterate through several matrices simultaneously as long as they have the same geometry (dimensionality and all the dimension sizes are the same). It iterates through the slices (or planes), not the elements, where "slice" is a continuous part of the arrays. On each iteration ``it.planes[0]``, ``it.planes[1]`` , ... will be the slices of the corresponding matrices.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 The example below illustrates how you can compute a normalized and threshold 3D color histogram: ::
 
@@ -2272,6 +2280,7 @@ The example below illustrates how you can compute a normalized and threshold 3D 
         }
 
         minProb *= image.rows*image.cols;
+<<<<<<< HEAD
         Mat plane;
         NAryMatIterator it(&hist, &plane, 1);
         double s = 0;
@@ -2287,6 +2296,31 @@ The example below illustrates how you can compute a normalized and threshold 3D 
         it = NAryMatIterator(&hist, &plane, 1);
         for(int p = 0; p < it.nplanes; p++, ++it)
             it.planes[0] *= s;
+=======
+
+        // intialize iterator (the style is different from STL).
+        // after initialization the iterator will contain
+        // the number of slices or planes the iterator will go through.
+        // it simultaneously increments iterators for several matrices
+        // supplied as a null terminated list of pointers
+        const Mat* arrays[] = {&hist, 0};
+        Mat planes[1];
+        NAryMatIterator itNAry(arrays, planes, 1);
+        double s = 0;
+        // iterate through the matrix. on each iteration
+        // itNAry.planes[i] (of type Mat) will be set to the current plane
+        // of the i-th n-dim matrix passed to the iterator constructor.
+        for(int p = 0; p < itNAry.nplanes; p++, ++itNAry)
+        {
+            threshold(itNAry.planes[0], itNAry.planes[0], minProb, 0, THRESH_TOZERO);
+            s += sum(itNAry.planes[0])[0];
+        }
+
+        s = 1./s;
+        itNAry = NAryMatIterator(arrays, planes, 1);
+        for(int p = 0; p < itNAry.nplanes; p++, ++itNAry)
+            itNAry.planes[0] *= s;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
 
@@ -2890,5 +2924,9 @@ The above methods are usually enough for users. If you want to make your own alg
  * Make a class and specify ``Algorithm`` as its base class.
  * The algorithm parameters should be the class members. See ``Algorithm::get()`` for the list of possible types of the parameters.
  * Add public virtual method ``AlgorithmInfo* info() const;`` to your class.
+<<<<<<< HEAD
  * Add constructor function, ``AlgorithmInfo`` instance and implement the ``info()`` method. The simplest way is to take https://github.com/Itseez/opencv/tree/master/modules/ml/src/ml_init.cpp as the reference and modify it according to the list of your parameters.
+=======
+ * Add constructor function, ``AlgorithmInfo`` instance and implement the ``info()`` method. The simplest way is to take https://github.com/opencv/opencv/tree/master/modules/ml/src/ml_init.cpp as the reference and modify it according to the list of your parameters.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  * Add some public function (e.g. ``initModule_<mymodule>()``) that calls info() of your algorithm and put it into the same source file as ``info()`` implementation. This is to force C++ linker to include this object file into the target application. See ``Algorithm::create()`` for details.

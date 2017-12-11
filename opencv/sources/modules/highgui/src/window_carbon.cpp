@@ -146,6 +146,10 @@ CV_IMPL int cvInitSystem( int argc, char** argv )
         }
         wasInitialized = 1;
     }
+<<<<<<< HEAD
+=======
+    setlocale(LC_NUMERIC,"C");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     return 0;
 }

@@ -19,7 +19,11 @@ Theory
 Code
 ====
 
+<<<<<<< HEAD
 This tutorial code's is shown lines below. You can also download it from `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/ShapeDescriptors/findContours_demo.cpp>`_
+=======
+This tutorial code's is shown lines below. You can also download it from `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/ShapeDescriptors/findContours_demo.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. code-block:: cpp
 

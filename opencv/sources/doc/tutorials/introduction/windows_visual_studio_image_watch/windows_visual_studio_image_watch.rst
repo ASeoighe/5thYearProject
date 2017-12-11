@@ -78,6 +78,11 @@ Make sure your active solution configuration (:menuselection:`Build --> Configur
 
 Build your solution (:menuselection:`Build --> Build Solution`, or press *F7*).
 
+<<<<<<< HEAD
+=======
+Before continuing, do not forget to add the command line argument of your input image to your project (:menuselection:`Right click on project --> Properties --> Configuration Properties --> Debugging` and then set the field ``Command Arguments`` with the location of the image).
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Now set a breakpoint on the source line that says
 
 .. code-block:: c++

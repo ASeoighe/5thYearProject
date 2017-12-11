@@ -235,7 +235,11 @@ void cv::viz::vtkCloudMatSource::filterNanColorsCopy(const Mat& cloud_colors, co
     scalars->SetName("Colors");
     scalars->SetNumberOfComponents(3);
     scalars->SetNumberOfTuples(total);
+<<<<<<< HEAD
     scalars->SetArray(array->val, total * 3, 0);
+=======
+    scalars->SetArray(array->val, total * 3, 0, vtkUnsignedCharArray::VTK_DATA_ARRAY_DELETE);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 template<typename _Tn, typename _Msk>

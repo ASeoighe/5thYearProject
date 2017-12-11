@@ -46,6 +46,7 @@
 #ifndef SKIP_INCLUDES
   #include <string.h>
   #include <limits.h>
+<<<<<<< HEAD
 #endif // SKIP_INCLUDES
 
 
@@ -57,6 +58,19 @@
 #elif defined __GNUC__
 
   #if defined __clang__ && __clang_major__ >= 3 && !defined __ANDROID__ && !defined __EMSCRIPTEN__
+=======
+  #include <stddef.h>
+#endif // SKIP_INCLUDES
+
+#ifdef __cplusplus
+
+/////// exchange-add operation for atomic operations on reference counters ///////
+#ifdef CV_XADD
+  // allow to use user-defined macro
+#elif defined __GNUC__
+
+  #if defined __clang__ && __clang_major__ >= 3 && !defined __ANDROID__ && !defined __EMSCRIPTEN__  && !defined(__CUDACC__)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     #ifdef __ATOMIC_SEQ_CST
         #define CV_XADD(addr, delta) __c11_atomic_fetch_add((_Atomic(int)*)(addr), (delta), __ATOMIC_SEQ_CST)
     #else
@@ -66,7 +80,11 @@
 
     #if !(defined WIN32 || defined _WIN32) && (defined __i486__ || defined __i586__ || \
         defined __i686__ || defined __MMX__ || defined __SSE__  || defined __ppc__) || \
+<<<<<<< HEAD
         (defined __GNUC__ && defined _STLPORT_MAJOR) || \
+=======
+        defined _STLPORT_MAJOR || defined _LIBCPP_VERSION || \
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         defined __EMSCRIPTEN__
 
       #define CV_XADD __sync_fetch_and_add
@@ -365,7 +383,11 @@ template<typename _Tp, int m, int n> inline double Matx<_Tp, m, n>::ddot(const M
 }
 
 
+<<<<<<< HEAD
 
+=======
+/** @cond IGNORED */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 template<typename _Tp, int m, int n> inline
 Matx<_Tp,m,n> Matx<_Tp,m,n>::diag(const typename Matx<_Tp,m,n>::diag_type& d)
 {
@@ -374,6 +396,10 @@ Matx<_Tp,m,n> Matx<_Tp,m,n>::diag(const typename Matx<_Tp,m,n>::diag_type& d)
         M(i,i) = d(i, 0);
     return M;
 }
+<<<<<<< HEAD
+=======
+/** @endcond */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 template<typename _Tp, int m, int n> inline
 Matx<_Tp,m,n> Matx<_Tp,m,n>::randu(_Tp a, _Tp b)
@@ -2557,10 +2583,17 @@ template<typename _Tp, size_t fixed_size> inline void AutoBuffer<_Tp, fixed_size
     if(_size <= size)
         return;
     deallocate();
+<<<<<<< HEAD
     if(_size > fixed_size)
     {
         ptr = cv::allocate<_Tp>(_size);
         size = _size;
+=======
+    size = _size;
+    if(_size > fixed_size)
+    {
+        ptr = cv::allocate<_Tp>(_size);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }
 
@@ -2625,12 +2658,24 @@ template<typename _Tp> inline Ptr<_Tp>::Ptr(const Ptr<_Tp>& _ptr)
 
 template<typename _Tp> inline Ptr<_Tp>& Ptr<_Tp>::operator = (const Ptr<_Tp>& _ptr)
 {
+<<<<<<< HEAD
     int* _refcount = _ptr.refcount;
     if( _refcount )
         CV_XADD(_refcount, 1);
     release();
     obj = _ptr.obj;
     refcount = _refcount;
+=======
+    if (this != &_ptr)
+    {
+      int* _refcount = _ptr.refcount;
+      if( _refcount )
+          CV_XADD(_refcount, 1);
+      release();
+      obj = _ptr.obj;
+      refcount = _refcount;
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return *this;
 }
 
@@ -2693,6 +2738,75 @@ template<typename _Tp> template<typename _Tp2> inline const Ptr<_Tp2> Ptr<_Tp>::
     return p;
 }
 
+<<<<<<< HEAD
+=======
+template<typename T>
+Ptr<T> makePtr()
+{
+    return Ptr<T>(new T());
+}
+
+template<typename T, typename A1>
+Ptr<T> makePtr(const A1& a1)
+{
+    return Ptr<T>(new T(a1));
+}
+
+template<typename T, typename A1, typename A2>
+Ptr<T> makePtr(const A1& a1, const A2& a2)
+{
+    return Ptr<T>(new T(a1, a2));
+}
+
+template<typename T, typename A1, typename A2, typename A3>
+Ptr<T> makePtr(const A1& a1, const A2& a2, const A3& a3)
+{
+    return Ptr<T>(new T(a1, a2, a3));
+}
+
+template<typename T, typename A1, typename A2, typename A3, typename A4>
+Ptr<T> makePtr(const A1& a1, const A2& a2, const A3& a3, const A4& a4)
+{
+    return Ptr<T>(new T(a1, a2, a3, a4));
+}
+
+template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5>
+Ptr<T> makePtr(const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5)
+{
+    return Ptr<T>(new T(a1, a2, a3, a4, a5));
+}
+
+template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
+Ptr<T> makePtr(const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6)
+{
+    return Ptr<T>(new T(a1, a2, a3, a4, a5, a6));
+}
+
+template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7>
+Ptr<T> makePtr(const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7)
+{
+    return Ptr<T>(new T(a1, a2, a3, a4, a5, a6, a7));
+}
+
+template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8>
+Ptr<T> makePtr(const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8)
+{
+    return Ptr<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8));
+}
+
+template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
+Ptr<T> makePtr(const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8, const A9& a9)
+{
+    return Ptr<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9));
+}
+
+template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10>
+Ptr<T> makePtr(const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8, const A9& a9, const A10& a10)
+{
+    return Ptr<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 //// specializied implementations of Ptr::delete_obj() for classic OpenCV types
 
 template<> CV_EXPORTS void Ptr<CvMat>::delete_obj();
@@ -3747,8 +3861,20 @@ template<typename _Tp> inline ptrdiff_t operator - (const SeqIterator<_Tp>& a,
                                                     const SeqIterator<_Tp>& b)
 {
     ptrdiff_t delta = a.index - b.index, n = a.seq->total;
+<<<<<<< HEAD
     if( std::abs(static_cast<long>(delta)) > n )
         delta += delta < 0 ? n : -n;
+=======
+#if defined(__QNX__)
+    // No long std::abs(long) in QNX
+    long absdelta = (delta < 0) ? -delta : delta;
+    if( absdelta > n )
+#else
+    if( std::abs(static_cast<long>(delta)) > n )
+#endif
+        delta += delta < 0 ? n : -n;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return delta;
 }
 

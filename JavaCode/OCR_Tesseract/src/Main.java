@@ -8,9 +8,13 @@ import net.sourceforge.tess4j.*;
 
 public class Main {
 	public static void main(String[] args) {
+
 		//String imgDir = "C:\\Users\\Aaron Scally Seoighe\\Google Drive\\Jswing.png";
 		//String imgDir = "C:\\Users\\Aaron Scally Seoighe\\Documents\\Code\\5thYrProject\\JavaCode\\OCR_Tesseract\\images\\eurotext.png";
 		String imgDir = "C:\\Users\\Aaron\\Documents\\GitHub\\5thYearProject\\testImages\\PlateImages\\21.png";
+
+		//String imgDir = "C:\\Users\\Aaron Scally Seoighe\\Documents\\Code\\5thYrProject\\JavaCode\\OCR_Tesseract\\images\\eurotext.png";
+		//String imgDir = "C:\\Users\\Aaron Scally Seoighe\\Documents\\Code\\5thYrProject\\testImages\\PlateImages\\plate.png";
 		File imageFile = new File (imgDir);
 		ITesseract instance = new Tesseract();
 		
@@ -29,7 +33,10 @@ public static void writeToFile(String input) {
     try {
 	 
        //Specify the file name and path here
+
 	 File file = new File("C:\\Users\\Aaron\\Documents\\GitHub\\5thYearProject\\testImages\\OutputFiles\\outPut.txt");
+
+	 File file = new File("C:\\Users\\Aaron Scally Seoighe\\Documents\\Code\\5thYrProject\\testImages\\OutputFiles\\outPut.txt");
 
 	 /* This logic will make sure that the file 
 	  * gets created if it is not present at the

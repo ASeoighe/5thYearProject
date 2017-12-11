@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 set(OpenCV_VERSION 2.4.9)
+=======
+set(OpenCV_VERSION 2.4.13.3)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 set(PACKAGE_VERSION ${OpenCV_VERSION})
 
 set(PACKAGE_VERSION_EXACT False)

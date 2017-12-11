@@ -15,7 +15,11 @@ if __name__ == "__main__":
             im = cv.LoadImageM(fileName, False)
             im3 = cv.LoadImageM(fileName, True)
        except: # if local copy cannot be opened, try downloading it
+<<<<<<< HEAD
             url = 'https://raw.github.com/Itseez/opencv/master/samples/cpp/left01.jpg'
+=======
+            url = 'https://raw.github.com/opencv/opencv/master/samples/cpp/left01.jpg'
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             filedata = urllib2.urlopen(url).read()
             imagefiledata = cv.CreateMatHeader(1, len(filedata), cv.CV_8UC1)
             cv.SetData(imagefiledata, filedata, len(filedata))

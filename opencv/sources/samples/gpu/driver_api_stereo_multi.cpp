@@ -8,11 +8,15 @@
 #endif
 
 #include <iostream>
+<<<<<<< HEAD
 #include "cvconfig.h"
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/gpu/gpu.hpp"
 
+<<<<<<< HEAD
 #if !defined(HAVE_CUDA) || !defined(HAVE_TBB) || defined(__arm__)
 
 int main()
@@ -32,6 +36,14 @@ int main()
     return 0;
 }
 
+=======
+#if defined(__arm__)
+int main()
+{
+    std::cout << "Unsupported for ARM CUDA library." << std::endl;
+    return 0;
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #else
 
 #include <cuda.h>
@@ -42,7 +54,10 @@ using namespace std;
 using namespace cv;
 using namespace cv::gpu;
 
+<<<<<<< HEAD
 struct Worker { void operator()(int device_id) const; };
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 void destroyContexts();
 
 #define safeCall(expr) safeCall_(expr, #expr, __FILE__, __LINE__)
@@ -77,6 +92,30 @@ GpuMat d_right[2];
 StereoBM_GPU* bm[2];
 GpuMat d_result[2];
 
+<<<<<<< HEAD
+=======
+
+struct Worker: public ParallelLoopBody
+{
+    virtual void operator() (const Range& range) const
+    {
+        for (int device_id = range.start; device_id != range.end; ++device_id)
+        {
+            contextOn(device_id);
+
+            bm[device_id]->operator()(d_left[device_id], d_right[device_id],
+                                      d_result[device_id]);
+
+            std::cout << "GPU #" << device_id << " (" << DeviceInfo().name()
+            << "): finished\n";
+
+            contextOff();
+
+        }
+    }
+};
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 static void printHelp()
 {
     std::cout << "Usage: driver_api_stereo_multi_gpu --left <left_image> --right <right_image>\n";
@@ -162,8 +201,12 @@ int main(int argc, char** argv)
     contextOff();
 
     // Execute calculation in two threads using two GPUs
+<<<<<<< HEAD
     int devices[] = {0, 1};
     parallel_do(devices, devices + 2, Worker());
+=======
+    parallel_for_(cv::Range(0, 2), Worker());
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     // Release the first GPU resources
     contextOn(0);
@@ -188,6 +231,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
+<<<<<<< HEAD
 
 void Worker::operator()(int device_id) const
 {
@@ -203,6 +247,8 @@ void Worker::operator()(int device_id) const
 }
 
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 void destroyContexts()
 {
     safeCall(cuCtxDestroy(contexts[0]));

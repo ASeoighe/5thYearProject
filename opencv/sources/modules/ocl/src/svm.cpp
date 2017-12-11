@@ -443,8 +443,13 @@ static void matmul_sigmod(oclMat & src, oclMat & src2, oclMat & dst, int src_row
     int dst_step = (int)dst.step / dst.elemSize();
     int x = MIN(16, src_rows);
     int y = MIN(16, src2_cols);
+<<<<<<< HEAD
     size_t localThreads[] = {x, y, 1};
     size_t globalThreads[] = {src2_cols, src_rows, 1};
+=======
+    size_t localThreads[] = {(size_t)x, (size_t)y, 1};
+    size_t globalThreads[] = {(size_t)src2_cols, (size_t)src_rows, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int width = var_count;
 
     vector< pair<size_t, const void *> > args;
@@ -483,8 +488,13 @@ static void matmul_poly(oclMat & src, oclMat & src2, oclMat & dst, int src_rows,
     int dst_step = (int)dst.step / dst.elemSize();
     int x = MIN(16, src_rows);
     int y = MIN(16, src2_cols);
+<<<<<<< HEAD
     size_t localThreads[] = {x, y, 1};
     size_t globalThreads[] = {src2_cols, src_rows, 1};
+=======
+    size_t localThreads[] = {(size_t)x, (size_t)y, 1};
+    size_t globalThreads[] = {(size_t)src2_cols, (size_t)src_rows, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int width = var_count;
 
     char build_options[50];
@@ -532,8 +542,13 @@ static void matmul_linear(oclMat & src, oclMat & src2, oclMat & dst, int src_row
     int dst_step = (int)dst.step / dst.elemSize();
     int x = MIN(16, src_rows);
     int y = MIN(16, src2_cols);
+<<<<<<< HEAD
     size_t localThreads[] = {x, y, 1};
     size_t globalThreads[] = {src2_cols, src_rows, 1};
+=======
+    size_t localThreads[] = {(size_t)x, (size_t)y, 1};
+    size_t globalThreads[] = {(size_t)src2_cols, (size_t)src_rows, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int width = var_count;
 
     vector< pair<size_t, const void *> > args;
@@ -579,8 +594,13 @@ static void matmul_rbf(oclMat& src, oclMat& src_e, oclMat& dst, int src_rows, in
 
     int x = MIN(16, src_rows);
     int y = MIN(16, src2_cols);
+<<<<<<< HEAD
     size_t localThreads[] = {x, y, 1};
     size_t globalThreads[] = {src2_cols,  src_rows, 1};
+=======
+    size_t localThreads[] = {(size_t)x, (size_t)y, 1};
+    size_t globalThreads[] = {(size_t)src2_cols,  (size_t)src_rows, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     char build_options[50];
 
     if(flag)
@@ -788,11 +808,19 @@ bool CvSVMSolver_ocl::solve_generic( CvSVMSolutionInfo& si )
     }
     Mat src1 = Mat(sample_count, var_count, CV_32FC1);
 
+<<<<<<< HEAD
     for(int i = 0; i < sample_count; ++i)
     {
         for(int j = 0; j < var_count; ++j)
         {
             src1.at<float>(i, j) = samples[i][j];
+=======
+    for(int i2 = 0; i2 < sample_count; ++i2)
+    {
+        for(int j2 = 0; j2 < var_count; ++j2)
+        {
+            src1.at<float>(i2, j2) = samples[i2][j2];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
     }
     oclMat src, src_e;

@@ -1107,7 +1107,11 @@ CV_INLINE  CvSetElem* cvSetNew( CvSet* set_header )
         set_header->active_count++;
     }
     else
+<<<<<<< HEAD
         cvSetAdd( set_header, NULL, (CvSetElem**)&elem );
+=======
+        cvSetAdd( set_header, NULL, &elem );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return elem;
 }
 
@@ -1706,6 +1710,10 @@ CVAPI(double) cvGetTickFrequency( void );
 #define CV_CPU_SSE4_2  7
 #define CV_CPU_POPCNT  8
 #define CV_CPU_AVX    10
+<<<<<<< HEAD
+=======
+#define CV_CPU_AVX2   11
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #define CV_HARDWARE_MAX_FEATURE 255
 
 CVAPI(int) cvCheckHardwareSupport(int feature);

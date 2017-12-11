@@ -22,6 +22,11 @@ source_group("Src\\Cuda"      FILES ${lib_cuda} ${lib_cuda_hdrs})
 source_group("Device"         FILES ${lib_device_hdrs})
 source_group("Device\\Detail" FILES ${lib_device_hdrs_detail})
 
+<<<<<<< HEAD
+=======
+ocv_warnings_disable(CMAKE_CXX_FLAGS -Wunused-private-field)
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 if(HAVE_CUDA)
   file(GLOB_RECURSE ncv_srcs "src/nvidia/*.cpp" "src/nvidia/*.h*")
   file(GLOB_RECURSE ncv_cuda "src/nvidia/*.cu")
@@ -29,7 +34,11 @@ if(HAVE_CUDA)
 
   source_group("Src\\NVidia" FILES ${ncv_files})
   ocv_include_directories("src/nvidia" "src/nvidia/core" "src/nvidia/NPP_staging" ${CUDA_INCLUDE_DIRS})
+<<<<<<< HEAD
   ocv_warnings_disable(CMAKE_CXX_FLAGS -Wundef -Wmissing-declarations -Wshadow -Wunused-parameter /wd4211 /wd4201 /wd4100 /wd4505 /wd4408)
+=======
+  ocv_warnings_disable(CMAKE_CXX_FLAGS -Wundef -Wmissing-declarations -Wshadow -Wunused-parameter -Wstrict-aliasing /wd4211 /wd4201 /wd4100 /wd4505 /wd4408)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   if(MSVC)
     if(NOT ENABLE_NOISY_WARNINGS)
@@ -54,11 +63,22 @@ if(HAVE_CUDA)
   endif()
 
   if(WITH_NVCUVID)
+<<<<<<< HEAD
     set(cuda_link_libs ${cuda_link_libs} ${CUDA_CUDA_LIBRARY} ${CUDA_nvcuvid_LIBRARY})
 
     if(WIN32)
       find_cuda_helper_libs(nvcuvenc)
       set(cuda_link_libs ${cuda_link_libs} ${CUDA_nvcuvenc_LIBRARY})
+=======
+    if(HAVE_NVCUVID)
+      set(cuda_link_libs ${cuda_link_libs} ${CUDA_CUDA_LIBRARY} ${CUDA_nvcuvid_LIBRARY})
+    endif()
+
+    if(WIN32)
+      if(HAVE_NVCUVENC)
+        set(cuda_link_libs ${cuda_link_libs} ${CUDA_nvcuvenc_LIBRARY})
+      endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     endif()
 
     if(WITH_FFMPEG)

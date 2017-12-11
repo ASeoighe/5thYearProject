@@ -142,12 +142,21 @@ PARAM_TEST_CASE(SVM_OCL, int, int, int)
         kernel_type = GET_PARAM(0);
         svm_type = GET_PARAM(1);
         K = GET_PARAM(2);
+<<<<<<< HEAD
         cv::Size size = cv::Size(MWIDTH, MHEIGHT);
         src.create(size, CV_32FC1);
         labels.create(1, size.height, CV_32SC1);
         int row_idx = 0;
         const int max_number = size.height / K - 1;
         CV_Assert(K <= size.height);
+=======
+        cv::Size sz = cv::Size(MWIDTH, MHEIGHT);
+        src.create(sz, CV_32FC1);
+        labels.create(1, sz.height, CV_32SC1);
+        int row_idx = 0;
+        const int max_number = sz.height / K - 1;
+        CV_Assert(K <= sz.height);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         for(int i = 0; i < K; i++ )
         {
             Mat center_row_header = src.row(row_idx);
@@ -159,7 +168,11 @@ PARAM_TEST_CASE(SVM_OCL, int, int, int)
             }
             labels.at<int>(0, row_idx) = i;
             for(int j = 0; (j < max_number) ||
+<<<<<<< HEAD
                     (i == K - 1 && j < max_number + size.height % K); j ++)
+=======
+                    (i == K - 1 && j < max_number + sz.height % K); j ++)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             {
                 Mat cur_row_header = src.row(row_idx + 1 + j);
                 center_row_header.copyTo(cur_row_header);

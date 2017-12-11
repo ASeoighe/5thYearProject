@@ -462,6 +462,10 @@ namespace sum
     }
 
     template void run<uchar, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void run<uchar, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void run<uchar, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void run<uchar, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
@@ -485,8 +489,15 @@ namespace sum
     template void run<int, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void run<int, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void run<int, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
 
     template void run<float, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+=======
+#endif
+
+    template void run<float, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void run<float, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void run<float, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void run<float, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
@@ -495,6 +506,10 @@ namespace sum
     template void run<double, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void run<double, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void run<double, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     template <typename T, int cn>
     void runAbs(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask)
@@ -504,6 +519,10 @@ namespace sum
     }
 
     template void runAbs<uchar, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void runAbs<uchar, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runAbs<uchar, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runAbs<uchar, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
@@ -527,8 +546,15 @@ namespace sum
     template void runAbs<int, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runAbs<int, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runAbs<int, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
 
     template void runAbs<float, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+=======
+#endif
+
+    template void runAbs<float, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void runAbs<float, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runAbs<float, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runAbs<float, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
@@ -537,6 +563,10 @@ namespace sum
     template void runAbs<double, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runAbs<double, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runAbs<double, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     template <typename T> struct Sqr : unary_function<T, T>
     {
@@ -553,6 +583,10 @@ namespace sum
     }
 
     template void runSqr<uchar, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void runSqr<uchar, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runSqr<uchar, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runSqr<uchar, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
@@ -576,8 +610,15 @@ namespace sum
     template void runSqr<int, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runSqr<int, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runSqr<int, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
 
     template void runSqr<float, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+=======
+#endif
+
+    template void runSqr<float, 1>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void runSqr<float, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runSqr<float, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runSqr<float, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
@@ -586,6 +627,10 @@ namespace sum
     template void runSqr<double, 2>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runSqr<double, 3>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
     template void runSqr<double, 4>(PtrStepSzb src, void* buf, double* out, PtrStepSzb mask);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 /////////////////////////////////////////////////////////////
@@ -773,12 +818,24 @@ namespace minMax
     }
 
     template void run<uchar >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void run<schar >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
     template void run<ushort>(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
     template void run<short >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
     template void run<int   >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
+<<<<<<< HEAD
     template void run<float >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
     template void run<double>(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
+=======
+#endif
+    template void run<float >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void run<double>(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, PtrStepb buf);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 /////////////////////////////////////////////////////////////
@@ -955,12 +1012,25 @@ namespace minMaxLoc
     }
 
     template void run<unsigned char >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+<<<<<<< HEAD
     template void run<signed char >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
     template void run<unsigned short>(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
     template void run<short >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
     template void run<int   >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
     template void run<float >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
     template void run<double>(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void run<signed char >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+    template void run<unsigned short>(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+    template void run<short >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+#endif
+    template void run<int   >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+    template void run<float >(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void run<double>(const PtrStepSzb src, const PtrStepb mask, double* minval, double* maxval, int* minloc, int* maxloc, PtrStepb valbuf, PtrStep<unsigned int> locbuf);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 /////////////////////////////////////////////////////////////
@@ -1079,12 +1149,24 @@ namespace countNonZero
     }
 
     template int run<uchar >(const PtrStepSzb src, PtrStep<unsigned int> buf);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template int run<schar >(const PtrStepSzb src, PtrStep<unsigned int> buf);
     template int run<ushort>(const PtrStepSzb src, PtrStep<unsigned int> buf);
     template int run<short >(const PtrStepSzb src, PtrStep<unsigned int> buf);
     template int run<int   >(const PtrStepSzb src, PtrStep<unsigned int> buf);
+<<<<<<< HEAD
     template int run<float >(const PtrStepSzb src, PtrStep<unsigned int> buf);
     template int run<double>(const PtrStepSzb src, PtrStep<unsigned int> buf);
+=======
+#endif
+    template int run<float >(const PtrStepSzb src, PtrStep<unsigned int> buf);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template int run<double>(const PtrStepSzb src, PtrStep<unsigned int> buf);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1257,6 +1339,14 @@ namespace reduce
         funcs[op]((PtrStepSz<T>) src, (D*) dst, stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    template void rows<unsigned char, int, unsigned char>(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
+    template void rows<unsigned char, float, float>(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
+    template void rows<float, float, float>(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void rows<unsigned char, int, unsigned char>(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
     template void rows<unsigned char, int, int>(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
     template void rows<unsigned char, float, float>(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
@@ -1280,6 +1370,10 @@ namespace reduce
     template void rows<float, double, double>(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
 
     template void rows<double, double, double>(PtrStepSzb src, void* dst, int op, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     ///////////////////////////////////////////////////////////
 
@@ -1338,6 +1432,14 @@ namespace reduce
         funcs[cn][op](src, dst, stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    template void cols<unsigned char, int, unsigned char>(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
+    template void cols<unsigned char, float, float>(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
+    template void cols<float, float, float>(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cols<unsigned char, int, unsigned char>(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
     template void cols<unsigned char, int, int>(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
     template void cols<unsigned char, float, float>(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
@@ -1361,6 +1463,10 @@ namespace reduce
     template void cols<float, double, double>(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
 
     template void cols<double, double, double>(PtrStepSzb src, void* dst, int cn, int op, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 #endif /* CUDA_DISABLER */

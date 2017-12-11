@@ -154,7 +154,11 @@ bool RFace::CheckElem(void * lpCandidat,void * lpIdeal)
     long x = Rect.x + cvRound(Rect.width/2);
     long y = Rect.y + cvRound(Rect.height/2);
 
+<<<<<<< HEAD
     if ( isPointInRect(cvPoint(x,y),IdealRect) )
+=======
+    if ( isPointInRect(cvPoint((int)x,(int)y),IdealRect) )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         return true;
 
 //  if ( isPointInRect(cvPoint(Rect.x,Rect.y),UpRect) &&
@@ -329,6 +333,7 @@ inline void RFace::ResizeRect(CvRect Rect,CvRect * lpRect,long lDir,long lD)
 {
     if (lDir == UP_SCALE)
     {
+<<<<<<< HEAD
         lpRect->x = Rect.x - lD;
         lpRect->y = Rect.y - lD;
         lpRect->width = Rect.width + 2*lD;
@@ -341,12 +346,30 @@ inline void RFace::ResizeRect(CvRect Rect,CvRect * lpRect,long lDir,long lD)
         if (Rect.width - 2*lD >= 0)
         {
             lpRect->width = Rect.width - 2*lD;
+=======
+        lpRect->x = Rect.x - (int)lD;
+        lpRect->y = Rect.y - (int)lD;
+        lpRect->width = Rect.width + (int)(2*lD);
+        lpRect->height = Rect.height + (int)(2*lD);
+    }
+    if (lDir == DOWN_SCALE)
+    {
+        lpRect->x = Rect.x + (int)lD;
+        lpRect->y = Rect.y + (int)lD;
+        if (Rect.width - 2*lD >= 0)
+        {
+            lpRect->width = Rect.width - (int)(2*lD);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }else
             lpRect->width = 0;
 
         if (Rect.height - 2*lD >= 0)
         {
+<<<<<<< HEAD
             lpRect->height = Rect.height - 2*lD;
+=======
+            lpRect->height = Rect.height - (int)(2*lD);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }else
             lpRect->height = 0;
     }

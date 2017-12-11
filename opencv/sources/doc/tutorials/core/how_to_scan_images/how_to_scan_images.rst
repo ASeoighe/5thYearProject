@@ -40,7 +40,11 @@ You can download the full source code :download:`here <../../../../samples/cpp/t
 
    how_to_scan_images imageName.jpg intValueToReduce [G]
 
+<<<<<<< HEAD
 The final argument is optional. If given the image will be loaded in gray scale format, otherwise the RGB color way is used. The first thing is to calculate the lookup table.
+=======
+The final argument is optional. If given the image will be loaded in gray scale format, otherwise the BGR color way is used. The first thing is to calculate the lookup table.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. literalinclude:: ../../../../samples/cpp/tutorial_code/core/how_to_scan_images/how_to_scan_images.cpp
    :language: cpp
@@ -76,7 +80,11 @@ As you could already read in my :ref:`matTheBasicImageContainer` tutorial the si
    Row n & \tabItG{n,0} & \tabItG{n,1} & \tabItG{n,...} & \tabItG{n, m} \\
    \end{tabular}
 
+<<<<<<< HEAD
 For multichannel images the columns contain as many sub columns as the number of channels. For example in case of an RGB color system:
+=======
+For multichannel images the columns contain as many sub columns as the number of channels. For example in case of an BGR color system:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. math::
 
@@ -89,7 +97,11 @@ For multichannel images the columns contain as many sub columns as the number of
    Row n & \tabIt{n,0} & \tabIt{n,1} & \tabIt{n,...} & \tabIt{n, m} \\
    \end{tabular}
 
+<<<<<<< HEAD
 Note that the order of the channels is inverse: BGR instead of RGB. Because in many cases the memory is large enough to store the rows in a successive fashion the rows may follow one after another, creating a single long row. Because everything is in a single place following one after another this may help to speed up the scanning process. We can use the :basicstructures:`isContinuous() <mat-iscontinuous>` function to *ask* the matrix if this is the case. Continue on to the next section to find an example.
+=======
+Because in many cases the memory is large enough to store the rows in a successive fashion the rows may follow one after another, creating a single long row. Because everything is in a single place following one after another this may help to speed up the scanning process. We can use the :basicstructures:`isContinuous() <mat-iscontinuous>` function to *ask* the matrix if this is the case. Continue on to the next section to find an example.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 The efficient way
 =================

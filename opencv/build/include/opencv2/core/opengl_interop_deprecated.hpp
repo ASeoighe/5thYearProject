@@ -167,7 +167,11 @@ class CV_EXPORTS GlArrays
 {
 public:
     inline GlArrays()
+<<<<<<< HEAD
         : vertex_(GlBuffer::ARRAY_BUFFER), color_(GlBuffer::ARRAY_BUFFER), bgra_(true), normal_(GlBuffer::ARRAY_BUFFER), texCoord_(GlBuffer::ARRAY_BUFFER)
+=======
+        : vertex_(GlBuffer::ARRAY_BUFFER), color_(GlBuffer::ARRAY_BUFFER), normal_(GlBuffer::ARRAY_BUFFER), texCoord_(GlBuffer::ARRAY_BUFFER)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
     }
 
@@ -194,7 +198,10 @@ public:
 private:
     GlBuffer vertex_;
     GlBuffer color_;
+<<<<<<< HEAD
     bool bgra_;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     GlBuffer normal_;
     GlBuffer texCoord_;
 };
@@ -287,6 +294,7 @@ public:
 
     void setupProjectionMatrix() const;
     void setupModelViewMatrix() const;
+<<<<<<< HEAD
 
 private:
     Point3d eye_;
@@ -316,6 +324,8 @@ private:
     double zFar_;
 
     bool perspectiveProjection_;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 };
 
 inline void GlBuffer::create(Size _size, int _type, Usage _usage) { create(_size.height, _size.width, _type, _usage); }

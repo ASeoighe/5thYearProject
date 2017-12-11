@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.opencv.engine"
+<<<<<<< HEAD
     android:versionCode="218@ANDROID_PLATFORM_VERSION_CODE@"
     android:versionName="2.18" >
+=======
+    android:versionCode="221@ANDROID_PLATFORM_VERSION_CODE@"
+    android:versionName="2.21" >
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     <uses-sdk android:minSdkVersion="@ANDROID_NATIVE_API_LEVEL@" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
@@ -27,4 +32,8 @@
         </intent-filter>
     </activity>
     </application>
+<<<<<<< HEAD
 </manifest>
+=======
+</manifest>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

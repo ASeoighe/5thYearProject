@@ -82,8 +82,11 @@
 #define OPENCV_GPU_UNUSED(x) (void)x
 
 #ifdef HAVE_CUDA
+<<<<<<< HEAD
 
     #include <cuda.h>
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     #include <cuda_runtime.h>
     #include <npp.h>
 
@@ -96,10 +99,20 @@
     #endif
 
     #ifdef HAVE_NVCUVID
+<<<<<<< HEAD
         #include <nvcuvid.h>
 
         #ifdef WIN32
             #include <NVEncoderAPI.h>
+=======
+        #include <cuda.h>
+        #include <nvcuvid.h>
+
+        #ifdef WIN32
+            #ifdef HAVE_NVCUVENC
+                #include <NVEncoderAPI.h>
+            #endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         #endif
     #endif
 

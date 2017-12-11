@@ -77,8 +77,13 @@ namespace cv { namespace gpu { namespace device
 
         if (dst_x < dst.cols && dst_y < dst.rows)
         {
+<<<<<<< HEAD
             const float src_x = dst_x * fx;
             const float src_y = dst_y * fy;
+=======
+            const float src_x = (dst_x + 0.5f) * fx - 0.5f;
+            const float src_y = (dst_y + 0.5f) * fy - 0.5f;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             work_type out = VecTraits<work_type>::all(0);
 
@@ -86,6 +91,7 @@ namespace cv { namespace gpu { namespace device
             const int y1 = __float2int_rd(src_y);
             const int x2 = x1 + 1;
             const int y2 = y1 + 1;
+<<<<<<< HEAD
             const int x2_read = ::min(x2, src.cols - 1);
             const int y2_read = ::min(y2, src.rows - 1);
 
@@ -96,6 +102,20 @@ namespace cv { namespace gpu { namespace device
             out = out + src_reg * ((src_x - x1) * (y2 - src_y));
 
             src_reg = src(y2_read, x1);
+=======
+            const int x1_read = ::max(::min(x1, src.cols - 1), 0);
+            const int y1_read = ::max(::min(y1, src.rows - 1), 0);
+            const int x2_read = ::max(::min(x2, src.cols - 1), 0);
+            const int y2_read = ::max(::min(y2, src.rows - 1), 0);
+
+            T src_reg = src(y1_read, x1_read);
+            out = out + src_reg * ((x2 - src_x) * (y2 - src_y));
+
+            src_reg = src(y1_read, x2_read);
+            out = out + src_reg * ((src_x - x1) * (y2 - src_y));
+
+            src_reg = src(y2_read, x1_read);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             out = out + src_reg * ((x2 - src_x) * (src_y - y1));
 
             src_reg = src(y2_read, x2_read);
@@ -119,6 +139,23 @@ namespace cv { namespace gpu { namespace device
         }
     }
 
+<<<<<<< HEAD
+=======
+    template <class Ptr2D, typename T> __global__ void resize_linear(const Ptr2D src, PtrStepSz<T> dst, const float fy, const float fx)
+    {
+        const int dst_x = blockDim.x * blockIdx.x + threadIdx.x;
+        const int dst_y = blockDim.y * blockIdx.y + threadIdx.y;
+
+        if (dst_x < dst.cols && dst_y < dst.rows)
+        {
+            const float src_x = (dst_x + 0.5f) * fx - 0.5f;
+            const float src_y = (dst_y + 0.5f) * fy - 0.5f;
+
+            dst(dst_y, dst_x) = src(src_y, src_x);
+        }
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template <typename Ptr2D, typename T> __global__ void resize_area(const Ptr2D src, PtrStepSz<T> dst)
     {
         const int x = blockDim.x * blockIdx.x + threadIdx.x;
@@ -213,7 +250,11 @@ namespace cv { namespace gpu { namespace device
         const dim3 block(32, 8);
         const dim3 grid(divUp(dst.cols, block.x), divUp(dst.rows, block.y));
 
+<<<<<<< HEAD
         resize_linear<<<grid, block>>>(src, dst, fy, fx);
+=======
+        resize_linear<<<grid, block, 0, stream>>>(src, dst, fy, fx);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cudaSafeCall( cudaGetLastError() );
 
         if (stream == 0)
@@ -231,7 +272,11 @@ namespace cv { namespace gpu { namespace device
             TextureAccessor<T> texSrc = texAccessor(src, 0, 0);
             LinearFilter< TextureAccessor<T> > filteredSrc(texSrc);
 
+<<<<<<< HEAD
             resize<<<grid, block>>>(filteredSrc, dst, fy, fx);
+=======
+            resize_linear<<<grid, block>>>(filteredSrc, dst, fy, fx);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
         else
         {
@@ -241,7 +286,11 @@ namespace cv { namespace gpu { namespace device
             BorderReader<TextureAccessor<T>, BrdReplicate<T> > brdSrc(texSrc, brd);
             LinearFilter< BorderReader<TextureAccessor<T>, BrdReplicate<T> > > filteredSrc(brdSrc);
 
+<<<<<<< HEAD
             resize<<<grid, block>>>(filteredSrc, dst, fy, fx);
+=======
+            resize_linear<<<grid, block>>>(filteredSrc, dst, fy, fx);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         cudaSafeCall( cudaGetLastError() );
@@ -326,11 +375,19 @@ namespace cv { namespace gpu { namespace device
     template <> struct ResizeNearestDispatcher<uchar> : SelectImplForNearest<uchar> {};
     template <> struct ResizeNearestDispatcher<uchar4> : SelectImplForNearest<uchar4> {};
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template <> struct ResizeNearestDispatcher<ushort> : SelectImplForNearest<ushort> {};
     template <> struct ResizeNearestDispatcher<ushort4> : SelectImplForNearest<ushort4> {};
 
     template <> struct ResizeNearestDispatcher<short> : SelectImplForNearest<short> {};
     template <> struct ResizeNearestDispatcher<short4> : SelectImplForNearest<short4> {};
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     template <> struct ResizeNearestDispatcher<float> : SelectImplForNearest<float> {};
     template <> struct ResizeNearestDispatcher<float4> : SelectImplForNearest<float4> {};
@@ -364,11 +421,19 @@ namespace cv { namespace gpu { namespace device
     template <> struct ResizeLinearDispatcher<uchar> : SelectImplForLinear<uchar> {};
     template <> struct ResizeLinearDispatcher<uchar4> : SelectImplForLinear<uchar4> {};
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template <> struct ResizeLinearDispatcher<ushort> : SelectImplForLinear<ushort> {};
     template <> struct ResizeLinearDispatcher<ushort4> : SelectImplForLinear<ushort4> {};
 
     template <> struct ResizeLinearDispatcher<short> : SelectImplForLinear<short> {};
     template <> struct ResizeLinearDispatcher<short4> : SelectImplForLinear<short4> {};
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     template <> struct ResizeLinearDispatcher<float> : SelectImplForLinear<float> {};
     template <> struct ResizeLinearDispatcher<float4> : SelectImplForLinear<float4> {};
@@ -394,6 +459,10 @@ namespace cv { namespace gpu { namespace device
         }
     };
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template <> struct ResizeCubicDispatcher<uchar> : SelectImplForCubic<uchar> {};
     template <> struct ResizeCubicDispatcher<uchar4> : SelectImplForCubic<uchar4> {};
 
@@ -405,6 +474,10 @@ namespace cv { namespace gpu { namespace device
 
     template <> struct ResizeCubicDispatcher<float> : SelectImplForCubic<float> {};
     template <> struct ResizeCubicDispatcher<float4> : SelectImplForCubic<float4> {};
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     // ResizeAreaDispatcher
 
@@ -451,7 +524,15 @@ namespace cv { namespace gpu { namespace device
         {
             ResizeNearestDispatcher<T>::call,
             ResizeLinearDispatcher<T>::call,
+<<<<<<< HEAD
             ResizeCubicDispatcher<T>::call,
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+            0,
+#else
+            ResizeCubicDispatcher<T>::call,
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             ResizeAreaDispatcher<T>::call
         };
 
@@ -459,13 +540,25 @@ namespace cv { namespace gpu { namespace device
         if (interpolation == 3 && (fx <= 1.f || fy <= 1.f))
             interpolation = 1;
 
+<<<<<<< HEAD
         funcs[interpolation](static_cast< PtrStepSz<T> >(src), static_cast< PtrStepSz<T> >(srcWhole), yoff, xoff, static_cast< PtrStepSz<T> >(dst), fy, fx, stream);
+=======
+        const func_t func = funcs[interpolation];
+        if (!func)
+            cv::gpu::error("Unsupported input parameters for resize", __FILE__, __LINE__, "");
+
+        func(static_cast< PtrStepSz<T> >(src), static_cast< PtrStepSz<T> >(srcWhole), yoff, xoff, static_cast< PtrStepSz<T> >(dst), fy, fx, stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
     template void resize<uchar >(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
     template void resize<uchar3>(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
     template void resize<uchar4>(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void resize<ushort >(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
     template void resize<ushort3>(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
     template void resize<ushort4>(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
@@ -473,6 +566,10 @@ namespace cv { namespace gpu { namespace device
     template void resize<short >(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
     template void resize<short3>(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
     template void resize<short4>(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     template void resize<float >(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);
     template void resize<float3>(const PtrStepSzb& src, const PtrStepSzb& srcWhole, int yoff, int xoff, const PtrStepSzb& dst, float fy, float fx, int interpolation, cudaStream_t stream);

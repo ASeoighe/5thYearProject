@@ -43,11 +43,19 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
 
     public static class JavaCameraSizeAccessor implements ListItemAccessor {
 
+<<<<<<< HEAD
+=======
+        @Override
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         public int getWidth(Object obj) {
             Camera.Size size = (Camera.Size) obj;
             return size.width;
         }
 
+<<<<<<< HEAD
+=======
+        @Override
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         public int getHeight(Object obj) {
             Camera.Size size = (Camera.Size) obj;
             return size.height;
@@ -146,7 +154,11 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
                     Log.d(TAG, "Set preview size to " + Integer.valueOf((int)frameSize.width) + "x" + Integer.valueOf((int)frameSize.height));
                     params.setPreviewSize((int)frameSize.width, (int)frameSize.height);
 
+<<<<<<< HEAD
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+=======
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && !android.os.Build.MODEL.equals("GT-I9100"))
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                         params.setRecordingHint(true);
 
                     List<String> FocusModes = params.getSupportedFocusModes();
@@ -228,6 +240,11 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
         }
     }
 
+<<<<<<< HEAD
+=======
+    private boolean mCameraFrameReady = false;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     @Override
     protected boolean connectCamera(int width, int height) {
 
@@ -239,6 +256,11 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
         if (!initializeCamera(width, height))
             return false;
 
+<<<<<<< HEAD
+=======
+        mCameraFrameReady = false;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         /* now we can start update thread */
         Log.d(TAG, "Starting processing thread");
         mStopThread = false;
@@ -248,6 +270,10 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     protected void disconnectCamera() {
         /* 1. We need to stop thread which updating the frames
          * 2. Stop camera and release it
@@ -270,12 +296,25 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
 
         /* Now release camera */
         releaseCamera();
+<<<<<<< HEAD
     }
 
     public void onPreviewFrame(byte[] frame, Camera arg1) {
         Log.d(TAG, "Preview Frame received. Frame size: " + frame.length);
         synchronized (this) {
             mFrameChain[1 - mChainIdx].put(0, 0, frame);
+=======
+
+        mCameraFrameReady = false;
+    }
+
+    @Override
+    public void onPreviewFrame(byte[] frame, Camera arg1) {
+        Log.d(TAG, "Preview Frame received. Frame size: " + frame.length);
+        synchronized (this) {
+            mFrameChain[mChainIdx].put(0, 0, frame);
+            mCameraFrameReady = true;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             this.notify();
         }
         if (mCamera != null)
@@ -283,10 +322,18 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
     }
 
     private class JavaCameraFrame implements CvCameraViewFrame {
+<<<<<<< HEAD
+=======
+        @Override
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         public Mat gray() {
             return mYuvFrameData.submat(0, mHeight, 0, mWidth);
         }
 
+<<<<<<< HEAD
+=======
+        @Override
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         public Mat rgba() {
             Imgproc.cvtColor(mYuvFrameData, mRgba, Imgproc.COLOR_YUV2RGBA_NV21, 4);
             return mRgba;
@@ -312,6 +359,7 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
 
     private class CameraWorker implements Runnable {
 
+<<<<<<< HEAD
         public void run() {
             do {
                 synchronized (JavaCameraView.this) {
@@ -327,6 +375,31 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
                     if (!mFrameChain[mChainIdx].empty())
                         deliverAndDrawFrame(mCameraFrame[mChainIdx]);
                     mChainIdx = 1 - mChainIdx;
+=======
+        @Override
+        public void run() {
+            do {
+                boolean hasFrame = false;
+                synchronized (JavaCameraView.this) {
+                    try {
+                        while (!mCameraFrameReady && !mStopThread) {
+                            JavaCameraView.this.wait();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (mCameraFrameReady)
+                    {
+                        mChainIdx = 1 - mChainIdx;
+                        mCameraFrameReady = false;
+                        hasFrame = true;
+                    }
+                }
+
+                if (!mStopThread && hasFrame) {
+                    if (!mFrameChain[1 - mChainIdx].empty())
+                        deliverAndDrawFrame(mCameraFrame[1 - mChainIdx]);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 }
             } while (!mStopThread);
             Log.d(TAG, "Finish processing thread");

@@ -50,6 +50,16 @@
 #include <vtkObjectFactory.h>
 #include <vtkSmartPointer.h>
 
+<<<<<<< HEAD
+=======
+namespace cv { namespace viz {
+    vtkSmartPointer<vtkRenderWindowInteractor> vtkCocoaRenderWindowInteractorNew();
+}} // namespace
+
+#if ((VTK_MAJOR_VERSION < 6) || ((VTK_MAJOR_VERSION == 6) && (VTK_MINOR_VERSION < 2)))
+
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 //----------------------------------------------------------------------------
 @interface vtkCocoaServerFix : NSObject
 {
@@ -175,8 +185,11 @@ namespace cv { namespace viz
     };
 
     vtkStandardNewMacro (vtkCocoaRenderWindowInteractorFix)
+<<<<<<< HEAD
 
     vtkSmartPointer<vtkRenderWindowInteractor> vtkCocoaRenderWindowInteractorNew();
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }}
 
 void cv::viz::vtkCocoaRenderWindowInteractorFix::Start ()
@@ -209,3 +222,16 @@ vtkSmartPointer<vtkRenderWindowInteractor> cv::viz::vtkCocoaRenderWindowInteract
 {
     return vtkSmartPointer<vtkCocoaRenderWindowInteractorFix>::New();
 }
+<<<<<<< HEAD
+=======
+
+
+#else
+
+vtkSmartPointer<vtkRenderWindowInteractor> cv::viz::vtkCocoaRenderWindowInteractorNew()
+{
+    return vtkSmartPointer<vtkCocoaRenderWindowInteractor>::New();
+}
+
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

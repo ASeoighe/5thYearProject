@@ -11,7 +11,11 @@
 //                For Open Source Computer Vision Library
 // Copyright (C) 2010-2012, Multicoreware, Inc., all rights reserved.
 // Copyright (C) 2010-2012, Institute Of Software Chinese Academy Of Science, all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010,2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // @Authors
@@ -63,7 +67,11 @@
 ///////////////////////////////////////////////////////////////
 /////////////////common///////////////////////////////////////
 /////////////////////////////////////////////////////////////
+<<<<<<< HEAD
 inline T saturate_cast(float v){
+=======
+T saturate_cast(float v){
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef T_SHORT
     return convert_short_sat_rte(v);
 #else
@@ -71,7 +79,11 @@ inline T saturate_cast(float v){
 #endif
 }
 
+<<<<<<< HEAD
 inline T4 saturate_cast4(float4 v){
+=======
+T4 saturate_cast4(float4 v){
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef T_SHORT
     return convert_short4_sat_rte(v);
 #else
@@ -92,12 +104,20 @@ typedef struct
 ////////////////////////// comp data //////////////////////////
 ///////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 inline float pix_diff_1(const uchar4 l, __global const uchar *rs)
+=======
+float pix_diff_1(const uchar4 l, __global const uchar *rs)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return abs((int)(l.x) - *rs);
 }
 
+<<<<<<< HEAD
 inline float pix_diff_4(const uchar4 l, __global const uchar *rs)
+=======
+float pix_diff_4(const uchar4 l, __global const uchar *rs)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     uchar4 r;
     r = *((__global uchar4 *)rs);
@@ -115,7 +135,11 @@ inline float pix_diff_4(const uchar4 l, __global const uchar *rs)
     return val;
 }
 
+<<<<<<< HEAD
 inline float pix_diff_3(const uchar4 l, __global const uchar *rs)
+=======
+float pix_diff_3(const uchar4 l, __global const uchar *rs)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return pix_diff_4(l, rs);
 }
@@ -233,7 +257,11 @@ __kernel void level_up_message(__global T *src, int src_rows, int src_step,
 ///////////////////////////////////////////////////////////////
 ////////////////////  calc all iterations /////////////////////
 ///////////////////////////////////////////////////////////////
+<<<<<<< HEAD
 inline void message(__global T *us_, __global T *ds_, __global T *ls_, __global T *rs_,
+=======
+void message(__global T *us_, __global T *ds_, __global T *ls_, __global T *rs_,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
               const __global T *dt,
               int u_step, int msg_disp_step, int data_disp_step,
               float4 cmax_disc_term, float4 cdisc_single_jump)

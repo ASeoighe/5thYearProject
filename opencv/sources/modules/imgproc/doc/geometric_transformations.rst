@@ -256,6 +256,74 @@ The function computes an inverse affine transformation represented by
 The result is also a
 :math:`2 \times 3` matrix of the same type as ``M`` .
 
+<<<<<<< HEAD
+=======
+LinearPolar
+-----------
+Remaps an image to polar space.
+
+.. ocv:cfunction:: void cvLinearPolar( const CvArr* src, CvArr* dst, CvPoint2D32f center, double maxRadius, int flags=CV_INTER_LINEAR+CV_WARP_FILL_OUTLIERS )
+
+    :param src: Source image
+
+    :param dst: Destination image. It will have same size and type as src.
+
+    :param center: The transformation center;
+
+    :param maxRadius: The radius of the bounding circle to transform. It determines the inverse magnitude scale parameter too. See below
+
+    :param flags: A combination of interpolation methods and the following optional flags:
+
+            *  **CV_WARP_FILL_OUTLIERS** fills all of the destination image pixels. If some of them correspond to outliers in the source image, they are set to zero
+
+            *  **CV_WARP_INVERSE_MAP** See below
+
+The function ``cvLinearPolar`` transforms the source image using the following transformation:
+
+  *
+    Forward transformation (``CV_WARP_INVERSE_MAP`` is not set):
+
+        .. math::
+
+            dst( \rho , \phi ) = src(x,y)
+
+
+  *
+    Inverse transformation (``CV_WARP_INVERSE_MAP`` is set):
+
+        .. math::
+
+            dst(x,y) = src( \rho , \phi )
+
+
+where
+
+    .. math::
+
+        \begin{array}{l}
+        I = (dx,dy) = (x - center.x,y - center.y) \\
+        \rho = Kx \cdot \texttt{magnitude} (I) ,\\
+        \phi = Ky \cdot \texttt{angle} (I)_{0..360 deg}
+        \end{array}
+
+and
+
+    .. math::
+
+        \begin{array}{l}
+        Kx = src.cols / maxRadius \\
+        Ky = src.rows / 360
+        \end{array}
+
+.. note::
+
+   * The function can not operate in-place.
+
+   * To calculate magnitude and angle in degrees :ocv:func:`cvCartToPolar` is used internally thus angles are measured from 0 to 360 with accuracy about 0.3 degrees.
+
+   * An example using the LinearPolar operation can be found at opencv_source_code/samples/c/polar_transforms.c
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 
 LogPolar
@@ -268,11 +336,19 @@ Remaps an image to log-polar space.
 
     :param src: Source image
 
+<<<<<<< HEAD
     :param dst: Destination image
 
     :param center: The transformation center; where the output precision is maximal
 
     :param M: Magnitude scale parameter. See below
+=======
+    :param dst: Destination image. It will have same size and type as src.
+
+    :param center: The transformation center; where the output precision is maximal
+
+    :param M: Magnitude scale parameter. It determines the radius of the bounding circle to transform too. See below
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     :param flags: A combination of interpolation methods and the following optional flags:
 
@@ -287,7 +363,11 @@ The function ``cvLogPolar`` transforms the source image using the following tran
 
         .. math::
 
+<<<<<<< HEAD
             dst( \phi , \rho ) = src(x,y)
+=======
+            dst( \rho , \phi ) = src(x, y)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 
   *
@@ -295,13 +375,18 @@ The function ``cvLogPolar`` transforms the source image using the following tran
 
         .. math::
 
+<<<<<<< HEAD
             dst(x,y) = src( \phi , \rho )
+=======
+            dst(x,y) = src( \rho , \phi )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 
 where
 
     .. math::
 
+<<<<<<< HEAD
         \rho = M  \cdot \log{\sqrt{x^2 + y^2}} , \phi =atan(y/x)
 
 
@@ -309,6 +394,31 @@ The function emulates the human "foveal" vision and can be used for fast scale a
 
 .. note::
 
+=======
+        \begin{array}{l}
+        I = (dx,dy) = (x - center.x,y - center.y) \\
+        \rho = M \cdot log_e(\texttt{magnitude} (I)) ,\\
+        \phi = Ky \cdot \texttt{angle} (I)_{0..360 deg}
+        \end{array}
+
+and
+
+    .. math::
+
+        \begin{array}{l}
+        M = src.cols / log_e(maxRadius) \\
+        Ky = src.rows / 360
+        \end{array}
+
+The function emulates the human "foveal" vision and can be used for fast scale and rotation-invariant template matching, for object tracking and so forth.
+
+.. note::
+
+   * The function can not operate in-place.
+
+   * To calculate magnitude and angle in degrees :ocv:func:`cvCartToPolar` is used internally thus angles are measured from 0 to 360 with accuracy about 0.3 degrees.
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    * An example using the geometric logpolar operation in 4 applications can be found at opencv_source_code/samples/cpp/logpolar_bsm.cpp
 
 remap
@@ -670,7 +780,14 @@ Computes the ideal point coordinates from the observed point coordinates.
 
 .. ocv:function:: void undistortPoints( InputArray src, OutputArray dst, InputArray cameraMatrix, InputArray distCoeffs, InputArray R=noArray(), InputArray P=noArray())
 
+<<<<<<< HEAD
 .. ocv:cfunction:: void cvUndistortPoints( const CvMat* src, CvMat* dst, const CvMat* camera_matrix, const CvMat* dist_coeffs, const CvMat* R=0, const CvMat* P=0 )
+=======
+.. ocv:pyfunction:: cv2.undistortPoints(src, cameraMatrix, distCoeffs[, dst[, R[, P]]]) -> dst
+
+.. ocv:cfunction:: void cvUndistortPoints( const CvMat* src, CvMat* dst, const CvMat* camera_matrix, const CvMat* dist_coeffs, const CvMat* R=0, const CvMat* P=0 )
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 .. ocv:pyoldfunction:: cv.UndistortPoints(src, dst, cameraMatrix, distCoeffs, R=None, P=None)-> None
 
     :param src: Observed point coordinates, 1xN or Nx1 2-channel (CV_32FC2 or CV_64FC2).

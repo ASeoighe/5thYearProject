@@ -41,6 +41,10 @@ static bool         log_power_checkpoints;
 
 #include <sys/syscall.h>
 #include <pthread.h>
+<<<<<<< HEAD
+=======
+#include <cerrno>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 static void setCurrentThreadAffinityMask(int mask)
 {
     pid_t pid=gettid();

@@ -501,8 +501,13 @@ GPU_TEST_P(OpticalFlowBM, Accuracy)
     cv::Mat velx, vely;
     calcOpticalFlowBM(frame0, frame1, block_size, shift_size, max_range, false, velx, vely);
 
+<<<<<<< HEAD
     EXPECT_MAT_NEAR(velx, d_velx, 0);
     EXPECT_MAT_NEAR(vely, d_vely, 0);
+=======
+    EXPECT_MAT_NEAR(velx, d_velx, 1e-6);
+    EXPECT_MAT_NEAR(vely, d_vely, 1e-6);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 INSTANTIATE_TEST_CASE_P(GPU_Video, OpticalFlowBM, ALL_DEVICES);

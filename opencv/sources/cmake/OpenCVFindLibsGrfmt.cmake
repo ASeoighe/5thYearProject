@@ -8,7 +8,12 @@ if(BUILD_ZLIB)
 else()
   include(FindZLIB)
   if(ZLIB_FOUND AND ANDROID)
+<<<<<<< HEAD
     if(ZLIB_LIBRARY STREQUAL "${ANDROID_SYSROOT}/usr/lib/libz.so")
+=======
+    if(ZLIB_LIBRARIES STREQUAL "${ANDROID_SYSROOT}/usr/lib/libz.so" OR
+        ZLIB_LIBRARIES STREQUAL "${ANDROID_SYSROOT}/usr/lib64/libz.so")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       set(ZLIB_LIBRARY z)
       set(ZLIB_LIBRARIES z)
     endif()

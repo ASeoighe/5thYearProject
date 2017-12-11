@@ -451,9 +451,15 @@ JNIEXPORT void JNICALL Java_org_opencv_gpu_DeviceInfo_queryMemory_10
         size_t totalMemory;
         size_t freeMemory;
         me->queryMemory( totalMemory, freeMemory );
+<<<<<<< HEAD
         jdouble tmp_totalMemory[1] = {totalMemory};
         env->SetDoubleArrayRegion(totalMemory_out, 0, 1, tmp_totalMemory);
         jdouble tmp_freeMemory[1] = {freeMemory};
+=======
+        jdouble tmp_totalMemory[1] = {(jdouble)totalMemory};
+        env->SetDoubleArrayRegion(totalMemory_out, 0, 1, tmp_totalMemory);
+        jdouble tmp_freeMemory[1] = {(jdouble)freeMemory};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         env->SetDoubleArrayRegion(freeMemory_out, 0, 1, tmp_freeMemory);
         return;
     } catch(const std::exception &e) {

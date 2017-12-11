@@ -1,12 +1,20 @@
 
 /* pngstruct.h - header file for PNG reference library
  *
+<<<<<<< HEAD
  * Copyright (c) 1998-2012 Glenn Randers-Pehrson
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
  * Last changed in libpng 1.5.9 [February 18, 2012]
  *
+=======
+ * Last changed in libpng 1.5.23 [July 23, 2015]
+ * Copyright (c) 1998-2002,2004,2006-2015 Glenn Randers-Pehrson
+ * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
+ * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
+ *
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  * This code is released under the libpng license.
  * For conditions of distribution and use, see the disclaimer
  * and license in png.h
@@ -237,6 +245,7 @@ struct png_struct_def
    png_uint_16p hist;                /* histogram */
 #endif
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
    png_byte heuristic_method;        /* heuristic for row filter selection */
    png_byte num_prev_filters;        /* number of weights for previous rows */
@@ -247,6 +256,8 @@ struct png_struct_def
    png_uint_16p inv_filter_costs;    /* 1/relative filter calculation cost */
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef PNG_TIME_RFC1123_SUPPORTED
    /* This is going to be unused in libpng16 and removed from libpng17 */
    char time_buffer[29]; /* String to hold RFC 1123 time text */
@@ -352,7 +363,18 @@ struct png_struct_def
 /* New member added in libpng-1.5.6 */
    png_bytep big_prev_row;
 
+<<<<<<< HEAD
    void (*read_filter[PNG_FILTER_VALUE_LAST-1])(png_row_infop row_info,
       png_bytep row, png_const_bytep prev_row);
+=======
+/* New member added in libpng-1.5.7 */
+   void (*read_filter[PNG_FILTER_VALUE_LAST-1])(png_row_infop row_info,
+      png_bytep row, png_const_bytep prev_row);
+
+   /* Options */
+#ifdef PNG_SET_OPTION_SUPPORTED
+   png_byte options;           /* On/off state (up to 4 options) */
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 };
 #endif /* PNGSTRUCT_H */

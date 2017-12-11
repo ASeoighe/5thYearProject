@@ -34,6 +34,7 @@
 //  or tort (including negligence or otherwise) arising in any way out of
 //  the use of this software, even if advised of the possibility of such damage.
 
+<<<<<<< HEAD
 #include <iostream>
 #include <string>
 #include <vector>
@@ -43,6 +44,29 @@
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/nonfree/features2d.hpp>
 #include <opencv2/legacy/legacy.hpp>
+=======
+#include "opencv2/opencv_modules.hpp"
+#include <iostream>
+
+#ifndef HAVE_OPENCV_NONFREE
+
+int main(int, char**)
+{
+    std::cout << "The sample requires nonfree module that is not available in your OpenCV distribution." << std::endl;
+    return -1;
+}
+
+#else
+
+# include <string>
+# include <vector>
+
+# include <opencv2/core/core.hpp>
+# include <opencv2/highgui/highgui.hpp>
+# include <opencv2/features2d/features2d.hpp>
+# include <opencv2/nonfree/features2d.hpp>
+# include <opencv2/legacy/legacy.hpp>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace cv;
 
@@ -87,7 +111,11 @@ int main( int argc, char** argv ) {
 
     // DESCRIPTOR
     // Our proposed FREAK descriptor
+<<<<<<< HEAD
     // (roation invariance, scale invariance, pattern radius corresponding to SMALLEST_KP_SIZE,
+=======
+    // (rotation invariance, scale invariance, pattern radius corresponding to SMALLEST_KP_SIZE,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     // number of octaves, optional vector containing the selected pairs)
     // FREAK extractor(true, true, 22, 4, std::vector<int>());
     FREAK extractor;
@@ -126,3 +154,8 @@ int main( int argc, char** argv ) {
     imshow("matches", imgMatch);
     waitKey(0);
 }
+<<<<<<< HEAD
+=======
+
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

@@ -43,6 +43,12 @@
 #import "opencv2/highgui/cap_ios.h"
 #include "precomp.hpp"
 
+<<<<<<< HEAD
+=======
+UIImage* MatToUIImage(const cv::Mat& image);
+void UIImageToMat(const UIImage* image, cv::Mat& m, bool alphaExist);
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 UIImage* MatToUIImage(const cv::Mat& image) {
 
     NSData *data = [NSData dataWithBytes:image.data
@@ -113,5 +119,8 @@ void UIImageToMat(const UIImage* image,
     CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows),
                        image.CGImage);
     CGContextRelease(contextRef);
+<<<<<<< HEAD
     CGColorSpaceRelease(colorSpace);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }

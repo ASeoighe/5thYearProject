@@ -48,9 +48,30 @@ using namespace cvtest;
 
 //#define DUMP
 
+<<<<<<< HEAD
 struct HOG : testing::TestWithParam<cv::gpu::DeviceInfo>, cv::gpu::HOGDescriptor
 {
     cv::gpu::DeviceInfo devInfo;
+=======
+class HogForTest : public cv::gpu::HOGDescriptor
+{
+public:
+    cv::gpu::GpuMat getBlockHists() const
+    {
+        return block_hists;
+    }
+
+    void computeBlockHistograms(const cv::gpu::GpuMat& img)
+    {
+        cv::gpu::HOGDescriptor::computeBlockHistograms(img);
+    }
+};
+
+struct HOG : testing::TestWithParam<cv::gpu::DeviceInfo>
+{
+    cv::gpu::DeviceInfo devInfo;
+    cv::Ptr<HogForTest> hog;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #ifdef DUMP
     std::ofstream f;
@@ -69,6 +90,11 @@ struct HOG : testing::TestWithParam<cv::gpu::DeviceInfo>, cv::gpu::HOGDescriptor
         devInfo = GetParam();
 
         cv::gpu::setDevice(devInfo.deviceID());
+<<<<<<< HEAD
+=======
+
+        hog = new HogForTest;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
 #ifdef DUMP
@@ -126,39 +152,71 @@ struct HOG : testing::TestWithParam<cv::gpu::DeviceInfo>, cv::gpu::HOGDescriptor
 
     void testDetect(const cv::Mat& img)
     {
+<<<<<<< HEAD
         gamma_correction = false;
         setSVMDetector(cv::gpu::HOGDescriptor::getDefaultPeopleDetector());
+=======
+        hog->gamma_correction = false;
+        hog->setSVMDetector(cv::gpu::HOGDescriptor::getDefaultPeopleDetector());
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         std::vector<cv::Point> locations;
 
         // Test detect
+<<<<<<< HEAD
         detect(loadMat(img), locations, 0);
 
 #ifdef DUMP
         dump(cv::Mat(block_hists), locations);
 #else
         compare(cv::Mat(block_hists), locations);
+=======
+        hog->detect(loadMat(img), locations, 0);
+
+#ifdef DUMP
+        dump(cv::Mat(hog->getBlockHist()), locations);
+#else
+        compare(cv::Mat(hog->getBlockHists()), locations);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
         // Test detect on smaller image
         cv::Mat img2;
         cv::resize(img, img2, cv::Size(img.cols / 2, img.rows / 2));
+<<<<<<< HEAD
         detect(loadMat(img2), locations, 0);
 
 #ifdef DUMP
         dump(cv::Mat(block_hists), locations);
 #else
         compare(cv::Mat(block_hists), locations);
+=======
+        hog->detect(loadMat(img2), locations, 0);
+
+#ifdef DUMP
+        dump(cv::Mat(hog->getBlockHist()), locations);
+#else
+        compare(cv::Mat(hog->getBlockHists()), locations);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
         // Test detect on greater image
         cv::resize(img, img2, cv::Size(img.cols * 2, img.rows * 2));
+<<<<<<< HEAD
         detect(loadMat(img2), locations, 0);
 
 #ifdef DUMP
         dump(cv::Mat(block_hists), locations);
 #else
         compare(cv::Mat(block_hists), locations);
+=======
+        hog->detect(loadMat(img2), locations, 0);
+
+#ifdef DUMP
+        dump(cv::Mat(hog->getBlockHist()), locations);
+#else
+        compare(cv::Mat(hog->getBlockHists()), locations);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
     }
 
@@ -216,8 +274,13 @@ GPU_TEST_P(HOG, GetDescriptors)
 
     // Convert train images into feature vectors (train table)
     cv::gpu::GpuMat descriptors, descriptors_by_cols;
+<<<<<<< HEAD
     getDescriptors(d_img, win_size, descriptors, DESCR_FORMAT_ROW_BY_ROW);
     getDescriptors(d_img, win_size, descriptors_by_cols, DESCR_FORMAT_COL_BY_COL);
+=======
+    hog->getDescriptors(d_img, hog->win_size, descriptors, cv::gpu::HOGDescriptor::DESCR_FORMAT_ROW_BY_ROW);
+    hog->getDescriptors(d_img, hog->win_size, descriptors_by_cols, cv::gpu::HOGDescriptor::DESCR_FORMAT_COL_BY_COL);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     // Check size of the result train table
     wins_per_img_x = 3;
@@ -251,39 +314,70 @@ GPU_TEST_P(HOG, GetDescriptors)
     img_rgb = readImage("hog/positive1.png");
     ASSERT_TRUE(!img_rgb.empty());
     cv::cvtColor(img_rgb, img, CV_BGR2BGRA);
+<<<<<<< HEAD
     computeBlockHistograms(cv::gpu::GpuMat(img));
     // Everything is fine with interpolation for left top subimage
     ASSERT_EQ(0.0, cv::norm((cv::Mat)block_hists, (cv::Mat)descriptors.rowRange(0, 1)));
+=======
+    hog->computeBlockHistograms(cv::gpu::GpuMat(img));
+    // Everything is fine with interpolation for left top subimage
+    ASSERT_EQ(0.0, cv::norm(cv::Mat(hog->getBlockHists()), (cv::Mat)descriptors.rowRange(0, 1)));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     img_rgb = readImage("hog/positive2.png");
     ASSERT_TRUE(!img_rgb.empty());
     cv::cvtColor(img_rgb, img, CV_BGR2BGRA);
+<<<<<<< HEAD
     computeBlockHistograms(cv::gpu::GpuMat(img));
     compare_inner_parts(cv::Mat(block_hists), cv::Mat(descriptors.rowRange(1, 2)));
+=======
+    hog->computeBlockHistograms(cv::gpu::GpuMat(img));
+    compare_inner_parts(cv::Mat(hog->getBlockHists()), cv::Mat(descriptors.rowRange(1, 2)));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     img_rgb = readImage("hog/negative1.png");
     ASSERT_TRUE(!img_rgb.empty());
     cv::cvtColor(img_rgb, img, CV_BGR2BGRA);
+<<<<<<< HEAD
     computeBlockHistograms(cv::gpu::GpuMat(img));
     compare_inner_parts(cv::Mat(block_hists), cv::Mat(descriptors.rowRange(2, 3)));
+=======
+    hog->computeBlockHistograms(cv::gpu::GpuMat(img));
+    compare_inner_parts(cv::Mat(hog->getBlockHists()), cv::Mat(descriptors.rowRange(2, 3)));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     img_rgb = readImage("hog/negative2.png");
     ASSERT_TRUE(!img_rgb.empty());
     cv::cvtColor(img_rgb, img, CV_BGR2BGRA);
+<<<<<<< HEAD
     computeBlockHistograms(cv::gpu::GpuMat(img));
     compare_inner_parts(cv::Mat(block_hists), cv::Mat(descriptors.rowRange(3, 4)));
+=======
+    hog->computeBlockHistograms(cv::gpu::GpuMat(img));
+    compare_inner_parts(cv::Mat(hog->getBlockHists()), cv::Mat(descriptors.rowRange(3, 4)));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     img_rgb = readImage("hog/positive3.png");
     ASSERT_TRUE(!img_rgb.empty());
     cv::cvtColor(img_rgb, img, CV_BGR2BGRA);
+<<<<<<< HEAD
     computeBlockHistograms(cv::gpu::GpuMat(img));
     compare_inner_parts(cv::Mat(block_hists), cv::Mat(descriptors.rowRange(4, 5)));
+=======
+    hog->computeBlockHistograms(cv::gpu::GpuMat(img));
+    compare_inner_parts(cv::Mat(hog->getBlockHists()), cv::Mat(descriptors.rowRange(4, 5)));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     img_rgb = readImage("hog/negative3.png");
     ASSERT_TRUE(!img_rgb.empty());
     cv::cvtColor(img_rgb, img, CV_BGR2BGRA);
+<<<<<<< HEAD
     computeBlockHistograms(cv::gpu::GpuMat(img));
     compare_inner_parts(cv::Mat(block_hists), cv::Mat(descriptors.rowRange(5, 6)));
+=======
+    hog->computeBlockHistograms(cv::gpu::GpuMat(img));
+    compare_inner_parts(cv::Mat(hog->getBlockHists()), cv::Mat(descriptors.rowRange(5, 6)));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 INSTANTIATE_TEST_CASE_P(GPU_ObjDetect, HOG, ALL_DEVICES);

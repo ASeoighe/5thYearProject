@@ -208,6 +208,14 @@ std::vector<std::pair<int, int> > CommonPackageManager::InitArmRating()
     result.push_back(std::pair<int, int>(PLATFORM_TEGRA4,  ARCH_ARMv7 | FEATURES_HAS_VFPv3 | FEATURES_HAS_VFPv4 | FEATURES_HAS_NEON));
     result.push_back(std::pair<int, int>(PLATFORM_TEGRA5,  ARCH_ARMv7 | FEATURES_HAS_VFPv3 | FEATURES_HAS_VFPv4 | FEATURES_HAS_NEON));
 
+<<<<<<< HEAD
+=======
+    result.push_back(std::pair<int, int>(PLATFORM_UNKNOWN, ARCH_AARCH64));
+    result.push_back(std::pair<int, int>(PLATFORM_UNKNOWN, ARCH_AARCH64 | FEATURES_HAS_VFPv3));
+    result.push_back(std::pair<int, int>(PLATFORM_UNKNOWN, ARCH_AARCH64 | FEATURES_HAS_VFPv3 | FEATURES_HAS_VFPv4));
+    result.push_back(std::pair<int, int>(PLATFORM_UNKNOWN, ARCH_AARCH64 | FEATURES_HAS_VFPv3 | FEATURES_HAS_VFPv3 | FEATURES_HAS_NEON));
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return result;
 }
 

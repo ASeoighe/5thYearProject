@@ -56,7 +56,11 @@
     #include <sys/types.h>
     #if defined ANDROID
         #include <sys/sysconf.h>
+<<<<<<< HEAD
     #else
+=======
+    #elif defined __APPLE__
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         #include <sys/sysctl.h>
     #endif
 #endif
@@ -177,7 +181,11 @@ namespace
     static void block_function(void* context, size_t index)
     {
         ProxyLoopBody* ptr_body = static_cast<ProxyLoopBody*>(context);
+<<<<<<< HEAD
         (*ptr_body)(cv::Range(index, index + 1));
+=======
+        (*ptr_body)(cv::Range((int)index, (int)index + 1));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 #elif defined HAVE_CONCURRENCY
     class ProxyLoopBody : public ParallelLoopBodyWrapper

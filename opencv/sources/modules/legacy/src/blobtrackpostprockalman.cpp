@@ -44,6 +44,10 @@
 /* State vector is (x,y,w,h,dx,dy,dw,dh). */
 /* Measurement is (x,y,w,h). */
 
+<<<<<<< HEAD
+=======
+#if 0
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 /* Dynamic matrix A: */
 const float A8[] = { 1, 0, 0, 0, 1, 0, 0, 0,
                      0, 1, 0, 0, 0, 1, 0, 0,
@@ -60,6 +64,15 @@ const float H8[] = { 1, 0, 0, 0, 0, 0, 0, 0,
                      0, 0, 1, 0, 0, 0, 0, 0,
                      0, 0, 0, 1, 0, 0, 0, 0};
 
+<<<<<<< HEAD
+=======
+#define STATE_NUM 8
+#define A A8
+#define H H8
+
+#else
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 /* Matrices for zero size velocity: */
 /* Dinamic matrix A: */
 const float A6[] = { 1, 0, 0, 0, 1, 0,
@@ -79,6 +92,11 @@ const float H6[] = { 1, 0, 0, 0, 0, 0,
 #define A A6
 #define H H6
 
+<<<<<<< HEAD
+=======
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 class CvBlobTrackPostProcKalman:public CvBlobTrackPostProcOne
 {
 

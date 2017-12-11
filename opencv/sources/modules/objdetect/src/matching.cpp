@@ -524,7 +524,13 @@ int addNullableBorder(CvLSVMFeatureMap *map, int bx, int by)
     float *new_map;
     sizeX = map->sizeX + 2 * bx;
     sizeY = map->sizeY + 2 * by;
+<<<<<<< HEAD
     new_map = (float *)malloc(sizeof(float) * sizeX * sizeY * map->numFeatures);
+=======
+    // fix for Windows Phone 8 ARM compiler
+    size_t size = sizeof(float) * sizeX * sizeY * map->numFeatures;
+    new_map = (float *)malloc(size);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     for (i = 0; i < sizeX * sizeY * map->numFeatures; i++)
     {
         new_map[i] = 0.0;

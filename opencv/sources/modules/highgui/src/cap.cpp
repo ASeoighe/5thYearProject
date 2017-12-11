@@ -238,10 +238,19 @@ CV_IMPL CvCapture * cvCreateCameraCapture (int index)
 #endif
 
 #ifdef HAVE_GSTREAMER
+<<<<<<< HEAD
             capture = cvCreateCapture_GStreamer(CV_CAP_GSTREAMER_V4L2, 0);
             if (capture)
                 return capture;
             capture = cvCreateCapture_GStreamer(CV_CAP_GSTREAMER_V4L, 0);
+=======
+            capture = cvCreateCapture_GStreamer(CV_CAP_GSTREAMER_V4L2,
+                                                reinterpret_cast<char *>(index));
+            if (capture)
+                return capture;
+            capture = cvCreateCapture_GStreamer(CV_CAP_GSTREAMER_V4L,
+                                                reinterpret_cast<char *>(index));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             if (capture)
                 return capture;
 #endif
@@ -368,8 +377,15 @@ CV_IMPL CvCapture * cvCreateFileCapture (const char * filename)
 {
     CvCapture * result = 0;
 
+<<<<<<< HEAD
     if (! result)
         result = cvCreateFileCapture_FFMPEG_proxy (filename);
+=======
+#ifdef HAVE_FFMPEG
+    if (! result)
+        result = cvCreateFileCapture_FFMPEG_proxy (filename);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #ifdef HAVE_VFW
     if (! result)
@@ -426,8 +442,15 @@ CV_IMPL CvVideoWriter* cvCreateVideoWriter( const char* filename, int fourcc,
     if(!fourcc || !fps)
         result = cvCreateVideoWriter_Images(filename);
 
+<<<<<<< HEAD
     if(!result)
         result = cvCreateVideoWriter_FFMPEG_proxy (filename, fourcc, fps, frameSize, is_color);
+=======
+#ifdef HAVE_FFMPEG
+    if(!result)
+        result = cvCreateVideoWriter_FFMPEG_proxy (filename, fourcc, fps, frameSize, is_color);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #ifdef HAVE_VFW
     if(!result)
@@ -459,6 +482,22 @@ CV_IMPL CvVideoWriter* cvCreateVideoWriter( const char* filename, int fourcc,
         result = cvCreateVideoWriter_GStreamer(filename, fourcc, fps, frameSize, is_color);
 #endif
 
+<<<<<<< HEAD
+=======
+#if !defined(HAVE_FFMPEG) && \
+    !defined(HAVE_VFW) && \
+    !defined(HAVE_MSMF) && \
+    !defined(HAVE_AVFOUNDATION) && \
+    !defined(HAVE_QUICKTIME) && \
+    !defined(HAVE_QTKIT) && \
+    !defined(HAVE_GSTREAMER)
+// If none of the writers is used
+// these statements suppress 'unused parameter' warnings.
+    (void)frameSize;
+    (void)is_color;
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if(!result)
         result = cvCreateVideoWriter_Images(filename);
 

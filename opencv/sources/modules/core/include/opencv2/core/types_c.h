@@ -43,6 +43,18 @@
 #ifndef __OPENCV_CORE_TYPES_H__
 #define __OPENCV_CORE_TYPES_H__
 
+<<<<<<< HEAD
+=======
+#if defined(__GNUC__) && !defined(COMPILER_ICC)
+# define CV_ATTR_UNUSED __attribute__((unused))
+# define CV_ATTR_USED __attribute__((used))
+#else
+# define CV_ATTR_UNUSED
+# define CV_ATTR_USED
+#endif
+
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #if !defined _CRT_SECURE_NO_DEPRECATE && defined _MSC_VER
 #  if _MSC_VER > 1300
 #    define _CRT_SECURE_NO_DEPRECATE /* to avoid multiple Visual Studio 2005 warnings */
@@ -305,6 +317,34 @@ enum {
 #define  CV_CMP(a,b)    (((a) > (b)) - ((a) < (b)))
 #define  CV_SIGN(a)     CV_CMP((a),0)
 
+<<<<<<< HEAD
+=======
+#if defined __GNUC__ && defined __arm__ && (defined __ARM_PCS_VFP || defined __ARM_VFPV3__)
+#  define CV_VFP 1
+#else
+#  define CV_VFP 0
+#endif
+
+
+#if CV_VFP
+// 1. general scheme
+#define ARM_ROUND(_value, _asm_string) \
+    int res; \
+    float temp; \
+    (void)temp; \
+    __asm__(_asm_string : [res] "=r" (res), [temp] "=w" (temp) : [value] "w" (_value)); \
+    return res;
+// 2. version for double
+#ifdef __clang__
+#define ARM_ROUND_DBL(value) ARM_ROUND(value, "vcvtr.s32.f64 %[temp], %[value] \n vmov %[res], %[temp]")
+#else
+#define ARM_ROUND_DBL(value) ARM_ROUND(value, "vcvtr.s32.f64 %[temp], %P[value] \n vmov %[res], %[temp]")
+#endif
+// 3. version for float
+#define ARM_ROUND_FLT(value) ARM_ROUND(value, "vcvtr.s32.f32 %[temp], %[value]\n vmov %[res], %[temp]")
+#endif // CV_VFP
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 CV_INLINE  int  cvRound( double value )
 {
 #if (defined _MSC_VER && defined _M_X64) || (defined __GNUC__ && defined __x86_64__ && defined __SSE2__ && !defined __APPLE__)
@@ -323,6 +363,11 @@ CV_INLINE  int  cvRound( double value )
 #elif defined CV_ICC || defined __GNUC__
 #  ifdef HAVE_TEGRA_OPTIMIZATION
     TEGRA_ROUND(value);
+<<<<<<< HEAD
+=======
+#  elif CV_VFP
+    ARM_ROUND_DBL(value)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #  else
     return (int)lrint(value);
 #  endif
@@ -790,7 +835,11 @@ CV_INLINE  void  cvmSet( CvMat* mat, int row, int col, double value )
     else
     {
         assert( type == CV_64FC1 );
+<<<<<<< HEAD
         ((double*)(void*)(mat->data.ptr + (size_t)mat->step*row))[col] = (double)value;
+=======
+        ((double*)(void*)(mat->data.ptr + (size_t)mat->step*row))[col] = value;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }
 

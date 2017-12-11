@@ -1,8 +1,13 @@
 
 /* pngwrite.c - general routines to write a PNG file
  *
+<<<<<<< HEAD
  * Last changed in libpng 1.5.11 [June 14, 2012]
  * Copyright (c) 1998-2012 Glenn Randers-Pehrson
+=======
+ * Last changed in libpng 1.5.23 [July 23, 2015]
+ * Copyright (c) 1998-2002,2004,2006-2015 Glenn Randers-Pehrson
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
@@ -34,6 +39,7 @@ png_write_info_before_PLTE(png_structp png_ptr, png_infop info_ptr)
 
    if (!(png_ptr->mode & PNG_WROTE_INFO_BEFORE_PLTE))
    {
+<<<<<<< HEAD
    /* Write PNG signature */
    png_write_sig(png_ptr);
 
@@ -113,6 +119,89 @@ png_write_info_before_PLTE(png_structp png_ptr, png_infop info_ptr)
          }
       }
    }
+=======
+      /* Write PNG signature */
+      png_write_sig(png_ptr);
+
+#ifdef PNG_MNG_FEATURES_SUPPORTED
+      if ((png_ptr->mode&PNG_HAVE_PNG_SIGNATURE) && \
+          (png_ptr->mng_features_permitted))
+      {
+         png_warning(png_ptr,
+             "MNG features are not allowed in a PNG datastream");
+         png_ptr->mng_features_permitted = 0;
+      }
+#endif
+
+      /* Write IHDR information. */
+      png_write_IHDR(png_ptr, info_ptr->width, info_ptr->height,
+          info_ptr->bit_depth, info_ptr->color_type,
+          info_ptr->compression_type, info_ptr->filter_type,
+#ifdef PNG_WRITE_INTERLACING_SUPPORTED
+          info_ptr->interlace_type
+#else
+          0
+#endif
+          );
+      /* The rest of these check to see if the valid field has the appropriate
+       * flag set, and if it does, writes the chunk.
+       */
+#ifdef PNG_WRITE_gAMA_SUPPORTED
+      if (info_ptr->valid & PNG_INFO_gAMA)
+         png_write_gAMA_fixed(png_ptr, info_ptr->gamma);
+#endif
+#ifdef PNG_WRITE_sRGB_SUPPORTED
+      if (info_ptr->valid & PNG_INFO_sRGB)
+         png_write_sRGB(png_ptr, (int)info_ptr->srgb_intent);
+#endif
+
+#ifdef PNG_WRITE_iCCP_SUPPORTED
+      if (info_ptr->valid & PNG_INFO_iCCP)
+         png_write_iCCP(png_ptr, info_ptr->iccp_name, PNG_COMPRESSION_TYPE_BASE,
+             (png_charp)info_ptr->iccp_profile, (int)info_ptr->iccp_proflen);
+#endif
+#ifdef PNG_WRITE_sBIT_SUPPORTED
+      if (info_ptr->valid & PNG_INFO_sBIT)
+         png_write_sBIT(png_ptr, &(info_ptr->sig_bit), info_ptr->color_type);
+#endif
+#ifdef PNG_WRITE_cHRM_SUPPORTED
+      if (info_ptr->valid & PNG_INFO_cHRM)
+         png_write_cHRM_fixed(png_ptr,
+             info_ptr->x_white, info_ptr->y_white,
+             info_ptr->x_red, info_ptr->y_red,
+             info_ptr->x_green, info_ptr->y_green,
+             info_ptr->x_blue, info_ptr->y_blue);
+#endif
+
+#ifdef PNG_WRITE_UNKNOWN_CHUNKS_SUPPORTED
+      if (info_ptr->unknown_chunks_num)
+      {
+         png_unknown_chunk *up;
+
+         png_debug(5, "writing extra chunks");
+
+         for (up = info_ptr->unknown_chunks;
+              up < info_ptr->unknown_chunks + info_ptr->unknown_chunks_num;
+              up++)
+         {
+            int keep = png_handle_as_unknown(png_ptr, up->name);
+
+            if (keep != PNG_HANDLE_CHUNK_NEVER &&
+                up->location &&
+                !(up->location & PNG_HAVE_PLTE) &&
+                !(up->location & PNG_HAVE_IDAT) &&
+                !(up->location & PNG_AFTER_IDAT) &&
+                ((up->name[3] & 0x20) || keep == PNG_HANDLE_CHUNK_ALWAYS ||
+                (png_ptr->flags & PNG_FLAG_KEEP_UNSAFE_CHUNKS)))
+            {
+               if (up->size == 0)
+                  png_warning(png_ptr, "Writing zero-length unknown chunk");
+
+               png_write_chunk(png_ptr, up->name, up->data, up->size);
+            }
+         }
+      }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
       png_ptr->mode |= PNG_WROTE_INFO_BEFORE_PLTE;
    }
@@ -223,11 +312,22 @@ png_write_info(png_structp png_ptr, png_infop info_ptr)
              info_ptr->text[i].lang,
              info_ptr->text[i].lang_key,
              info_ptr->text[i].text);
+<<<<<<< HEAD
 #else
           png_warning(png_ptr, "Unable to write international text");
 #endif
           /* Mark this chunk as written */
           info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_NONE_WR;
+=======
+         /* Mark this chunk as written */
+         if (info_ptr->text[i].compression == PNG_TEXT_COMPRESSION_NONE)
+            info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_NONE_WR;
+         else
+            info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_zTXt_WR;
+#else
+         png_warning(png_ptr, "Unable to write international text");
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       }
 
       /* If we want a compressed text chunk */
@@ -238,11 +338,19 @@ png_write_info(png_structp png_ptr, png_infop info_ptr)
          png_write_zTXt(png_ptr, info_ptr->text[i].key,
              info_ptr->text[i].text, 0,
              info_ptr->text[i].compression);
+<<<<<<< HEAD
 #else
          png_warning(png_ptr, "Unable to write compressed text");
 #endif
          /* Mark this chunk as written */
          info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_zTXt_WR;
+=======
+         /* Mark this chunk as written */
+         info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_zTXt_WR;
+#else
+         png_warning(png_ptr, "Unable to write compressed text");
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       }
 
       else if (info_ptr->text[i].compression == PNG_TEXT_COMPRESSION_NONE)
@@ -340,11 +448,19 @@ png_write_end(png_structp png_ptr, png_infop info_ptr)
                 info_ptr->text[i].lang,
                 info_ptr->text[i].lang_key,
                 info_ptr->text[i].text);
+<<<<<<< HEAD
 #else
             png_warning(png_ptr, "Unable to write international text");
 #endif
             /* Mark this chunk as written */
             info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_NONE_WR;
+=======
+            /* Mark this chunk as written */
+            info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_NONE_WR;
+#else
+            png_warning(png_ptr, "Unable to write international text");
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          }
 
          else if (info_ptr->text[i].compression >= PNG_TEXT_COMPRESSION_zTXt)
@@ -354,11 +470,19 @@ png_write_end(png_structp png_ptr, png_infop info_ptr)
             png_write_zTXt(png_ptr, info_ptr->text[i].key,
                 info_ptr->text[i].text, 0,
                 info_ptr->text[i].compression);
+<<<<<<< HEAD
 #else
             png_warning(png_ptr, "Unable to write compressed text");
 #endif
             /* Mark this chunk as written */
             info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_zTXt_WR;
+=======
+            /* Mark this chunk as written */
+            info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_zTXt_WR;
+#else
+            png_warning(png_ptr, "Unable to write compressed text");
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          }
 
          else if (info_ptr->text[i].compression == PNG_TEXT_COMPRESSION_NONE)
@@ -367,12 +491,20 @@ png_write_end(png_structp png_ptr, png_infop info_ptr)
             /* Write uncompressed chunk */
             png_write_tEXt(png_ptr, info_ptr->text[i].key,
                 info_ptr->text[i].text, 0);
+<<<<<<< HEAD
 #else
             png_warning(png_ptr, "Unable to write uncompressed text");
 #endif
 
             /* Mark this chunk as written */
             info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_NONE_WR;
+=======
+            /* Mark this chunk as written */
+            info_ptr->text[i].compression = PNG_TEXT_COMPRESSION_NONE_WR;
+#else
+            png_warning(png_ptr, "Unable to write uncompressed text");
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          }
       }
 #endif
@@ -420,7 +552,10 @@ png_write_end(png_structp png_ptr, png_infop info_ptr)
 }
 
 #ifdef PNG_CONVERT_tIME_SUPPORTED
+<<<<<<< HEAD
 /* "tm" structure is not supported on WindowsCE */
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 void PNGAPI
 png_convert_from_struct_tm(png_timep ptime, PNG_CONST struct tm FAR * ttime)
 {
@@ -456,9 +591,12 @@ png_create_write_struct,(png_const_charp user_png_ver, png_voidp error_ptr,
        warn_fn, NULL, NULL, NULL));
 }
 
+<<<<<<< HEAD
 /* Alternate initialize png_ptr structure, and allocate any memory needed */
 static void png_reset_filter_heuristics(png_structp png_ptr); /* forward decl */
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 PNG_FUNCTION(png_structp,PNGAPI
 png_create_write_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
     png_error_ptr error_fn, png_error_ptr warn_fn, png_voidp mem_ptr,
@@ -500,6 +638,7 @@ png_create_write_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
  */
 #ifdef USE_FAR_KEYWORD
    if (setjmp(tmp_jmpbuf))
+<<<<<<< HEAD
 #else
    if (setjmp(png_jmpbuf(png_ptr))) /* sets longjmp to match setjmp */
 #endif
@@ -508,6 +647,15 @@ png_create_write_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
 #endif
       PNG_ABORT();
 #endif
+=======
+      png_memcpy(png_jmpbuf(png_ptr), tmp_jmpbuf, png_sizeof(jmp_buf));
+   PNG_ABORT();
+#else
+   if (setjmp(png_jmpbuf(png_ptr))) /* sets longjmp to match setjmp */
+      PNG_ABORT();
+#endif
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #ifdef PNG_USER_MEM_SUPPORTED
    png_set_mem_fn(png_ptr, mem_ptr, malloc_fn, free_fn);
@@ -520,7 +668,11 @@ png_create_write_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
    /* Initialize zbuf - compression buffer */
    png_ptr->zbuf_size = PNG_ZBUF_SIZE;
 
+<<<<<<< HEAD
    if (!png_cleanup_needed)
+=======
+   if (png_cleanup_needed == 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    {
       png_ptr->zbuf = (png_bytep)png_malloc_warn(png_ptr,
           png_ptr->zbuf_size);
@@ -528,7 +680,11 @@ png_create_write_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
          png_cleanup_needed = 1;
    }
 
+<<<<<<< HEAD
    if (png_cleanup_needed)
+=======
+   if (png_cleanup_needed != 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    {
        /* Clean up PNG structure and deallocate any memory. */
        png_free(png_ptr, png_ptr->zbuf);
@@ -544,10 +700,13 @@ png_create_write_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
 
    png_set_write_fn(png_ptr, NULL, NULL, NULL);
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
    png_reset_filter_heuristics(png_ptr);
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    return (png_ptr);
 }
 
@@ -764,7 +923,11 @@ png_write_row(png_structp png_ptr, png_const_bytep row)
    {
       png_do_write_interlace(&row_info, png_ptr->row_buf + 1, png_ptr->pass);
       /* This should always get caught above, but still ... */
+<<<<<<< HEAD
       if (!(row_info.width))
+=======
+      if (row_info.width == 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       {
          png_write_finish_row(png_ptr);
          return;
@@ -864,7 +1027,11 @@ png_write_flush(png_structp png_ptr)
             png_error(png_ptr, "zlib error");
       }
 
+<<<<<<< HEAD
       if (!(png_ptr->zstream.avail_out))
+=======
+      if ((png_ptr->zstream.avail_out) == 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       {
          /* Write the IDAT and reset the zlib output buffer */
          png_write_IDAT(png_ptr, png_ptr->zbuf, png_ptr->zbuf_size);
@@ -982,6 +1149,7 @@ png_write_destroy(png_structp png_ptr)
    png_free(png_ptr, png_ptr->paeth_row);
 #endif
 
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
    /* Use this to save a little code space, it doesn't free the filter_costs */
    png_reset_filter_heuristics(png_ptr);
@@ -989,6 +1157,8 @@ png_write_destroy(png_structp png_ptr)
    png_free(png_ptr, png_ptr->inv_filter_costs);
 #endif
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef PNG_SETJMP_SUPPORTED
    /* Reset structure */
    png_memcpy(tmp_jmp, png_ptr->longjmp_buffer, png_sizeof(jmp_buf));
@@ -1042,6 +1212,10 @@ png_set_filter(png_structp png_ptr, int method, int filters)
          case 5:
          case 6:
          case 7: png_warning(png_ptr, "Unknown row filter for method 0");
+<<<<<<< HEAD
+=======
+             /* FALL THROUGH */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif /* PNG_WRITE_FILTER_SUPPORTED */
          case PNG_FILTER_VALUE_NONE:
             png_ptr->do_filter = PNG_FILTER_NONE; break;
@@ -1078,6 +1252,10 @@ png_set_filter(png_structp png_ptr, int method, int filters)
        */
       if (png_ptr->row_buf != NULL)
       {
+<<<<<<< HEAD
+=======
+         png_ptr->do_filter = PNG_FILTER_NONE;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef PNG_WRITE_FILTER_SUPPORTED
          if ((png_ptr->do_filter & PNG_FILTER_SUB) && png_ptr->sub_row == NULL)
          {
@@ -1138,8 +1316,13 @@ png_set_filter(png_structp png_ptr, int method, int filters)
          }
 
          if (png_ptr->do_filter == PNG_NO_FILTERS)
+<<<<<<< HEAD
 #endif /* PNG_WRITE_FILTER_SUPPORTED */
             png_ptr->do_filter = PNG_FILTER_NONE;
+=======
+            png_ptr->do_filter = PNG_FILTER_NONE;
+#endif /* PNG_WRITE_FILTER_SUPPORTED */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       }
    }
    else
@@ -1153,6 +1336,7 @@ png_set_filter(png_structp png_ptr, int method, int filters)
  * filtered data going to zlib more consistent, hopefully resulting in
  * better compression.
  */
+<<<<<<< HEAD
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED      /* GRR 970116 */
 /* Convenience reset API. */
 static void
@@ -1269,6 +1453,9 @@ png_init_filter_heuristics(png_structp png_ptr, int heuristic_method,
    }
 }
 
+=======
+#ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED /* DEPRECATED */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 /* Provide floating and fixed point APIs */
 #ifdef PNG_FLOATING_POINT_SUPPORTED
 void PNGAPI
@@ -1276,6 +1463,7 @@ png_set_filter_heuristics(png_structp png_ptr, int heuristic_method,
     int num_weights, png_const_doublep filter_weights,
     png_const_doublep filter_costs)
 {
+<<<<<<< HEAD
    png_debug(1, "in png_set_filter_heuristics");
 
    /* The internal API allocates all the arrays and ensures that the elements of
@@ -1322,6 +1510,13 @@ png_set_filter_heuristics(png_structp png_ptr, int heuristic_method,
              (png_uint_16)(PNG_COST_FACTOR * filter_costs[i] + .5);
       }
    }
+=======
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(heuristic_method)
+   PNG_UNUSED(num_weights)
+   PNG_UNUSED(filter_weights)
+   PNG_UNUSED(filter_costs)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 #endif /* FLOATING_POINT */
 
@@ -1331,6 +1526,7 @@ png_set_filter_heuristics_fixed(png_structp png_ptr, int heuristic_method,
     int num_weights, png_const_fixed_point_p filter_weights,
     png_const_fixed_point_p filter_costs)
 {
+<<<<<<< HEAD
    png_debug(1, "in png_set_filter_heuristics_fixed");
 
    /* The internal API allocates all the arrays and ensures that the elements of
@@ -1392,6 +1588,18 @@ png_set_filter_heuristics_fixed(png_structp png_ptr, int heuristic_method,
 #endif /* FIXED_POINT */
 #endif /* PNG_WRITE_WEIGHTED_FILTER_SUPPORTED */
 
+=======
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(heuristic_method)
+   PNG_UNUSED(num_weights)
+   PNG_UNUSED(filter_weights)
+   PNG_UNUSED(filter_costs)
+}
+#endif /* FIXED_POINT */
+#endif /* WRITE_WEIGHTED_FILTER */
+
+#ifdef PNG_WRITE_CUSTOMIZE_COMPRESSION_SUPPORTED
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 void PNGAPI
 png_set_compression_level(png_structp png_ptr, int level)
 {
@@ -1470,6 +1678,10 @@ png_set_compression_method(png_structp png_ptr, int method)
    png_ptr->flags |= PNG_FLAG_ZLIB_CUSTOM_METHOD;
    png_ptr->zlib_method = method;
 }
+<<<<<<< HEAD
+=======
+#endif /* WRITE_CUSTOMIZE_COMPRESSION */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 /* The following were added to libpng-1.5.4 */
 #ifdef PNG_WRITE_CUSTOMIZE_ZTXT_COMPRESSION_SUPPORTED
@@ -1527,10 +1739,17 @@ png_set_text_compression_window_bits(png_structp png_ptr, int window_bits)
 #ifndef WBITS_8_OK
    /* Avoid libpng bug with 256-byte windows */
    if (window_bits == 8)
+<<<<<<< HEAD
       {
         png_warning(png_ptr, "Text compression window is being reset to 512");
         window_bits = 9;
       }
+=======
+   {
+      png_warning(png_ptr, "Text compression window is being reset to 512");
+      window_bits = 9;
+   }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #endif
    png_ptr->flags |= PNG_FLAG_ZTXT_CUSTOM_WINDOW_BITS;

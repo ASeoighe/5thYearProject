@@ -121,7 +121,11 @@ Code
 
    * Applies the *Sobel Operator* and generates as output an image with the detected *edges* bright on a darker background.
 
+<<<<<<< HEAD
 #. The tutorial code's is shown lines below. You can also download it from `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/ImgTrans/Sobel_Demo.cpp>`_
+=======
+#. The tutorial code's is shown lines below. You can also download it from `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/ImgTrans/Sobel_Demo.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. code-block:: cpp
 
@@ -154,7 +158,11 @@ Code
      GaussianBlur( src, src, Size(3,3), 0, 0, BORDER_DEFAULT );
 
      /// Convert it to gray
+<<<<<<< HEAD
      cvtColor( src, src_gray, CV_RGB2GRAY );
+=======
+     cvtColor( src, src_gray, CV_BGR2GRAY );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
      /// Create window
      namedWindow( window_name, CV_WINDOW_AUTOSIZE );
@@ -217,7 +225,11 @@ Explanation
 
    .. code-block:: cpp
 
+<<<<<<< HEAD
       cvtColor( src, src_gray, CV_RGB2GRAY );
+=======
+      cvtColor( src, src_gray, CV_BGR2GRAY );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #. Second, we calculate the "*derivatives*" in *x* and *y* directions. For this, we use the function :sobel:`Sobel <>` as shown below:
 

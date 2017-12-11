@@ -2,20 +2,28 @@
 #pragma warning( disable : 4201 4408 4127 4100)
 #endif
 
+<<<<<<< HEAD
 #include "cvconfig.h"
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
 #include "opencv2/gpu/gpu.hpp"
 #include "opencv2/highgui/highgui.hpp"
+<<<<<<< HEAD
 
 #ifdef HAVE_CUDA
 #include "NCVHaarObjectDetection.hpp"
 #endif
+=======
+#include "NCVHaarObjectDetection.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace std;
 using namespace cv;
 
+<<<<<<< HEAD
 
 #if !defined(HAVE_CUDA) || defined(__arm__)
 
@@ -35,6 +43,16 @@ int main( int, const char** )
 #else
 
 
+=======
+#if defined(__arm__)
+int main()
+{
+    std::cout << "Unsupported for ARM CUDA library." << std::endl;
+    return 0;
+}
+#else
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 const Size2i preferredVideoFrameSize(640, 480);
 const string wndTitle = "NVIDIA Computer Vision :: Haar Classifiers Cascade";
 
@@ -386,4 +404,8 @@ int main(int argc, const char** argv)
     return 0;
 }
 
+<<<<<<< HEAD
 #endif //!defined(HAVE_CUDA)
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

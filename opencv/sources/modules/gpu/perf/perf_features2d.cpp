@@ -41,6 +41,10 @@
 //M*/
 
 #include "perf_precomp.hpp"
+<<<<<<< HEAD
+=======
+#include "opencv2/ts/gpu_perf.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace std;
 using namespace testing;
@@ -123,7 +127,11 @@ PERF_TEST_P(Image_NFeatures, Features2D_ORB,
 
         sortKeyPoints(gpu_keypoints, gpu_descriptors);
 
+<<<<<<< HEAD
         SANITY_CHECK_KEYPOINTS(gpu_keypoints);
+=======
+        SANITY_CHECK_KEYPOINTS(gpu_keypoints, 1e-10);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         SANITY_CHECK(gpu_descriptors);
     }
     else
@@ -145,9 +153,23 @@ PERF_TEST_P(Image_NFeatures, Features2D_ORB,
 
 DEF_PARAM_TEST(DescSize_Norm, int, NormType);
 
+<<<<<<< HEAD
 PERF_TEST_P(DescSize_Norm, Features2D_BFMatch,
             Combine(Values(64, 128, 256),
                     Values(NormType(cv::NORM_L1), NormType(cv::NORM_L2), NormType(cv::NORM_HAMMING))))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(DescSize_Norm, Features2D_BFMatch, Combine(
+    Values(64, 128, 256),
+    Values(NormType(cv::NORM_L2), NormType(cv::NORM_HAMMING))
+))
+#else
+PERF_TEST_P(DescSize_Norm, Features2D_BFMatch, Combine(
+    Values(64, 128, 256),
+    Values(NormType(cv::NORM_L1), NormType(cv::NORM_L2), NormType(cv::NORM_HAMMING))
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     declare.time(20.0);
 
@@ -202,10 +224,26 @@ static void toOneRowMatches(const std::vector< std::vector<cv::DMatch> >& src, s
 
 DEF_PARAM_TEST(DescSize_K_Norm, int, int, NormType);
 
+<<<<<<< HEAD
 PERF_TEST_P(DescSize_K_Norm, Features2D_BFKnnMatch,
             Combine(Values(64, 128, 256),
                     Values(2, 3),
                     Values(NormType(cv::NORM_L1), NormType(cv::NORM_L2))))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(DescSize_K_Norm, Features2D_BFKnnMatch, Combine(
+    Values(64, 128, 256),
+    Values(2, 3),
+    Values(NormType(cv::NORM_L2))
+))
+#else
+PERF_TEST_P(DescSize_K_Norm, Features2D_BFKnnMatch, Combine(
+    Values(64, 128, 256),
+    Values(2, 3),
+    Values(NormType(cv::NORM_L1), NormType(cv::NORM_L2))
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     declare.time(30.0);
 
@@ -257,9 +295,23 @@ PERF_TEST_P(DescSize_K_Norm, Features2D_BFKnnMatch,
 //////////////////////////////////////////////////////////////////////
 // BFRadiusMatch
 
+<<<<<<< HEAD
 PERF_TEST_P(DescSize_Norm, Features2D_BFRadiusMatch,
             Combine(Values(64, 128, 256),
                     Values(NormType(cv::NORM_L1), NormType(cv::NORM_L2))))
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+PERF_TEST_P(DescSize_Norm, Features2D_BFRadiusMatch, Combine(
+    Values(64, 128, 256),
+    Values(NormType(cv::NORM_L2))
+))
+#else
+PERF_TEST_P(DescSize_Norm, Features2D_BFRadiusMatch, Combine(
+    Values(64, 128, 256),
+    Values(NormType(cv::NORM_L1), NormType(cv::NORM_L2))
+))
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     declare.time(30.0);
 

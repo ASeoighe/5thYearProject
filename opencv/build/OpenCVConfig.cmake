@@ -79,6 +79,13 @@ if(MSVC)
     set(OpenCV_RUNTIME vc11)
   elseif(MSVC_VERSION EQUAL 1800)
     set(OpenCV_RUNTIME vc12)
+<<<<<<< HEAD
+=======
+  elseif(MSVC_VERSION EQUAL 1900)
+    set(OpenCV_RUNTIME vc14)
+  elseif(MSVC_VERSION EQUAL 1910 OR MSVC_VERSION EQUAL 1911)
+    set(OpenCV_RUNTIME vc15)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   endif()
 elseif(MINGW)
   set(OpenCV_RUNTIME mingw)
@@ -86,7 +93,11 @@ elseif(MINGW)
   execute_process(COMMAND ${CMAKE_CXX_COMPILER} -dumpmachine
                   OUTPUT_VARIABLE OPENCV_GCC_TARGET_MACHINE
                   OUTPUT_STRIP_TRAILING_WHITESPACE)
+<<<<<<< HEAD
   if(CMAKE_OPENCV_GCC_TARGET_MACHINE MATCHES "64")
+=======
+  if(OPENCV_GCC_TARGET_MACHINE MATCHES "amd64|x86_64|AMD64")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     set(MINGW64 1)
     set(OpenCV_ARCH x64)
   else()

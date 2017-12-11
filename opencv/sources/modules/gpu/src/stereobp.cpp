@@ -67,7 +67,11 @@ namespace cv { namespace gpu { namespace device
         template<typename T, typename D>
         void comp_data_gpu(const PtrStepSzb& left, const PtrStepSzb& right, const PtrStepSzb& data, cudaStream_t stream);
         template<typename T>
+<<<<<<< HEAD
         void data_step_down_gpu(int dst_cols, int dst_rows, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream);
+=======
+        void data_step_down_gpu(int dst_cols, int dst_rows, int src_cols, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         template <typename T>
         void level_up_messages_gpu(int dst_idx, int dst_cols, int dst_rows, int src_rows, PtrStepSzb* mus, PtrStepSzb* mds, PtrStepSzb* mls, PtrStepSzb* mrs, cudaStream_t stream);
         template <typename T>
@@ -158,7 +162,11 @@ namespace
 
             init(stream);
 
+<<<<<<< HEAD
             datas[0].create(rows * rthis.ndisp, cols, rthis.msg_type);
+=======
+            createContinuous(rows * rthis.ndisp, cols, rthis.msg_type, datas[0]);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             comp_data_callers[rthis.msg_type == CV_32F][left.channels()](left, right, datas[0], StreamAccessor::getStream(stream));
 
@@ -187,10 +195,17 @@ namespace
     private:
         void init(Stream& stream)
         {
+<<<<<<< HEAD
             u.create(rows * rthis.ndisp, cols, rthis.msg_type);
             d.create(rows * rthis.ndisp, cols, rthis.msg_type);
             l.create(rows * rthis.ndisp, cols, rthis.msg_type);
             r.create(rows * rthis.ndisp, cols, rthis.msg_type);
+=======
+            createContinuous(rows * rthis.ndisp, cols, rthis.msg_type, u);
+            createContinuous(rows * rthis.ndisp, cols, rthis.msg_type, d);
+            createContinuous(rows * rthis.ndisp, cols, rthis.msg_type, l);
+            createContinuous(rows * rthis.ndisp, cols, rthis.msg_type, r);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             if (rthis.levels & 1)
             {
@@ -216,10 +231,17 @@ namespace
                 int less_rows = (rows + 1) / 2;
                 int less_cols = (cols + 1) / 2;
 
+<<<<<<< HEAD
                 u2.create(less_rows * rthis.ndisp, less_cols, rthis.msg_type);
                 d2.create(less_rows * rthis.ndisp, less_cols, rthis.msg_type);
                 l2.create(less_rows * rthis.ndisp, less_cols, rthis.msg_type);
                 r2.create(less_rows * rthis.ndisp, less_cols, rthis.msg_type);
+=======
+                createContinuous(less_rows * rthis.ndisp, less_cols, rthis.msg_type, u2);
+                createContinuous(less_rows * rthis.ndisp, less_cols, rthis.msg_type, d2);
+                createContinuous(less_rows * rthis.ndisp, less_cols, rthis.msg_type, l2);
+                createContinuous(less_rows * rthis.ndisp, less_cols, rthis.msg_type, r2);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
                 if ((rthis.levels & 1) == 0)
                 {
@@ -253,7 +275,11 @@ namespace
 
         void calcBP(GpuMat& disp, Stream& stream)
         {
+<<<<<<< HEAD
             typedef void (*data_step_down_t)(int dst_cols, int dst_rows, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream);
+=======
+            typedef void (*data_step_down_t)(int dst_cols, int dst_rows, int src_cols, int src_rows, const PtrStepSzb& src, const PtrStepSzb& dst, cudaStream_t stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             static const data_step_down_t data_step_down_callers[2] =
             {
                 data_step_down_gpu<short>, data_step_down_gpu<float>
@@ -286,9 +312,15 @@ namespace
                 cols_all[i] = (cols_all[i-1] + 1) / 2;
                 rows_all[i] = (rows_all[i-1] + 1) / 2;
 
+<<<<<<< HEAD
                 datas[i].create(rows_all[i] * rthis.ndisp, cols_all[i], rthis.msg_type);
 
                 data_step_down_callers[funcIdx](cols_all[i], rows_all[i], rows_all[i-1], datas[i-1], datas[i], cudaStream);
+=======
+                createContinuous(rows_all[i] * rthis.ndisp, cols_all[i], rthis.msg_type, datas[i]);
+
+                data_step_down_callers[funcIdx](cols_all[i], rows_all[i], cols_all[i-1], rows_all[i-1], datas[i-1], datas[i], cudaStream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
 
             PtrStepSzb mus[] = {u, u2};

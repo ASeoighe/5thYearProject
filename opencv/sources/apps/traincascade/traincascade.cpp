@@ -14,9 +14,16 @@ int main( int argc, char* argv[] )
     int numPos    = 2000;
     int numNeg    = 1000;
     int numStages = 20;
+<<<<<<< HEAD
     int precalcValBufSize = 256,
         precalcIdxBufSize = 256;
     bool baseFormatSave = false;
+=======
+    int precalcValBufSize = 1024,
+        precalcIdxBufSize = 1024;
+    bool baseFormatSave = false;
+    double acceptanceRatioBreakValue = -1.0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CvCascadeParams cascadeParams;
     CvCascadeBoostParams stageParams;
@@ -37,6 +44,10 @@ int main( int argc, char* argv[] )
         cout << "  [-precalcValBufSize <precalculated_vals_buffer_size_in_Mb = " << precalcValBufSize << ">]" << endl;
         cout << "  [-precalcIdxBufSize <precalculated_idxs_buffer_size_in_Mb = " << precalcIdxBufSize << ">]" << endl;
         cout << "  [-baseFormatSave]" << endl;
+<<<<<<< HEAD
+=======
+        cout << "  [-acceptanceRatioBreakValue <value> = " << acceptanceRatioBreakValue << ">]" << endl;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cascadeParams.printDefaults();
         stageParams.printDefaults();
         for( int fi = 0; fi < fc; fi++ )
@@ -83,6 +94,13 @@ int main( int argc, char* argv[] )
         {
             baseFormatSave = true;
         }
+<<<<<<< HEAD
+=======
+        else if( !strcmp( argv[i], "-acceptanceRatioBreakValue" ) )
+        {
+            acceptanceRatioBreakValue = atof(argv[++i]);
+        }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         else if ( cascadeParams.scanAttr( argv[i], argv[i+1] ) ) { i++; }
         else if ( stageParams.scanAttr( argv[i], argv[i+1] ) ) { i++; }
         else if ( !set )
@@ -108,6 +126,11 @@ int main( int argc, char* argv[] )
                       cascadeParams,
                       *featureParams[cascadeParams.featureType],
                       stageParams,
+<<<<<<< HEAD
                       baseFormatSave );
+=======
+                      baseFormatSave,
+                      acceptanceRatioBreakValue );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return 0;
 }

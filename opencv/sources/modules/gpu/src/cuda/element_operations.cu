@@ -234,6 +234,10 @@ namespace arithm
     }
 
     template void addMat<uchar, uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addMat<uchar, schar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void addMat<uchar, ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void addMat<uchar, short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -278,7 +282,13 @@ namespace arithm
     //template void addMat<float, ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void addMat<float, short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void addMat<float, int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
     template void addMat<float, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+=======
+#endif
+    template void addMat<float, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addMat<float, double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
 
     //template void addMat<double, uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -288,6 +298,10 @@ namespace arithm
     //template void addMat<double, int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void addMat<double, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void addMat<double, double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -329,6 +343,10 @@ namespace arithm
     }
 
     template void addScalar<uchar, float, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addScalar<uchar, float, schar>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void addScalar<uchar, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void addScalar<uchar, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -373,7 +391,13 @@ namespace arithm
     //template void addScalar<float, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void addScalar<float, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void addScalar<float, float, int>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
     template void addScalar<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+=======
+#endif
+    template void addScalar<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addScalar<float, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
 
     //template void addScalar<double, double, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -383,6 +407,10 @@ namespace arithm
     //template void addScalar<double, double, int>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void addScalar<double, double, float>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void addScalar<double, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -469,6 +497,10 @@ namespace arithm
     }
 
     template void subMat<uchar, uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void subMat<uchar, schar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void subMat<uchar, ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void subMat<uchar, short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -513,7 +545,13 @@ namespace arithm
     //template void subMat<float, ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void subMat<float, short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void subMat<float, int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
     template void subMat<float, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+=======
+#endif
+    template void subMat<float, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void subMat<float, double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
 
     //template void subMat<double, uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -523,6 +561,10 @@ namespace arithm
     //template void subMat<double, int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void subMat<double, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void subMat<double, double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -542,6 +584,10 @@ namespace arithm
     }
 
     template void subScalar<uchar, float, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void subScalar<uchar, float, schar>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void subScalar<uchar, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void subScalar<uchar, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -586,7 +632,13 @@ namespace arithm
     //template void subScalar<float, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void subScalar<float, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void subScalar<float, float, int>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
     template void subScalar<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+=======
+#endif
+    template void subScalar<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void subScalar<float, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
 
     //template void subScalar<double, double, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -596,6 +648,10 @@ namespace arithm
     //template void subScalar<double, double, int>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     //template void subScalar<double, double, float>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void subScalar<double, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -700,6 +756,10 @@ namespace arithm
     }
 
     template void mulMat<uchar, float, uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void mulMat<uchar, float, schar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     template void mulMat<uchar, float, ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     template void mulMat<uchar, float, short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
@@ -744,7 +804,13 @@ namespace arithm
     //template void mulMat<float, float, ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     //template void mulMat<float, float, short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     //template void mulMat<float, float, int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+<<<<<<< HEAD
     template void mulMat<float, float, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+=======
+#endif
+    template void mulMat<float, float, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void mulMat<float, double, double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
 
     //template void mulMat<double, double, uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
@@ -754,6 +820,10 @@ namespace arithm
     //template void mulMat<double, double, int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     //template void mulMat<double, double, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     template void mulMat<double, double, double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -791,6 +861,10 @@ namespace arithm
     }
 
     template void mulScalar<uchar, float, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void mulScalar<uchar, float, schar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void mulScalar<uchar, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void mulScalar<uchar, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
@@ -835,7 +909,13 @@ namespace arithm
     //template void mulScalar<float, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void mulScalar<float, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void mulScalar<float, float, int>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void mulScalar<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void mulScalar<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void mulScalar<float, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
 
     //template void mulScalar<double, double, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
@@ -845,6 +925,10 @@ namespace arithm
     //template void mulScalar<double, double, int>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void mulScalar<double, double, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void mulScalar<double, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -968,6 +1052,10 @@ namespace arithm
     }
 
     template void divMat<uchar, float, uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void divMat<uchar, float, schar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     template void divMat<uchar, float, ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     template void divMat<uchar, float, short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
@@ -1012,7 +1100,13 @@ namespace arithm
     //template void divMat<float, float, ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     //template void divMat<float, float, short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     //template void divMat<float, float, int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+<<<<<<< HEAD
     template void divMat<float, float, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+=======
+#endif
+    template void divMat<float, float, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void divMat<float, double, double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
 
     //template void divMat<double, double, uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
@@ -1022,6 +1116,10 @@ namespace arithm
     //template void divMat<double, double, int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     //template void divMat<double, double, float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
     template void divMat<double, double, double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, double scale, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1037,6 +1135,10 @@ namespace arithm
     }
 
     template void divScalar<uchar, float, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void divScalar<uchar, float, schar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void divScalar<uchar, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void divScalar<uchar, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
@@ -1081,7 +1183,13 @@ namespace arithm
     //template void divScalar<float, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void divScalar<float, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void divScalar<float, float, int>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void divScalar<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void divScalar<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void divScalar<float, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
 
     //template void divScalar<double, double, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
@@ -1091,6 +1199,10 @@ namespace arithm
     //template void divScalar<double, double, int>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void divScalar<double, double, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void divScalar<double, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1128,6 +1240,10 @@ namespace arithm
     }
 
     template void divInv<uchar, float, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void divInv<uchar, float, schar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void divInv<uchar, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void divInv<uchar, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
@@ -1172,7 +1288,13 @@ namespace arithm
     //template void divInv<float, float, ushort>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void divInv<float, float, short>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void divInv<float, float, int>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void divInv<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void divInv<float, float, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void divInv<float, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
 
     //template void divInv<double, double, uchar>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
@@ -1182,6 +1304,10 @@ namespace arithm
     //template void divInv<double, double, int>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     //template void divInv<double, double, float>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
     template void divInv<double, double, double>(PtrStepSzb src1, double val, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1278,12 +1404,24 @@ namespace arithm
     }
 
     template void absDiffMat<uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void absDiffMat<schar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void absDiffMat<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void absDiffMat<short>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void absDiffMat<int>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void absDiffMat<float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void absDiffMat<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void absDiffMat<float>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void absDiffMat<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1323,12 +1461,24 @@ namespace arithm
     }
 
     template void absDiffScalar<uchar, float>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void absDiffScalar<schar, float>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void absDiffScalar<ushort, float>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void absDiffScalar<short, float>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void absDiffScalar<int, float>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void absDiffScalar<float, float>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void absDiffScalar<double, double>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void absDiffScalar<float, float>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void absDiffScalar<double, double>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1349,13 +1499,25 @@ namespace arithm
         transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, abs_func<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void absMat<uchar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void absMat<schar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void absMat<ushort>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void absMat<short>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void absMat<int>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void absMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void absMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void absMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void absMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1390,13 +1552,25 @@ namespace arithm
         transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, Sqr<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void sqrMat<uchar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrMat<schar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrMat<ushort>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrMat<short>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrMat<int>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void sqrMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void sqrMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void sqrMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1417,13 +1591,25 @@ namespace arithm
         transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, sqrt_func<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void sqrtMat<uchar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrtMat<schar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrtMat<ushort>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrtMat<short>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrtMat<int>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void sqrtMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void sqrtMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void sqrtMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void sqrtMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1444,13 +1630,25 @@ namespace arithm
         transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, log_func<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void logMat<uchar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void logMat<schar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void logMat<ushort>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void logMat<short>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void logMat<int>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void logMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void logMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void logMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void logMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1486,13 +1684,25 @@ namespace arithm
         transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, Exp<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void expMat<uchar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void expMat<schar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void expMat<ushort>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void expMat<short>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void expMat<int>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void expMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
     template void expMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void expMat<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void expMat<double>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -1620,36 +1830,81 @@ namespace arithm
     }
 
     template void cmpMatEq<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpMatEq<schar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatEq<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatEq<short >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatEq<int   >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpMatEq<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatEq<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
 
     template void cmpMatNe<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpMatEq<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpMatEq<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void cmpMatNe<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpMatNe<schar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatNe<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatNe<short >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatNe<int   >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpMatNe<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatNe<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
 
     template void cmpMatLt<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpMatNe<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpMatNe<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void cmpMatLt<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpMatLt<schar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatLt<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatLt<short >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatLt<int   >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpMatLt<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatLt<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
 
     template void cmpMatLe<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpMatLt<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpMatLt<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void cmpMatLe<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpMatLe<schar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatLe<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatLe<short >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatLe<int   >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpMatLe<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void cmpMatLe<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpMatLe<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpMatLe<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -1824,52 +2079,119 @@ namespace arithm
     }
 
     template void cmpScalarEq<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpScalarEq<schar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarEq<ushort>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarEq<short >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarEq<int   >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpScalarEq<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarEq<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
 
     template void cmpScalarNe<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpScalarEq<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpScalarEq<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void cmpScalarNe<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpScalarNe<schar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarNe<ushort>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarNe<short >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarNe<int   >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpScalarNe<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarNe<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
 
     template void cmpScalarLt<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpScalarNe<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpScalarNe<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void cmpScalarLt<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpScalarLt<schar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarLt<ushort>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarLt<short >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarLt<int   >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpScalarLt<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarLt<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
 
     template void cmpScalarLe<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpScalarLt<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpScalarLt<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void cmpScalarLe<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpScalarLe<schar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarLe<ushort>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarLe<short >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarLe<int   >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpScalarLe<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarLe<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
 
     template void cmpScalarGt<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpScalarLe<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpScalarLe<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void cmpScalarGt<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpScalarGt<schar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarGt<ushort>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarGt<short >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarGt<int   >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpScalarGt<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarGt<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
 
     template void cmpScalarGe<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpScalarGt<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpScalarGt<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void cmpScalarGe<uchar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void cmpScalarGe<schar >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarGe<ushort>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarGe<short >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarGe<int   >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void cmpScalarGe<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
     template void cmpScalarGe<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void cmpScalarGe<float >(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void cmpScalarGe<double>(PtrStepSzb src, int cn, double val[4], PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -1896,38 +2218,67 @@ namespace cv { namespace gpu { namespace device
 
 namespace arithm
 {
+<<<<<<< HEAD
     template <typename T> void bitMatNot(PtrStepSzb src, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream)
     {
         if (mask.data)
             transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, bit_not<T>(), mask, stream);
+=======
+    template <typename T> void bitMatNot(PtrStepSzb src, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream)
+    {
+        if (mask.data)
+            transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, bit_not<T>(), SingleMaskChannels(mask, num_channels), stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         else
             transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, bit_not<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
     template <typename T> void bitMatAnd(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream)
     {
         if (mask.data)
             transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_and<T>(), mask, stream);
+=======
+    template <typename T> void bitMatAnd(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream)
+    {
+        if (mask.data)
+            transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_and<T>(), SingleMaskChannels(mask, num_channels), stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         else
             transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_and<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
     template <typename T> void bitMatOr(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream)
     {
         if (mask.data)
             transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_or<T>(), mask, stream);
+=======
+    template <typename T> void bitMatOr(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream)
+    {
+        if (mask.data)
+            transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_or<T>(), SingleMaskChannels(mask, num_channels), stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         else
             transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_or<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
     template <typename T> void bitMatXor(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream)
     {
         if (mask.data)
             transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_xor<T>(), mask, stream);
+=======
+    template <typename T> void bitMatXor(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream)
+    {
+        if (mask.data)
+            transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_xor<T>(), SingleMaskChannels(mask, num_channels), stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         else
             transform((PtrStepSz<T>) src1, (PtrStepSz<T>) src2, (PtrStepSz<T>) dst, bit_xor<T>(), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
     template void bitMatNot<uchar>(PtrStepSzb src, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void bitMatNot<ushort>(PtrStepSzb src, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void bitMatNot<uint>(PtrStepSzb src, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
@@ -1943,6 +2294,23 @@ namespace arithm
     template void bitMatXor<uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void bitMatXor<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
     template void bitMatXor<uint>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, cudaStream_t stream);
+=======
+    template void bitMatNot<uchar>(PtrStepSzb src, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+    template void bitMatNot<ushort>(PtrStepSzb src, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+    template void bitMatNot<uint>(PtrStepSzb src, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+
+    template void bitMatAnd<uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+    template void bitMatAnd<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+    template void bitMatAnd<uint>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+
+    template void bitMatOr<uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+    template void bitMatOr<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+    template void bitMatOr<uint>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+
+    template void bitMatXor<uchar>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+    template void bitMatXor<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+    template void bitMatXor<uint>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, PtrStepb mask, int num_channels, cudaStream_t stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -1981,6 +2349,7 @@ namespace arithm
     }
 
     template void bitScalarAnd<uchar>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void bitScalarAnd<ushort>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
     template void bitScalarAnd<int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
     template void bitScalarAnd<unsigned int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
@@ -1994,6 +2363,27 @@ namespace arithm
     template void bitScalarXor<ushort>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
     template void bitScalarXor<int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
     template void bitScalarXor<unsigned int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void bitScalarAnd<ushort>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+    template void bitScalarAnd<int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+    template void bitScalarAnd<unsigned int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void bitScalarOr<uchar>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void bitScalarOr<ushort>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+    template void bitScalarOr<int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+    template void bitScalarOr<unsigned int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+
+    template void bitScalarXor<uchar>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void bitScalarXor<ushort>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+    template void bitScalarXor<int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+    template void bitScalarXor<unsigned int>(PtrStepSzb src1, uint src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -2067,18 +2457,38 @@ namespace arithm
     }
 
     template void minMat<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void minMat<schar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void minMat<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void minMat<short >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void minMat<int   >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void minMat<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void minMat<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void minMat<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void minMat<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     template <typename T> void minScalar(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream)
     {
         transform((PtrStepSz<T>) src1, (PtrStepSz<T>) dst, cv::gpu::device::bind2nd(minimum<T>(), src2), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    template void minScalar<uchar >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+    template void minScalar<int   >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+    template void minScalar<float >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void minScalar<uchar >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void minScalar<schar >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void minScalar<ushort>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
@@ -2086,6 +2496,10 @@ namespace arithm
     template void minScalar<int   >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void minScalar<float >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void minScalar<double>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -2159,12 +2573,24 @@ namespace arithm
     }
 
     template void maxMat<uchar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void maxMat<schar >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void maxMat<ushort>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void maxMat<short >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void maxMat<int   >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void maxMat<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
     template void maxMat<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void maxMat<float >(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void maxMat<double>(PtrStepSzb src1, PtrStepSzb src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     template <typename T> void maxScalar(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream)
     {
@@ -2172,12 +2598,24 @@ namespace arithm
     }
 
     template void maxScalar<uchar >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void maxScalar<schar >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void maxScalar<ushort>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void maxScalar<short >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void maxScalar<int   >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void maxScalar<float >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
     template void maxScalar<double>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void maxScalar<float >(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void maxScalar<double>(PtrStepSzb src1, double src2, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -2233,12 +2671,24 @@ namespace arithm
     }
 
     template void threshold<uchar>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void threshold<schar>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
     template void threshold<ushort>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
     template void threshold<short>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
     template void threshold<int>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
+<<<<<<< HEAD
     template void threshold<float>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
     template void threshold<double>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
+=======
+#endif
+    template void threshold<float>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void threshold<double>(PtrStepSzb src, PtrStepSzb dst, double thresh, double maxVal, int type, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -2312,13 +2762,25 @@ namespace arithm
         transform((PtrStepSz<T>) src, (PtrStepSz<T>) dst, PowOp<T>(power), WithOutMask(), stream);
     }
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void pow<uchar>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
     template void pow<schar>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
     template void pow<short>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
     template void pow<ushort>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
     template void pow<int>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void pow<float>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
     template void pow<double>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void pow<float>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+    template void pow<double>(PtrStepSzb src, double power, PtrStepSzb dst, cudaStream_t stream);
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -2397,6 +2859,10 @@ namespace arithm
     }
 
     template void addWeighted<uchar, uchar, uchar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addWeighted<uchar, uchar, schar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<uchar, uchar, ushort>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<uchar, uchar, short>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
@@ -2451,9 +2917,16 @@ namespace arithm
     template void addWeighted<uchar, double, int>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<uchar, double, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<uchar, double, double>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
 
 
 
+=======
+#endif
+
+
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addWeighted<schar, schar, uchar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<schar, schar, schar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<schar, schar, ushort>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
@@ -2501,9 +2974,16 @@ namespace arithm
     template void addWeighted<schar, double, int>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<schar, double, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<schar, double, double>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
 
 
 
+=======
+#endif
+
+
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addWeighted<ushort, ushort, uchar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<ushort, ushort, schar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<ushort, ushort, ushort>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
@@ -2543,9 +3023,16 @@ namespace arithm
     template void addWeighted<ushort, double, int>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<ushort, double, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<ushort, double, double>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
 
 
 
+=======
+#endif
+
+
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addWeighted<short, short, uchar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<short, short, schar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<short, short, ushort>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
@@ -2577,9 +3064,16 @@ namespace arithm
     template void addWeighted<short, double, int>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<short, double, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<short, double, double>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
 
 
 
+=======
+#endif
+
+
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addWeighted<int, int, uchar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<int, int, schar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<int, int, ushort>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
@@ -2603,15 +3097,28 @@ namespace arithm
     template void addWeighted<int, double, int>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<int, double, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<int, double, double>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
 
 
 
+=======
+#endif
+
+
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addWeighted<float, float, uchar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<float, float, schar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<float, float, ushort>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<float, float, short>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<float, float, int>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
     template void addWeighted<float, float, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+=======
+#endif
+    template void addWeighted<float, float, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addWeighted<float, float, double>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
 
     template void addWeighted<float, double, uchar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
@@ -2621,9 +3128,17 @@ namespace arithm
     template void addWeighted<float, double, int>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<float, double, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<float, double, double>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
 
 
 
+=======
+#endif
+
+
+
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template void addWeighted<double, double, uchar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<double, double, schar>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<double, double, ushort>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
@@ -2631,6 +3146,10 @@ namespace arithm
     template void addWeighted<double, double, int>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<double, double, float>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
     template void addWeighted<double, double, double>(PtrStepSzb src1, double alpha, PtrStepSzb src2, double beta, double gamma, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 #endif /* CUDA_DISABLER */

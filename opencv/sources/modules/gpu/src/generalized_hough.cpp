@@ -675,6 +675,7 @@ namespace
     /////////////////////////////////////////
     // POSITION & SCALE & ROTATION
 
+<<<<<<< HEAD
     double toRad(double a)
     {
         return a * CV_PI / 180.0;
@@ -697,6 +698,8 @@ namespace
         return (fabs(clampAngle(a - b)) <= eps);
     }
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     class GHT_Guil_Full : public GHT_Pos
     {
     public:

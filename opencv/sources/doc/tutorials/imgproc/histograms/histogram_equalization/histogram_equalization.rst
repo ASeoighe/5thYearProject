@@ -83,7 +83,11 @@ Code
         * Display the source and equalized images in a window.
 
    * **Downloadable code**:
+<<<<<<< HEAD
      Click `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/Histograms_Matching/EqualizeHist_Demo.cpp>`_
+=======
+     Click `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/Histograms_Matching/EqualizeHist_Demo.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    * **Code at glance:**
 

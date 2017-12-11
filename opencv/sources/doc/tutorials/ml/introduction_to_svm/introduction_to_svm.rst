@@ -105,8 +105,13 @@ Explanation
 
   .. code-block:: cpp
 
+<<<<<<< HEAD
      Mat trainingDataMat(3, 2, CV_32FC1, trainingData);
      Mat labelsMat      (3, 1, CV_32FC1, labels);
+=======
+     Mat trainingDataMat(4, 2, CV_32FC1, trainingData);
+     Mat labelsMat      (4, 1, CV_32FC1, labels);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 2. **Set up SVM's parameters**
 

@@ -57,14 +57,23 @@ namespace cvflann {
 class DynamicBitset
 {
 public:
+<<<<<<< HEAD
     /** @param default constructor
+=======
+    /** default constructor
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     DynamicBitset()
     {
     }
 
+<<<<<<< HEAD
     /** @param only constructor we use in our code
      * @param the size of the bitset (in bits)
+=======
+    /** only constructor we use in our code
+     * @param sz the size of the bitset (in bits)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     DynamicBitset(size_t sz)
     {
@@ -87,7 +96,11 @@ public:
         return bitset_.empty();
     }
 
+<<<<<<< HEAD
     /** @param set all the bits to 0
+=======
+    /** set all the bits to 0
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     void reset()
     {
@@ -95,7 +108,11 @@ public:
     }
 
     /** @brief set one bit to 0
+<<<<<<< HEAD
      * @param
+=======
+     * @param index
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     void reset(size_t index)
     {
@@ -106,15 +123,24 @@ public:
      * This function is useful when resetting a given set of bits so that the
      * whole bitset ends up being 0: if that's the case, we don't care about setting
      * other bits to 0
+<<<<<<< HEAD
      * @param
+=======
+     * @param index
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     void reset_block(size_t index)
     {
         bitset_[index / cell_bit_size_] = 0;
     }
 
+<<<<<<< HEAD
     /** @param resize the bitset so that it contains at least size bits
      * @param size
+=======
+    /** resize the bitset so that it contains at least sz bits
+     * @param sz
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     void resize(size_t sz)
     {
@@ -122,7 +148,11 @@ public:
         bitset_.resize(sz / cell_bit_size_ + 1);
     }
 
+<<<<<<< HEAD
     /** @param set a bit to true
+=======
+    /** set a bit to true
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      * @param index the index of the bit to set to 1
      */
     void set(size_t index)
@@ -130,14 +160,22 @@ public:
         bitset_[index / cell_bit_size_] |= size_t(1) << (index % cell_bit_size_);
     }
 
+<<<<<<< HEAD
     /** @param gives the number of contained bits
+=======
+    /** gives the number of contained bits
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     size_t size() const
     {
         return size_;
     }
 
+<<<<<<< HEAD
     /** @param check if a bit is set
+=======
+    /** check if a bit is set
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      * @param index the index of the bit to check
      * @return true if the bit is set
      */

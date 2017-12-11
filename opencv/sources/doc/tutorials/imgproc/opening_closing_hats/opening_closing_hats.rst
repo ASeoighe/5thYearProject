@@ -31,7 +31,11 @@ In the previous tutorial we covered two basic Morphology operations:
    * Erosion
    * Dilation.
 
+<<<<<<< HEAD
 Based on these two we can effectuate more sophisticated transformations to our images. Here we discuss briefly 05 operations offered by OpenCV:
+=======
+Based on these two we can effectuate more sophisticated transformations to our images. Here we discuss briefly 5 operations offered by OpenCV:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 Opening
 ---------
@@ -50,6 +54,15 @@ Opening
      :alt: Opening
      :align: center
 
+<<<<<<< HEAD
+=======
+For the sake of clarity, we have performed the opening operation (:math:`7x7` rectangular structuring element) on the same original image but inverted such as the object in white is now the letter.
+
+  .. image:: images/Morphology_2_Tutorial_Theory_Opening_2.png
+     :alt: Left image: original image inverted, right image: resulting opening
+     :align: center
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Closing
 ---------
 
@@ -65,6 +78,14 @@ Closing
      :alt: Closing example
      :align: center
 
+<<<<<<< HEAD
+=======
+On the inverted image, we have performed the closing operation (:math:`7x7` rectangular structuring element):
+
+  .. image:: images/Morphology_2_Tutorial_Theory_Closing_2.png
+     :alt: Left image: original image inverted, right image: resulting closing
+     :align: center
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 Morphological Gradient
 ------------------------
@@ -111,7 +132,11 @@ Black Hat
 Code
 ======
 
+<<<<<<< HEAD
 This tutorial code's is shown lines below. You can also download it from `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/ImgProc/Morphology_2.cpp>`_
+=======
+This tutorial code's is shown lines below. You can also download it from `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/ImgProc/Morphology_2.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. code-block:: cpp
 

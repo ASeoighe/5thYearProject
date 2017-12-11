@@ -101,7 +101,11 @@ public:
             }
             else
             {
+<<<<<<< HEAD
                 if (readStringList(input, imageList))
+=======
+                if (isListOfImages(input) && readStringList(input, imageList))
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     {
                         inputType = IMAGE_LIST;
                         nrFrames = (nrFrames < (int)imageList.size()) ? nrFrames : (int)imageList.size();
@@ -169,6 +173,19 @@ public:
             l.push_back((string)*it);
         return true;
     }
+<<<<<<< HEAD
+=======
+
+    static bool isListOfImages( const string& filename)
+    {
+        string s(filename);
+        // Look for file extension
+        if( s.find(".xml") == string::npos && s.find(".yaml") == string::npos && s.find(".yml") == string::npos )
+            return false;
+        else
+            return true;
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 public:
     Size boardSize;            // The size of the board -> Number of items by width and height
     Pattern calibrationPattern;// One of the Chessboard, circles, or asymmetric circle pattern

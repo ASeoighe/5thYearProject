@@ -1,12 +1,20 @@
 
 /* pnginfo.h - header file for PNG reference library
  *
+<<<<<<< HEAD
  * Copyright (c) 1998-2011 Glenn Randers-Pehrson
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
  * Last changed in libpng 1.5.0 [January 6, 2011]
  *
+=======
+ * Last changed in libpng 1.5.0 [January 6, 2011]
+ * Copyright (c) 1998-2002,2004,2006-2011 Glenn Randers-Pehrson
+ * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
+ * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
+ *
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  * This code is released under the libpng license.
  * For conditions of distribution and use, see the disclaimer
  * and license in png.h
@@ -242,7 +250,11 @@ defined(PNG_READ_BACKGROUND_SUPPORTED)
 #ifdef PNG_sPLT_SUPPORTED
    /* Data on sPLT chunks (there may be more than one). */
    png_sPLT_tp splt_palettes;
+<<<<<<< HEAD
    png_uint_32 splt_palettes_num;
+=======
+   int splt_palettes_num;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
 #ifdef PNG_sCAL_SUPPORTED

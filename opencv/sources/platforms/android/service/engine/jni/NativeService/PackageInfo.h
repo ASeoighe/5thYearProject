@@ -10,7 +10,11 @@
 #define ARCH_ARMv5_NAME "armv5"
 #define ARCH_ARMv6_NAME "armv6"
 #define ARCH_ARMv7_NAME "armv7a"
+<<<<<<< HEAD
 #define ARCH_ARMv8_NAME "armv8"
+=======
+#define ARCH_AARCH64_NAME "aarch64"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #define FEATURES_HAS_VFPv3d16_NAME "vfpv3d16"
 #define FEATURES_HAS_VFPv3_NAME "vfpv3"

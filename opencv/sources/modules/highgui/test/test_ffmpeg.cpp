@@ -132,6 +132,10 @@ public:
                         writer << img;
                     }
 
+<<<<<<< HEAD
+=======
+                    writer.release();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     if (!created) created = true;
                     else remove(filename.c_str());
                 }
@@ -395,6 +399,13 @@ TEST(Highgui_Video_parallel_writers_and_readers, accuracy)
         if (code == 1)
             std::cerr << "Couldn't delete " << *i << std::endl;
     }
+<<<<<<< HEAD
+=======
+
+    // delete the readers
+    for (std::vector<VideoCapture *>::iterator i = readers.begin(), end = readers.end(); i != end; ++i)
+        delete *i;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 #endif

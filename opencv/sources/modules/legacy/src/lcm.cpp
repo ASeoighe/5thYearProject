@@ -100,8 +100,13 @@ typedef struct CvLCMData
 //    Context:
 //    Parameters:
 //      LCM : in&out.
+<<<<<<< HEAD
 //    Returns: 1, if hybrid model was succesfully constructed
 //             0, if some error occures
+=======
+//    Returns: 1, if hybrid model was successfully constructed
+//             0, if some error occurs
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 //F*/
 CV_IMPL
 int _cvConstructLCM(CvLCM* LCM);

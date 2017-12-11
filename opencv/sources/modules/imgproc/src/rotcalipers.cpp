@@ -186,6 +186,7 @@ icvRotatingCalipers( CvPoint2D32f* points, int n, int mode, float* out )
 
         /* compute cosine of angle between calipers side and polygon edge */
         /* dp - dot product */
+<<<<<<< HEAD
         float dp0 = base_a * vect[seq[0]].x + base_b * vect[seq[0]].y;
         float dp1 = -base_b * vect[seq[1]].x + base_a * vect[seq[1]].y;
         float dp2 = -base_a * vect[seq[2]].x - base_b * vect[seq[2]].y;
@@ -193,17 +194,39 @@ icvRotatingCalipers( CvPoint2D32f* points, int n, int mode, float* out )
 
         float cosalpha = dp0 * inv_vect_length[seq[0]];
         float maxcos = cosalpha;
+=======
+        float dp[4] = {
+            +base_a * vect[seq[0]].x + base_b * vect[seq[0]].y,
+            -base_b * vect[seq[1]].x + base_a * vect[seq[1]].y,
+            -base_a * vect[seq[2]].x - base_b * vect[seq[2]].y,
+            +base_b * vect[seq[3]].x - base_a * vect[seq[3]].y,
+        };
+
+        float maxcos = dp[0] * inv_vect_length[seq[0]];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         /* number of calipers edges, that has minimal angle with edge */
         int main_element = 0;
 
         /* choose minimal angle */
+<<<<<<< HEAD
         cosalpha = dp1 * inv_vect_length[seq[1]];
         maxcos = (cosalpha > maxcos) ? (main_element = 1, cosalpha) : maxcos;
         cosalpha = dp2 * inv_vect_length[seq[2]];
         maxcos = (cosalpha > maxcos) ? (main_element = 2, cosalpha) : maxcos;
         cosalpha = dp3 * inv_vect_length[seq[3]];
         maxcos = (cosalpha > maxcos) ? (main_element = 3, cosalpha) : maxcos;
+=======
+        for ( i = 1; i < 4; ++i )
+        {
+            float cosalpha = dp[i] * inv_vect_length[seq[i]];
+            if (cosalpha > maxcos)
+            {
+                main_element = i;
+                maxcos = cosalpha;
+            }
+        }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         /*rotate calipers*/
         {

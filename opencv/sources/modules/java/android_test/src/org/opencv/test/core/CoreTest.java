@@ -2052,7 +2052,11 @@ public class CoreTest extends OpenCVTestCase {
         };
         Mat roots = new Mat();
 
+<<<<<<< HEAD
         assertEquals(0.0, Core.solvePoly(coeffs, roots));
+=======
+        assertGE(1e-6, Math.abs(Core.solvePoly(coeffs, roots)));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         truth = new Mat(3, 1, CvType.CV_32FC2) {
             {

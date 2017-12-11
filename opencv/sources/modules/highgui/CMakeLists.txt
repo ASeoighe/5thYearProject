@@ -9,6 +9,13 @@ ocv_add_module(highgui opencv_imgproc OPTIONAL opencv_androidcamera)
 
 ocv_clear_vars(GRFMT_LIBS)
 
+<<<<<<< HEAD
+=======
+if(HAVE_WINRT_CX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /ZW")
+endif()
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 if(HAVE_PNG OR HAVE_TIFF OR HAVE_OPENEXR)
   ocv_include_directories(${ZLIB_INCLUDE_DIR})
   list(APPEND GRFMT_LIBS ${ZLIB_LIBRARIES})
@@ -50,19 +57,29 @@ source_group("Src\\grfmts" FILES ${grfmt_hdrs} ${grfmt_srcs})
 set(highgui_hdrs
     src/precomp.hpp
     src/utils.hpp
+<<<<<<< HEAD
     src/cap_ffmpeg_impl.hpp
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     )
 
 set(highgui_srcs
     src/cap.cpp
     src/cap_images.cpp
+<<<<<<< HEAD
     src/cap_ffmpeg.cpp
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     src/loadsave.cpp
     src/utils.cpp
     src/window.cpp
     )
 
+<<<<<<< HEAD
 file(GLOB highgui_ext_hdrs "include/opencv2/${name}/*.hpp" "include/opencv2/${name}/*.h")
+=======
+file(GLOB highgui_ext_hdrs "include/opencv2/*.hpp" "include/opencv2/${name}/*.hpp" "include/opencv2/${name}/*.h")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 if(HAVE_QT5)
   set(CMAKE_AUTOMOC ON)
@@ -119,6 +136,10 @@ if (WIN32 AND HAVE_DSHOW)
 endif()
 
 if (WIN32 AND HAVE_MSMF)
+<<<<<<< HEAD
+=======
+  list(APPEND highgui_srcs src/cap_msmf.hpp)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   list(APPEND highgui_srcs src/cap_msmf.cpp)
 endif()
 
@@ -165,18 +186,36 @@ endif(HAVE_opencv_androidcamera)
 
 if(HAVE_XIMEA)
   list(APPEND highgui_srcs src/cap_ximea.cpp)
+<<<<<<< HEAD
   ocv_include_directories(${XIMEA_PATH})
   if(XIMEA_LIBRARY_DIR)
     link_directories("${XIMEA_LIBRARY_DIR}")
   endif()
   if(X86_64)
     list(APPEND HIGHGUI_LIBRARIES m3apiX64)
+=======
+  if(XIMEA_PATH)
+    ocv_include_directories(${XIMEA_PATH})
+  endif()
+  if(XIMEA_LIBRARY_DIR)
+    link_directories("${XIMEA_LIBRARY_DIR}")
+  endif()
+  if(WIN32 AND X86_64)
+    list(APPEND HIGHGUI_LIBRARIES m3apiX64)
+  elseif(APPLE)
+    list(APPEND HIGHGUI_LIBRARIES "-framework m3api")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   else()
     list(APPEND HIGHGUI_LIBRARIES m3api)
   endif()
 endif(HAVE_XIMEA)
 
 if(HAVE_FFMPEG)
+<<<<<<< HEAD
+=======
+  list(APPEND highgui_hdrs src/cap_ffmpeg_impl.hpp)
+  list(APPEND highgui_srcs src/cap_ffmpeg.cpp)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   if(UNIX AND BZIP2_LIBRARIES)
     list(APPEND HIGHGUI_LIBRARIES ${BZIP2_LIBRARIES})
   endif()
@@ -206,8 +245,18 @@ if(HAVE_IMAGEIO AND IOS)
 endif()
 
 if(HAVE_AVFOUNDATION)
+<<<<<<< HEAD
   list(APPEND highgui_srcs src/cap_avfoundation.mm)
   list(APPEND HIGHGUI_LIBRARIES "-framework AVFoundation" "-framework QuartzCore")
+=======
+  if(IOS)
+    list(APPEND highgui_srcs ${CMAKE_CURRENT_LIST_DIR}/src/cap_avfoundation.mm)
+    list(APPEND HIGHGUI_LIBRARIES "-framework AVFoundation" "-framework QuartzCore")
+  else()
+    list(APPEND highgui_srcs ${CMAKE_CURRENT_LIST_DIR}/src/cap_avfoundation_mac.mm)
+    list(APPEND HIGHGUI_LIBRARIES "-framework Cocoa" "-framework Accelerate" "-framework AVFoundation" "-framework CoreGraphics" "-framework CoreMedia" "-framework CoreVideo" "-framework QuartzCore")
+  endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 endif()
 
 if(HAVE_QUICKTIME)
@@ -227,7 +276,11 @@ endif(HAVE_INTELPERC)
 if(IOS)
   add_definitions(-DHAVE_IOS=1)
   list(APPEND highgui_srcs src/ios_conversions.mm src/cap_ios_abstract_camera.mm src/cap_ios_photo_camera.mm src/cap_ios_video_camera.mm)
+<<<<<<< HEAD
   list(APPEND HIGHGUI_LIBRARIES "-framework Accelerate" "-framework AVFoundation" "-framework CoreGraphics" "-framework CoreImage" "-framework CoreMedia" "-framework CoreVideo" "-framework QuartzCore" "-framework AssetsLibrary")
+=======
+  list(APPEND HIGHGUI_LIBRARIES "-framework Accelerate" "-framework AVFoundation" "-framework CoreGraphics" "-framework CoreMedia" "-framework CoreVideo" "-framework QuartzCore" "-framework AssetsLibrary")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 endif()
 
 if(WIN32)
@@ -283,7 +336,11 @@ endif()
 set_target_properties(${the_module} PROPERTIES LINK_INTERFACE_LIBRARIES "")
 
 ocv_add_precompiled_headers(${the_module})
+<<<<<<< HEAD
 ocv_warnings_disable(CMAKE_CXX_FLAGS -Wno-deprecated-declarations)
+=======
+ocv_warnings_disable(CMAKE_CXX_FLAGS -Wno-deprecated-declarations -Wno-clobbered)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 if(WIN32 AND WITH_FFMPEG)
   #copy ffmpeg dll to the output folder

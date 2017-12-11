@@ -53,17 +53,47 @@ bool cv::solvePnP( InputArray _opoints, InputArray _ipoints,
     Mat opoints = _opoints.getMat(), ipoints = _ipoints.getMat();
     int npoints = std::max(opoints.checkVector(3, CV_32F), opoints.checkVector(3, CV_64F));
     CV_Assert( npoints >= 0 && npoints == std::max(ipoints.checkVector(2, CV_32F), ipoints.checkVector(2, CV_64F)) );
+<<<<<<< HEAD
     _rvec.create(3, 1, CV_64F);
     _tvec.create(3, 1, CV_64F);
     Mat cameraMatrix = _cameraMatrix.getMat(), distCoeffs = _distCoeffs.getMat();
 
+=======
+    Mat cameraMatrix = _cameraMatrix.getMat(), distCoeffs = _distCoeffs.getMat();
+
+    Mat rvec, tvec;
+    if( flags != CV_ITERATIVE )
+        useExtrinsicGuess = false;
+
+    if( useExtrinsicGuess )
+    {
+        int rtype = _rvec.type(), ttype = _tvec.type();
+        Size rsize = _rvec.size(), tsize = _tvec.size();
+        CV_Assert( (rtype == CV_32F || rtype == CV_64F) &&
+                   (ttype == CV_32F || ttype == CV_64F) );
+        CV_Assert( (rsize == Size(1, 3) || rsize == Size(3, 1)) &&
+                   (tsize == Size(1, 3) || tsize == Size(3, 1)) );
+    }
+    else
+    {
+        _rvec.create(3, 1, CV_64F);
+        _tvec.create(3, 1, CV_64F);
+    }
+    rvec = _rvec.getMat();
+    tvec = _tvec.getMat();
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if (flags == CV_EPNP)
     {
         cv::Mat undistortedPoints;
         cv::undistortPoints(ipoints, undistortedPoints, cameraMatrix, distCoeffs);
         epnp PnP(cameraMatrix, opoints, undistortedPoints);
 
+<<<<<<< HEAD
         cv::Mat R, rvec = _rvec.getMat(), tvec = _tvec.getMat();
+=======
+        cv::Mat R;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         PnP.compute_pose(R, tvec);
         cv::Rodrigues(R, rvec);
         return true;
@@ -75,7 +105,11 @@ bool cv::solvePnP( InputArray _opoints, InputArray _ipoints,
         cv::undistortPoints(ipoints, undistortedPoints, cameraMatrix, distCoeffs);
         p3p P3Psolver(cameraMatrix);
 
+<<<<<<< HEAD
         cv::Mat R, rvec = _rvec.getMat(), tvec = _tvec.getMat();
+=======
+        cv::Mat R;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         bool result = P3Psolver.solve(R, tvec, opoints, undistortedPoints);
         if (result)
             cv::Rodrigues(R, rvec);
@@ -85,7 +119,11 @@ bool cv::solvePnP( InputArray _opoints, InputArray _ipoints,
     {
         CvMat c_objectPoints = opoints, c_imagePoints = ipoints;
         CvMat c_cameraMatrix = cameraMatrix, c_distCoeffs = distCoeffs;
+<<<<<<< HEAD
         CvMat c_rvec = _rvec.getMat(), c_tvec = _tvec.getMat();
+=======
+        CvMat c_rvec = rvec, c_tvec = tvec;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cvFindExtrinsicCameraParams2(&c_objectPoints, &c_imagePoints, &c_cameraMatrix,
                                      c_distCoeffs.rows*c_distCoeffs.cols ? &c_distCoeffs : 0,
                                      &c_rvec, &c_tvec, useExtrinsicGuess );
@@ -137,11 +175,21 @@ namespace cv
             CameraParameters camera;
         };
 
+<<<<<<< HEAD
         static void pnpTask(const vector<char>& pointsMask, const Mat& objectPoints, const Mat& imagePoints,
                      const Parameters& params, vector<int>& inliers, Mat& rvec, Mat& tvec,
                      const Mat& rvecInit, const Mat& tvecInit, Mutex& resultsMutex)
         {
             Mat modelObjectPoints(1, MIN_POINTS_COUNT, CV_32FC3), modelImagePoints(1, MIN_POINTS_COUNT, CV_32FC2);
+=======
+        template <typename OpointType, typename IpointType>
+        static void pnpTask(const int curIndex, const vector<char>& pointsMask, const Mat& objectPoints, const Mat& imagePoints,
+                     const Parameters& params, vector<int>& inliers, int& bestIndex, Mat& rvec, Mat& tvec,
+                     const Mat& rvecInit, const Mat& tvecInit, Mutex& resultsMutex)
+        {
+            Mat modelObjectPoints(1, MIN_POINTS_COUNT, CV_MAKETYPE(DataDepth<OpointType>::value, 3));
+            Mat modelImagePoints(1, MIN_POINTS_COUNT, CV_MAKETYPE(DataDepth<IpointType>::value, 2));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for (int i = 0, colIndex = 0; i < (int)pointsMask.size(); i++)
             {
                 if (pointsMask[i])
@@ -160,7 +208,11 @@ namespace cv
             for (int i = 0; i < MIN_POINTS_COUNT; i++)
                 for (int j = i + 1; j < MIN_POINTS_COUNT; j++)
                 {
+<<<<<<< HEAD
                     if (norm(modelObjectPoints.at<Vec3f>(0, i) - modelObjectPoints.at<Vec3f>(0, j)) < eps)
+=======
+                    if (norm(modelObjectPoints.at<Vec<OpointType,3> >(0, i) - modelObjectPoints.at<Vec<OpointType,3> >(0, j)) < eps)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                         num_same_points++;
                 }
             if (num_same_points > 0)
@@ -174,7 +226,11 @@ namespace cv
                      params.useExtrinsicGuess, params.flags);
 
 
+<<<<<<< HEAD
             vector<Point2f> projected_points;
+=======
+            vector<Point_<OpointType> > projected_points;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             projected_points.resize(objectPoints.cols);
             projectPoints(objectPoints, localRvec, localTvec, params.camera.intrinsics, params.camera.distortion, projected_points);
 
@@ -184,25 +240,68 @@ namespace cv
             vector<int> localInliers;
             for (int i = 0; i < objectPoints.cols; i++)
             {
+<<<<<<< HEAD
                 Point2f p(imagePoints.at<Vec2f>(0, i)[0], imagePoints.at<Vec2f>(0, i)[1]);
                 if ((norm(p - projected_points[i]) < params.reprojectionError)
                     && (rotatedPoints.at<Vec3f>(0, i)[2] > 0)) //hack
+=======
+                //Although p is a 2D point it needs the same type as the object points to enable the norm calculation
+                Point_<OpointType> p((OpointType)imagePoints.at<Vec<IpointType,2> >(0, i)[0],
+                                     (OpointType)imagePoints.at<Vec<IpointType,2> >(0, i)[1]);
+                if ((norm(p - projected_points[i]) < params.reprojectionError)
+                    && (rotatedPoints.at<Vec<OpointType,3> >(0, i)[2] > 0)) //hack
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 {
                     localInliers.push_back(i);
                 }
             }
 
+<<<<<<< HEAD
             if (localInliers.size() > inliers.size())
             {
                 resultsMutex.lock();
 
+=======
+            resultsMutex.lock();
+            if ( (localInliers.size() > inliers.size()) || (localInliers.size() == inliers.size() && inliers.size() > 0 && curIndex > bestIndex))
+            {
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 inliers.clear();
                 inliers.resize(localInliers.size());
                 memcpy(&inliers[0], &localInliers[0], sizeof(int) * localInliers.size());
                 localRvec.copyTo(rvec);
                 localTvec.copyTo(tvec);
+<<<<<<< HEAD
 
                 resultsMutex.unlock();
+=======
+                bestIndex = curIndex;
+            }
+            resultsMutex.unlock();
+        }
+
+        static void pnpTask(const int curIndex, const vector<char>& pointsMask, const Mat& objectPoints, const Mat& imagePoints,
+            const Parameters& params, vector<int>& inliers, int& bestIndex, Mat& rvec, Mat& tvec,
+            const Mat& rvecInit, const Mat& tvecInit, Mutex& resultsMutex)
+        {
+            CV_Assert(objectPoints.depth() == CV_64F ||  objectPoints.depth() == CV_32F);
+            CV_Assert(imagePoints.depth() == CV_64F ||  imagePoints.depth() == CV_32F);
+            const bool objectDoublePrecision = objectPoints.depth() == CV_64F;
+            const bool imageDoublePrecision = imagePoints.depth() == CV_64F;
+            if(objectDoublePrecision)
+            {
+                if(imageDoublePrecision)
+                    pnpTask<double, double>(curIndex, pointsMask, objectPoints, imagePoints, params, inliers, bestIndex, rvec, tvec, rvecInit, tvecInit, resultsMutex);
+                else
+                    pnpTask<double, float>(curIndex, pointsMask, objectPoints, imagePoints, params, inliers, bestIndex, rvec, tvec, rvecInit, tvecInit, resultsMutex);
+            }
+            else
+            {
+                if(imageDoublePrecision)
+                    pnpTask<float, double>(curIndex, pointsMask, objectPoints, imagePoints, params, inliers, bestIndex, rvec, tvec, rvecInit, tvecInit, resultsMutex);
+                else
+                    pnpTask<float, float>(curIndex, pointsMask, objectPoints, imagePoints, params, inliers, bestIndex, rvec, tvec, rvecInit, tvecInit, resultsMutex);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
         }
 
@@ -212,12 +311,22 @@ namespace cv
             void operator()( const BlockedRange& r ) const
             {
                 vector<char> pointsMask(objectPoints.cols, 0);
+<<<<<<< HEAD
                 memset(&pointsMask[0], 1, MIN_POINTS_COUNT );
                 for( int i=r.begin(); i!=r.end(); ++i )
                 {
                     generateVar(pointsMask);
                     pnpTask(pointsMask, objectPoints, imagePoints, parameters,
                             inliers, rvec, tvec, initRvec, initTvec, syncMutex);
+=======
+                for( int i=r.begin(); i!=r.end(); ++i )
+                {
+                    memset(&pointsMask[0], 0, objectPoints.cols );
+                    memset(&pointsMask[0], 1, MIN_POINTS_COUNT );
+                    generateVar(pointsMask, rng_base_seed + i);
+                    pnpTask(i, pointsMask, objectPoints, imagePoints, parameters,
+                            inliers, bestIndex, rvec, tvec, initRvec, initTvec, syncMutex);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     if ((int)inliers.size() >= parameters.minInliersCount)
                     {
 #ifdef HAVE_TBB
@@ -229,6 +338,7 @@ namespace cv
                 }
             }
             PnPSolver(const Mat& _objectPoints, const Mat& _imagePoints, const Parameters& _parameters,
+<<<<<<< HEAD
                       Mat& _rvec, Mat& _tvec, vector<int>& _inliers):
             objectPoints(_objectPoints), imagePoints(_imagePoints), parameters(_parameters),
             rvec(_rvec), tvec(_tvec), inliers(_inliers)
@@ -237,6 +347,15 @@ namespace cv
                 tvec.copyTo(initTvec);
 
                 generator.state = theRNG().state; //to control it somehow...
+=======
+                      Mat& _rvec, Mat& _tvec, vector<int>& _inliers, int& _bestIndex, uint64 _rng_base_seed):
+            objectPoints(_objectPoints), imagePoints(_imagePoints), parameters(_parameters),
+            rvec(_rvec), tvec(_tvec), inliers(_inliers), bestIndex(_bestIndex), rng_base_seed(_rng_base_seed)
+            {
+                bestIndex = -1;
+                rvec.copyTo(initRvec);
+                tvec.copyTo(initTvec);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
         private:
             PnPSolver& operator=(const PnPSolver&);
@@ -246,6 +365,7 @@ namespace cv
             const Parameters& parameters;
             Mat &rvec, &tvec;
             vector<int>& inliers;
+<<<<<<< HEAD
             Mat initRvec, initTvec;
 
             static RNG generator;
@@ -253,6 +373,17 @@ namespace cv
 
             void generateVar(vector<char>& mask) const
             {
+=======
+            int& bestIndex;
+            const uint64 rng_base_seed;
+            Mat initRvec, initTvec;
+
+            static Mutex syncMutex;
+
+          void generateVar(vector<char>& mask, uint64 rng_seed) const
+            {
+                RNG generator(rng_seed);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 int size = (int)mask.size();
                 for (int i = 0; i < size; i++)
                 {
@@ -266,7 +397,10 @@ namespace cv
         };
 
         Mutex PnPSolver::syncMutex;
+<<<<<<< HEAD
         RNG PnPSolver::generator;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     }
 }
@@ -277,10 +411,15 @@ void cv::solvePnPRansac(InputArray _opoints, InputArray _ipoints,
                         int iterationsCount, float reprojectionError, int minInliersCount,
                         OutputArray _inliers, int flags)
 {
+<<<<<<< HEAD
+=======
+    const int _rng_seed = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     Mat opoints = _opoints.getMat(), ipoints = _ipoints.getMat();
     Mat cameraMatrix = _cameraMatrix.getMat(), distCoeffs = _distCoeffs.getMat();
 
     CV_Assert(opoints.isContinuous());
+<<<<<<< HEAD
     CV_Assert(opoints.depth() == CV_32F);
     CV_Assert((opoints.rows == 1 && opoints.channels() == 3) || opoints.cols*opoints.channels() == 3);
     CV_Assert(ipoints.isContinuous());
@@ -291,6 +430,34 @@ void cv::solvePnPRansac(InputArray _opoints, InputArray _ipoints,
     _tvec.create(3, 1, CV_64FC1);
     Mat rvec = _rvec.getMat();
     Mat tvec = _tvec.getMat();
+=======
+    CV_Assert(opoints.depth() == CV_32F || opoints.depth() == CV_64F);
+    CV_Assert((opoints.rows == 1 && opoints.channels() == 3) || opoints.cols*opoints.channels() == 3);
+    CV_Assert(ipoints.isContinuous());
+    CV_Assert(ipoints.depth() == CV_32F || ipoints.depth() == CV_64F);
+    CV_Assert((ipoints.rows == 1 && ipoints.channels() == 2) || ipoints.cols*ipoints.channels() == 2);
+
+    Mat rvec, tvec;
+    if( flags != CV_ITERATIVE )
+        useExtrinsicGuess = false;
+
+    if( useExtrinsicGuess )
+    {
+        int rtype = _rvec.type(), ttype = _tvec.type();
+        Size rsize = _rvec.size(), tsize = _tvec.size();
+        CV_Assert( (rtype == CV_32F || rtype == CV_64F) &&
+                   (ttype == CV_32F || ttype == CV_64F) );
+        CV_Assert( (rsize == Size(1, 3) || rsize == Size(3, 1)) &&
+                   (tsize == Size(1, 3) || tsize == Size(3, 1)) );
+    }
+    else
+    {
+        _rvec.create(3, 1, CV_64F);
+        _tvec.create(3, 1, CV_64F);
+    }
+    rvec = _rvec.getMat();
+    tvec = _tvec.getMat();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     Mat objectPoints = opoints.reshape(3, 1), imagePoints = ipoints.reshape(2, 1);
 
@@ -308,11 +475,20 @@ void cv::solvePnPRansac(InputArray _opoints, InputArray _ipoints,
     Mat localRvec, localTvec;
     rvec.copyTo(localRvec);
     tvec.copyTo(localTvec);
+<<<<<<< HEAD
+=======
+    int bestIndex;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     if (objectPoints.cols >= pnpransac::MIN_POINTS_COUNT)
     {
         parallel_for(BlockedRange(0,iterationsCount), cv::pnpransac::PnPSolver(objectPoints, imagePoints, params,
+<<<<<<< HEAD
                                                                                localRvec, localTvec, localInliers));
+=======
+                                                                               localRvec, localTvec, localInliers, bestIndex,
+                                                                               _rng_seed));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
     if (localInliers.size() >= (size_t)pnpransac::MIN_POINTS_COUNT)
@@ -320,7 +496,11 @@ void cv::solvePnPRansac(InputArray _opoints, InputArray _ipoints,
         if (flags != CV_P3P)
         {
             int i, pointsCount = (int)localInliers.size();
+<<<<<<< HEAD
             Mat inlierObjectPoints(1, pointsCount, CV_32FC3), inlierImagePoints(1, pointsCount, CV_32FC2);
+=======
+            Mat inlierObjectPoints(1, pointsCount, CV_MAKE_TYPE(opoints.depth(), 3)), inlierImagePoints(1, pointsCount, CV_MAKE_TYPE(ipoints.depth(), 2));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for (i = 0; i < pointsCount; i++)
             {
                 int index = localInliers[i];
@@ -329,7 +509,12 @@ void cv::solvePnPRansac(InputArray _opoints, InputArray _ipoints,
                 Mat colInlierObjectPoints = inlierObjectPoints(Rect(i, 0, 1, 1));
                 objectPoints.col(index).copyTo(colInlierObjectPoints);
             }
+<<<<<<< HEAD
             solvePnP(inlierObjectPoints, inlierImagePoints, params.camera.intrinsics, params.camera.distortion, localRvec, localTvec, true, flags);
+=======
+            solvePnP(inlierObjectPoints, inlierImagePoints, params.camera.intrinsics, params.camera.distortion,
+                     localRvec, localTvec, params.useExtrinsicGuess, flags);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
         localRvec.copyTo(rvec);
         localTvec.copyTo(tvec);

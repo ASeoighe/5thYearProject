@@ -28,6 +28,11 @@ Here it is:
 
    #include <cv.h>
    #include <highgui.h>
+<<<<<<< HEAD
+=======
+   #include <opencv2/imgproc/imgproc.hpp>
+   #include <stdio.h>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    using namespace cv;
 
@@ -63,7 +68,11 @@ Here it is:
 Explanation
 ============
 
+<<<<<<< HEAD
 #. We begin by loading an image using :readwriteimagevideo:`imread <imread>`, located in the path given by *imageName*. For this example, assume you are loading a RGB image.
+=======
+#. We begin by loading an image using :readwriteimagevideo:`imread <imread>`, located in the path given by *imageName*. For this example, assume you are loading a BGR image.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #. Now we are going to convert our image from BGR to Grayscale format. OpenCV has a really nice function to do this kind of transformations:
 

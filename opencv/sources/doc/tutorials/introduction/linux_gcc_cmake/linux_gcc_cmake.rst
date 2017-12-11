@@ -46,7 +46,11 @@ Let's use a simple program such as DisplayImage.cpp shown below.
           printf("No image data \n");
           return -1;
       }
+<<<<<<< HEAD
       namedWindow("Display Image", CV_WINDOW_AUTOSIZE );
+=======
+      namedWindow("Display Image", WINDOW_AUTOSIZE );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       imshow("Display Image", image);
 
       waitKey(0);

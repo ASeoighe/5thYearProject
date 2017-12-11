@@ -22,7 +22,11 @@ Theory
 Code
 ====
 
+<<<<<<< HEAD
 This tutorial code's is shown lines below. You can also download it from `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/objectDetection/objectDetection.cpp>`_ . The second version (using LBP for face detection) can be `found here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/objectDetection/objectDetection2.cpp>`_
+=======
+This tutorial code's is shown lines below. You can also download it from `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/objectDetection/objectDetection.cpp>`_ . The second version (using LBP for face detection) can be `found here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/objectDetection/objectDetection2.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. code-block:: cpp
 

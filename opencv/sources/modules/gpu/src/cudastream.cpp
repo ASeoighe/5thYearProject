@@ -89,6 +89,10 @@ struct Stream::Impl
     }
 
     cudaStream_t stream;
+<<<<<<< HEAD
+=======
+    bool own_stream;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int ref_counter;
 };
 
@@ -270,7 +274,11 @@ void cv::gpu::Stream::enqueueConvert(const GpuMat& src, GpuMat& dst, int dtype, 
     convertTo(src, dst, alpha, beta, stream);
 }
 
+<<<<<<< HEAD
 #if CUDA_VERSION >= 5000
+=======
+#if CUDART_VERSION >= 5000
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 namespace
 {
@@ -293,7 +301,11 @@ namespace
 
 void cv::gpu::Stream::enqueueHostCallback(StreamCallback callback, void* userData)
 {
+<<<<<<< HEAD
 #if CUDA_VERSION >= 5000
+=======
+#if CUDART_VERSION >= 5000
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     CallbackData* data = new CallbackData;
     data->callback = callback;
     data->userData = userData;
@@ -335,6 +347,10 @@ void cv::gpu::Stream::create()
     impl = (Stream::Impl*) fastMalloc(sizeof(Stream::Impl));
 
     impl->stream = stream;
+<<<<<<< HEAD
+=======
+    impl->own_stream = true;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     impl->ref_counter = 1;
 }
 
@@ -342,9 +358,30 @@ void cv::gpu::Stream::release()
 {
     if (impl && CV_XADD(&impl->ref_counter, -1) == 1)
     {
+<<<<<<< HEAD
         cudaSafeCall( cudaStreamDestroy(impl->stream) );
+=======
+        if (impl->own_stream)
+        {
+            cudaSafeCall( cudaStreamDestroy(impl->stream) );
+        }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cv::fastFree(impl);
     }
 }
 
+<<<<<<< HEAD
+=======
+Stream StreamAccessor::wrapStream(cudaStream_t stream)
+{
+    Stream::Impl* impl = (Stream::Impl*) fastMalloc(sizeof(Stream::Impl));
+
+    impl->stream = stream;
+    impl->own_stream = false;
+    impl->ref_counter = 1;
+
+    return Stream(impl);
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif /* !defined (HAVE_CUDA) */

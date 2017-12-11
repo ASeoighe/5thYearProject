@@ -27,9 +27,16 @@ if(WIN32)
 endif()
 
 if(INSTALL_C_EXAMPLES AND NOT WIN32)
+<<<<<<< HEAD
   file(GLOB GPU_FILES performance/*.cpp performance/*.h)
   install(FILES ${GPU_FILES}
           DESTINATION ${OPENCV_SAMPLES_SRC_INSTALL_PATH}/gpu/performance
           PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
+=======
+  file(GLOB GPU_FILES performance/*.cpp performance/*.h performance/CMakeLists.txt)
+  install(FILES ${GPU_FILES}
+          DESTINATION "${OPENCV_SAMPLES_SRC_INSTALL_PATH}/gpu/performance"
+          PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
           COMPONENT samples)
 endif()

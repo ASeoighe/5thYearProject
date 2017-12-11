@@ -122,6 +122,7 @@ namespace cv
         typedef PtrStep<float> PtrStepf;
         typedef PtrStep<int> PtrStepi;
 
+<<<<<<< HEAD
 
 #if defined __GNUC__
     #define __CV_GPU_DEPR_BEFORE__
@@ -143,6 +144,25 @@ namespace cv
             template <typename U>
             explicit __CV_GPU_DEPR_BEFORE__ DevMem2D_(const DevMem2D_<U>& d) : PtrStepSz<T>(d.rows, d.cols, (T*)d.data, d.step) {}
         } __CV_GPU_DEPR_AFTER__ ;
+=======
+#if defined __GNUC__
+    #define CV_GPU_DEPRECATED __attribute__ ((deprecated))
+#elif defined(__MSVC__) //|| defined(__CUDACC__)
+    #pragma deprecated(DevMem2D_)
+    #define CV_GPU_DEPRECATED __declspec(deprecated)
+#else
+    #define CV_GPU_DEPRECATED
+#endif
+
+        template <typename T> struct DevMem2D_ : public PtrStepSz<T>
+        {
+            CV_GPU_DEPRECATED DevMem2D_() {}
+            CV_GPU_DEPRECATED DevMem2D_(int rows_, int cols_, T* data_, size_t step_) : PtrStepSz<T>(rows_, cols_, data_, step_) {}
+
+            template <typename U>
+            explicit CV_GPU_DEPRECATED DevMem2D_(const DevMem2D_<U>& d) : PtrStepSz<T>(d.rows, d.cols, (T*)d.data, d.step) {}
+        };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         typedef DevMem2D_<unsigned char> DevMem2Db;
         typedef DevMem2Db DevMem2D;
@@ -174,8 +194,12 @@ namespace cv
         typedef PtrElemStep_<float> PtrElemStepf;
         typedef PtrElemStep_<int> PtrElemStepi;
 
+<<<<<<< HEAD
 //#undef __CV_GPU_DEPR_BEFORE__
 //#undef __CV_GPU_DEPR_AFTER__
+=======
+//#undef CV_GPU_DEPRECATED
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         namespace device
         {

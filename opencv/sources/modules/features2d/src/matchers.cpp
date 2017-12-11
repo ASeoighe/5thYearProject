@@ -352,18 +352,41 @@ void BFMatcher::knnMatchImpl( const Mat& queryDescriptors, vector<vector<DMatch>
 
     matches.reserve(queryDescriptors.rows);
 
+<<<<<<< HEAD
     Mat dist, nidx;
 
     int iIdx, imgCount = (int)trainDescCollection.size(), update = 0;
     int dtype = normType == NORM_HAMMING || normType == NORM_HAMMING2 ||
         (normType == NORM_L1 && queryDescriptors.type() == CV_8U) ? CV_32S : CV_32F;
+=======
+    int iIdx, imgCount = (int)trainDescCollection.size(), update = 0;
+    int dtype = normType == NORM_HAMMING || normType == NORM_HAMMING2 ||
+        (normType == NORM_L1 && queryDescriptors.type() == CV_8U) ? CV_32S : CV_32F;
+    int maxRows = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert( (int64)imgCount*IMGIDX_ONE < INT_MAX );
 
     for( iIdx = 0; iIdx < imgCount; iIdx++ )
+<<<<<<< HEAD
     {
         CV_Assert( trainDescCollection[iIdx].rows < IMGIDX_ONE );
         batchDistance(queryDescriptors, trainDescCollection[iIdx], dist, dtype, nidx,
+=======
+        maxRows = std::max(maxRows, trainDescCollection[iIdx].rows);
+
+    int m = queryDescriptors.rows;
+    Mat dist(m, knn, dtype), nidx(m, knn, CV_32S);
+    dist = Scalar::all(dtype == CV_32S ? (double)INT_MAX : (double)FLT_MAX);
+    nidx = Scalar::all(-1);
+
+    for( iIdx = 0; iIdx < imgCount; iIdx++ )
+    {
+        CV_Assert( trainDescCollection[iIdx].rows < IMGIDX_ONE );
+        int n = std::min(knn, trainDescCollection[iIdx].rows);
+        Mat dist_i = dist.colRange(0, n), nidx_i = nidx.colRange(0, n);
+        batchDistance(queryDescriptors, trainDescCollection[iIdx], dist_i, dtype, nidx_i,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                       normType, knn, masks.empty() ? Mat() : masks[iIdx], update, crossCheck);
         update += IMGIDX_ONE;
     }
@@ -522,10 +545,27 @@ void FlannBasedMatcher::clear()
 
 void FlannBasedMatcher::train()
 {
+<<<<<<< HEAD
     if( flannIndex.empty() || mergedDescriptors.size() < addedDescCount )
     {
         mergedDescriptors.set( trainDescCollection );
         flannIndex = new flann::Index( mergedDescriptors.getDescriptors(), *indexParams );
+=======
+    int trained = mergedDescriptors.size();
+    if (flannIndex.empty() || trained < addedDescCount)
+    {
+        mergedDescriptors.set( trainDescCollection );
+
+        //  construct flannIndex class, if empty or Algorithm not equal FLANN_INDEX_LSH
+        if (flannIndex.empty() || flannIndex->getAlgorithm() != cvflann::FLANN_INDEX_LSH)
+        {
+            flannIndex = new flann::Index(mergedDescriptors.getDescriptors(), *indexParams);
+        }
+        else
+        {
+            flannIndex->build(mergedDescriptors.getDescriptors(), mergedDescriptors.getDescriptors().rowRange(trained, mergedDescriptors.size()), *indexParams, cvflann::FLANN_DIST_HAMMING);
+        }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }
 

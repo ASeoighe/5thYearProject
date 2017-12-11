@@ -557,7 +557,10 @@ void CV_Resize_Test::resize_1d(const Mat& _src, Mat& _dst, int dy, const dim& _d
                 xyD[r] = 0;
                 for (int k = 0; k < ksize; ++k)
                     xyD[r] += w[k] * xyS[k * cn + r];
+<<<<<<< HEAD
                 xyD[r] = xyD[r];
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
         }
     }
@@ -645,8 +648,12 @@ private:
 };
 
 CV_Remap_Test::CV_Remap_Test() :
+<<<<<<< HEAD
     CV_ImageWarpBaseTest(), mapx(), mapy(),
     borderType(-1), borderValue()
+=======
+    CV_ImageWarpBaseTest(), borderType(-1)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     funcs[0] = &CV_Remap_Test::remap_nearest;
     funcs[1] = &CV_Remap_Test::remap_generic;
@@ -667,7 +674,11 @@ void CV_Remap_Test::generate_test_data()
     // generating the mapx, mapy matrices
     static const int mapx_types[] = { CV_16SC2, CV_32FC1, CV_32FC2 };
     mapx.create(dst.size(), mapx_types[rng.uniform(0, sizeof(mapx_types) / sizeof(int))]);
+<<<<<<< HEAD
     mapy = Mat();
+=======
+    mapy.release();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     const int n = std::min(std::min(src.cols, src.rows) / 10 + 1, 2);
     float _n = 0; //static_cast<float>(-n);
@@ -694,7 +705,11 @@ void CV_Remap_Test::generate_test_data()
                     {
                         MatIterator_<ushort> begin_y = mapy.begin<ushort>(), end_y = mapy.end<ushort>();
                         for ( ; begin_y != end_y; ++begin_y)
+<<<<<<< HEAD
                             begin_y[0] = static_cast<short>(rng.uniform(0, 1024));
+=======
+                            *begin_y = static_cast<ushort>(rng.uniform(0, 1024));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     }
                     break;
 
@@ -702,7 +717,11 @@ void CV_Remap_Test::generate_test_data()
                     {
                         MatIterator_<short> begin_y = mapy.begin<short>(), end_y = mapy.end<short>();
                         for ( ; begin_y != end_y; ++begin_y)
+<<<<<<< HEAD
                             begin_y[0] = static_cast<short>(rng.uniform(0, 1024));
+=======
+                            *begin_y = static_cast<short>(rng.uniform(0, 1024));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     }
                     break;
                 }
@@ -719,8 +738,13 @@ void CV_Remap_Test::generate_test_data()
             MatIterator_<float> begin_y = mapy.begin<float>();
             for ( ; begin_x != end_x; ++begin_x, ++begin_y)
             {
+<<<<<<< HEAD
                 begin_x[0] = rng.uniform(_n, fscols);
                 begin_y[0] = rng.uniform(_n, fsrows);
+=======
+                *begin_x = rng.uniform(_n, fscols);
+                *begin_y = rng.uniform(_n, fsrows);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
         }
         break;
@@ -732,8 +756,13 @@ void CV_Remap_Test::generate_test_data()
                     fsrows = static_cast<float>(std::max(src.rows - 1 + n, 0));
             for ( ; begin_x != end_x; ++begin_x)
             {
+<<<<<<< HEAD
                 begin_x[0] = rng.uniform(_n, fscols);
                 begin_x[1] = rng.uniform(_n, fsrows);
+=======
+                (*begin_x)[0] = rng.uniform(_n, fscols);
+                (*begin_x)[1] = rng.uniform(_n, fsrows);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
         }
         break;
@@ -778,6 +807,7 @@ void CV_Remap_Test::prepare_test_data_for_reference_func()
 {
     CV_ImageWarpBaseTest::prepare_test_data_for_reference_func();
     convert_maps();
+<<<<<<< HEAD
 /*
     const int ksize = 3;
     Mat kernel = getStructuringElement(CV_MOP_ERODE, Size(ksize, ksize));
@@ -795,6 +825,8 @@ void CV_Remap_Test::prepare_test_data_for_reference_func()
     src.copyTo(dilate_src, dst_mask);
     dst_mask.release();
 */
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 void CV_Remap_Test::run_reference_func()

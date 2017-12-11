@@ -111,6 +111,7 @@ namespace cv
 
 /******************************* Defs and macros *****************************/
 
+<<<<<<< HEAD
 // default number of sampled intervals per octave
 static const int SIFT_INTVLS = 3;
 
@@ -126,6 +127,8 @@ static const float SIFT_CURV_THR = 10.f;
 // double image size before pyramid construction?
 static const bool SIFT_IMG_DBL = true;
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // default width of descriptor histogram array
 static const int SIFT_DESCR_WIDTH = 4;
 
@@ -185,10 +188,19 @@ static Mat createInitialImage( const Mat& img, bool doubleImageSize, float sigma
 {
     Mat gray, gray_fpt;
     if( img.channels() == 3 || img.channels() == 4 )
+<<<<<<< HEAD
         cvtColor(img, gray, COLOR_BGR2GRAY);
     else
         img.copyTo(gray);
     gray.convertTo(gray_fpt, DataType<sift_wt>::type, SIFT_FIXPT_SCALE, 0);
+=======
+    {
+        cvtColor(img, gray, COLOR_BGR2GRAY);
+        gray.convertTo(gray_fpt, DataType<sift_wt>::type, SIFT_FIXPT_SCALE, 0);
+    }
+    else
+        img.convertTo(gray_fpt, DataType<sift_wt>::type, SIFT_FIXPT_SCALE, 0);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     float sig_diff;
 
@@ -196,7 +208,11 @@ static Mat createInitialImage( const Mat& img, bool doubleImageSize, float sigma
     {
         sig_diff = sqrtf( std::max(sigma * sigma - SIFT_INIT_SIGMA * SIFT_INIT_SIGMA * 4, 0.01f) );
         Mat dbl;
+<<<<<<< HEAD
         resize(gray_fpt, dbl, Size(gray.cols*2, gray.rows*2), 0, 0, INTER_LINEAR);
+=======
+        resize(gray_fpt, dbl, Size(gray_fpt.cols*2, gray_fpt.rows*2), 0, 0, INTER_LINEAR);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         GaussianBlur(dbl, dbl, Size(), sig_diff, sig_diff);
         return dbl;
     }

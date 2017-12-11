@@ -48,11 +48,15 @@ The structure of package contents looks as follows:
 
 ::
 
+<<<<<<< HEAD
     OpenCV-2.4.9-android-sdk
     |_ apk
     |   |_ OpenCV_2.4.9_binary_pack_armv7a.apk
     |   |_ OpenCV_2.4.9_Manager_2.18_XXX.apk
     |
+=======
+    OpenCV-2.4.13-android-sdk
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     |_ doc
     |_ samples
     |_ sdk
@@ -157,10 +161,17 @@ Get the OpenCV4Android SDK
 
    .. code-block:: bash
 
+<<<<<<< HEAD
       unzip ~/Downloads/OpenCV-2.4.9-android-sdk.zip
 
 .. |opencv_android_bin_pack| replace:: :file:`OpenCV-2.4.9-android-sdk.zip`
 .. _opencv_android_bin_pack_url: http://sourceforge.net/projects/opencvlibrary/files/opencv-android/2.4.9/OpenCV-2.4.9-android-sdk.zip/download
+=======
+      unzip ~/Downloads/OpenCV-2.4.11-android-sdk.zip
+
+.. |opencv_android_bin_pack| replace:: :file:`OpenCV-2.4.11-android-sdk.zip`
+.. _opencv_android_bin_pack_url: http://sourceforge.net/projects/opencvlibrary/files/opencv-android/2.4.11/OpenCV-2.4.11-android-sdk.zip/download
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 .. |opencv_android_bin_pack_url| replace:: |opencv_android_bin_pack|
 .. |seven_zip| replace:: 7-Zip
 .. _seven_zip: http://www.7-zip.org/
@@ -295,7 +306,11 @@ Well, running samples from Eclipse is very simple:
   .. code-block:: sh
     :linenos:
 
+<<<<<<< HEAD
     <Android SDK path>/platform-tools/adb install <OpenCV4Android SDK path>/apk/OpenCV_2.4.9_Manager_2.18_armv7a-neon.apk
+=======
+    <Android SDK path>/platform-tools/adb install <OpenCV4Android SDK path>/apk/OpenCV_2.4.11_Manager_2.20_armv7a-neon.apk
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   .. note:: ``armeabi``, ``armv7a-neon``, ``arm7a-neon-android8``, ``mips`` and ``x86`` stand for
             platform targets:

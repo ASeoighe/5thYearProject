@@ -97,6 +97,20 @@ CV_INLINE IppiSize ippiSize(int width, int height)
     IppiSize size = { width, height };
     return size;
 }
+<<<<<<< HEAD
+=======
+
+CV_INLINE IppiSize ippiSize(const cv::Size & _size)
+{
+    IppiSize size = { _size.width, _size.height };
+    return size;
+}
+
+#if IPP_VERSION_MAJOR >= 9 // IPP 9+ is not supported
+#undef HAVE_IPP
+#undef IPP_VERSION_MAJOR
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
 #ifndef IPPI_CALL
@@ -134,6 +148,13 @@ CV_INLINE IppiSize ippiSize(int width, int height)
 #      define __xgetbv() 0
 #    endif
 #  endif
+<<<<<<< HEAD
+=======
+#  if defined __AVX2__
+#    include <immintrin.h>
+#    define CV_AVX2 1
+#  endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
 
@@ -142,7 +163,11 @@ CV_INLINE IppiSize ippiSize(int width, int height)
 # include "arm_neon.h"
 # define CV_NEON 1
 # define CPU_HAS_NEON_FEATURE (true)
+<<<<<<< HEAD
 #elif defined(__ARM_NEON__)
+=======
+#elif defined(__ARM_NEON__) || defined(__ARM_NEON)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #  include <arm_neon.h>
 #  define CV_NEON 1
 #  define CPU_HAS_NEON_FEATURE (true)
@@ -169,6 +194,12 @@ CV_INLINE IppiSize ippiSize(int width, int height)
 #ifndef CV_AVX
 #  define CV_AVX 0
 #endif
+<<<<<<< HEAD
+=======
+#ifndef CV_AVX2
+#  define CV_AVX2 0
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifndef CV_NEON
 #  define CV_NEON 0
 #endif
@@ -278,7 +309,11 @@ namespace cv
         return classname##_info_var; \
     } \
     \
+<<<<<<< HEAD
     static ::cv::AlgorithmInfo& classname##_info_auto = classname##_info(); \
+=======
+    CV_ATTR_USED static ::cv::AlgorithmInfo& classname##_info_auto = classname##_info(); \
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     \
     ::cv::AlgorithmInfo* classname::info() const \
     { \
@@ -520,7 +555,11 @@ void func_name( T *array, size_t total, user_data_type aux )                    
     }                                                                               \
     stack[48];                                                                      \
                                                                                     \
+<<<<<<< HEAD
     aux = aux;                                                                      \
+=======
+    (void)aux;                                                                      \
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                                                                                     \
     if( total <= 1 )                                                                \
         return;                                                                     \

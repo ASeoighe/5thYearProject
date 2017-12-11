@@ -46,6 +46,15 @@
 
 #ifdef __cplusplus
 
+<<<<<<< HEAD
+=======
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverloaded-virtual"
+#endif
+
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <map>
 #include <string>
 #include <iostream>
@@ -2141,6 +2150,13 @@ CV_EXPORTS bool initModule_ml(void);
 
 }
 
+<<<<<<< HEAD
+=======
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif // __cplusplus
 #endif // __OPENCV_ML_HPP__
 

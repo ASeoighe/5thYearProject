@@ -1,4 +1,5 @@
 #include <iostream>
+<<<<<<< HEAD
 #include "cvconfig.h"
 
 #ifndef HAVE_OPENGL
@@ -8,6 +9,8 @@ int main()
     return -1;
 }
 #else
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #ifdef WIN32
     #define WIN32_LEAN_AND_MEAN 1
@@ -118,5 +121,8 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+<<<<<<< HEAD
 
 #endif
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

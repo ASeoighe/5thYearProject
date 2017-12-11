@@ -717,12 +717,21 @@ OCL_TEST_P(MinMax, MAT)
         {
             minVal = std::numeric_limits<double>::max();
             maxVal = -std::numeric_limits<double>::max();
+<<<<<<< HEAD
             for (int i = 0; i < src1_roi.rows; ++i)
                 for (int j = 0; j < src1_roi.cols; ++j)
                 {
                     signed char val = src1_roi.at<signed char>(i, j);
                     if (val < minVal) minVal = val;
                     if (val > maxVal) maxVal = val;
+=======
+            for (int i2 = 0; i2 < src1_roi.rows; ++i2)
+                for (int j2 = 0; j2 < src1_roi.cols; ++j2)
+                {
+                    signed char oneVal = src1_roi.at<signed char>(i2, j2);
+                    if (oneVal < minVal) minVal = oneVal;
+                    if (oneVal > maxVal) maxVal = oneVal;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 }
         }
 
@@ -739,10 +748,17 @@ OCL_TEST_P(MinMax, MASK)
     enum { MAX_IDX = 0, MIN_IDX };
     static const double minMaxGolds[2][7] =
     {
+<<<<<<< HEAD
         { std::numeric_limits<uchar>::min(), std::numeric_limits<char>::min(), std::numeric_limits<ushort>::min(),
           std::numeric_limits<short>::min(), std::numeric_limits<int>::min(), -std::numeric_limits<float>::max(), -std::numeric_limits<double>::max() },
         { std::numeric_limits<uchar>::max(), std::numeric_limits<char>::max(), std::numeric_limits<ushort>::max(),
           std::numeric_limits<short>::max(), std::numeric_limits<int>::max(), std::numeric_limits<float>::max(), std::numeric_limits<double>::max() },
+=======
+        { (double)std::numeric_limits<uchar>::min(), (double)std::numeric_limits<char>::min(), (double)std::numeric_limits<ushort>::min(),
+          (double)std::numeric_limits<short>::min(), (double)std::numeric_limits<int>::min(), (double)-std::numeric_limits<float>::max(), (double)-std::numeric_limits<double>::max() },
+        { (double)std::numeric_limits<uchar>::max(), (double)std::numeric_limits<char>::max(), (double)std::numeric_limits<ushort>::max(),
+          (double)std::numeric_limits<short>::max(), (double)std::numeric_limits<int>::max(), (double)std::numeric_limits<float>::max(), (double)std::numeric_limits<double>::max() },
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     };
 
     for (int j = 0; j < LOOP_TIMES; j++)
@@ -758,6 +774,7 @@ OCL_TEST_P(MinMax, MASK)
         {
             minVal = std::numeric_limits<double>::max();
             maxVal = -std::numeric_limits<double>::max();
+<<<<<<< HEAD
             for (int i = 0; i < src1_roi.rows; ++i)
                 for (int j = 0; j < src1_roi.cols; ++j)
                 {
@@ -765,6 +782,15 @@ OCL_TEST_P(MinMax, MASK)
                     unsigned char m = mask_roi.at<unsigned char>(i, j);
                     if (val < minVal && m) minVal = val;
                     if (val > maxVal && m) maxVal = val;
+=======
+            for (int i2 = 0; i2 < src1_roi.rows; ++i2)
+                for (int j2 = 0; j2 < src1_roi.cols; ++j2)
+                {
+                    signed char oneVal = src1_roi.at<signed char>(i2, j2);
+                    unsigned char m = mask_roi.at<unsigned char>(i2, j2);
+                    if (oneVal < minVal && m) minVal = oneVal;
+                    if (oneVal > maxVal && m) maxVal = oneVal;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 }
         }
 
@@ -796,14 +822,21 @@ OCL_TEST_P(MinMaxLoc, MAT)
 
         double minVal, maxVal;
         cv::Point minLoc, maxLoc;
+<<<<<<< HEAD
         int depth = src1.depth();
 
         if (depth != CV_8S)
+=======
+        int oneDepth = src1.depth();
+
+        if (oneDepth != CV_8S)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             cv::minMaxLoc(src1_roi, &minVal, &maxVal, &minLoc, &maxLoc);
         else
         {
             minVal = std::numeric_limits<double>::max();
             maxVal = -std::numeric_limits<double>::max();
+<<<<<<< HEAD
             for (int i = 0; i < src1_roi.rows; ++i)
                 for (int j = 0; j < src1_roi.cols; ++j)
                 {
@@ -819,6 +852,23 @@ OCL_TEST_P(MinMaxLoc, MAT)
                         maxVal = val;
                         maxLoc.x = j;
                         maxLoc.y = i;
+=======
+            for (int i2 = 0; i2 < src1_roi.rows; ++i2)
+                for (int j2 = 0; j2 < src1_roi.cols; ++j2)
+                {
+                    signed char oneVal = src1_roi.at<signed char>(i2, j2);
+                    if (oneVal < minVal)
+                    {
+                        minVal = oneVal;
+                        minLoc.x = j2;
+                        minLoc.y = i2;
+                    }
+                    if (oneVal > maxVal)
+                    {
+                        maxVal = oneVal;
+                        maxLoc.x = j2;
+                        maxLoc.y = i2;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     }
                 }
         }
@@ -828,7 +878,11 @@ OCL_TEST_P(MinMaxLoc, MAT)
         cv::ocl::minMaxLoc(gsrc1_roi, &minVal_, &maxVal_, &minLoc_, &maxLoc_, cv::ocl::oclMat());
 
         double error0 = 0., error1 = 0., minlocVal = 0., minlocVal_ = 0., maxlocVal = 0., maxlocVal_ = 0.;
+<<<<<<< HEAD
         if (depth == 0)
+=======
+        if (oneDepth == 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<unsigned char>(minLoc);
             minlocVal_ = src1_roi.at<unsigned char>(minLoc_);
@@ -837,7 +891,11 @@ OCL_TEST_P(MinMaxLoc, MAT)
             error0 = ::abs(src1_roi.at<unsigned char>(minLoc_) - src1_roi.at<unsigned char>(minLoc));
             error1 = ::abs(src1_roi.at<unsigned char>(maxLoc_) - src1_roi.at<unsigned char>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 1)
+=======
+        if (oneDepth == 1)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<signed char>(minLoc);
             minlocVal_ = src1_roi.at<signed char>(minLoc_);
@@ -846,7 +904,11 @@ OCL_TEST_P(MinMaxLoc, MAT)
             error0 = ::abs(src1_roi.at<signed char>(minLoc_) - src1_roi.at<signed char>(minLoc));
             error1 = ::abs(src1_roi.at<signed char>(maxLoc_) - src1_roi.at<signed char>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 2)
+=======
+        if (oneDepth == 2)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<unsigned short>(minLoc);
             minlocVal_ = src1_roi.at<unsigned short>(minLoc_);
@@ -855,7 +917,11 @@ OCL_TEST_P(MinMaxLoc, MAT)
             error0 = ::abs(src1_roi.at<unsigned short>(minLoc_) - src1_roi.at<unsigned short>(minLoc));
             error1 = ::abs(src1_roi.at<unsigned short>(maxLoc_) - src1_roi.at<unsigned short>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 3)
+=======
+        if (oneDepth == 3)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<signed short>(minLoc);
             minlocVal_ = src1_roi.at<signed short>(minLoc_);
@@ -864,7 +930,11 @@ OCL_TEST_P(MinMaxLoc, MAT)
             error0 = ::abs(src1_roi.at<signed short>(minLoc_) - src1_roi.at<signed short>(minLoc));
             error1 = ::abs(src1_roi.at<signed short>(maxLoc_) - src1_roi.at<signed short>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 4)
+=======
+        if (oneDepth == 4)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<int>(minLoc);
             minlocVal_ = src1_roi.at<int>(minLoc_);
@@ -873,23 +943,39 @@ OCL_TEST_P(MinMaxLoc, MAT)
             error0 = ::abs(src1_roi.at<int>(minLoc_) - src1_roi.at<int>(minLoc));
             error1 = ::abs(src1_roi.at<int>(maxLoc_) - src1_roi.at<int>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 5)
+=======
+        if (oneDepth == 5)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<float>(minLoc);
             minlocVal_ = src1_roi.at<float>(minLoc_);
             maxlocVal = src1_roi.at<float>(maxLoc);
             maxlocVal_ = src1_roi.at<float>(maxLoc_);
+<<<<<<< HEAD
             error0 = ::abs(src1_roi.at<float>(minLoc_) - src1_roi.at<float>(minLoc));
             error1 = ::abs(src1_roi.at<float>(maxLoc_) - src1_roi.at<float>(maxLoc));
         }
         if (depth == 6)
+=======
+            error0 = std::abs(src1_roi.at<float>(minLoc_) - src1_roi.at<float>(minLoc));
+            error1 = std::abs(src1_roi.at<float>(maxLoc_) - src1_roi.at<float>(maxLoc));
+        }
+        if (oneDepth == 6)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<double>(minLoc);
             minlocVal_ = src1_roi.at<double>(minLoc_);
             maxlocVal = src1_roi.at<double>(maxLoc);
             maxlocVal_ = src1_roi.at<double>(maxLoc_);
+<<<<<<< HEAD
             error0 = ::abs(src1_roi.at<double>(minLoc_) - src1_roi.at<double>(minLoc));
             error1 = ::abs(src1_roi.at<double>(maxLoc_) - src1_roi.at<double>(maxLoc));
+=======
+            error0 = std::abs(src1_roi.at<double>(minLoc_) - src1_roi.at<double>(minLoc));
+            error1 = std::abs(src1_roi.at<double>(maxLoc_) - src1_roi.at<double>(maxLoc));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         EXPECT_DOUBLE_EQ(minVal_, minVal);
@@ -909,13 +995,19 @@ OCL_TEST_P(MinMaxLoc, MASK)
         random_roi();
         double minVal, maxVal;
         cv::Point minLoc, maxLoc;
+<<<<<<< HEAD
         int depth = src1.depth();
         if (depth != CV_8S)
+=======
+        int oneDepth = src1.depth();
+        if (oneDepth != CV_8S)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             cv::minMaxLoc(src1_roi, &minVal, &maxVal, &minLoc, &maxLoc, mask_roi);
         else
         {
             minVal = std::numeric_limits<double>::max();
             maxVal = -std::numeric_limits<double>::max();
+<<<<<<< HEAD
             for (int i = 0; i < src1_roi.rows; ++i)
                 for (int j = 0; j < src1_roi.cols; ++j)
                 {
@@ -932,6 +1024,24 @@ OCL_TEST_P(MinMaxLoc, MASK)
                         maxVal = val;
                         maxLoc.x = j;
                         maxLoc.y = i;
+=======
+            for (int i2 = 0; i2 < src1_roi.rows; ++i2)
+                for (int j2 = 0; j2 < src1_roi.cols; ++j2)
+                {
+                    signed char oneVal = src1_roi.at<signed char>(i2, j2);
+                    unsigned char m = mask_roi.at<unsigned char>(i2 , j2);
+                    if (oneVal < minVal && m)
+                    {
+                        minVal = oneVal;
+                        minLoc.x = j2;
+                        minLoc.y = i2;
+                    }
+                    if (oneVal > maxVal && m)
+                    {
+                        maxVal = oneVal;
+                        maxLoc.x = j2;
+                        maxLoc.y = i2;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     }
                 }
         }
@@ -942,7 +1052,11 @@ OCL_TEST_P(MinMaxLoc, MASK)
 
         double error0 = 0., error1 = 0., minlocVal = 0., minlocVal_ = 0., maxlocVal = 0., maxlocVal_ = 0.;
         if (minLoc_.x == -1 || minLoc_.y == -1 || maxLoc_.x == -1 || maxLoc_.y == -1) continue;
+<<<<<<< HEAD
         if (depth == 0)
+=======
+        if (oneDepth == 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<unsigned char>(minLoc);
             minlocVal_ = src1_roi.at<unsigned char>(minLoc_);
@@ -951,7 +1065,11 @@ OCL_TEST_P(MinMaxLoc, MASK)
             error0 = ::abs(src1_roi.at<unsigned char>(minLoc_) - src1_roi.at<unsigned char>(minLoc));
             error1 = ::abs(src1_roi.at<unsigned char>(maxLoc_) - src1_roi.at<unsigned char>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 1)
+=======
+        if (oneDepth == 1)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<signed char>(minLoc);
             minlocVal_ = src1_roi.at<signed char>(minLoc_);
@@ -960,7 +1078,11 @@ OCL_TEST_P(MinMaxLoc, MASK)
             error0 = ::abs(src1_roi.at<signed char>(minLoc_) - src1_roi.at<signed char>(minLoc));
             error1 = ::abs(src1_roi.at<signed char>(maxLoc_) - src1_roi.at<signed char>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 2)
+=======
+        if (oneDepth == 2)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<unsigned short>(minLoc);
             minlocVal_ = src1_roi.at<unsigned short>(minLoc_);
@@ -969,7 +1091,11 @@ OCL_TEST_P(MinMaxLoc, MASK)
             error0 = ::abs(src1_roi.at<unsigned short>(minLoc_) - src1_roi.at<unsigned short>(minLoc));
             error1 = ::abs(src1_roi.at<unsigned short>(maxLoc_) - src1_roi.at<unsigned short>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 3)
+=======
+        if (oneDepth == 3)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<signed short>(minLoc);
             minlocVal_ = src1_roi.at<signed short>(minLoc_);
@@ -978,7 +1104,11 @@ OCL_TEST_P(MinMaxLoc, MASK)
             error0 = ::abs(src1_roi.at<signed short>(minLoc_) - src1_roi.at<signed short>(minLoc));
             error1 = ::abs(src1_roi.at<signed short>(maxLoc_) - src1_roi.at<signed short>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 4)
+=======
+        if (oneDepth == 4)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<int>(minLoc);
             minlocVal_ = src1_roi.at<int>(minLoc_);
@@ -987,23 +1117,39 @@ OCL_TEST_P(MinMaxLoc, MASK)
             error0 = ::abs(src1_roi.at<int>(minLoc_) - src1_roi.at<int>(minLoc));
             error1 = ::abs(src1_roi.at<int>(maxLoc_) - src1_roi.at<int>(maxLoc));
         }
+<<<<<<< HEAD
         if (depth == 5)
+=======
+        if (oneDepth == 5)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<float>(minLoc);
             minlocVal_ = src1_roi.at<float>(minLoc_);
             maxlocVal = src1_roi.at<float>(maxLoc);
             maxlocVal_ = src1_roi.at<float>(maxLoc_);
+<<<<<<< HEAD
             error0 = ::abs(src1_roi.at<float>(minLoc_) - src1_roi.at<float>(minLoc));
             error1 = ::abs(src1_roi.at<float>(maxLoc_) - src1_roi.at<float>(maxLoc));
         }
         if (depth == 6)
+=======
+            error0 = std::abs(src1_roi.at<float>(minLoc_) - src1_roi.at<float>(minLoc));
+            error1 = std::abs(src1_roi.at<float>(maxLoc_) - src1_roi.at<float>(maxLoc));
+        }
+        if (oneDepth == 6)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             minlocVal = src1_roi.at<double>(minLoc);
             minlocVal_ = src1_roi.at<double>(minLoc_);
             maxlocVal = src1_roi.at<double>(maxLoc);
             maxlocVal_ = src1_roi.at<double>(maxLoc_);
+<<<<<<< HEAD
             error0 = ::abs(src1_roi.at<double>(minLoc_) - src1_roi.at<double>(minLoc));
             error1 = ::abs(src1_roi.at<double>(maxLoc_) - src1_roi.at<double>(maxLoc));
+=======
+            error0 = std::abs(src1_roi.at<double>(minLoc_) - src1_roi.at<double>(minLoc));
+            error1 = std::abs(src1_roi.at<double>(maxLoc_) - src1_roi.at<double>(maxLoc));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         EXPECT_DOUBLE_EQ(minVal_, minVal);

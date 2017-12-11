@@ -1,6 +1,11 @@
 How to select the proper version of OpenCV Manager
 --------------------------------------------------
 
+<<<<<<< HEAD
+=======
+DEPRECATED: This information is outdated since OpenCV 2.4.12
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Since version 1.7 several packages of OpenCV Manager are built. Every package is targeted for some
 specific hardware platform and includes corresponding OpenCV binaries. So, in most cases OpenCV
 Manager uses built-in version of OpenCV. Separate package with OpenCV binaries is currently used in

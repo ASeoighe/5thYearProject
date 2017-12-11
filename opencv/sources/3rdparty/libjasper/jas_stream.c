@@ -345,6 +345,10 @@ jas_stream_t *jas_stream_tmpfile()
 {
     jas_stream_t *stream;
     jas_stream_fileobj_t *obj;
+<<<<<<< HEAD
+=======
+    char *tmpname;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     if (!(stream = jas_stream_create())) {
         return 0;
@@ -365,10 +369,19 @@ jas_stream_t *jas_stream_tmpfile()
 
 #ifdef _WIN32
     /* Choose a file name. */
+<<<<<<< HEAD
     tmpnam(obj->pathname);
 
     /* Open the underlying file. */
     if ((obj->fd = open(obj->pathname, O_CREAT | O_EXCL | O_RDWR | O_TRUNC | O_BINARY,
+=======
+    tmpname = tempnam(NULL, NULL);
+    strcpy(obj->pathname, tmpname);
+    free(tmpname);
+
+    /* Open the underlying file. */
+    if ((obj->fd = open(obj->pathname, O_CREAT | O_EXCL | O_RDWR | O_TRUNC | O_BINARY | O_TEMPORARY | _O_SHORT_LIVED,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       JAS_STREAM_PERMS)) < 0) {
         jas_stream_destroy(stream);
         return 0;

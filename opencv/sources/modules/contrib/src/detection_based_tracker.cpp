@@ -491,7 +491,11 @@ void DetectionBasedTracker::process(const Mat& imageGray)
     } else {
         LOGD("DetectionBasedTracker::process: get _rectsWhereRegions from previous positions");
         for(size_t i = 0; i < trackedObjects.size(); i++) {
+<<<<<<< HEAD
             int n = trackedObjects[i].lastPositions.size();
+=======
+            int n = (int)trackedObjects[i].lastPositions.size();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             CV_Assert(n > 0);
 
             Rect r = trackedObjects[i].lastPositions[n-1];
@@ -535,7 +539,11 @@ void DetectionBasedTracker::getObjects(std::vector<cv::Rect>& result) const
     result.clear();
 
     for(size_t i=0; i < trackedObjects.size(); i++) {
+<<<<<<< HEAD
         Rect r=calcTrackedObjectPositionToShow(i);
+=======
+        Rect r=calcTrackedObjectPositionToShow((int)i);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         if (r.area()==0) {
             continue;
         }
@@ -549,7 +557,11 @@ void DetectionBasedTracker::getObjects(std::vector<Object>& result) const
     result.clear();
 
     for(size_t i=0; i < trackedObjects.size(); i++) {
+<<<<<<< HEAD
         Rect r=calcTrackedObjectPositionToShow(i);
+=======
+        Rect r=calcTrackedObjectPositionToShow((int)i);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         if (r.area()==0) {
             continue;
         }
@@ -581,8 +593,13 @@ void DetectionBasedTracker::updateTrackedObjects(const vector<Rect>& detectedObj
         INTERSECTED_RECTANGLE=-2
     };
 
+<<<<<<< HEAD
     int N1=trackedObjects.size();
     int N2=detectedObjects.size();
+=======
+    int N1=(int)trackedObjects.size();
+    int N2=(int)detectedObjects.size();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     LOGD("DetectionBasedTracker::updateTrackedObjects: N1=%d, N2=%d", N1, N2);
 
     for(int i=0; i < N1; i++) {
@@ -600,7 +617,11 @@ void DetectionBasedTracker::updateTrackedObjects(const vector<Rect>& detectedObj
         int bestIndex=-1;
         int bestArea=-1;
 
+<<<<<<< HEAD
         int numpositions=curObject.lastPositions.size();
+=======
+        int numpositions=(int)curObject.lastPositions.size();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         CV_Assert(numpositions > 0);
         Rect prevRect=curObject.lastPositions[numpositions-1];
         LOGD("DetectionBasedTracker::updateTrackedObjects: prevRect[%d]={%d, %d, %d x %d}", i, prevRect.x, prevRect.y, prevRect.width, prevRect.height);
@@ -682,7 +703,11 @@ void DetectionBasedTracker::updateTrackedObjects(const vector<Rect>& detectedObj
                 )
            )
         {
+<<<<<<< HEAD
             int numpos=it->lastPositions.size();
+=======
+            int numpos=(int)it->lastPositions.size();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             CV_Assert(numpos > 0);
             Rect r = it->lastPositions[numpos-1];
             LOGD("DetectionBasedTracker::updateTrackedObjects: deleted object {%d, %d, %d x %d}",
@@ -711,7 +736,11 @@ Rect DetectionBasedTracker::calcTrackedObjectPositionToShow(int i) const
 
     const TrackedObject::PositionsVector& lastPositions=trackedObjects[i].lastPositions;
 
+<<<<<<< HEAD
     int N=lastPositions.size();
+=======
+    int N=(int)lastPositions.size();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if (N<=0) {
         LOGE("DetectionBasedTracker::calcTrackedObjectPositionToShow: ERROR: no positions for i=%d", i);
         return Rect();

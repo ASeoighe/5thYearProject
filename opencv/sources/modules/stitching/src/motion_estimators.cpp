@@ -589,6 +589,14 @@ void waveCorrect(vector<Mat> &rmats, WaveCorrectKind kind)
 #if ENABLE_LOG
     int64 t = getTickCount();
 #endif
+<<<<<<< HEAD
+=======
+    if (rmats.size() <= 1)
+    {
+        LOGLN("Wave correcting, time: " << ((getTickCount() - t) / getTickFrequency()) << " sec");
+        return;
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     Mat moment = Mat::zeros(3, 3, CV_32F);
     for (size_t i = 0; i < rmats.size(); ++i)
@@ -611,7 +619,18 @@ void waveCorrect(vector<Mat> &rmats, WaveCorrectKind kind)
     for (size_t i = 0; i < rmats.size(); ++i)
         img_k += rmats[i].col(2);
     Mat rg0 = rg1.cross(img_k);
+<<<<<<< HEAD
     rg0 /= norm(rg0);
+=======
+    double rg0_norm = norm(rg0);
+
+    if( rg0_norm <= DBL_MIN )
+    {
+        return;
+    }
+
+    rg0 /= rg0_norm;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     Mat rg2 = rg0.cross(rg1);
 

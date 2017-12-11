@@ -4,12 +4,32 @@
  * @author A. Huaman
  */
 
+<<<<<<< HEAD
 #include <stdio.h>
 #include <iostream>
 #include "opencv2/core/core.hpp"
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/nonfree/features2d.hpp"
+=======
+#include "opencv2/opencv_modules.hpp"
+#include <stdio.h>
+
+#ifndef HAVE_OPENCV_NONFREE
+
+int main(int, char**)
+{
+    printf("The sample requires nonfree module that is not available in your OpenCV distribution.\n");
+    return -1;
+}
+
+#else
+
+# include "opencv2/core/core.hpp"
+# include "opencv2/features2d/features2d.hpp"
+# include "opencv2/highgui/highgui.hpp"
+# include "opencv2/nonfree/features2d.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace cv;
 
@@ -28,7 +48,11 @@ int main( int argc, char** argv )
   Mat img_2 = imread( argv[2], CV_LOAD_IMAGE_GRAYSCALE );
 
   if( !img_1.data || !img_2.data )
+<<<<<<< HEAD
   { std::cout<< " --(!) Error reading images " << std::endl; return -1; }
+=======
+  { printf(" --(!) Error reading images \n"); return -1; }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   //-- Step 1: Detect the keypoints using SURF Detector
   int minHessian = 400;
@@ -97,4 +121,10 @@ int main( int argc, char** argv )
  * @function readme
  */
 void readme()
+<<<<<<< HEAD
 { std::cout << " Usage: ./SURF_FlannMatcher <img1> <img2>" << std::endl; }
+=======
+{ printf(" Usage: ./SURF_FlannMatcher <img1> <img2>\n"); }
+
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

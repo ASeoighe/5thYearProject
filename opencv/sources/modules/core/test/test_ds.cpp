@@ -56,7 +56,11 @@ static void cvTsSimpleSeqShiftAndCopy( CvTsSimpleSeq* seq, int from_idx, int to_
                 (seq->count - from_idx)*elem_size );
     }
     seq->count += to_idx - from_idx;
+<<<<<<< HEAD
     if( elem && to_idx > from_idx )
+=======
+    if( elem )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         memcpy( seq->array + from_idx*elem_size, elem, (to_idx - from_idx)*elem_size );
 }
 
@@ -493,6 +497,10 @@ class Core_SeqBaseTest : public Core_DynStructBaseTest
 {
 public:
     Core_SeqBaseTest();
+<<<<<<< HEAD
+=======
+    virtual ~Core_SeqBaseTest();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     void clear();
     void run( int );
 
@@ -503,11 +511,21 @@ protected:
     int test_seq_ops( int iters );
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 Core_SeqBaseTest::Core_SeqBaseTest()
 {
 }
 
+<<<<<<< HEAD
+=======
+Core_SeqBaseTest::~Core_SeqBaseTest()
+{
+    clear();
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 void Core_SeqBaseTest::clear()
 {
@@ -1208,6 +1226,10 @@ class Core_SetTest : public Core_DynStructBaseTest
 {
 public:
     Core_SetTest();
+<<<<<<< HEAD
+=======
+    virtual ~Core_SetTest();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     void clear();
     void run( int );
 
@@ -1221,6 +1243,13 @@ Core_SetTest::Core_SetTest()
 {
 }
 
+<<<<<<< HEAD
+=======
+Core_SetTest::~Core_SetTest()
+{
+    clear();
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 void Core_SetTest::clear()
 {
@@ -1419,6 +1448,10 @@ class Core_GraphTest : public Core_DynStructBaseTest
 {
 public:
     Core_GraphTest();
+<<<<<<< HEAD
+=======
+    virtual ~Core_GraphTest();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     void clear();
     void run( int );
 
@@ -1432,6 +1465,13 @@ Core_GraphTest::Core_GraphTest()
 {
 }
 
+<<<<<<< HEAD
+=======
+Core_GraphTest::~Core_GraphTest()
+{
+    clear();
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 void Core_GraphTest::clear()
 {
@@ -2044,6 +2084,11 @@ void Core_GraphScanTest::run( int )
                 CV_TS_SEQ_CHECK_CONDITION( vtx_count == 0 && edge_count == 0,
                                           "Not every vertex/edge has been visited" );
                 update_progressbar();
+<<<<<<< HEAD
+=======
+
+                cvReleaseGraphScanner( &scanner );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
 
             // for a random graph the test just checks that every graph vertex and
@@ -2108,8 +2153,11 @@ void Core_GraphScanTest::run( int )
     catch(int)
     {
     }
+<<<<<<< HEAD
 
     cvReleaseGraphScanner( &scanner );
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 

@@ -140,6 +140,11 @@ if(WIN32)
     install(FILES "${CMAKE_BINARY_DIR}/win-install/OpenCVConfig.cmake" DESTINATION "${OpenCV_INSTALL_BINARIES_PREFIX}staticlib" COMPONENT dev)
     install(EXPORT OpenCVModules DESTINATION "${OpenCV_INSTALL_BINARIES_PREFIX}staticlib" FILE OpenCVModules${modules_file_suffix}.cmake COMPONENT dev)
   endif()
+<<<<<<< HEAD
   install(FILES "${CMAKE_BINARY_DIR}/win-install/OpenCVConfig-version.cmake" DESTINATION "${CMAKE_INSTALL_PREFIX}" COMPONENT dev)
   install(FILES "${OpenCV_SOURCE_DIR}/cmake/OpenCVConfig.cmake" DESTINATION "${CMAKE_INSTALL_PREFIX}/" COMPONENT dev)
+=======
+  install(FILES "${CMAKE_BINARY_DIR}/win-install/OpenCVConfig-version.cmake" DESTINATION "." COMPONENT dev)
+  install(FILES "${OpenCV_SOURCE_DIR}/cmake/OpenCVConfig.cmake" DESTINATION "." COMPONENT dev)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 endif()

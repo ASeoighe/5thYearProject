@@ -40,7 +40,11 @@ Modification of ``fastNlMeansDenoising`` function for colored images
 
     :param h: Parameter regulating filter strength for luminance component. Bigger h value perfectly removes noise but also removes image details, smaller h value preserves details but also preserves some noise
 
+<<<<<<< HEAD
     :param hForColorComponents: The same as h but for color components. For most images value equals 10 will be enought to remove colored noise and do not distort colors
+=======
+    :param hColor: The same as h but for color components. For most images value equals 10 will be enought to remove colored noise and do not distort colors
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 The function converts image to CIELAB colorspace and then separately denoise L and AB components with given h parameters using ``fastNlMeansDenoising`` function.
 
@@ -85,6 +89,10 @@ Modification of ``fastNlMeansDenoisingMulti`` function for colored images sequen
 
     :param h: Parameter regulating filter strength for luminance component. Bigger h value perfectly removes noise but also removes image details, smaller h value preserves details but also preserves some noise.
 
+<<<<<<< HEAD
     :param hForColorComponents: The same as h but for color components.
+=======
+    :param hColor: The same as h but for color components.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 The function converts images to CIELAB colorspace and then separately denoise L and AB components with given h parameters using ``fastNlMeansDenoisingMulti`` function.

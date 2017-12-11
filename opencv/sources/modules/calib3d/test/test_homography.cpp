@@ -12,6 +12,10 @@
 //
 // Copyright (C) 2000-2008, Intel Corporation, all rights reserved.
 // Copyright (C) 2009, Willow Garage Inc., all rights reserved.
+<<<<<<< HEAD
+=======
+// Copyright (C) 2015, Itseez Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // Redistribution and use in source and binary forms, with or without modification,
@@ -562,6 +566,12 @@ void CV_HomographyTest::run(int)
             default: continue;
             }
         }
+<<<<<<< HEAD
+=======
+
+        delete[]src_data;
+        src_data = NULL;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }
 

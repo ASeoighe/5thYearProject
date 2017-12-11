@@ -14,7 +14,11 @@ using namespace std;
  * @function help
  * @brief Display instructions to use this tutorial program
  */
+<<<<<<< HEAD
 void help()
+=======
+static void help()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     cout
     << "--------------------------------------------------------------------------" << endl

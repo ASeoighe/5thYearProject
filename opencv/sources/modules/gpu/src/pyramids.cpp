@@ -68,6 +68,20 @@ void cv::gpu::pyrDown(const GpuMat& src, GpuMat& dst, Stream& stream)
 
     typedef void (*func_t)(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[6][4] =
+    {
+        {pyrDown_gpu<uchar>      , 0 /*pyrDown_gpu<uchar2>*/ , pyrDown_gpu<uchar3>      , pyrDown_gpu<uchar4>      },
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {pyrDown_gpu<float>      , 0 /*pyrDown_gpu<float2>*/ , pyrDown_gpu<float3>      , pyrDown_gpu<float4>      }
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[6][4] =
     {
         {pyrDown_gpu<uchar>      , 0 /*pyrDown_gpu<uchar2>*/ , pyrDown_gpu<uchar3>      , pyrDown_gpu<uchar4>      },
@@ -77,6 +91,10 @@ void cv::gpu::pyrDown(const GpuMat& src, GpuMat& dst, Stream& stream)
         {0 /*pyrDown_gpu<int>*/  , 0 /*pyrDown_gpu<int2>*/   , 0 /*pyrDown_gpu<int3>*/  , 0 /*pyrDown_gpu<int4>*/  },
         {pyrDown_gpu<float>      , 0 /*pyrDown_gpu<float2>*/ , pyrDown_gpu<float3>      , pyrDown_gpu<float4>      }
     };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert(src.depth() <= CV_32F && src.channels() <= 4);
 
@@ -106,6 +124,20 @@ void cv::gpu::pyrUp(const GpuMat& src, GpuMat& dst, Stream& stream)
 
     typedef void (*func_t)(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[6][4] =
+    {
+        {pyrUp_gpu<uchar>      , 0 /*pyrUp_gpu<uchar2>*/ , pyrUp_gpu<uchar3>      , pyrUp_gpu<uchar4>      },
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {pyrUp_gpu<float>      , 0 /*pyrUp_gpu<float2>*/ , pyrUp_gpu<float3>      , pyrUp_gpu<float4>      }
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[6][4] =
     {
         {pyrUp_gpu<uchar>      , 0 /*pyrUp_gpu<uchar2>*/ , pyrUp_gpu<uchar3>      , pyrUp_gpu<uchar4>      },
@@ -115,6 +147,10 @@ void cv::gpu::pyrUp(const GpuMat& src, GpuMat& dst, Stream& stream)
         {0 /*pyrUp_gpu<int>*/  , 0 /*pyrUp_gpu<int2>*/   , 0 /*pyrUp_gpu<int3>*/  , 0 /*pyrUp_gpu<int4>*/  },
         {pyrUp_gpu<float>      , 0 /*pyrUp_gpu<float2>*/ , pyrUp_gpu<float3>      , pyrUp_gpu<float4>      }
     };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     CV_Assert(src.depth() <= CV_32F && src.channels() <= 4);
 

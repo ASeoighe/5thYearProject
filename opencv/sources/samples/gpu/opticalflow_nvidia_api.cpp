@@ -9,12 +9,16 @@
 #include <ctime>
 #include <ctype.h>
 
+<<<<<<< HEAD
 #include "cvconfig.h"
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <iostream>
 #include <iomanip>
 #include "opencv2/gpu/gpu.hpp"
 #include "opencv2/highgui/highgui.hpp"
 
+<<<<<<< HEAD
 #ifdef HAVE_CUDA
 #include "NPP_staging/NPP_staging.hpp"
 #include "NCVBroxOpticalFlow.hpp"
@@ -29,6 +33,11 @@ int main( int, const char** )
 #else
 
 //using std::tr1::shared_ptr;
+=======
+#include "NPP_staging/NPP_staging.hpp"
+#include "NCVBroxOpticalFlow.hpp"
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 using cv::Ptr;
 
 #define PARAM_LEFT  "--left"
@@ -649,5 +658,8 @@ int main(int argc, char **argv)
 
     return 0;
 }
+<<<<<<< HEAD
 
 #endif
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

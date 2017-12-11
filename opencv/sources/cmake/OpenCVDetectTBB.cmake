@@ -63,6 +63,13 @@ if(NOT HAVE_TBB)
           set(_TBB_LIB_PATH "${_TBB_LIB_PATH}/vc10")
         elseif(MSVC11)
           set(_TBB_LIB_PATH "${_TBB_LIB_PATH}/vc11")
+<<<<<<< HEAD
+=======
+        elseif(MSVC12)
+          set(_TBB_LIB_PATH "${_TBB_LIB_PATH}/vc12")
+        elseif(MSVC14)
+          set(_TBB_LIB_PATH "${_TBB_LIB_PATH}/vc14")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         endif()
         set(TBB_LIB_DIR "${_TBB_LIB_PATH}" CACHE PATH "Full path of TBB library directory")
         link_directories("${TBB_LIB_DIR}")

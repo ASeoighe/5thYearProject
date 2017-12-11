@@ -95,6 +95,11 @@ didDropVideoFrameWithSampleBuffer:(QTSampleBuffer *)sampleBuffer
 - (int)updateImage;
 - (IplImage*)getOutput;
 
+<<<<<<< HEAD
+=======
+- (void)doFireTimer:(NSTimer *)timer;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 @end
 
 /*****************************************************************************
@@ -297,7 +302,11 @@ bool CvCaptureCAM::grabFrame(double timeOut) {
     // method exits immediately"
     // using usleep() is not a good alternative, because it may block the GUI.
     // Create a dummy timer so that runUntilDate does not exit immediately:
+<<<<<<< HEAD
     [NSTimer scheduledTimerWithTimeInterval:100 target:nil selector:@selector(doFireTimer:) userInfo:nil repeats:YES];
+=======
+    [NSTimer scheduledTimerWithTimeInterval:100 target:capture selector:@selector(doFireTimer:) userInfo:nil repeats:YES];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     while (![capture updateImage] && (total += sleepTime)<=timeOut) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:sleepTime]];
     }
@@ -450,6 +459,7 @@ double CvCaptureCAM::getProperty(int property_id){
     QTFormatDescription* format = [[connections objectAtIndex:0] formatDescription];
     NSSize s1 = [[format attributeForKey:QTFormatDescriptionVideoCleanApertureDisplaySizeAttribute] sizeValue];
 
+<<<<<<< HEAD
     int width=s1.width, height=s1.height;
     switch (property_id) {
         case CV_CAP_PROP_FRAME_WIDTH:
@@ -457,6 +467,14 @@ double CvCaptureCAM::getProperty(int property_id){
             break;
         case CV_CAP_PROP_FRAME_HEIGHT:
             retval = height;
+=======
+    switch (property_id) {
+        case CV_CAP_PROP_FRAME_WIDTH:
+            retval = s1.width;
+            break;
+        case CV_CAP_PROP_FRAME_HEIGHT:
+            retval = s1.height;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             break;
         default:
             retval = 0;
@@ -626,6 +644,14 @@ didDropVideoFrameWithSampleBuffer:(QTSampleBuffer *)sampleBuffer
     return 1;
 }
 
+<<<<<<< HEAD
+=======
+- (void)doFireTimer:(NSTimer *)timer {
+    (void)timer;
+    // dummy
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 @end
 
 
@@ -1013,12 +1039,17 @@ bool CvVideoWriter_QT::writeFrame(const IplImage* image) {
     cvCvtColor(image, argbimage, CV_BGR2BGRA);
 
 
+<<<<<<< HEAD
     unsigned char* imagedata = (unsigned char*)argbimage->imageData;
+=======
+    unsigned char* imagedata_ = (unsigned char*)argbimage->imageData;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     //BGRA --> ARGB
 
     for (int j = 0; j < argbimage->height; j++) {
         int rowstart = argbimage->widthStep * j;
         for (int i = rowstart; i < rowstart+argbimage->widthStep; i+=4) {
+<<<<<<< HEAD
             unsigned char temp = imagedata[i];
             imagedata[i] = 255;
             imagedata[i+3] = temp;
@@ -1029,6 +1060,18 @@ bool CvVideoWriter_QT::writeFrame(const IplImage* image) {
     }
 
     NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&imagedata
+=======
+            unsigned char temp = imagedata_[i];
+            imagedata_[i] = 255;
+            imagedata_[i+3] = temp;
+            temp = imagedata_[i+2];
+            imagedata_[i+2] = imagedata_[i+1];
+            imagedata_[i+1] = temp;
+        }
+    }
+
+    NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&imagedata_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                                                                          pixelsWide:movieSize.width
                                                                          pixelsHigh:movieSize.height
                                                                       bitsPerSample:8

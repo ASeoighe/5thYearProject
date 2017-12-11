@@ -2691,6 +2691,7 @@ double cv::kmeans( InputArray _data, int K,
                    int flags, OutputArray _centers )
 {
     const int SPP_TRIALS = 3;
+<<<<<<< HEAD
     Mat data = _data.getMat();
     bool isrow = data.rows == 1 && data.channels() > 1;
     int N = !isrow ? data.rows : data.cols;
@@ -2701,6 +2702,20 @@ double cv::kmeans( InputArray _data, int K,
     CV_Assert( data.dims <= 2 && type == CV_32F && K > 0 );
     CV_Assert( N >= K );
 
+=======
+    Mat data0 = _data.getMat();
+    bool isrow = data0.rows == 1 && data0.channels() > 1;
+    int N = !isrow ? data0.rows : data0.cols;
+    int dims = (!isrow ? data0.cols : 1)*data0.channels();
+    int type = data0.depth();
+
+    attempts = std::max(attempts, 1);
+    CV_Assert( data0.dims <= 2 && type == CV_32F && K > 0 );
+    CV_Assert( N >= K );
+
+    Mat data(N, dims, CV_32F, data0.data, isrow ? dims * sizeof(float) : static_cast<size_t>(data0.step));
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     _bestLabels.create(N, 1, CV_32S, -1, true);
 
     Mat _labels, best_labels = _bestLabels.getMat();
@@ -3437,7 +3452,11 @@ ptrdiff_t operator - (const MatConstIterator& b, const MatConstIterator& a)
     if( a.m != b.m )
         return INT_MAX;
     if( a.sliceEnd == b.sliceEnd )
+<<<<<<< HEAD
         return (b.ptr - a.ptr)/b.elemSize;
+=======
+        return (b.ptr - a.ptr)/static_cast<ptrdiff_t>(b.elemSize);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     return b.lpos() - a.lpos();
 }
@@ -4275,6 +4294,19 @@ Rect RotatedRect::boundingRect() const
     return r;
 }
 
+<<<<<<< HEAD
+=======
+
+Rect_<float> RotatedRect::boundingRect2f() const
+{
+    Point2f pt[4];
+    points(pt);
+    Rect_<float> r(Point_<float>(min(min(min(pt[0].x, pt[1].x), pt[2].x), pt[3].x), min(min(min(pt[0].y, pt[1].y), pt[2].y), pt[3].y)),
+                   Point_<float>(max(max(max(pt[0].x, pt[1].x), pt[2].x), pt[3].x), max(max(max(pt[0].y, pt[1].y), pt[2].y), pt[3].y)));
+    return r;
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 /* End of file. */

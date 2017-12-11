@@ -44,19 +44,31 @@ or
 Scalar
 -------
 * Represents a 4-element vector. The type Scalar is widely used in OpenCV for passing pixel values.
+<<<<<<< HEAD
 * In this tutorial, we will use it extensively to represent RGB color values (3 parameters). It is not necessary to define the last argument if it is not going to be used.
+=======
+* In this tutorial, we will use it extensively to represent BGR color values (3 parameters). It is not necessary to define the last argument if it is not going to be used.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 * Let's see an example, if we are asked for a color argument and we give:
 
   .. code-block:: cpp
 
      Scalar( a, b, c )
 
+<<<<<<< HEAD
   We would be defining a RGB color such as: *Red = c*, *Green = b* and *Blue = a*
+=======
+  We would be defining a BGR color such as: *Blue = a*, *Green = b* and *Red = c*
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 
 Code
 =====
+<<<<<<< HEAD
 * This code is in your OpenCV sample folder. Otherwise you can grab it from `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/core/Matrix/Drawing_1.cpp>`_
+=======
+* This code is in your OpenCV sample folder. Otherwise you can grab it from `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/core/Matrix/Drawing_1.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 Explanation
 =============
@@ -135,7 +147,11 @@ Explanation
 
         * Draw a line from Point **start** to Point **end**
         * The line is displayed in the image **img**
+<<<<<<< HEAD
         * The line color is defined by **Scalar( 0, 0, 0)** which is the RGB value correspondent to **Black**
+=======
+        * The line color is defined by **Scalar( 0, 0, 0)** which is the BGR value correspondent to **Black**
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         * The line thickness is set to **thickness** (in this case 2)
         * The line is a 8-connected one (**lineType** = 8)
 
@@ -167,7 +183,11 @@ Explanation
         * The ellipse center is located in the point **(w/2.0, w/2.0)** and is enclosed in a box of size **(w/4.0, w/16.0)**
         * The ellipse is rotated **angle** degrees
         * The ellipse extends an arc between **0** and **360** degrees
+<<<<<<< HEAD
         * The color of the figure will be **Scalar( 255, 255, 0)** which means blue in RGB value.
+=======
+        * The color of the figure will be **Scalar( 255, 0, 0)** which means blue in BGR value.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         * The ellipse's **thickness** is 2.
 
 

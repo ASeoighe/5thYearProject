@@ -966,10 +966,15 @@ void ChamferMatcher::Matching::computeDistanceTransform(Mat& edges_img, Mat& dis
     for (int y=0;y<h;++y) {
         for (int x=0;x<w;++x) {
             // initialize
+<<<<<<< HEAD
             if (&annotate_img!=NULL) {
                 annotate_img.at<Vec2i>(y,x)[0]=x;
                 annotate_img.at<Vec2i>(y,x)[1]=y;
             }
+=======
+            annotate_img.at<Vec2i>(y,x)[0]=x;
+            annotate_img.at<Vec2i>(y,x)[1]=y;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             uchar edge_val = edges_img.at<uchar>(y,x);
             if( (edge_val!=0) ) {
@@ -1013,10 +1018,15 @@ void ChamferMatcher::Matching::computeDistanceTransform(Mat& edges_img, Mat& dis
                 dist_img.at<float>(ny,nx) = dist;
                 q.push(std::make_pair(nx,ny));
 
+<<<<<<< HEAD
                 if (&annotate_img!=NULL) {
                     annotate_img.at<Vec2i>(ny,nx)[0]=annotate_img.at<Vec2i>(y,x)[0];
                     annotate_img.at<Vec2i>(ny,nx)[1]=annotate_img.at<Vec2i>(y,x)[1];
                 }
+=======
+                annotate_img.at<Vec2i>(ny,nx)[0]=annotate_img.at<Vec2i>(y,x)[0];
+                annotate_img.at<Vec2i>(ny,nx)[1]=annotate_img.at<Vec2i>(y,x)[1];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
         }
     }
@@ -1107,6 +1117,7 @@ ChamferMatcher::Match* ChamferMatcher::Matching::localChamferDistance(Point offs
 
     float cost = (sum_distance/truncate_)/addr.size();
 
+<<<<<<< HEAD
 
     if (&orientation_img!=NULL) {
         float* optr = orientation_img.ptr<float>(y)+x;
@@ -1127,6 +1138,24 @@ ChamferMatcher::Match* ChamferMatcher::Matching::localChamferDistance(Point offs
                         cost = (float)(beta*cost+alpha*(sum_orientation/(2*CV_PI))/cnt_orientation);
         }
 
+=======
+    float* optr = orientation_img.ptr<float>(y)+x;
+    float sum_orientation = 0;
+    int cnt_orientation = 0;
+
+    for (size_t i=0;i<addr.size();++i) {
+
+        if(addr[i] < (orientation_img.cols*orientation_img.rows) - (offset.y*orientation_img.cols + offset.x)){
+                            if (tpl->orientations[i]>=-CV_PI && (*(optr+addr[i]))>=-CV_PI) {
+                sum_orientation += orientation_diff(tpl->orientations[i], (*(optr+addr[i])));
+                cnt_orientation++;
+            }
+        }
+    }
+
+    if (cnt_orientation>0) {
+                    cost = (float)(beta*cost+alpha*(sum_orientation/(2*CV_PI))/cnt_orientation);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
     if(cost > 0){

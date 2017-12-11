@@ -45,7 +45,11 @@
 
 #include "precomp.hpp"
 
+<<<<<<< HEAD
 #ifdef HAVE_CUDA
+=======
+#if defined(HAVE_CUDA) && defined(HAVE_NVCUVID)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 namespace cv { namespace gpu {
     namespace detail

@@ -309,7 +309,11 @@ struct MOG2Invoker : ParallelLoopBody
 
                 //internal:
                 bool fitsPDF = false;//if it remains zero a new GMM mode will be added
+<<<<<<< HEAD
                 int nmodes = modesUsed[x], nNewModes = nmodes;//current number of modes in GMM
+=======
+                int nmodes = modesUsed[x];//current number of modes in GMM
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 float totalWeight = 0.f;
 
                 float* mean_m = mean;
@@ -415,8 +419,11 @@ struct MOG2Invoker : ParallelLoopBody
                     gmm[mode].weight *= totalWeight;
                 }
 
+<<<<<<< HEAD
                 nmodes = nNewModes;
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 //make new mode if needed and exit
                 if( !fitsPDF )
                 {
@@ -577,28 +584,49 @@ void BackgroundSubtractorMOG2::operator()(InputArray _image, OutputArray _fgmask
 void BackgroundSubtractorMOG2::getBackgroundImage(OutputArray backgroundImage) const
 {
     int nchannels = CV_MAT_CN(frameType);
+<<<<<<< HEAD
     CV_Assert( nchannels == 3 );
     Mat meanBackground(frameSize, CV_8UC3, Scalar::all(0));
 
     int firstGaussianIdx = 0;
     const GMM* gmm = (GMM*)bgmodel.data;
     const Vec3f* mean = reinterpret_cast<const Vec3f*>(gmm + frameSize.width*frameSize.height*nmixtures);
+=======
+    CV_Assert(nchannels == 1 || nchannels == 3);
+    Mat meanBackground(frameSize, CV_MAKETYPE(CV_8U, nchannels), Scalar::all(0));
+    int firstGaussianIdx = 0;
+    const GMM* gmm = (GMM*)bgmodel.data;
+    const float* mean = reinterpret_cast<const float*>(gmm + frameSize.width*frameSize.height*nmixtures);
+    std::vector<float> meanVal(nchannels, 0.f);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     for(int row=0; row<meanBackground.rows; row++)
     {
         for(int col=0; col<meanBackground.cols; col++)
         {
             int nmodes = bgmodelUsedModes.at<uchar>(row, col);
+<<<<<<< HEAD
             Vec3f meanVal;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             float totalWeight = 0.f;
             for(int gaussianIdx = firstGaussianIdx; gaussianIdx < firstGaussianIdx + nmodes; gaussianIdx++)
             {
                 GMM gaussian = gmm[gaussianIdx];
+<<<<<<< HEAD
                 meanVal += gaussian.weight * mean[gaussianIdx];
+=======
+                size_t meanPosition = gaussianIdx*nchannels;
+                for(int chn = 0; chn < nchannels; chn++)
+                {
+                    meanVal[chn] += gaussian.weight * mean[meanPosition + chn];
+                }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 totalWeight += gaussian.weight;
 
                 if(totalWeight > backgroundRatio)
                     break;
             }
+<<<<<<< HEAD
 
             meanVal *= (1.f / totalWeight);
             meanBackground.at<Vec3b>(row, col) = Vec3b(meanVal);
@@ -625,6 +653,25 @@ void BackgroundSubtractorMOG2::getBackgroundImage(OutputArray backgroundImage) c
     default:
         CV_Error(CV_StsUnsupportedFormat, "");
     }
+=======
+            float invWeight = 1.f/totalWeight;
+            switch(nchannels)
+            {
+            case 1:
+                meanBackground.at<uchar>(row, col) = (uchar)(meanVal[0] * invWeight);
+                meanVal[0] = 0.f;
+                break;
+            case 3:
+                Vec3f& meanVec = *reinterpret_cast<Vec3f*>(&meanVal[0]);
+                meanBackground.at<Vec3b>(row, col) = Vec3b(meanVec * invWeight);
+                meanVec = 0.f;
+                break;
+            }
+            firstGaussianIdx += nmixtures;
+        }
+    }
+    meanBackground.copyTo(backgroundImage);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 }

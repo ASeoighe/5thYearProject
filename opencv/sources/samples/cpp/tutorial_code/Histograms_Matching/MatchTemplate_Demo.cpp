@@ -60,7 +60,11 @@ void MatchingMethod( int, void* )
   int result_cols =  img.cols - templ.cols + 1;
   int result_rows = img.rows - templ.rows + 1;
 
+<<<<<<< HEAD
   result.create( result_cols, result_rows, CV_32FC1 );
+=======
+  result.create( result_rows, result_cols, CV_32FC1 );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   /// Do the Matching and Normalize
   matchTemplate( img, templ, result, match_method );

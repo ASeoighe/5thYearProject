@@ -156,7 +156,11 @@ inline void ReallocImage(IplImage** ppImage, CvSize sz, long lChNum)
             cvReleaseImage( &pImage );
     }
     if( pImage == NULL )
+<<<<<<< HEAD
         pImage = cvCreateImage( sz, IPL_DEPTH_8U, lChNum);
+=======
+        pImage = cvCreateImage( sz, IPL_DEPTH_8U, (int)lChNum);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     *ppImage = pImage;
 }
 

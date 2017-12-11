@@ -1353,7 +1353,11 @@ void Core_DetTest::get_test_array_types_and_sizes( int test_case_idx, vector<vec
 {
     Base::get_test_array_types_and_sizes( test_case_idx, sizes, types );
 
+<<<<<<< HEAD
     sizes[INPUT][0].width = sizes[INPUT][0].height = sizes[INPUT][0].height;
+=======
+    sizes[INPUT][0].width = sizes[INPUT][0].height;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     sizes[TEMP][0] = sizes[INPUT][0];
     types[TEMP][0] = CV_64FC1;
 }
@@ -2329,6 +2333,20 @@ void Core_SolvePolyTest::run( int )
             pass = pass && div < err_eps;
         }
 
+<<<<<<< HEAD
+=======
+        //test bug #5623 - solves equation x^3 = 0
+        cv::Mat coeffs_5623(4, 1, CV_64FC1);
+        cv::Mat r_5623(3, 1, CV_64FC2);
+        coeffs_5623.at<double>(0) = 1;
+        coeffs_5623.at<double>(1) = 0;
+        coeffs_5623.at<double>(2) = 0;
+        coeffs_5623.at<double>(3) = 0;
+        double prec_5623 = cv::solveCubic(coeffs_5623, r_5623);
+        pass = pass && r_5623.at<double>(0) == 0 && r_5623.at<double>(1) == 0 && r_5623.at<double>(2) == 0;
+        pass = pass && prec_5623 == 1;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         if (!pass)
         {
             ts->set_failed_test_info(cvtest::TS::FAIL_INVALID_OUTPUT);
@@ -2348,6 +2366,58 @@ void Core_SolvePolyTest::run( int )
     }
 }
 
+<<<<<<< HEAD
+=======
+template<typename T>
+static void checkRoot(Mat& r, T re, T im)
+{
+    for (int i = 0; i < r.cols*r.rows; i++)
+    {
+        Vec<T, 2> v = *(Vec<T, 2>*)r.ptr(i);
+        if (fabs(re - v[0]) < 1e-6 && fabs(im - v[1]) < 1e-6)
+        {
+            v[0] = std::numeric_limits<T>::quiet_NaN();
+            v[1] = std::numeric_limits<T>::quiet_NaN();
+            return;
+        }
+    }
+    GTEST_NONFATAL_FAILURE_("Can't find root") << "(" << re << ", " << im << ")";
+}
+TEST(Core_SolvePoly, regression_5599)
+{
+    // x^4 - x^2 = 0, roots: 1, -1, 0, 0
+    cv::Mat coefs = (cv::Mat_<float>(1,5) << 0, 0, -1, 0, 1 );
+    {
+        cv::Mat r;
+        double prec;
+        prec = cv::solvePoly(coefs, r);
+        EXPECT_LE(prec, 1e-6);
+        EXPECT_EQ(4u, r.total());
+        //std::cout << "Preciseness = " << prec << std::endl;
+        //std::cout << "roots:\n" << r << "\n" << std::endl;
+        ASSERT_EQ(CV_32FC2, r.type());
+        checkRoot<float>(r, 1, 0);
+        checkRoot<float>(r, -1, 0);
+        checkRoot<float>(r, 0, 0);
+        checkRoot<float>(r, 0, 0);
+    }
+    // x^2 - 2x + 1 = 0,  roots: 1, 1
+    coefs = (cv::Mat_<float>(1,3) << 1, -2, 1 );
+    {
+        cv::Mat r;
+        double prec;
+        prec = cv::solvePoly(coefs, r);
+        EXPECT_LE(prec, 1e-6);
+        EXPECT_EQ(2u, r.total());
+        //std::cout << "Preciseness = " << prec << std::endl;
+        //std::cout << "roots:\n" << r << "\n" << std::endl;
+        ASSERT_EQ(CV_32FC2, r.type());
+        checkRoot<float>(r, 1, 0);
+        checkRoot<float>(r, 1, 0);
+    }
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 class Core_CheckRange_Empty : public cvtest::BaseTest
 {
 public:
@@ -2512,6 +2582,18 @@ TEST(Core_SVD, flt)
 
 // TODO: eigenvv, invsqrt, cbrt, fastarctan, (round, floor, ceil(?)),
 
+<<<<<<< HEAD
+=======
+enum
+{
+    MAT_N_DIM_C1,
+    MAT_N_1_CDIM,
+    MAT_1_N_CDIM,
+    MAT_N_DIM_C1_NONCONT,
+    MAT_N_1_CDIM_NONCONT,
+    VECTOR
+};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 class CV_KMeansSingularTest : public cvtest::BaseTest
 {
@@ -2519,7 +2601,11 @@ public:
     CV_KMeansSingularTest() {}
     ~CV_KMeansSingularTest() {}
 protected:
+<<<<<<< HEAD
     void run(int)
+=======
+    void run(int inVariant)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
         int i, iter = 0, N = 0, N0 = 0, K = 0, dims = 0;
         Mat labels;
@@ -2531,11 +2617,16 @@ protected:
             for( iter = 0; iter < maxIter; iter++ )
             {
                 ts->update_context(this, iter, true);
+<<<<<<< HEAD
                 dims = rng.uniform(1, MAX_DIM+1);
+=======
+                dims = rng.uniform(inVariant == MAT_1_N_CDIM ? 2 : 1, MAX_DIM+1);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 N = rng.uniform(1, MAX_POINTS+1);
                 N0 = rng.uniform(1, MAX(N/10, 2));
                 K = rng.uniform(1, N+1);
 
+<<<<<<< HEAD
                 Mat data0(N0, dims, CV_32F);
                 rng.fill(data0, RNG::UNIFORM, -1, 1);
 
@@ -2545,6 +2636,67 @@ protected:
 
                 kmeans(data, K, labels, TermCriteria(TermCriteria::MAX_ITER+TermCriteria::EPS, 30, 0),
                        5, KMEANS_PP_CENTERS);
+=======
+                if (inVariant == VECTOR)
+                {
+                    dims = 2;
+
+                    std::vector<cv::Point2f> data0(N0);
+                    rng.fill(data0, RNG::UNIFORM, -1, 1);
+
+                    std::vector<cv::Point2f> data(N);
+                    for( i = 0; i < N; i++ )
+                        data[i] = data0[rng.uniform(0, N0)];
+
+                    kmeans(data, K, labels, TermCriteria(TermCriteria::MAX_ITER+TermCriteria::EPS, 30, 0),
+                           5, KMEANS_PP_CENTERS);
+                }
+                else
+                {
+                    Mat data0(N0, dims, CV_32F);
+                    rng.fill(data0, RNG::UNIFORM, -1, 1);
+
+                    Mat data;
+
+                    switch (inVariant)
+                    {
+                    case MAT_N_DIM_C1:
+                        data.create(N, dims, CV_32F);
+                        for( i = 0; i < N; i++ )
+                            data0.row(rng.uniform(0, N0)).copyTo(data.row(i));
+                        break;
+
+                    case MAT_N_1_CDIM:
+                        data.create(N, 1, CV_32FC(dims));
+                        for( i = 0; i < N; i++ )
+                            memcpy(data.ptr(i), data0.ptr(rng.uniform(0, N0)), dims * sizeof(float));
+                        break;
+
+                    case MAT_1_N_CDIM:
+                        data.create(1, N, CV_32FC(dims));
+                        for( i = 0; i < N; i++ )
+                            memcpy(data.data + i * dims * sizeof(float), data0.ptr(rng.uniform(0, N0)), dims * sizeof(float));
+                        break;
+
+                    case MAT_N_DIM_C1_NONCONT:
+                        data.create(N, dims + 5, CV_32F);
+                        data = data(Range(0, N), Range(0, dims));
+                        for( i = 0; i < N; i++ )
+                            data0.row(rng.uniform(0, N0)).copyTo(data.row(i));
+                        break;
+
+                    case MAT_N_1_CDIM_NONCONT:
+                        data.create(N, 3, CV_32FC(dims));
+                        data = data.colRange(0, 1);
+                        for( i = 0; i < N; i++ )
+                            memcpy(data.ptr(i), data0.ptr(rng.uniform(0, N0)), dims * sizeof(float));
+                        break;
+                    }
+
+                    kmeans(data, K, labels, TermCriteria(TermCriteria::MAX_ITER+TermCriteria::EPS, 30, 0),
+                           5, KMEANS_PP_CENTERS);
+                }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
                 Mat hist(K, 1, CV_32S, Scalar(0));
                 for( i = 0; i < N; i++ )
@@ -2568,7 +2720,23 @@ protected:
     }
 };
 
+<<<<<<< HEAD
 TEST(Core_KMeans, singular) { CV_KMeansSingularTest test; test.safe_run(); }
+=======
+TEST(Core_KMeans, singular) { CV_KMeansSingularTest test; test.safe_run(MAT_N_DIM_C1); }
+
+CV_ENUM(KMeansInputVariant, MAT_N_DIM_C1, MAT_N_1_CDIM, MAT_1_N_CDIM, MAT_N_DIM_C1_NONCONT, MAT_N_1_CDIM_NONCONT, VECTOR)
+
+typedef testing::TestWithParam<KMeansInputVariant> Core_KMeans_InputVariants;
+
+TEST_P(Core_KMeans_InputVariants, singular)
+{
+    CV_KMeansSingularTest test;
+    test.safe_run(GetParam());
+}
+
+INSTANTIATE_TEST_CASE_P(AllVariants, Core_KMeans_InputVariants, KMeansInputVariant::all());
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 TEST(CovariationMatrixVectorOfMat, accuracy)
 {

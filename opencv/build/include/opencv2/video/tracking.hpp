@@ -258,7 +258,11 @@ CV_EXPORTS_W int meanShift( InputArray probImage, CV_OUT CV_IN_OUT Rect& window,
 /*!
  Kalman filter.
 
+<<<<<<< HEAD
  The class implements standard Kalman filter \url{http://en.wikipedia.org/wiki/Kalman_filter}.
+=======
+ The class implements standard Kalman filter http://en.wikipedia.org/wiki/Kalman_filter.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  However, you can modify KalmanFilter::transitionMatrix, KalmanFilter::controlMatrix and
  KalmanFilter::measurementMatrix to get the extended Kalman filter functionality.
 */

@@ -193,7 +193,11 @@ In the main program, before processing, first check input command parameters. He
     {
         std::cout<<"RetinaDemo: processing image "<<argv[2]<<std::endl;
         // image processing case
+<<<<<<< HEAD
         inputFrame = cv::imread(std::string(argv[2]), 1); // load image in RGB mode
+=======
+        inputFrame = cv::imread(std::string(argv[2]), 1); // load image in BGR color mode
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }else
         if (!strcmp(inputMediaType.c_str(), "-video"))
         {

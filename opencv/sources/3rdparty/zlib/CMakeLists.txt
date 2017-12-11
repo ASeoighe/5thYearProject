@@ -82,11 +82,20 @@ if(UNIX)
   endif()
 endif()
 
+<<<<<<< HEAD
 ocv_warnings_disable(CMAKE_C_FLAGS -Wattributes -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations)
+=======
+ocv_warnings_disable(CMAKE_C_FLAGS -Wshorten-64-to-32 -Wattributes -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wshift-negative-value)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 set_target_properties(${ZLIB_LIBRARY} PROPERTIES
         OUTPUT_NAME ${ZLIB_LIBRARY}
         DEBUG_POSTFIX "${OPENCV_DEBUG_POSTFIX}"
+<<<<<<< HEAD
+=======
+        COMPILE_PDB_NAME ${ZLIB_LIBRARY}
+        COMPILE_PDB_NAME_DEBUG "${ZLIB_LIBRARY}${OPENCV_DEBUG_POSTFIX}"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         ARCHIVE_OUTPUT_DIRECTORY ${3P_LIBRARY_OUTPUT_PATH}
     )
 

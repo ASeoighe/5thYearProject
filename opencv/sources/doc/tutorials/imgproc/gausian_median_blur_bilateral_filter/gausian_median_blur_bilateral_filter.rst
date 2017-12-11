@@ -115,7 +115,11 @@ Code
         * Applies 4 different kinds of filters (explained in Theory) and show the filtered images sequentially
 
    * **Downloadable code**:
+<<<<<<< HEAD
      Click `here <https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/ImgProc/Smoothing.cpp>`_
+=======
+     Click `here <https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/ImgProc/Smoothing.cpp>`_
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    * **Code at glance:**
 

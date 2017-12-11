@@ -41,6 +41,10 @@
 //M*/
 
 #include "perf_precomp.hpp"
+<<<<<<< HEAD
+=======
+#include "opencv2/ts/gpu_perf.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 using namespace std;
 using namespace testing;
@@ -99,7 +103,12 @@ PERF_TEST_P(Sz_Depth_Cn_KernelSz, Denoising_BilateralFilter,
 
 DEF_PARAM_TEST(Sz_Depth_Cn_WinSz_BlockSz, cv::Size, MatDepth, MatCn, int, int);
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn_WinSz_BlockSz, Denoising_NonLocalMeans,
+=======
+// disabled, since it takes too much time
+PERF_TEST_P(Sz_Depth_Cn_WinSz_BlockSz, DISABLED_Denoising_NonLocalMeans,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             Combine(GPU_DENOISING_IMAGE_SIZES,
                     Values<MatDepth>(CV_8U),
                     GPU_CHANNELS_1_3,
@@ -143,7 +152,12 @@ PERF_TEST_P(Sz_Depth_Cn_WinSz_BlockSz, Denoising_NonLocalMeans,
 
 DEF_PARAM_TEST(Sz_Depth_Cn_WinSz_BlockSz, cv::Size, MatDepth, MatCn, int, int);
 
+<<<<<<< HEAD
 PERF_TEST_P(Sz_Depth_Cn_WinSz_BlockSz, Denoising_FastNonLocalMeans,
+=======
+// disabled, since it takes too much time
+PERF_TEST_P(Sz_Depth_Cn_WinSz_BlockSz, DISABLED_Denoising_FastNonLocalMeans,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             Combine(GPU_DENOISING_IMAGE_SIZES,
                     Values<MatDepth>(CV_8U),
                     GPU_CHANNELS_1_3,

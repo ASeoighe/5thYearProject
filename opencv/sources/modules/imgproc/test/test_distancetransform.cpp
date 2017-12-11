@@ -166,10 +166,17 @@ cvTsDistTransform( const CvMat* _src, CvMat* _dst, int dist_type,
     int i, j, k;
     int width = _src->cols, height = _src->rows;
     const float init_val = 1e6;
+<<<<<<< HEAD
     float mask[3];
     CvMat* temp;
     int ofs[16];
     float delta[16];
+=======
+    float mask[3] = { 0 };
+    CvMat* temp;
+    int ofs[16] = { 0 };
+    float delta[16] = { 0 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int tstep, count;
 
     assert( mask_size == 3 || mask_size == 5 );

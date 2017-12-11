@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
 
+<<<<<<< HEAD
 #include "cvconfig.h"
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"

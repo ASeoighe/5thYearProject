@@ -545,6 +545,14 @@ CV_IMPL void cvSetTrackbarPos( const char*, const char*, int )
     CV_NO_GUI_ERROR( "cvSetTrackbarPos" );
 }
 
+<<<<<<< HEAD
+=======
+CV_IMPL void cvSetTrackbarMax(const char*, const char*, int)
+{
+    CV_NO_GUI_ERROR( "cvSetTrackbarMax" );
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 CV_IMPL void* cvGetWindowHandle( const char* )
 {
     CV_NO_GUI_ERROR( "cvGetWindowHandle" );

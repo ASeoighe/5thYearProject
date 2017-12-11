@@ -2,7 +2,11 @@
 // http://docs.opencv.org/doc/tutorials/calib3d/camera_calibration/camera_calibration.html
 //
 // It uses standard OpenCV asymmetric circles grid pattern 11x4:
+<<<<<<< HEAD
 // https://github.com/Itseez/opencv/blob/2.4/doc/acircles_pattern.png.
+=======
+// https://github.com/opencv/opencv/blob/2.4/doc/acircles_pattern.png.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // The results are the camera matrix and 5 distortion coefficients.
 //
 // Tap on highlighted pattern to capture pattern corners for calibration.

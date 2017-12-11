@@ -114,7 +114,11 @@ namespace cv { namespace gpu { namespace device
 
                     sum =       0.0625f * src(b.idx_row_low (src_y - 2), b.idx_col_high(x));
                     sum = sum + 0.25f   * src(b.idx_row_low (src_y - 1), b.idx_col_high(x));
+<<<<<<< HEAD
                     sum = sum + 0.375f  * src(src_y                    , b.idx_col_high(x));
+=======
+                    sum = sum + 0.375f  * src(b.idx_row_high(src_y    ), b.idx_col_high(x));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     sum = sum + 0.25f   * src(b.idx_row_high(src_y + 1), b.idx_col_high(x));
                     sum = sum + 0.0625f * src(b.idx_row_high(src_y + 2), b.idx_col_high(x));
 
@@ -129,7 +133,11 @@ namespace cv { namespace gpu { namespace device
 
                     sum =       0.0625f * src(b.idx_row_low (src_y - 2), b.idx_col(left_x));
                     sum = sum + 0.25f   * src(b.idx_row_low (src_y - 1), b.idx_col(left_x));
+<<<<<<< HEAD
                     sum = sum + 0.375f  * src(src_y                    , b.idx_col(left_x));
+=======
+                    sum = sum + 0.375f  * src(b.idx_row_high(src_y    ), b.idx_col(left_x));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     sum = sum + 0.25f   * src(b.idx_row_high(src_y + 1), b.idx_col(left_x));
                     sum = sum + 0.0625f * src(b.idx_row_high(src_y + 2), b.idx_col(left_x));
 
@@ -144,7 +152,11 @@ namespace cv { namespace gpu { namespace device
 
                     sum =       0.0625f * src(b.idx_row_low (src_y - 2), b.idx_col_high(right_x));
                     sum = sum + 0.25f   * src(b.idx_row_low (src_y - 1), b.idx_col_high(right_x));
+<<<<<<< HEAD
                     sum = sum + 0.375f  * src(src_y                    , b.idx_col_high(right_x));
+=======
+                    sum = sum + 0.375f  * src(b.idx_row_high(src_y    ), b.idx_col_high(right_x));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     sum = sum + 0.25f   * src(b.idx_row_high(src_y + 1), b.idx_col_high(right_x));
                     sum = sum + 0.0625f * src(b.idx_row_high(src_y + 2), b.idx_col_high(right_x));
 
@@ -197,6 +209,10 @@ namespace cv { namespace gpu { namespace device
         template void pyrDown_gpu<uchar3>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
         template void pyrDown_gpu<uchar4>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         //template void pyrDown_gpu<schar>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
         //template void pyrDown_gpu<char2>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
         //template void pyrDown_gpu<char3>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
@@ -216,6 +232,10 @@ namespace cv { namespace gpu { namespace device
         //template void pyrDown_gpu<int2>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
         //template void pyrDown_gpu<int3>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
         //template void pyrDown_gpu<int4>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         template void pyrDown_gpu<float>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);
         //template void pyrDown_gpu<float2>(PtrStepSzb src, PtrStepSzb dst, cudaStream_t stream);

@@ -392,6 +392,11 @@ CvStatus CV_STDCALL icvGetRectSubPix_8u32f_C1R
     ip.x = cvFloor( center.x );
     ip.y = cvFloor( center.y );
 
+<<<<<<< HEAD
+=======
+    CV_DbgAssert(fabs(center.x - ip.x) <= 1.0f && fabs(center.y - ip.y) <= 1.0f);
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if( win_size.width <= 0 || win_size.height <= 0 )
         return CV_BADRANGE_ERR;
 

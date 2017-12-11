@@ -264,7 +264,11 @@ Loads the classifier from a file. The previous content is destroyed.
 
 .. ocv:function:: bool gpu::CascadeClassifier_GPU::load(const string& filename)
 
+<<<<<<< HEAD
     :param filename: Name of the file from which the classifier is loaded. Only the old ``haar`` classifier (trained by the ``haar`` training application) and NVIDIA's ``nvbin`` are supported for HAAR and only new type of OpenCV XML cascade supported for LBP.
+=======
+    :param filename: Name of the file from which the classifier is loaded. Only the old ``haar`` classifiers (trained by the ``haar`` training application) and NVIDIA's ``nvbin`` are supported for HAAR and only new type of OpenCV XML cascade supported for LBP. The working haar classifiers can be found under ``data\haarcascades_GPU\``.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 
 gpu::CascadeClassifier_GPU::release

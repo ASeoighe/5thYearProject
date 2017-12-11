@@ -40,9 +40,15 @@ Code
    * Display the detected circle in a window.
 
    .. |TutorialHoughCirclesSimpleDownload| replace:: here
+<<<<<<< HEAD
    .. _TutorialHoughCirclesSimpleDownload: https://github.com/Itseez/opencv/tree/master/samples/cpp/houghcircles.cpp
    .. |TutorialHoughCirclesFancyDownload| replace:: here
    .. _TutorialHoughCirclesFancyDownload: https://github.com/Itseez/opencv/tree/master/samples/cpp/tutorial_code/ImgTrans/HoughCircle_Demo.cpp
+=======
+   .. _TutorialHoughCirclesSimpleDownload: https://github.com/opencv/opencv/tree/master/samples/cpp/houghcircles.cpp
+   .. |TutorialHoughCirclesFancyDownload| replace:: here
+   .. _TutorialHoughCirclesFancyDownload: https://github.com/opencv/opencv/tree/master/samples/cpp/tutorial_code/ImgTrans/HoughCircle_Demo.cpp
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #. The sample code that we will explain can be downloaded from |TutorialHoughCirclesSimpleDownload|_. A slightly fancier version (which shows both Hough standard and probabilistic with trackbars for changing the threshold values) can be found |TutorialHoughCirclesFancyDownload|_.
 

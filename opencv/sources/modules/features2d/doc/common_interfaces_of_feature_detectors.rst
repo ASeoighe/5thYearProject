@@ -144,6 +144,14 @@ Also a combined format is supported: feature detector adapter name ( ``"Grid"`` 
 :ocv:class:`PyramidAdaptedFeatureDetector` ) + feature detector name (see above),
 for example: ``"GridFAST"``, ``"PyramidSTAR"`` .
 
+<<<<<<< HEAD
+=======
+.. note:: When using the SIFT and SURF detector types be sure to add the following lines to your code
+
+     * Add an extra include: `#include <opencv2/nonfree/nonfree.hpp>`
+     * Add an initialisation function at the start of your code: `initModule_nonfree();`
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 FastFeatureDetector
 -------------------
 .. ocv:class:: FastFeatureDetector : public FeatureDetector

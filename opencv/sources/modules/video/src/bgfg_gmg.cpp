@@ -280,7 +280,11 @@ namespace
                         }
                     }
                 }
+<<<<<<< HEAD
                 else if (updateBackgroundModel_)
+=======
+                else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 {
                     // training-mode update
 

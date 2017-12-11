@@ -12,14 +12,25 @@ if(ARMEABI_V7A)
   else()
     set(ANDROID_PLATFORM_VERSION_CODE "3")
   endif()
+<<<<<<< HEAD
+=======
+elseif(ARM64_V8A)
+  set(ANDROID_PLATFORM_VERSION_CODE "4")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 elseif(ARMEABI_V6)
   set(ANDROID_PLATFORM_VERSION_CODE "1")
 elseif(ARMEABI)
   set(ANDROID_PLATFORM_VERSION_CODE "1")
 elseif(X86)
+<<<<<<< HEAD
   set(ANDROID_PLATFORM_VERSION_CODE "4")
 elseif(MIPS)
   set(ANDROID_PLATFORM_VERSION_CODE "5")
+=======
+  set(ANDROID_PLATFORM_VERSION_CODE "5")
+elseif(MIPS)
+  set(ANDROID_PLATFORM_VERSION_CODE "6")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 else()
   message(WARNING "Can not automatically determine the value for ANDROID_PLATFORM_VERSION_CODE")
 endif()

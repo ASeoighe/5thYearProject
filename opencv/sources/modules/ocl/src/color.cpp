@@ -87,7 +87,11 @@ static void fromRGB_caller(const oclMat &src, oclMat &dst, int bidx, const std::
     if (!data2.empty())
         args.push_back( make_pair( sizeof(cl_mem) , (void *)&data2.data ));
 
+<<<<<<< HEAD
     size_t gt[3] = { dst.cols/pixels_per_work_item, dst.rows, 1 };
+=======
+    size_t gt[3] = { (size_t)dst.cols/pixels_per_work_item, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = { 16, 10, 1 };
 #else
@@ -122,7 +126,11 @@ static void toHSV_caller(const oclMat &src, oclMat &dst, int bidx, const std::st
     if (!data2.empty())
         args.push_back( make_pair( sizeof(cl_mem) , (void *)&data2.data ));
 
+<<<<<<< HEAD
    size_t gt[3] = { dst.cols, dst.rows, 1 };
+=======
+   size_t gt[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = { 16, 10, 1 };
 #else
@@ -154,7 +162,11 @@ static void fromGray_caller(const oclMat &src, oclMat &dst, int bidx, const std:
     if (!data.empty())
         args.push_back( make_pair( sizeof(cl_mem) , (void *)&data.data ));
 
+<<<<<<< HEAD
     size_t gt[3] = { dst.cols, dst.rows, 1 };
+=======
+    size_t gt[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = { 16, 10, 1 };
 #else
@@ -197,7 +209,11 @@ static void toRGB_caller(const oclMat &src, oclMat &dst, int bidx, const std::st
     if (!data.empty())
         args.push_back( make_pair( sizeof(cl_mem) , (void *)&data.data ));
 
+<<<<<<< HEAD
     size_t gt[3] = { dst.cols/pixels_per_work_item, dst.rows, 1 };
+=======
+    size_t gt[3] = { (size_t)dst.cols/pixels_per_work_item, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = { 16, 10, 1 };
 #else
@@ -229,7 +245,11 @@ static void toRGB_NV12_caller(const oclMat &src, oclMat &dst, int bidx, const st
     if (!data.empty())
         args.push_back( make_pair( sizeof(cl_mem) , (void *)&data.data ));
 
+<<<<<<< HEAD
     size_t gt[3] = {src.cols, src.rows, 1};
+=======
+    size_t gt[3] = {(size_t)src.cols, (size_t)src.rows, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = {16, 10, 1};
 #else
@@ -261,7 +281,11 @@ static void fromHSV_caller(const oclMat &src, oclMat &dst, int bidx, const std::
     if (!data.empty())
         args.push_back( make_pair( sizeof(cl_mem) , (void *)&data.data ));
 
+<<<<<<< HEAD
     size_t gt[3] = { dst.cols, dst.rows, 1 };
+=======
+    size_t gt[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = { 16, 10, 1 };
 #else
@@ -288,7 +312,11 @@ static void RGB_caller(const oclMat &src, oclMat &dst, bool reverse)
     args.push_back( make_pair( sizeof(cl_int) , (void *)&src_offset ));
     args.push_back( make_pair( sizeof(cl_int) , (void *)&dst_offset ));
 
+<<<<<<< HEAD
     size_t gt[3] = { dst.cols, dst.rows, 1 };
+=======
+    size_t gt[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = { 16, 10, 1 };
 #else
@@ -314,7 +342,11 @@ static void fromRGB5x5_caller(const oclMat &src, oclMat &dst, int bidx, int gree
     args.push_back( make_pair( sizeof(cl_int) , (void *)&src_offset ));
     args.push_back( make_pair( sizeof(cl_int) , (void *)&dst_offset ));
 
+<<<<<<< HEAD
     size_t gt[3] = { dst.cols, dst.rows, 1 };
+=======
+    size_t gt[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = { 16, 10, 1 };
 #else
@@ -340,7 +372,11 @@ static void toRGB5x5_caller(const oclMat &src, oclMat &dst, int bidx, int greenb
     args.push_back( make_pair( sizeof(cl_int) , (void *)&src_offset ));
     args.push_back( make_pair( sizeof(cl_int) , (void *)&dst_offset ));
 
+<<<<<<< HEAD
     size_t gt[3] = { dst.cols, dst.rows, 1 };
+=======
+    size_t gt[3] = { (size_t)dst.cols, (size_t)dst.rows, 1 };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #ifdef ANDROID
     size_t lt[3] = { 16, 10, 1 };
 #else

@@ -52,6 +52,10 @@ namespace
 {
     // first four bytes, should be the same in little endian
     const float FLO_TAG_FLOAT = 202021.25f;  // check for this when READING the file
+<<<<<<< HEAD
+=======
+#ifdef DUMP
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     const char FLO_TAG_STRING[] = "PIEH";    // use this when WRITING the file
 
     // binary file format for flow data specified here:
@@ -76,6 +80,10 @@ namespace
             }
         }
     }
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     // binary file format for flow data specified here:
     // http://vision.middlebury.edu/flow/data/
@@ -113,6 +121,7 @@ namespace
         return !cvIsNaN(u.x) && !cvIsNaN(u.y) && (fabs(u.x) < 1e9) && (fabs(u.y) < 1e9);
     }
 
+<<<<<<< HEAD
     double calcRMSE(const Mat_<Point2f>& flow1, const Mat_<Point2f>& flow2)
     {
         double sum = 0.0;
@@ -135,13 +144,46 @@ namespace
         }
 
         return sqrt(sum / (1e-9 + counter));
+=======
+    void check(const Mat_<Point2f>& gold, const Mat_<Point2f>& flow, double threshold = 0.1, double expectedAccuracy = 0.95)
+    {
+        threshold = threshold*threshold;
+
+        size_t gold_counter = 0;
+        size_t valid_counter = 0;
+
+        for (int i = 0; i < gold.rows; ++i)
+        {
+            for (int j = 0; j < gold.cols; ++j)
+            {
+                const Point2f u1 = gold(i, j);
+                const Point2f u2 = flow(i, j);
+
+                if (isFlowCorrect(u1))
+                {
+                    gold_counter++;
+                    if (isFlowCorrect(u2))
+                    {
+                        const Point2f diff = u1 - u2;
+                        double err = diff.ddot(diff);
+                        if (err <= threshold)
+                            valid_counter++;
+                    }
+                }
+            }
+        }
+        EXPECT_GE(valid_counter, expectedAccuracy * gold_counter);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }
 
 TEST(Video_calcOpticalFlowDual_TVL1, Regression)
 {
+<<<<<<< HEAD
     const double MAX_RMSE = 0.02;
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     const string frame1_path = TS::ptr()->get_data_path() + "optflow/RubberWhale1.png";
     const string frame2_path = TS::ptr()->get_data_path() + "optflow/RubberWhale2.png";
     const string gold_flow_path = TS::ptr()->get_data_path() + "optflow/tvl1_flow.flo";
@@ -165,7 +207,11 @@ TEST(Video_calcOpticalFlowDual_TVL1, Regression)
     ASSERT_EQ(gold.rows, flow.rows);
     ASSERT_EQ(gold.cols, flow.cols);
 
+<<<<<<< HEAD
     const double err = calcRMSE(gold, flow);
     EXPECT_LE(err, MAX_RMSE);
+=======
+    check(gold, flow);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 }

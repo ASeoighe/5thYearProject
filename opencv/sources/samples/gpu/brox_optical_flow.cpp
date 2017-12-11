@@ -3,7 +3,10 @@
 #include <string>
 #include <ctype.h>
 
+<<<<<<< HEAD
 #include "cvconfig.h"
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/gpu/gpu.hpp"

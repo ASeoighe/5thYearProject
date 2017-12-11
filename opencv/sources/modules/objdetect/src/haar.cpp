@@ -1317,9 +1317,15 @@ public:
         if( cascade->hid_cascade->ipp_stages )
         {
             IppiRect iequRect = {equRect.x, equRect.y, equRect.width, equRect.height};
+<<<<<<< HEAD
             ippiRectStdDev_32f_C1R(sum1.ptr<float>(y1), sum1.step,
                                    sqsum1.ptr<double>(y1), sqsum1.step,
                                    norm1->ptr<float>(y1), norm1->step,
+=======
+            ippiRectStdDev_32f_C1R(sum1.ptr<float>(y1), (int)sum1.step,
+                                   sqsum1.ptr<double>(y1), (int)sqsum1.step,
+                                   norm1->ptr<float>(y1), (int)norm1->step,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                                    ippiSize(ssz.width, ssz.height), iequRect );
 
             int positive = (ssz.width/ystep)*((ssz.height + ystep-1)/ystep);
@@ -1340,9 +1346,15 @@ public:
             for( int j = 0; j < cascade->count; j++ )
             {
                 if( ippiApplyHaarClassifier_32f_C1R(
+<<<<<<< HEAD
                             sum1.ptr<float>(y1), sum1.step,
                             norm1->ptr<float>(y1), norm1->step,
                             mask1->ptr<uchar>(y1), mask1->step,
+=======
+                            sum1.ptr<float>(y1), (int)sum1.step,
+                            norm1->ptr<float>(y1), (int)norm1->step,
+                            mask1->ptr<uchar>(y1), (int)mask1->step,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                             ippiSize(ssz.width, ssz.height), &positive,
                             cascade->hid_cascade->stage_classifier[j].threshold,
                             (IppiHaarClassifier_32f*)cascade->hid_cascade->ipp_stages[j]) < 0 )
@@ -1977,7 +1989,11 @@ cvLoadHaarClassifierCascade( const char* directory, CvSize orig_window_size )
         if( !f )
             CV_Error( CV_StsError, "" );
         fseek( f, 0, SEEK_END );
+<<<<<<< HEAD
         size = ftell( f );
+=======
+        size = (int)ftell( f );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         fseek( f, 0, SEEK_SET );
         size_t elements_read = fread( ptr, 1, size, f );
         CV_Assert(elements_read == (size_t)(size));

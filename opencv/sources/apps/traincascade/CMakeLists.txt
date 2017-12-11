@@ -10,6 +10,11 @@ project(traincascade)
 ocv_include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${OpenCV_SOURCE_DIR}/include/opencv")
 ocv_include_modules(${OPENCV_TRAINCASCADE_DEPS})
 
+<<<<<<< HEAD
+=======
+ocv_warnings_disable(CMAKE_CXX_FLAGS -Woverloaded-virtual)
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 set(traincascade_files traincascade.cpp
   cascadeclassifier.cpp cascadeclassifier.h
   boost.cpp boost.h features.cpp traincascade_features.h
@@ -26,7 +31,10 @@ set_target_properties(${the_target} PROPERTIES
                       DEBUG_POSTFIX "${OPENCV_DEBUG_POSTFIX}"
                       ARCHIVE_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH}
                       RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH}
+<<<<<<< HEAD
                       INSTALL_NAME_DIR lib
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                       OUTPUT_NAME "opencv_traincascade")
 
 if(ENABLE_SOLUTION_FOLDERS)

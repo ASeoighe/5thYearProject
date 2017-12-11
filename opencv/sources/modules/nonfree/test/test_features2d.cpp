@@ -1001,7 +1001,17 @@ TEST( Features2d_Detector_SURF, regression )
 /*
  * Descriptors
  */
+<<<<<<< HEAD
 TEST( Features2d_DescriptorExtractor_SIFT, regression )
+=======
+
+#ifdef __aarch64__
+// The discrepancy is 1, but 0.03 is allowed
+TEST( Features2d_DescriptorExtractor_SIFT, DISABLED_regression )
+#else
+TEST( Features2d_DescriptorExtractor_SIFT, regression )
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     CV_DescriptorExtractorTest<L2<float> > test( "descriptor-sift", 0.03f,
                                                   DescriptorExtractor::create("SIFT") );
@@ -1015,7 +1025,16 @@ TEST( Features2d_DescriptorExtractor_SURF, regression )
     test.safe_run();
 }
 
+<<<<<<< HEAD
 TEST( Features2d_DescriptorExtractor_OpponentSIFT, regression )
+=======
+#ifdef __aarch64__
+// The discrepancy is 1, but 0.18 is allowed
+TEST( Features2d_DescriptorExtractor_OpponentSIFT, DISABLED_regression )
+#else
+TEST( Features2d_DescriptorExtractor_OpponentSIFT, regression )
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     CV_DescriptorExtractorTest<L2<float> > test( "descriptor-opponent-sift", 0.18f,
                                                  DescriptorExtractor::create("OpponentSIFT") );

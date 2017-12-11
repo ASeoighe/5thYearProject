@@ -52,7 +52,11 @@ namespace cv { namespace viz
 cv::viz::vtkImageMatSource::vtkImageMatSource()
 {
     this->SetNumberOfInputPorts(0);
+<<<<<<< HEAD
     this->ImageData = vtkImageData::New();
+=======
+    this->ImageData = vtkSmartPointer<vtkImageData>::New();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 int cv::viz::vtkImageMatSource::RequestInformation(vtkInformation *, vtkInformationVector**, vtkInformationVector *outputVector)

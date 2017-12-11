@@ -85,6 +85,16 @@ public:
         return 0;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Dummy implementation for other algorithms of addable indexes after that.
+     */
+    void addIndex(const Matrix<ElementType>& /*wholeData*/, const Matrix<ElementType>& /*additionalData*/)
+    {
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     void buildIndex()
     {
         /* nothing to do here for linear search */

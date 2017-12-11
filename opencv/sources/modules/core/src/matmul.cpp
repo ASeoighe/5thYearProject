@@ -1013,6 +1013,10 @@ void cv::gemm( InputArray matA, InputArray matB, double alpha,
     GEMMBlockMulFunc blockMulFunc;
     GEMMStoreFunc storeFunc;
     Mat *matD = &D, tmat;
+<<<<<<< HEAD
+=======
+    size_t tmat_size = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     const uchar* Cdata = C.data;
     size_t Cstep = C.data ? (size_t)C.step : 0;
     AutoBuffer<uchar> buf;
@@ -1045,8 +1049,13 @@ void cv::gemm( InputArray matA, InputArray matB, double alpha,
 
     if( D.data == A.data || D.data == B.data )
     {
+<<<<<<< HEAD
         buf.allocate(d_size.width*d_size.height*CV_ELEM_SIZE(type));
         tmat = Mat(d_size.height, d_size.width, type, (uchar*)buf );
+=======
+        tmat_size = (size_t)d_size.width*d_size.height*CV_ELEM_SIZE(type);
+        // Allocate tmat later, once the size of buf is known
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         matD = &tmat;
     }
 
@@ -1123,6 +1132,13 @@ void cv::gemm( InputArray matA, InputArray matB, double alpha,
         (d_size.width <= block_lin_size &&
         d_size.height <= block_lin_size && len <= block_lin_size) )
     {
+<<<<<<< HEAD
+=======
+        if( tmat_size > 0 ) {
+            buf.allocate(tmat_size);
+            tmat = Mat(d_size.height, d_size.width, type, (uchar*)buf );
+        }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         singleMulFunc( A.data, A.step, B.data, b_step, Cdata, Cstep,
                        matD->data, matD->step, a_size, d_size, alpha, beta, flags );
     }
@@ -1132,7 +1148,11 @@ void cv::gemm( InputArray matA, InputArray matB, double alpha,
         int is_b_t = flags & GEMM_2_T;
         int elem_size = CV_ELEM_SIZE(type);
         int dk0_1, dk0_2;
+<<<<<<< HEAD
         int a_buf_size = 0, b_buf_size, d_buf_size;
+=======
+        size_t a_buf_size = 0, b_buf_size, d_buf_size;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         uchar* a_buf = 0;
         uchar* b_buf = 0;
         uchar* d_buf = 0;
@@ -1173,8 +1193,13 @@ void cv::gemm( InputArray matA, InputArray matB, double alpha,
             dn0 = block_size / dk0;
 
         dk0_1 = (dn0+dn0/8+2) & -2;
+<<<<<<< HEAD
         b_buf_size = (dk0+dk0/8+1)*dk0_1*elem_size;
         d_buf_size = (dk0+dk0/8+1)*dk0_1*work_elem_size;
+=======
+        b_buf_size = (size_t)(dk0+dk0/8+1)*dk0_1*elem_size;
+        d_buf_size = (size_t)(dk0+dk0/8+1)*dk0_1*work_elem_size;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         if( is_a_t )
         {
@@ -1182,12 +1207,21 @@ void cv::gemm( InputArray matA, InputArray matB, double alpha,
             flags &= ~GEMM_1_T;
         }
 
+<<<<<<< HEAD
         buf.allocate(a_buf_size + b_buf_size + d_buf_size);
+=======
+        buf.allocate(d_buf_size + b_buf_size + a_buf_size + tmat_size);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         d_buf = (uchar*)buf;
         b_buf = d_buf + d_buf_size;
 
         if( is_a_t )
             a_buf = b_buf + b_buf_size;
+<<<<<<< HEAD
+=======
+        if( tmat_size > 0 )
+            tmat = Mat(d_size.height, d_size.width, type, b_buf + b_buf_size + a_buf_size );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         for( i = 0; i < d_size.height; i += di )
         {

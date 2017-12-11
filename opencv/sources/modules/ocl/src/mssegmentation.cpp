@@ -71,8 +71,13 @@ namespace
         vector<int> rank;
         vector<int> size;
     private:
+<<<<<<< HEAD
         DjSets(const DjSets &) {}
         DjSets operator =(const DjSets &);
+=======
+        DjSets(const DjSets &); // = delete
+        DjSets& operator =(const DjSets &); // = delete
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     };
 
     template <typename T>
@@ -139,6 +144,7 @@ namespace
     // Implementation
     //
 
+<<<<<<< HEAD
     DjSets DjSets::operator = (const DjSets &/*obj*/)
     {
         //cout << "Invalid DjSets constructor\n";
@@ -146,6 +152,8 @@ namespace
         return *this;
     }
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     DjSets::DjSets(int n) : parent(n), rank(n, 0), size(n, 1)
     {
         for (int i = 0; i < n; ++i)

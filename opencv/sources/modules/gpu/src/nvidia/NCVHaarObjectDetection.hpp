@@ -59,6 +59,14 @@
 #ifndef _ncvhaarobjectdetection_hpp_
 #define _ncvhaarobjectdetection_hpp_
 
+<<<<<<< HEAD
+=======
+#ifdef __GNUC__
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <string>
 #include "NCV.hpp"
 
@@ -458,5 +466,11 @@ NCV_EXPORTS NCVStatus ncvHaarStoreNVBIN_host(const std::string &filename,
                                              NCVVector<HaarFeature64> &h_HaarFeatures);
 
 
+<<<<<<< HEAD
+=======
+#ifdef __GNUC__
+# pragma GCC diagnostic pop
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #endif // _ncvhaarobjectdetection_hpp_

@@ -247,7 +247,11 @@ if(ANDROID)
     # build the library project
     # normally we should do this after a native part, but for a library project we can build the java part first
     add_custom_command(OUTPUT "${JAR_FILE}" "${JAR_FILE}.dephelper"
+<<<<<<< HEAD
                        COMMAND ${ANT_EXECUTABLE} -q -noinput -k debug
+=======
+                       COMMAND ${ANT_EXECUTABLE} -q -noinput -k debug -Djava.target=1.6 -Djava.source=1.6
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                        COMMAND ${CMAKE_COMMAND} -E touch "${JAR_FILE}.dephelper" # can not rely on classes.jar because different versions of SDK update timestamp at different times
                        WORKING_DIRECTORY "${OpenCV_BINARY_DIR}"
                        DEPENDS ${step3_depends}
@@ -286,6 +290,12 @@ else(ANDROID)
 endif(ANDROID)
 
 # step 5: build native part
+<<<<<<< HEAD
+=======
+ocv_warnings_disable(CMAKE_CXX_FLAGS -Wunused-const-variable -Woverloaded-virtual)
+
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 add_library(${the_module} SHARED ${handwrittren_h_sources} ${handwrittren_cpp_sources} ${generated_cpp_sources}
                                  ${copied_files}
                                 "${JAR_FILE}" "${JAR_FILE}.dephelper")

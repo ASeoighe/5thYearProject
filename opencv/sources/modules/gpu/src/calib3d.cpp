@@ -138,14 +138,25 @@ namespace
             bool was;
             do
             {
+<<<<<<< HEAD
                 subset[i] = rand() % num_points;
                 was = false;
                 for (int j = 0; j < i; ++j)
+=======
+                subset[i] = cv::theRNG().uniform(0, num_points);
+                was = false;
+                for (int j = 0; j < i; ++j)
+                {
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     if (subset[j] == subset[i])
                     {
                         was = true;
                         break;
                     }
+<<<<<<< HEAD
+=======
+                }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             } while (was);
         }
     }

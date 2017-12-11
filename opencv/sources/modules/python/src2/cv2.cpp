@@ -1,6 +1,10 @@
 #if defined(_MSC_VER) && (_MSC_VER >= 1800)
 // eliminating duplicated round() declaration
+<<<<<<< HEAD
 #define HAVE_ROUND
+=======
+#define HAVE_ROUND 1
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
 #include <Python.h>
@@ -233,7 +237,16 @@ static int pyopencv_to(const PyObject* o, Mat& m, const ArgInfo info, bool allow
 
     if( PyInt_Check(o) )
     {
+<<<<<<< HEAD
         double v[] = {PyInt_AsLong((PyObject*)o), 0., 0., 0.};
+=======
+        double v[] = {
+            static_cast<double>(PyInt_AsLong((PyObject*)o)),
+            0.,
+            0.,
+            0.,
+        };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         m = Mat(4, 1, CV_64F, v).clone();
         return true;
     }
@@ -285,7 +298,11 @@ static int pyopencv_to(const PyObject* o, Mat& m, const ArgInfo info, bool allow
 
     if( type < 0 )
     {
+<<<<<<< HEAD
         if( typenum == NPY_INT64 || typenum == NPY_UINT64 || type == NPY_LONG )
+=======
+        if( typenum == NPY_INT64 || typenum == NPY_UINT64 || typenum == NPY_LONG )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             needcopy = needcast = true;
             new_typenum = NPY_INT;

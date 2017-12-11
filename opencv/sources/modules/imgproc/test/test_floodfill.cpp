@@ -501,6 +501,11 @@ _exit_:
     comp[6] = s1;
     comp[7] = s2;
     comp[8] = 0;
+<<<<<<< HEAD
+=======
+
+    cvReleaseMemStorage(&st);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 

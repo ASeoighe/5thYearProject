@@ -32,6 +32,7 @@ bool CvCascadeImageReader::NegReader::create( const string _filename, Size _winS
     if ( !file.is_open() )
         return false;
 
+<<<<<<< HEAD
     size_t pos = _filename.rfind('\\');
     char dlmrt = '\\';
     if (pos == string::npos)
@@ -40,12 +41,18 @@ bool CvCascadeImageReader::NegReader::create( const string _filename, Size _winS
         dlmrt = '/';
     }
     dirname = pos == string::npos ? "" : _filename.substr(0, pos) + dlmrt;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     while( !file.eof() )
     {
         std::getline(file, str);
         if (str.empty()) break;
         if (str.at(0) == '#' ) continue; /* comment */
+<<<<<<< HEAD
         imgFilenames.push_back(dirname + str);
+=======
+        imgFilenames.push_back(str);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     file.close();
 

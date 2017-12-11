@@ -77,6 +77,20 @@ void cv::gpu::bilateralFilter(const GpuMat& src, GpuMat& dst, int kernel_size, f
 
     typedef void (*func_t)(const PtrStepSzb& src, PtrStepSzb dst, int kernel_size, float sigma_spatial, float sigma_color, int borderMode, cudaStream_t s);
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+    static const func_t funcs[6][4] =
+    {
+        {bilateral_filter_gpu<uchar>       , 0 /*bilateral_filter_gpu<uchar2>*/ , bilateral_filter_gpu<uchar3>       , bilateral_filter_gpu<uchar4>       },
+        {0 /*bilateral_filter_gpu<schar>*/ , 0 /*bilateral_filter_gpu<schar2>*/ , 0 /*bilateral_filter_gpu<schar3>*/ , 0 /*bilateral_filter_gpu<schar4>*/ },
+        {0 /*bilateral_filter_gpu<ushort>*/, 0 /*bilateral_filter_gpu<ushort2>*/, 0 /*bilateral_filter_gpu<ushort3>*/, 0 /*bilateral_filter_gpu<ushort4>*/},
+        {0 /*bilateral_filter_gpu<short>*/ , 0 /*bilateral_filter_gpu<short2>*/ , 0 /*bilateral_filter_gpu<short3>*/ , 0 /*bilateral_filter_gpu<short4>*/ },
+        {0 /*bilateral_filter_gpu<int>*/   , 0 /*bilateral_filter_gpu<int2>*/   , 0 /*bilateral_filter_gpu<int3>*/   , 0 /*bilateral_filter_gpu<int4>*/   },
+        {bilateral_filter_gpu<float>       , 0 /*bilateral_filter_gpu<float2>*/ , bilateral_filter_gpu<float3>       , bilateral_filter_gpu<float4>       }
+    };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     static const func_t funcs[6][4] =
     {
         {bilateral_filter_gpu<uchar>      , 0 /*bilateral_filter_gpu<uchar2>*/ , bilateral_filter_gpu<uchar3>      , bilateral_filter_gpu<uchar4>      },
@@ -86,6 +100,10 @@ void cv::gpu::bilateralFilter(const GpuMat& src, GpuMat& dst, int kernel_size, f
         {0 /*bilateral_filter_gpu<int>*/  , 0 /*bilateral_filter_gpu<int2>*/   , 0 /*bilateral_filter_gpu<int3>*/  , 0 /*bilateral_filter_gpu<int4>*/  },
         {bilateral_filter_gpu<float>      , 0 /*bilateral_filter_gpu<float2>*/ , bilateral_filter_gpu<float3>      , bilateral_filter_gpu<float4>      }
     };
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     sigma_color = (sigma_color <= 0 ) ? 1 : sigma_color;
     sigma_spatial = (sigma_spatial <= 0 ) ? 1 : sigma_spatial;

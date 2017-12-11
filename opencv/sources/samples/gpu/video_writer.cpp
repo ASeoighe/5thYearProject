@@ -63,7 +63,12 @@ int main(int argc, const char* argv[])
         {
             std::cout << "Open GPU Writer" << std::endl;
 
+<<<<<<< HEAD
             d_writer.open("output_gpu.avi", frame.size(), FPS);
+=======
+            const cv::String outputFilename = "output_gpu.avi";
+            d_writer.open(outputFilename, frame.size(), FPS);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         d_frame.upload(frame);

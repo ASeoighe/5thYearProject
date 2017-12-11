@@ -302,7 +302,11 @@ gpu::FGDStatModel
 -----------------
 .. ocv:class:: gpu::FGDStatModel
 
+<<<<<<< HEAD
 Class used for background/foreground segmentation. ::
+=======
+  Class used for background/foreground segmentation. ::
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     class FGDStatModel
     {
@@ -400,7 +404,11 @@ gpu::MOG_GPU
 ------------
 .. ocv:class:: gpu::MOG_GPU
 
+<<<<<<< HEAD
 Gaussian Mixture-based Backbround/Foreground Segmentation Algorithm. ::
+=======
+  Gaussian Mixture-based Backbround/Foreground Segmentation Algorithm. ::
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     class MOG_GPU
     {
@@ -479,7 +487,11 @@ gpu::MOG2_GPU
 -------------
 .. ocv:class:: gpu::MOG2_GPU
 
+<<<<<<< HEAD
 Gaussian Mixture-based Background/Foreground Segmentation Algorithm. ::
+=======
+  Gaussian Mixture-based Background/Foreground Segmentation Algorithm. ::
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     class MOG2_GPU
     {
@@ -594,7 +606,11 @@ gpu::GMG_GPU
 
   Class used for background/foreground segmentation. ::
 
+<<<<<<< HEAD
     class GMG_GPU_GPU
+=======
+    class GMG_GPU
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     {
     public:
         GMG_GPU();

@@ -233,7 +233,11 @@ MSERNewHistory( MSERConnectedComp* comp, MSERGrowHistory* history )
         history->shortcut = comp->history->shortcut;
         history->stable = comp->history->stable;
     }
+<<<<<<< HEAD
     history->val = comp->grey_level;
+=======
+    history->val = (int)comp->grey_level;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     history->size = comp->size;
     comp->history = history;
 }
@@ -263,7 +267,11 @@ MSERMergeComp( MSERConnectedComp* comp1,
         }
         if ( NULL != comp2->history && comp2->history->stable > history->stable )
             history->stable = comp2->history->stable;
+<<<<<<< HEAD
         history->val = comp1->grey_level;
+=======
+        history->val = (int)comp1->grey_level;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         history->size = comp1->size;
         // put comp1 to history
         comp->var = comp1->var;
@@ -288,7 +296,11 @@ MSERMergeComp( MSERConnectedComp* comp1,
         }
         if ( NULL != comp1->history && comp1->history->stable > history->stable )
             history->stable = comp1->history->stable;
+<<<<<<< HEAD
         history->val = comp2->grey_level;
+=======
+        history->val = (int)comp2->grey_level;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         history->size = comp2->size;
         // put comp2 to history
         comp->var = comp2->var;
@@ -312,7 +324,11 @@ static float
 MSERVariationCalc( MSERConnectedComp* comp, int delta )
 {
     MSERGrowHistory* history = comp->history;
+<<<<<<< HEAD
     int val = comp->grey_level;
+=======
+    int val = (int)comp->grey_level;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if ( NULL != history )
     {
         MSERGrowHistory* shortcut = history->shortcut;

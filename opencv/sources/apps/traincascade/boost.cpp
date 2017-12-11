@@ -374,7 +374,11 @@ CvDTreeNode* CvCascadeBoostTrainData::subsample_data( const CvMat* _subsample_id
             if (is_buf_16u)
             {
                 unsigned short* udst_idx = (unsigned short*)(buf->data.s + root->buf_idx*get_length_subbuf() +
+<<<<<<< HEAD
                     vi*sample_count + data_root->offset);
+=======
+                    (size_t)vi*sample_count + data_root->offset);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 for( int i = 0; i < num_valid; i++ )
                 {
                     idx = src_idx[i];
@@ -387,7 +391,11 @@ CvDTreeNode* CvCascadeBoostTrainData::subsample_data( const CvMat* _subsample_id
             else
             {
                 int* idst_idx = buf->data.i + root->buf_idx*get_length_subbuf() +
+<<<<<<< HEAD
                     vi*sample_count + root->offset;
+=======
+                    (size_t)vi*sample_count + root->offset;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 for( int i = 0; i < num_valid; i++ )
                 {
                     idx = src_idx[i];
@@ -404,14 +412,22 @@ CvDTreeNode* CvCascadeBoostTrainData::subsample_data( const CvMat* _subsample_id
         if (is_buf_16u)
         {
             unsigned short* udst = (unsigned short*)(buf->data.s + root->buf_idx*get_length_subbuf() +
+<<<<<<< HEAD
                 (workVarCount-1)*sample_count + root->offset);
+=======
+                (size_t)(workVarCount-1)*sample_count + root->offset);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for( int i = 0; i < count; i++ )
                 udst[i] = (unsigned short)src_lbls[sidx[i]];
         }
         else
         {
             int* idst = buf->data.i + root->buf_idx*get_length_subbuf() +
+<<<<<<< HEAD
                 (workVarCount-1)*sample_count + root->offset;
+=======
+                (size_t)(workVarCount-1)*sample_count + root->offset;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for( int i = 0; i < count; i++ )
                 idst[i] = src_lbls[sidx[i]];
         }
@@ -421,14 +437,22 @@ CvDTreeNode* CvCascadeBoostTrainData::subsample_data( const CvMat* _subsample_id
         if (is_buf_16u)
         {
             unsigned short* sample_idx_dst = (unsigned short*)(buf->data.s + root->buf_idx*get_length_subbuf() +
+<<<<<<< HEAD
                 workVarCount*sample_count + root->offset);
+=======
+                (size_t)workVarCount*sample_count + root->offset);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for( int i = 0; i < count; i++ )
                 sample_idx_dst[i] = (unsigned short)sample_idx_src[sidx[i]];
         }
         else
         {
             int* sample_idx_dst = buf->data.i + root->buf_idx*get_length_subbuf() +
+<<<<<<< HEAD
                 workVarCount*sample_count + root->offset;
+=======
+                (size_t)workVarCount*sample_count + root->offset;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for( int i = 0; i < count; i++ )
                 sample_idx_dst[i] = sample_idx_src[sidx[i]];
         }
@@ -614,9 +638,15 @@ void CvCascadeBoostTrainData::setData( const CvFeatureEvaluator* _featureEvaluat
 
     // set sample labels
     if (is_buf_16u)
+<<<<<<< HEAD
         udst = (unsigned short*)(buf->data.s + work_var_count*sample_count);
     else
         idst = buf->data.i + work_var_count*sample_count;
+=======
+        udst = (unsigned short*)(buf->data.s + (size_t)work_var_count*sample_count);
+    else
+        idst = buf->data.i + (size_t)work_var_count*sample_count;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     for (int si = 0; si < sample_count; si++)
     {
@@ -684,11 +714,19 @@ void CvCascadeBoostTrainData::get_ord_var_data( CvDTreeNode* n, int vi, float* o
     if ( vi < numPrecalcIdx )
     {
         if( !is_buf_16u )
+<<<<<<< HEAD
             *sortedIndices = buf->data.i + n->buf_idx*get_length_subbuf() + vi*sample_count + n->offset;
         else
         {
             const unsigned short* shortIndices = (const unsigned short*)(buf->data.s + n->buf_idx*get_length_subbuf() +
                                                     vi*sample_count + n->offset );
+=======
+            *sortedIndices = buf->data.i + n->buf_idx*get_length_subbuf() + (size_t)vi*sample_count + n->offset;
+        else
+        {
+            const unsigned short* shortIndices = (const unsigned short*)(buf->data.s + n->buf_idx*get_length_subbuf() +
+                                                    (size_t)vi*sample_count + n->offset );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for( int i = 0; i < nodeSampleCount; i++ )
                 sortedIndicesBuf[i] = shortIndices[i];
 
@@ -799,6 +837,7 @@ struct FeatureIdxOnlyPrecalc : ParallelLoopBody
             {
                 valCachePtr[si] = (*featureEvaluator)( fi, si );
                 if ( is_buf_16u )
+<<<<<<< HEAD
                     *(udst + fi*sample_count + si) = (unsigned short)si;
                 else
                     *(idst + fi*sample_count + si) = si;
@@ -807,6 +846,16 @@ struct FeatureIdxOnlyPrecalc : ParallelLoopBody
                 icvSortUShAux( udst + fi*sample_count, sample_count, valCachePtr );
             else
                 icvSortIntAux( idst + fi*sample_count, sample_count, valCachePtr );
+=======
+                    *(udst + (size_t)fi*sample_count + si) = (unsigned short)si;
+                else
+                    *(idst + (size_t)fi*sample_count + si) = si;
+            }
+            if ( is_buf_16u )
+                icvSortUShAux( udst + (size_t)fi*sample_count, sample_count, valCachePtr );
+            else
+                icvSortIntAux( idst + (size_t)fi*sample_count, sample_count, valCachePtr );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
     }
     const CvFeatureEvaluator* featureEvaluator;
@@ -835,6 +884,7 @@ struct FeatureValAndIdxPrecalc : ParallelLoopBody
             {
                 valCache->at<float>(fi,si) = (*featureEvaluator)( fi, si );
                 if ( is_buf_16u )
+<<<<<<< HEAD
                     *(udst + fi*sample_count + si) = (unsigned short)si;
                 else
                     *(idst + fi*sample_count + si) = si;
@@ -843,6 +893,16 @@ struct FeatureValAndIdxPrecalc : ParallelLoopBody
                 icvSortUShAux( udst + fi*sample_count, sample_count, valCache->ptr<float>(fi) );
             else
                 icvSortIntAux( idst + fi*sample_count, sample_count, valCache->ptr<float>(fi) );
+=======
+                    *(udst + (size_t)fi*sample_count + si) = (unsigned short)si;
+                else
+                    *(idst + (size_t)fi*sample_count + si) = si;
+            }
+            if ( is_buf_16u )
+                icvSortUShAux( udst + (size_t)fi*sample_count, sample_count, valCache->ptr<float>(fi) );
+            else
+                icvSortIntAux( idst + (size_t)fi*sample_count, sample_count, valCache->ptr<float>(fi) );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
     }
     const CvFeatureEvaluator* featureEvaluator;
@@ -1165,9 +1225,15 @@ void CvCascadeBoostTree::split_node_data( CvDTreeNode* node )
     if (data->is_buf_16u)
     {
         unsigned short *ldst = (unsigned short *)(buf->data.s + left->buf_idx*length_buf_row +
+<<<<<<< HEAD
             (workVarCount-1)*scount + left->offset);
         unsigned short *rdst = (unsigned short *)(buf->data.s + right->buf_idx*length_buf_row +
             (workVarCount-1)*scount + right->offset);
+=======
+            (size_t)(workVarCount-1)*scount + left->offset);
+        unsigned short *rdst = (unsigned short *)(buf->data.s + right->buf_idx*length_buf_row +
+            (size_t)(workVarCount-1)*scount + right->offset);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         for( int i = 0; i < n; i++ )
         {
@@ -1188,9 +1254,15 @@ void CvCascadeBoostTree::split_node_data( CvDTreeNode* node )
     else
     {
         int *ldst = buf->data.i + left->buf_idx*length_buf_row +
+<<<<<<< HEAD
             (workVarCount-1)*scount + left->offset;
         int *rdst = buf->data.i + right->buf_idx*length_buf_row +
             (workVarCount-1)*scount + right->offset;
+=======
+            (size_t)(workVarCount-1)*scount + left->offset;
+        int *rdst = buf->data.i + right->buf_idx*length_buf_row +
+            (size_t)(workVarCount-1)*scount + right->offset;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         for( int i = 0; i < n; i++ )
         {
@@ -1218,9 +1290,15 @@ void CvCascadeBoostTree::split_node_data( CvDTreeNode* node )
     if (data->is_buf_16u)
     {
         unsigned short* ldst = (unsigned short*)(buf->data.s + left->buf_idx*length_buf_row +
+<<<<<<< HEAD
             workVarCount*scount + left->offset);
         unsigned short* rdst = (unsigned short*)(buf->data.s + right->buf_idx*length_buf_row +
             workVarCount*scount + right->offset);
+=======
+            (size_t)workVarCount*scount + left->offset);
+        unsigned short* rdst = (unsigned short*)(buf->data.s + right->buf_idx*length_buf_row +
+            (size_t)workVarCount*scount + right->offset);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         for (int i = 0; i < n; i++)
         {
             unsigned short idx = (unsigned short)tempBuf[i];
@@ -1239,9 +1317,15 @@ void CvCascadeBoostTree::split_node_data( CvDTreeNode* node )
     else
     {
         int* ldst = buf->data.i + left->buf_idx*length_buf_row +
+<<<<<<< HEAD
             workVarCount*scount + left->offset;
         int* rdst = buf->data.i + right->buf_idx*length_buf_row +
             workVarCount*scount + right->offset;
+=======
+            (size_t)workVarCount*scount + left->offset;
+        int* rdst = buf->data.i + right->buf_idx*length_buf_row +
+            (size_t)workVarCount*scount + right->offset;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         for (int i = 0; i < n; i++)
         {
             int idx = tempBuf[i];
@@ -1410,7 +1494,11 @@ void CvCascadeBoost::update_weights( CvBoostTree* tree )
         if (data->is_buf_16u)
         {
             unsigned short* labels = (unsigned short*)(buf->data.s + data->data_root->buf_idx*length_buf_row +
+<<<<<<< HEAD
                 data->data_root->offset + (data->work_var_count-1)*data->sample_count);
+=======
+                data->data_root->offset + (size_t)(data->work_var_count-1)*data->sample_count);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             for( int i = 0; i < n; i++ )
             {
                 // save original categorical responses {0,1}, convert them to {-1,1}
@@ -1428,7 +1516,11 @@ void CvCascadeBoost::update_weights( CvBoostTree* tree )
         else
         {
             int* labels = buf->data.i + data->data_root->buf_idx*length_buf_row +
+<<<<<<< HEAD
                 data->data_root->offset + (data->work_var_count-1)*data->sample_count;
+=======
+                data->data_root->offset + (size_t)(data->work_var_count-1)*data->sample_count;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
             for( int i = 0; i < n; i++ )
             {

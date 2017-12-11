@@ -280,7 +280,12 @@ __global__ void scanRows(T_in *d_src, Ncv32u texOffs, Ncv32u srcWidth, Ncv32u sr
 
     __shared__ T_out shmem[NUM_SCAN_THREADS * 2];
     __shared__ T_out carryElem;
+<<<<<<< HEAD
     carryElem = 0;
+=======
+    if (threadIdx.x == 0)
+        carryElem = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     __syncthreads();
 
     while (numBuckets--)
@@ -288,7 +293,11 @@ __global__ void scanRows(T_in *d_src, Ncv32u texOffs, Ncv32u srcWidth, Ncv32u sr
         Ncv32u curElemOffs = offsetX + threadIdx.x;
         T_out curScanElem;
 
+<<<<<<< HEAD
         T_in curElem;
+=======
+        T_in curElem = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         T_out curElemMod;
 
         if (curElemOffs < srcWidth)

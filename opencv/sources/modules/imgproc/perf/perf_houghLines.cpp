@@ -11,6 +11,20 @@ using std::tr1::get;
 typedef std::tr1::tuple<String, double, double, int> Image_RhoStep_ThetaStep_Threshold_t;
 typedef perf::TestBaseWithParam<Image_RhoStep_ThetaStep_Threshold_t> Image_RhoStep_ThetaStep_Threshold;
 
+<<<<<<< HEAD
+=======
+#ifdef __aarch64__
+// In case of  aarch64 the function produces one more line than expected
+PERF_TEST_P(Image_RhoStep_ThetaStep_Threshold, DISABLED_HoughLines,
+            testing::Combine(
+                testing::Values( "cv/shared/pic5.png", "stitching/a1.png" ),
+                testing::Values( 1, 10 ),
+                testing::Values( 0.01, 0.1 ),
+                testing::Values( 300, 500 )
+                )
+            )
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 PERF_TEST_P(Image_RhoStep_ThetaStep_Threshold, HoughLines,
             testing::Combine(
                 testing::Values( "cv/shared/pic5.png", "stitching/a1.png" ),
@@ -19,6 +33,10 @@ PERF_TEST_P(Image_RhoStep_ThetaStep_Threshold, HoughLines,
                 testing::Values( 300, 500 )
                 )
             )
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     String filename = getDataPath(get<0>(GetParam()));
     double rhoStep = get<1>(GetParam());

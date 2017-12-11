@@ -24,8 +24,13 @@ static void colorizeFlow(const Mat &u, const Mat &v, Mat &dst)
     minMaxLoc(u, &uMin, &uMax, 0, 0);
     double vMin, vMax;
     minMaxLoc(v, &vMin, &vMax, 0, 0);
+<<<<<<< HEAD
     uMin = ::abs(uMin); uMax = ::abs(uMax);
     vMin = ::abs(vMin); vMax = ::abs(vMax);
+=======
+    uMin = std::abs(uMin); uMax = std::abs(uMax);
+    vMin = std::abs(vMin); vMax = std::abs(vMax);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     float dMax = static_cast<float>(::max(::max(uMin, uMax), ::max(vMin, vMax)));
 
     dst.create(u.size(), CV_8UC3);

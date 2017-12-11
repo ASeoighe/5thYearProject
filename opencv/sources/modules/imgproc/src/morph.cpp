@@ -584,6 +584,7 @@ typedef MorphFVec<VMax32f> DilateVec32f;
 
 #else
 
+<<<<<<< HEAD
 #ifdef HAVE_TEGRA_OPTIMIZATION
 using tegra::ErodeRowVec8u;
 using tegra::DilateRowVec8u;
@@ -591,12 +592,17 @@ using tegra::DilateRowVec8u;
 using tegra::ErodeColumnVec8u;
 using tegra::DilateColumnVec8u;
 #else
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 typedef MorphRowNoVec ErodeRowVec8u;
 typedef MorphRowNoVec DilateRowVec8u;
 
 typedef MorphColumnNoVec ErodeColumnVec8u;
 typedef MorphColumnNoVec DilateColumnVec8u;
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 typedef MorphRowNoVec ErodeRowVec16u;
 typedef MorphRowNoVec DilateRowVec16u;
@@ -1114,6 +1120,20 @@ public:
         Mat srcStripe = src.rowRange(row0, row1);
         Mat dstStripe = dst.rowRange(row0, row1);
 
+<<<<<<< HEAD
+=======
+
+#if defined HAVE_TEGRA_OPTIMIZATION
+        //Iterative separable filters are converted to single iteration filters
+        //But anyway check that we really get 1 iteration prior to processing
+        if( countNonZero(kernel) == kernel.rows*kernel.cols && iterations == 1 &&
+            src.depth() == CV_8U && ( op == MORPH_ERODE || op == MORPH_DILATE ) &&
+            tegra::morphology(srcStripe, dstStripe, op, kernel, anchor,
+                              rowBorderType, columnBorderType, borderValue) )
+            return;
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         Ptr<FilterEngine> f = createMorphologyFilter(op, src.type(), kernel, anchor,
                                                      rowBorderType, columnBorderType, borderValue );
 
@@ -1234,7 +1254,11 @@ static bool IPPMorphOp(int op, InputArray _src, OutputArray _dst,
                     return false;
             }
         }
+<<<<<<< HEAD
         for( x = 0; y < kernel.cols; x++ )
+=======
+        for( x = 0; x < kernel.cols; x++ )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         {
             if( kernel.at<uchar>(anchor.y, x) != 0 )
                 continue;
@@ -1374,6 +1398,11 @@ void cv::morphologyEx( InputArray _src, OutputArray _dst, int op,
     _dst.create(src.size(), src.type());
     Mat dst = _dst.getMat();
 
+<<<<<<< HEAD
+=======
+    Mat k1, k2, e1, e2;        //only for hit and miss op
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     switch( op )
     {
     case MORPH_ERODE:
@@ -1409,6 +1438,27 @@ void cv::morphologyEx( InputArray _src, OutputArray _dst, int op,
         erode( temp, temp, kernel, anchor, iterations, borderType, borderValue );
         dst = temp - src;
         break;
+<<<<<<< HEAD
+=======
+    case MORPH_HITMISS:
+        CV_Assert(src.type() == CV_8UC1);
+        k1 = (kernel.getMat() == 1);
+        k2 = (kernel.getMat() == -1);
+        if (countNonZero(k1) <= 0)
+            e1 = src;
+        else
+            erode(src, e1, k1, anchor, iterations, borderType, borderValue);
+        if (countNonZero(k2) <= 0)
+            e2 = src;
+        else
+        {
+            Mat src_complement;
+            bitwise_not(src, src_complement);
+            erode(src_complement, e2, k2, anchor, iterations, borderType, borderValue);
+        }
+        dst = e1 & e2;
+        break;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     default:
         CV_Error( CV_StsBadArg, "unknown morphological operation" );
     }

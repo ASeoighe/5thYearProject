@@ -1,8 +1,13 @@
 
 /* pngget.c - retrieval of values from info struct
  *
+<<<<<<< HEAD
  * Last changed in libpng 1.5.7 [December 15, 2011]
  * Copyright (c) 1998-2011 Glenn Randers-Pehrson
+=======
+ * Last changed in libpng 1.5.19 [August 21, 2014]
+ * Copyright (c) 1998-2002,2004,2006-2014 Glenn Randers-Pehrson
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
@@ -123,6 +128,12 @@ png_get_x_pixels_per_meter(png_const_structp png_ptr, png_const_infop info_ptr)
          if (info_ptr->phys_unit_type == PNG_RESOLUTION_METER)
             return (info_ptr->x_pixels_per_unit);
       }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return (0);
@@ -140,6 +151,12 @@ png_get_y_pixels_per_meter(png_const_structp png_ptr, png_const_infop info_ptr)
       if (info_ptr->phys_unit_type == PNG_RESOLUTION_METER)
          return (info_ptr->y_pixels_per_unit);
    }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return (0);
@@ -157,6 +174,12 @@ png_get_pixels_per_meter(png_const_structp png_ptr, png_const_infop info_ptr)
           info_ptr->x_pixels_per_unit == info_ptr->y_pixels_per_unit)
          return (info_ptr->x_pixels_per_unit);
    }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return (0);
@@ -175,6 +198,12 @@ png_get_pixel_aspect_ratio(png_const_structp png_ptr, png_const_infop info_ptr)
          return ((float)((float)info_ptr->y_pixels_per_unit
              /(float)info_ptr->x_pixels_per_unit));
    }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return ((float)0.0);
@@ -203,6 +232,12 @@ png_get_pixel_aspect_ratio_fixed(png_const_structp png_ptr,
           (png_int_32)info_ptr->x_pixels_per_unit))
          return res;
    }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return 0;
@@ -220,6 +255,12 @@ png_get_x_offset_microns(png_const_structp png_ptr, png_const_infop info_ptr)
       if (info_ptr->offset_unit_type == PNG_OFFSET_MICROMETER)
          return (info_ptr->x_offset);
    }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return (0);
@@ -236,6 +277,12 @@ png_get_y_offset_microns(png_const_structp png_ptr, png_const_infop info_ptr)
       if (info_ptr->offset_unit_type == PNG_OFFSET_MICROMETER)
          return (info_ptr->y_offset);
    }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return (0);
@@ -252,6 +299,12 @@ png_get_x_offset_pixels(png_const_structp png_ptr, png_const_infop info_ptr)
       if (info_ptr->offset_unit_type == PNG_OFFSET_PIXEL)
          return (info_ptr->x_offset);
    }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return (0);
@@ -268,6 +321,12 @@ png_get_y_offset_pixels(png_const_structp png_ptr, png_const_infop info_ptr)
       if (info_ptr->offset_unit_type == PNG_OFFSET_PIXEL)
          return (info_ptr->y_offset);
    }
+<<<<<<< HEAD
+=======
+#else
+   PNG_UNUSED(png_ptr)
+   PNG_UNUSED(info_ptr)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 
    return (0);
@@ -646,7 +705,11 @@ png_get_gAMA(png_const_structp png_ptr, png_const_infop info_ptr,
    png_fixed_point igamma;
    png_uint_32 ok = png_get_gAMA_fixed(png_ptr, info_ptr, &igamma);
 
+<<<<<<< HEAD
    if (ok)
+=======
+   if (ok != 0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       *file_gamma = png_float(png_ptr, igamma, "png_get_gAMA");
 
    return ok;
@@ -683,7 +746,11 @@ png_get_iCCP(png_const_structp png_ptr, png_const_infop info_ptr,
 
    if (png_ptr != NULL && info_ptr != NULL && (info_ptr->valid & PNG_INFO_iCCP)
        && name != NULL && compression_type != NULL && profile != NULL &&
+<<<<<<< HEAD
          proflen != NULL)
+=======
+		 proflen != NULL)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
    {
       *name = info_ptr->iccp_name;
       *profile = info_ptr->iccp_profile;
@@ -741,6 +808,7 @@ png_get_IHDR(png_structp png_ptr, png_infop info_ptr,
 {
    png_debug1(1, "in %s retrieval function", "IHDR");
 
+<<<<<<< HEAD
    if (png_ptr == NULL || info_ptr == NULL || width == NULL ||
        height == NULL || bit_depth == NULL || color_type == NULL)
       return (0);
@@ -749,6 +817,22 @@ png_get_IHDR(png_structp png_ptr, png_infop info_ptr,
    *height = info_ptr->height;
    *bit_depth = info_ptr->bit_depth;
    *color_type = info_ptr->color_type;
+=======
+   if (png_ptr == NULL || info_ptr == NULL)
+      return (0);
+
+   if (width != NULL)
+       *width = info_ptr->width;
+
+   if (height != NULL)
+       *height = info_ptr->height;
+
+   if (bit_depth != NULL)
+       *bit_depth = info_ptr->bit_depth;
+
+   if (color_type != NULL)
+       *color_type = info_ptr->color_type;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    if (compression_type != NULL)
       *compression_type = info_ptr->compression_type;
@@ -1121,4 +1205,20 @@ png_get_io_chunk_name (png_structp png_ptr)
 }
 #endif /* ?PNG_IO_STATE_SUPPORTED */
 
+<<<<<<< HEAD
+=======
+#ifdef PNG_CHECK_FOR_INVALID_INDEX_SUPPORTED
+#  ifdef PNG_GET_PALETTE_MAX_SUPPORTED
+int PNGAPI
+png_get_palette_max(png_const_structp png_ptr, png_const_infop info_ptr)
+{
+   if (png_ptr != NULL && info_ptr != NULL)
+      return png_ptr->num_palette_max;
+
+   return (-1);
+}
+#  endif
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif /* PNG_READ_SUPPORTED || PNG_WRITE_SUPPORTED */

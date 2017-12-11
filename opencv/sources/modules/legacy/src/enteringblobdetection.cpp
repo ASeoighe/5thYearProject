@@ -588,7 +588,13 @@ private:
     float           m_param_roi_scale;
     int             m_param_only_roi;
 
+<<<<<<< HEAD
     CvObjectDetector* m_split_detector;
+=======
+#ifdef USE_OBJECT_DETECTOR
+    CvObjectDetector* m_split_detector;
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     CvSize          m_min_window_size;
     int             m_max_border;
 
@@ -603,7 +609,13 @@ CvBlobDetector* cvCreateBlobDetectorCC(){return new CvBlobDetectorCC;}
 
 /* Constructor for BlobDetector: */
 CvBlobDetectorCC::CvBlobDetectorCC() :
+<<<<<<< HEAD
     m_split_detector(0),
+=======
+#ifdef USE_OBJECT_DETECTOR
+    m_split_detector(0),
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     m_detected_blob_seq(sizeof(CvDetectedBlob)),
     m_roi_seq(0),
     m_debug_blob_seq(sizeof(CvDetectedBlob))

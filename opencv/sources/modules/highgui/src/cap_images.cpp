@@ -67,10 +67,18 @@ class CvCapture_Images : public CvCapture
 public:
     CvCapture_Images()
     {
+<<<<<<< HEAD
         filename = 0;
         currentframe = firstframe = 0;
         length = 0;
         frame = 0;
+=======
+        filename = NULL;
+        currentframe = firstframe = 0;
+        length = 0;
+        frame = NULL;
+        grabbedInOpen = false;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
     virtual ~CvCapture_Images()
@@ -92,6 +100,10 @@ protected:
     unsigned length; // length of sequence
 
     IplImage* frame;
+<<<<<<< HEAD
+=======
+    bool grabbedInOpen;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 };
 
 
@@ -100,7 +112,11 @@ void CvCapture_Images::close()
     if( filename )
     {
         free(filename);
+<<<<<<< HEAD
         filename = 0;
+=======
+        filename = NULL;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     currentframe = firstframe = 0;
     length = 0;
@@ -113,17 +129,36 @@ bool CvCapture_Images::grabFrame()
     char str[_MAX_PATH];
     sprintf(str, filename, firstframe + currentframe);
 
+<<<<<<< HEAD
+=======
+    if (grabbedInOpen)
+    {
+        grabbedInOpen = false;
+        ++currentframe;
+
+        return frame != NULL;
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     cvReleaseImage(&frame);
     frame = cvLoadImage(str, CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_ANYCOLOR);
     if( frame )
         currentframe++;
 
+<<<<<<< HEAD
     return frame != 0;
+=======
+    return frame != NULL;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 IplImage* CvCapture_Images::retrieveFrame(int)
 {
+<<<<<<< HEAD
     return frame;
+=======
+    return grabbedInOpen ? NULL : frame;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 double CvCapture_Images::getProperty(int id)
@@ -166,6 +201,11 @@ bool CvCapture_Images::setProperty(int id, double value)
             value = length - 1;
         }
         currentframe = cvRound(value);
+<<<<<<< HEAD
+=======
+        if (currentframe != 0)
+            grabbedInOpen = false; // grabbed frame is not valid anymore
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         return true;
     case CV_CAP_PROP_POS_AVI_RATIO:
         if(value > 1) {
@@ -176,6 +216,11 @@ bool CvCapture_Images::setProperty(int id, double value)
             value = 0;
         }
         currentframe = cvRound((length - 1) * value);
+<<<<<<< HEAD
+=======
+        if (currentframe != 0)
+            grabbedInOpen = false; // grabbed frame is not valid anymore
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         return true;
     }
     CV_WARN("unknown/unhandled property\n");
@@ -278,7 +323,17 @@ bool CvCapture_Images::open(const char * _filename)
     }
 
     firstframe = offset;
+<<<<<<< HEAD
     return true;
+=======
+
+    // grab frame to enable properties retrieval
+    bool grabRes = grabFrame();
+    grabbedInOpen = true;
+    currentframe = 0;
+
+    return grabRes;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 
@@ -290,7 +345,11 @@ CvCapture* cvCreateFileCapture_Images(const char * filename)
         return capture;
 
     delete capture;
+<<<<<<< HEAD
     return 0;
+=======
+    return NULL;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //

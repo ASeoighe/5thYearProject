@@ -73,6 +73,31 @@ namespace
         }
     }
 
+<<<<<<< HEAD
+=======
+    template <typename T, template <typename> class Interpolator>
+    void resizeLinearImpl(const cv::Mat& src, cv::Mat& dst, double fx, double fy)
+    {
+        const int cn = src.channels();
+
+        cv::Size dsize(cv::saturate_cast<int>(src.cols * fx), cv::saturate_cast<int>(src.rows * fy));
+
+        dst.create(dsize, src.type());
+
+        float ifx = static_cast<float>(1.0 / fx);
+        float ify = static_cast<float>(1.0 / fy);
+
+        for (int y = 0; y < dsize.height; ++y)
+        {
+            for (int x = 0; x < dsize.width; ++x)
+            {
+                for (int c = 0; c < cn; ++c)
+                    dst.at<T>(y, x * cn + c) = Interpolator<T>::getValue(src, (y + 0.5f) * ify - 0.5f, (x + 0.5f) * ifx - 0.5f, c, cv::BORDER_REPLICATE);
+            }
+        }
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     void resizeGold(const cv::Mat& src, cv::Mat& dst, double fx, double fy, int interpolation)
     {
         typedef void (*func_t)(const cv::Mat& src, cv::Mat& dst, double fx, double fy);
@@ -90,12 +115,21 @@ namespace
 
         static const func_t linear_funcs[] =
         {
+<<<<<<< HEAD
             resizeImpl<unsigned char, LinearInterpolator>,
             resizeImpl<signed char, LinearInterpolator>,
             resizeImpl<unsigned short, LinearInterpolator>,
             resizeImpl<short, LinearInterpolator>,
             resizeImpl<int, LinearInterpolator>,
             resizeImpl<float, LinearInterpolator>
+=======
+            resizeLinearImpl<unsigned char, LinearInterpolator>,
+            resizeLinearImpl<signed char, LinearInterpolator>,
+            resizeLinearImpl<unsigned short, LinearInterpolator>,
+            resizeLinearImpl<short, LinearInterpolator>,
+            resizeLinearImpl<int, LinearInterpolator>,
+            resizeLinearImpl<float, LinearInterpolator>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         };
 
         static const func_t cubic_funcs[] =
@@ -152,6 +186,18 @@ GPU_TEST_P(Resize, Accuracy)
     EXPECT_MAT_NEAR(dst_gold, dst, src.depth() == CV_32F ? 1e-2 : 1.0);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Resize, testing::Combine(
+    ALL_DEVICES,
+    DIFFERENT_SIZES,
+    testing::Values(MatType(CV_8UC1), MatType(CV_8UC3), MatType(CV_8UC4), MatType(CV_32FC1), MatType(CV_32FC3), MatType(CV_32FC4)),
+    testing::Values(0.3, 0.5, 1.5, 2.0),
+    testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_LINEAR)),
+    WHOLE_SUBMAT));
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Resize, testing::Combine(
     ALL_DEVICES,
     DIFFERENT_SIZES,
@@ -159,6 +205,10 @@ INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Resize, testing::Combine(
     testing::Values(0.3, 0.5, 1.5, 2.0),
     testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_LINEAR), Interpolation(cv::INTER_CUBIC)),
     WHOLE_SUBMAT));
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 /////////////////
 
@@ -195,15 +245,55 @@ GPU_TEST_P(ResizeSameAsHost, Accuracy)
     cv::Mat dst_gold;
     cv::resize(src, dst_gold, cv::Size(), coeff, coeff, interpolation);
 
+<<<<<<< HEAD
     EXPECT_MAT_NEAR(dst_gold, dst, src.depth() == CV_32F ? 1e-2 : 1.0);
 }
 
+=======
+    // CPU test for cv::resize uses 16 as error threshold for CV_8U, we uses 4 as error threshold for CV_8U
+    EXPECT_MAT_NEAR(dst_gold, dst, src.depth() == CV_32F ? 1e-2 : src.depth() == CV_8U ? 4.0 : 1.0);
+}
+
+#ifdef OPENCV_TINY_GPU_MODULE
+INSTANTIATE_TEST_CASE_P(GPU_ImgProc, ResizeSameAsHost, testing::Combine(
+    ALL_DEVICES,
+    DIFFERENT_SIZES,
+    testing::Values(MatType(CV_8UC1), MatType(CV_8UC3), MatType(CV_8UC4), MatType(CV_32FC1), MatType(CV_32FC3), MatType(CV_32FC4)),
+    testing::Values(0.3, 0.5),
+    testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_LINEAR), Interpolation(cv::INTER_AREA)),
+    WHOLE_SUBMAT));
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 INSTANTIATE_TEST_CASE_P(GPU_ImgProc, ResizeSameAsHost, testing::Combine(
     ALL_DEVICES,
     DIFFERENT_SIZES,
     testing::Values(MatType(CV_8UC1), MatType(CV_8UC3), MatType(CV_8UC4), MatType(CV_16UC1), MatType(CV_16UC3), MatType(CV_16UC4), MatType(CV_32FC1), MatType(CV_32FC3), MatType(CV_32FC4)),
     testing::Values(0.3, 0.5),
+<<<<<<< HEAD
     testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_AREA)),
     WHOLE_SUBMAT));
+=======
+    testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_LINEAR), Interpolation(cv::INTER_AREA)),
+    WHOLE_SUBMAT));
+#endif
+
+#ifdef OPENCV_TINY_GPU_MODULE
+INSTANTIATE_TEST_CASE_P(GPU_ImgProc2, ResizeSameAsHost, testing::Combine(
+    ALL_DEVICES,
+    DIFFERENT_SIZES,
+    testing::Values(MatType(CV_8UC1), MatType(CV_8UC3), MatType(CV_8UC4), MatType(CV_32FC1), MatType(CV_32FC3), MatType(CV_32FC4)),
+    testing::Values(0.3, 0.5, 1.5, 2.0),
+    testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_LINEAR)),
+    WHOLE_SUBMAT));
+#else
+INSTANTIATE_TEST_CASE_P(GPU_ImgProc2, ResizeSameAsHost, testing::Combine(
+    ALL_DEVICES,
+    DIFFERENT_SIZES,
+    testing::Values(MatType(CV_8UC1), MatType(CV_8UC3), MatType(CV_8UC4), MatType(CV_16UC1), MatType(CV_16UC3), MatType(CV_16UC4), MatType(CV_32FC1), MatType(CV_32FC3), MatType(CV_32FC4)),
+    testing::Values(0.3, 0.5, 1.5, 2.0),
+    testing::Values(Interpolation(cv::INTER_NEAREST), Interpolation(cv::INTER_LINEAR)),
+    WHOLE_SUBMAT));
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #endif // HAVE_CUDA

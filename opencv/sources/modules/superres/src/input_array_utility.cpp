@@ -226,11 +226,19 @@ namespace
 
         static const double maxVals[] =
         {
+<<<<<<< HEAD
             numeric_limits<uchar>::max(),
             numeric_limits<schar>::max(),
             numeric_limits<ushort>::max(),
             numeric_limits<short>::max(),
             numeric_limits<int>::max(),
+=======
+            (double)numeric_limits<uchar>::max(),
+            (double)numeric_limits<schar>::max(),
+            (double)numeric_limits<ushort>::max(),
+            (double)numeric_limits<short>::max(),
+            (double)numeric_limits<int>::max(),
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             1.0,
             1.0,
         };
@@ -329,11 +337,19 @@ namespace
 
         static const double maxVals[] =
         {
+<<<<<<< HEAD
             std::numeric_limits<uchar>::max(),
             std::numeric_limits<schar>::max(),
             std::numeric_limits<ushort>::max(),
             std::numeric_limits<short>::max(),
             std::numeric_limits<int>::max(),
+=======
+            (double)std::numeric_limits<uchar>::max(),
+            (double)std::numeric_limits<schar>::max(),
+            (double)std::numeric_limits<ushort>::max(),
+            (double)std::numeric_limits<short>::max(),
+            (double)std::numeric_limits<int>::max(),
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             1.0,
             1.0,
         };

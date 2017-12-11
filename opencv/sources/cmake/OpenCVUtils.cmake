@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+include(CheckFunctionExists)
+include(CheckIncludeFile)
+
+if(UNIX)
+  find_package(PkgConfig)
+endif()
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 # Search packages for host system instead of packages for target system
 # in case of cross compilation thess macro should be defined by toolchain file
 if(NOT COMMAND find_host_package)
@@ -11,6 +21,50 @@ if(NOT COMMAND find_host_program)
   endmacro()
 endif()
 
+<<<<<<< HEAD
+=======
+if(NOT COMMAND cmake_parse_arguments)
+  include(CMakeParseArguments OPTIONAL) # CMake 2.8.3+
+endif()
+
+# Debugging function
+function(ocv_cmake_dump_vars)
+  set(VARS "")
+  get_cmake_property(_variableNames VARIABLES)
+  if(COMMAND cmake_parse_arguments222)
+    cmake_parse_arguments(DUMP "" "TOFILE" "" ${ARGN})
+    set(regex "${DUMP_UNPARSED_ARGUMENTS}")
+  else()
+    set(regex "${ARGV0}")
+    if(ARGV1 STREQUAL "TOFILE")
+      set(DUMP_TOFILE "${ARGV2}")
+    endif()
+  endif()
+  string(TOLOWER "${regex}" regex_lower)
+  foreach(_variableName ${_variableNames})
+    string(TOLOWER "${_variableName}" _variableName_lower)
+    if(_variableName MATCHES "${regex}" OR _variableName_lower MATCHES "${regex_lower}")
+      set(VARS "${VARS}${_variableName}=${${_variableName}}\n")
+    endif()
+  endforeach()
+  if(DUMP_TOFILE)
+    file(WRITE ${CMAKE_BINARY_DIR}/${DUMP_TOFILE} "${VARS}")
+  else()
+    message(AUTHOR_WARNING "${VARS}")
+  endif()
+endfunction()
+
+function(ocv_cmake_eval var_name)
+  if(DEFINED ${var_name})
+    file(WRITE "${CMAKE_BINARY_DIR}/CMakeCommand-${var_name}.cmake" ${${var_name}})
+    include("${CMAKE_BINARY_DIR}/CMakeCommand-${var_name}.cmake")
+  endif()
+  if(";${ARGN};" MATCHES ";ONCE;")
+    unset(${var_name} CACHE)
+  endif()
+endfunction()
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 # assert macro
 # Note: it doesn't support lists in arguments
 # Usage samples:
@@ -41,6 +95,12 @@ function(ocv_include_directories)
     get_filename_component(__abs_dir "${dir}" ABSOLUTE)
     if("${__abs_dir}" MATCHES "^${OpenCV_SOURCE_DIR}" OR "${__abs_dir}" MATCHES "^${OpenCV_BINARY_DIR}")
       list(APPEND __add_before "${dir}")
+<<<<<<< HEAD
+=======
+    elseif(CMAKE_COMPILER_IS_GNUCXX AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS "6.0" AND
+           dir MATCHES "/usr/include$")
+      # workaround for GCC 6.x bug
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     else()
       include_directories(AFTER SYSTEM "${dir}")
     endif()
@@ -66,7 +126,11 @@ set(OCV_COMPILER_FAIL_REGEX
     "[Uu]nknown option"                         # HP
     "[Ww]arning: [Oo]ption"                     # SunPro
     "command option .* is not recognized"       # XL
+<<<<<<< HEAD
     "not supported in this configuration; ignored"       # AIX
+=======
+    "not supported in this configuration, ignored"       # AIX (';' is replaced with ',')
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     "File with unknown suffix passed to linker" # PGI
     "WARNING: unknown flag:"                    # Open64
   )
@@ -105,12 +169,34 @@ MACRO(ocv_check_compiler_flag LANG FLAG RESULT)
         COMPILE_DEFINITIONS "${FLAG}"
         OUTPUT_VARIABLE OUTPUT)
 
+<<<<<<< HEAD
       FOREACH(_regex ${OCV_COMPILER_FAIL_REGEX})
         IF("${OUTPUT}" MATCHES "${_regex}")
           SET(${RESULT} 0)
           break()
         ENDIF()
       ENDFOREACH()
+=======
+      if(${RESULT})
+        string(REPLACE ";" "," OUTPUT_LINES "${OUTPUT}")
+        string(REPLACE "\n" ";" OUTPUT_LINES "${OUTPUT_LINES}")
+        foreach(_regex ${OCV_COMPILER_FAIL_REGEX})
+          if(NOT ${RESULT})
+            break()
+          endif()
+          foreach(_line ${OUTPUT_LINES})
+            if("${_line}" MATCHES "${_regex}")
+              file(APPEND ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log
+                  "Build output check failed:\n"
+                  "    Regex: '${_regex}'\n"
+                  "    Output line: '${_line}'\n")
+              set(${RESULT} 0)
+              break()
+            endif()
+          endforeach()
+        endforeach()
+      endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
       IF(${RESULT})
         SET(${RESULT} 1 CACHE INTERNAL "Test ${RESULT}")
@@ -118,6 +204,16 @@ MACRO(ocv_check_compiler_flag LANG FLAG RESULT)
       ELSE(${RESULT})
         MESSAGE(STATUS "Performing Test ${RESULT} - Failed")
         SET(${RESULT} "" CACHE INTERNAL "Test ${RESULT}")
+<<<<<<< HEAD
+=======
+        file(APPEND ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log
+            "Compilation failed:\n"
+            "    source file: '${_fname}'\n"
+            "    check option: '${FLAG}'\n"
+            "===== BUILD LOG =====\n"
+            "${OUTPUT}\n"
+            "===== END =====\n\n")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       ENDIF(${RESULT})
     else()
       SET(${RESULT} 0)
@@ -200,12 +296,20 @@ macro(OCV_OPTION variable description value)
     endif()
   endforeach()
   unset(__varname)
+<<<<<<< HEAD
   if("${__condition}" STREQUAL "")
+=======
+  if(__condition STREQUAL "")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     set(__condition 2 GREATER 1)
   endif()
 
   if(${__condition})
+<<<<<<< HEAD
     if("${__value}" MATCHES ";")
+=======
+    if(__value MATCHES ";")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       if(${__value})
         option(${variable} "${description}" ON)
       else()
@@ -227,6 +331,47 @@ macro(OCV_OPTION variable description value)
   unset(__value)
 endmacro()
 
+<<<<<<< HEAD
+=======
+# Usage: ocv_append_build_options(HIGHGUI FFMPEG)
+macro(ocv_append_build_options var_prefix pkg_prefix)
+  foreach(suffix INCLUDE_DIRS LIBRARIES LIBRARY_DIRS)
+    if(${pkg_prefix}_${suffix})
+      list(APPEND ${var_prefix}_${suffix} ${${pkg_prefix}_${suffix}})
+      list(REMOVE_DUPLICATES ${var_prefix}_${suffix})
+    endif()
+  endforeach()
+endmacro()
+
+# Usage is similar to CMake 'pkg_check_modules' command
+# It additionally controls HAVE_${define} and ${define}_${modname}_FOUND variables
+macro(ocv_check_modules define)
+  unset(HAVE_${define})
+  foreach(m ${ARGN})
+    if (m MATCHES "(.*[^><])(>=|=|<=)(.*)")
+      set(__modname "${CMAKE_MATCH_1}")
+    else()
+      set(__modname "${m}")
+    endif()
+    unset(${define}_${__modname}_FOUND)
+  endforeach()
+  pkg_check_modules(${define} ${ARGN})
+  if(${define}_FOUND)
+    set(HAVE_${define} 1)
+  endif()
+  foreach(m ${ARGN})
+    if (m MATCHES "(.*[^><])(>=|=|<=)(.*)")
+      set(__modname "${CMAKE_MATCH_1}")
+    else()
+      set(__modname "${m}")
+    endif()
+    if(NOT DEFINED ${define}_${__modname}_FOUND AND ${define}_FOUND)
+      set(${define}_${__modname}_FOUND 1)
+    endif()
+  endforeach()
+endmacro()
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 # Macros that checks if module have been installed.
 # After it adds module to build and define
@@ -449,6 +594,7 @@ endmacro()
 
 
 # convert list of paths to libraries names without lib prefix
+<<<<<<< HEAD
 macro(ocv_convert_to_lib_name var)
   set(__tmp "")
   foreach(path ${ARGN})
@@ -461,6 +607,31 @@ macro(ocv_convert_to_lib_name var)
   unset(__tmp_name)
 endmacro()
 
+=======
+function(ocv_convert_to_lib_name var)
+  set(tmp "")
+  foreach(path ${ARGN})
+    get_filename_component(tmp_name "${path}" NAME_WE)
+    string(REGEX REPLACE "^lib" "" tmp_name "${tmp_name}")
+    list(APPEND tmp "${tmp_name}")
+  endforeach()
+  set(${var} ${tmp} PARENT_SCOPE)
+endfunction()
+
+# create imported targets for a list of external libraries
+function(ocv_create_imported_targets var)
+  set(target_list "")
+
+  foreach(library ${ARGN})
+    ocv_convert_to_lib_name(libname "${library}")
+    add_library("opencv_dep_${libname}" UNKNOWN IMPORTED)
+    set_target_properties("opencv_dep_${libname}" PROPERTIES IMPORTED_LOCATION "${library}")
+    list(APPEND target_list "opencv_dep_${libname}")
+  endforeach()
+
+  set("${var}" "${target_list}" PARENT_SCOPE)
+endfunction()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 # add install command
 function(ocv_install_target)
@@ -487,8 +658,16 @@ function(ocv_install_target)
     set(${__package}_TARGETS "${${__package}_TARGETS}" CACHE INTERNAL "List of ${__package} targets")
   endif()
 
+<<<<<<< HEAD
   if(INSTALL_CREATE_DISTRIB)
     if(MSVC AND NOT BUILD_SHARED_LIBS)
+=======
+  if(MSVS)
+    if(NOT INSTALL_IGNORE_PDB AND
+        (INSTALL_PDB OR
+          (INSTALL_CREATE_DISTRIB AND NOT BUILD_SHARED_LIBS)
+        ))
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       set(__target "${ARGV0}")
 
       set(isArchive 0)
@@ -511,6 +690,7 @@ function(ocv_install_target)
 
 #      message(STATUS "Process ${__target} dst=${__dst}...")
       if(DEFINED __dst)
+<<<<<<< HEAD
         get_target_property(fname ${__target} LOCATION_DEBUG)
         if(fname MATCHES "\\.lib$")
           string(REGEX REPLACE "\\.lib$" ".pdb" fname "${fname}")
@@ -521,6 +701,24 @@ function(ocv_install_target)
         if(fname MATCHES "\\.lib$")
           string(REGEX REPLACE "\\.lib$" ".pdb" fname "${fname}")
           install(FILES ${fname} DESTINATION ${__dst} CONFIGURATIONS Release)
+=======
+        # If CMake version is >=3.1.0 or <2.8.12.
+        if(NOT CMAKE_VERSION VERSION_LESS 3.1.0 OR CMAKE_VERSION VERSION_LESS 2.8.12)
+          get_target_property(fname ${__target} LOCATION_DEBUG)
+          if(fname MATCHES "\\.lib$")
+            string(REGEX REPLACE "\\.lib$" ".pdb" fname "${fname}")
+            install(FILES "${fname}" DESTINATION "${__dst}" CONFIGURATIONS Debug OPTIONAL)
+          endif()
+
+          get_target_property(fname ${__target} LOCATION_RELEASE)
+          if(fname MATCHES "\\.lib$")
+            string(REGEX REPLACE "\\.lib$" ".pdb" fname "${fname}")
+            install(FILES "${fname}" DESTINATION "${__dst}" CONFIGURATIONS Release OPTIONAL)
+          endif()
+        else()
+          # CMake 2.8.12 broke PDB support for STATIC libraries from MSVS, fix was introduced in CMake 3.1.0.
+          message(WARNING "PDB's are not supported from this version of CMake, use CMake version later then 3.1.0 or before 2.8.12.")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         endif()
       endif()
     endif()
@@ -619,3 +817,30 @@ function(ocv_source_group group)
   file(GLOB srcs ${OCV_SOURCE_GROUP_GLOB})
   source_group(${group} FILES ${srcs})
 endfunction()
+<<<<<<< HEAD
+=======
+
+macro(ocv_get_libname var_name)
+  get_filename_component(__libname "${ARGN}" NAME)
+  string(REGEX REPLACE "^lib(.+).(a|so)(.[.0-9]+)?$" "\\1" __libname "${__libname}")
+  set(${var_name} "${__libname}")
+endmacro()
+
+# build the list of simple dependencies, that links via "-l"
+#  _all_libs - name of variable with input list
+#  _simple - name of variable with output list of simple libs
+#  _other - name of variable with _all_libs - _simple
+macro(ocv_extract_simple_libs _all_libs _simple _other)
+  set(${_simple} "")
+  set(${_other} "")
+  foreach(_l ${${_all_libs}})
+    if(TARGET ${_l})
+        list(APPEND ${_other} ${_l})
+    elseif(EXISTS "${_l}")
+        list(APPEND ${_other} ${_l})
+    else()
+        list(APPEND ${_simple} ${_l})
+    endif()
+  endforeach()
+endmacro()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

@@ -366,7 +366,22 @@ inline void Mat::release()
     if( refcount && CV_XADD(refcount, -1) == 1 )
         deallocate();
     data = datastart = dataend = datalimit = 0;
+<<<<<<< HEAD
     size.p[0] = 0;
+=======
+    for(int i = 0; i < dims; i++)
+        size.p[i] = 0;
+#ifdef _DEBUG
+    flags = MAGIC_VAL;
+    dims = rows = cols = 0;
+    if (step.p != step.buf)
+    {
+        fastFree(step.p);
+        step.p = step.buf;
+        size.p = &rows;
+    }
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     refcount = 0;
 }
 
@@ -683,6 +698,11 @@ template<typename _Tp> inline void Mat::push_back(const _Tp& elem)
 {
     if( !data )
     {
+<<<<<<< HEAD
+=======
+        CV_Assert((type()==0) || (DataType<_Tp>::type == type()));
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         *this = Mat(1, 1, DataType<_Tp>::type, (void*)&elem).clone();
         return;
     }
@@ -818,6 +838,12 @@ template<typename _Tp> inline Mat_<_Tp>::Mat_(int _dims, const int* _sz)
 template<typename _Tp> inline Mat_<_Tp>::Mat_(int _dims, const int* _sz, const _Tp& _s)
     : Mat(_dims, _sz, DataType<_Tp>::type, Scalar(_s)) {}
 
+<<<<<<< HEAD
+=======
+template<typename _Tp> inline Mat_<_Tp>::Mat_(int _dims, const int* _sz, _Tp* _data, const size_t* _steps)
+    : Mat(_dims, _sz, DataType<_Tp>::type, _data, _steps) {}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 template<typename _Tp> inline Mat_<_Tp>::Mat_(const Mat_<_Tp>& m, const Range* ranges)
     : Mat(m, ranges) {}
 
@@ -2564,7 +2590,11 @@ SparseMatConstIterator_<_Tp>::operator ++()
 template<typename _Tp> inline SparseMatConstIterator_<_Tp>
 SparseMatConstIterator_<_Tp>::operator ++(int)
 {
+<<<<<<< HEAD
     SparseMatConstIterator it = *this;
+=======
+    SparseMatConstIterator_<_Tp> it = *this;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     SparseMatConstIterator::operator ++();
     return it;
 }
@@ -2608,7 +2638,11 @@ SparseMatIterator_<_Tp>::operator ++()
 template<typename _Tp> inline SparseMatIterator_<_Tp>
 SparseMatIterator_<_Tp>::operator ++(int)
 {
+<<<<<<< HEAD
     SparseMatIterator it = *this;
+=======
+    SparseMatIterator_<_Tp> it = *this;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     SparseMatConstIterator::operator ++();
     return it;
 }

@@ -302,6 +302,7 @@ PackageInfo::PackageInfo(int version, int platform, int cpu_id, std::string inst
                 }
                 #endif
             }
+<<<<<<< HEAD
             else if (ARCH_ARMv8 & CpuID)
             {
                 LOGD("PackageInfo::PackageInfo: package arch ARMv8");
@@ -316,6 +317,15 @@ PackageInfo::PackageInfo(int version, int platform, int cpu_id, std::string inst
                     //    FullName += string("_") + features;
                 //}
             }
+=======
+            #ifdef __SUPPORT_AARCH64
+            else if (ARCH_AARCH64 & CpuID)
+            {
+                LOGD("PackageInfo::PackageInfo: package arch AARCH64");
+                FullName += string("_") + ARCH_AARCH64_NAME;
+            }
+            #endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             #ifdef __SUPPORT_MIPS
             else if (ARCH_MIPS & CpuID)
             {
@@ -460,14 +470,31 @@ InstallPath(install_path)
             {
                 CpuID = ARCH_ARMv7 | SplitARMFeatures(features);
             }
+<<<<<<< HEAD
+=======
+            #ifdef __SUPPORT_AARCH64
+            else if (ARCH_AARCH64_NAME == features[2])
+            {
+                CpuID = ARCH_AARCH64 | SplitARMFeatures(features);
+            }
+            #endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             else if (ARCH_X86_NAME == features[2])
             {
                 CpuID = ARCH_X86 | SplitIntelFeatures(features);
             }
+<<<<<<< HEAD
+=======
+            #ifdef __SUPPORT_INTEL_x64
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             else if (ARCH_X64_NAME == features[2])
             {
                 CpuID = ARCH_X64 | SplitIntelFeatures(features);
             }
+<<<<<<< HEAD
+=======
+            #endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             #ifdef __SUPPORT_MIPS
             else if (ARCH_MIPS_NAME == features[2])
             {

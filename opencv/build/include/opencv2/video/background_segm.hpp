@@ -218,6 +218,10 @@ public:
      * model.
      * @param image Input image
      * @param fgmask Output mask image representing foreground and background pixels
+<<<<<<< HEAD
+=======
+     * @param learningRate Determines how quickly features are "forgotten" from histograms
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     virtual void operator()(InputArray image, OutputArray fgmask, double learningRate=-1.0);
 

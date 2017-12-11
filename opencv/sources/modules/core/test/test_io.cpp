@@ -144,7 +144,15 @@ protected:
 
             depth = cvtest::randInt(rng) % (CV_64F+1);
             cn = cvtest::randInt(rng) % 4 + 1;
+<<<<<<< HEAD
             int sz[] = {cvtest::randInt(rng)%10+1, cvtest::randInt(rng)%10+1, cvtest::randInt(rng)%10+1};
+=======
+            int sz[] = {
+                static_cast<int>(cvtest::randInt(rng)%10+1),
+                static_cast<int>(cvtest::randInt(rng)%10+1),
+                static_cast<int>(cvtest::randInt(rng)%10+1),
+            };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             MatND test_mat_nd(3, sz, CV_MAKETYPE(depth, cn));
 
             rng0.fill(test_mat_nd, CV_RAND_UNI, Scalar::all(ranges[depth][0]), Scalar::all(ranges[depth][1]));
@@ -156,8 +164,17 @@ protected:
                 multiply(test_mat_nd, test_mat_scale, test_mat_nd);
             }
 
+<<<<<<< HEAD
             int ssz[] = {cvtest::randInt(rng)%10+1, cvtest::randInt(rng)%10+1,
                 cvtest::randInt(rng)%10+1,cvtest::randInt(rng)%10+1};
+=======
+            int ssz[] = {
+                static_cast<int>(cvtest::randInt(rng)%10+1),
+                static_cast<int>(cvtest::randInt(rng)%10+1),
+                static_cast<int>(cvtest::randInt(rng)%10+1),
+                static_cast<int>(cvtest::randInt(rng)%10+1),
+            };
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             SparseMat test_sparse_mat = cvTsGetRandomSparseMat(4, ssz, cvtest::randInt(rng)%(CV_64F+1),
                                                                cvtest::randInt(rng) % 10000, 0, 100, rng);
 
@@ -514,3 +531,17 @@ TEST(Core_InputOutput, FileStorage)
     sprintf(arr, "sprintf is hell %d", 666);
     EXPECT_NO_THROW(f << arr);
 }
+<<<<<<< HEAD
+=======
+
+TEST(Core_InputOutput, FileStorageKey)
+{
+    cv::FileStorage f("dummy.yml", cv::FileStorage::WRITE | cv::FileStorage::MEMORY);
+
+    EXPECT_NO_THROW(f << "key1" << "value1");
+    EXPECT_NO_THROW(f << "_key2" << "value2");
+    EXPECT_NO_THROW(f << "key_3" << "value3");
+    const std::string expected = "%YAML:1.0\nkey1: value1\n_key2: value2\nkey_3: value3\n";
+    ASSERT_STREQ(f.releaseAndGetString().c_str(), expected.c_str());
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

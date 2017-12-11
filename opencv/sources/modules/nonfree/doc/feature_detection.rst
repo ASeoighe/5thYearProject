@@ -110,7 +110,13 @@ Detects keypoints and computes SURF descriptors for them.
 
 .. ocv:pyfunction:: cv2.SURF.detect(image[, mask]) -> keypoints
 
+<<<<<<< HEAD
 .. ocv:cfunction:: void cvExtractSURF( const CvArr* image, const CvArr* mask, CvSeq** keypoints, CvSeq** descriptors, CvMemStorage* storage, CvSURFParams params )
+=======
+.. ocv:pyfunction:: cv2.SURF.detectAndCompute(image, mask[, descriptors[, useProvidedKeypoints]]) -> keypoints, descriptors
+
+.. ocv:cfunction:: void cvExtractSURF(const CvArr* image, const CvArr* mask, CvSeq** keypoints, CvSeq** descriptors, CvMemStorage* storage, CvSURFParams params)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 .. ocv:pyoldfunction:: cv.ExtractSURF(image, mask, storage, params)-> (keypoints, descriptors)
 

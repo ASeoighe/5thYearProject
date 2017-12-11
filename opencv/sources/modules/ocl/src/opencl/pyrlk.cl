@@ -11,7 +11,11 @@
 //                For Open Source Computer Vision Library
 //
 // Copyright (C) 2010-2012, Multicoreware, Inc., all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010,2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // @Authors
@@ -52,7 +56,11 @@
 #endif
 #ifdef CPU
 
+<<<<<<< HEAD
 inline void reduce3(float val1, float val2, float val3,  __local float* smem1,  __local float* smem2,  __local float* smem3, int tid)
+=======
+void reduce3(float val1, float val2, float val3,  __local float* smem1,  __local float* smem2,  __local float* smem3, int tid)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     smem1[tid] = val1;
     smem2[tid] = val2;
@@ -71,7 +79,11 @@ inline void reduce3(float val1, float val2, float val3,  __local float* smem1,  
     }
 }
 
+<<<<<<< HEAD
 inline void reduce2(float val1, float val2, volatile __local float* smem1, volatile __local float* smem2, int tid)
+=======
+void reduce2(float val1, float val2, volatile __local float* smem1, volatile __local float* smem2, int tid)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     smem1[tid] = val1;
     smem2[tid] = val2;
@@ -88,7 +100,11 @@ inline void reduce2(float val1, float val2, volatile __local float* smem1, volat
     }
 }
 
+<<<<<<< HEAD
 inline void reduce1(float val1, volatile __local float* smem1, int tid)
+=======
+void reduce1(float val1, volatile __local float* smem1, int tid)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     smem1[tid] = val1;
     barrier(CLK_LOCAL_MEM_FENCE);
@@ -103,7 +119,11 @@ inline void reduce1(float val1, volatile __local float* smem1, int tid)
     }
 }
 #else
+<<<<<<< HEAD
 inline void reduce3(float val1, float val2, float val3,
+=======
+void reduce3(float val1, float val2, float val3,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
              __local volatile float* smem1, __local volatile float* smem2, __local volatile float* smem3, int tid)
 {
     smem1[tid] = val1;
@@ -150,7 +170,11 @@ inline void reduce3(float val1, float val2, float val3,
     barrier(CLK_LOCAL_MEM_FENCE);
 }
 
+<<<<<<< HEAD
 inline void reduce2(float val1, float val2, __local volatile float* smem1, __local volatile float* smem2, int tid)
+=======
+void reduce2(float val1, float val2, __local volatile float* smem1, __local volatile float* smem2, int tid)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     smem1[tid] = val1;
     smem2[tid] = val2;
@@ -189,7 +213,11 @@ inline void reduce2(float val1, float val2, __local volatile float* smem1, __loc
     barrier(CLK_LOCAL_MEM_FENCE);
 }
 
+<<<<<<< HEAD
 inline void reduce1(float val1, __local volatile float* smem1, int tid)
+=======
+void reduce1(float val1, __local volatile float* smem1, int tid)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     smem1[tid] = val1;
     barrier(CLK_LOCAL_MEM_FENCE);
@@ -225,7 +253,11 @@ inline void reduce1(float val1, __local volatile float* smem1, int tid)
 // Image read mode
 __constant sampler_t sampler    = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_LINEAR;
 
+<<<<<<< HEAD
 inline void SetPatch(image2d_t I, float x, float y,
+=======
+void SetPatch(image2d_t I, float x, float y,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
               float* Pch, float* Dx, float* Dy,
               float* A11, float* A12, float* A22)
 {
@@ -246,7 +278,11 @@ inline void SetPatch(image2d_t I, float x, float y,
     *A22 += dIdy * dIdy;
 }
 
+<<<<<<< HEAD
 inline void GetPatch(image2d_t J, float x, float y,
+=======
+void GetPatch(image2d_t J, float x, float y,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
               float* Pch, float* Dx, float* Dy,
               float* b1, float* b2)
 {
@@ -256,13 +292,21 @@ inline void GetPatch(image2d_t J, float x, float y,
     *b2 += diff**Dy;
 }
 
+<<<<<<< HEAD
 inline void GetError(image2d_t J, const float x, const float y, const float* Pch, float* errval)
+=======
+void GetError(image2d_t J, const float x, const float y, const float* Pch, float* errval)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     float diff = read_imagef(J, sampler, (float2)(x,y)).x-*Pch;
     *errval += fabs(diff);
 }
 
+<<<<<<< HEAD
 inline void SetPatch4(image2d_t I, const float x, const float y,
+=======
+void SetPatch4(image2d_t I, const float x, const float y,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                float4* Pch, float4* Dx, float4* Dy,
                float* A11, float* A12, float* A22)
 {
@@ -285,7 +329,11 @@ inline void SetPatch4(image2d_t I, const float x, const float y,
     *A22 += sqIdx.x + sqIdx.y + sqIdx.z;
 }
 
+<<<<<<< HEAD
 inline void GetPatch4(image2d_t J, const float x, const float y,
+=======
+void GetPatch4(image2d_t J, const float x, const float y,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                const float4* Pch, const float4* Dx, const float4* Dy,
                float* b1, float* b2)
 {
@@ -297,7 +345,11 @@ inline void GetPatch4(image2d_t J, const float x, const float y,
     *b2 += xdiff.x + xdiff.y + xdiff.z;
 }
 
+<<<<<<< HEAD
 inline void GetError4(image2d_t J, const float x, const float y, const float4* Pch, float* errval)
+=======
+void GetError4(image2d_t J, const float x, const float y, const float4* Pch, float* errval)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     float4 diff = read_imagef(J, sampler, (float2)(x,y))-*Pch;
     *errval += fabs(diff.x) + fabs(diff.y) + fabs(diff.z);

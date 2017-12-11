@@ -37,11 +37,18 @@
 
 file(READ ${input_file} file_text)
 
+<<<<<<< HEAD
 if (${file_text} MATCHES ".+")
 
   # Remember, four backslashes is escaped to one backslash in the string.
   string(REGEX REPLACE ";" "\\\\;" file_text ${file_text})
   string(REGEX REPLACE "\ncode" ";code" file_text ${file_text})
+=======
+if (NOT "${file_text}" STREQUAL "")
+
+  string(REPLACE ";" "\\;" file_text ${file_text})
+  string(REPLACE "\ncode" ";code" file_text ${file_text})
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   list(LENGTH file_text len)
 
@@ -57,7 +64,11 @@ if (${file_text} MATCHES ".+")
 
         # Extract kernel names.
         if (${entry} MATCHES "[^g]name = ([^ ]+)")
+<<<<<<< HEAD
           string(REGEX REPLACE ".* = ([^ ]+)" "\\1" entry ${entry})
+=======
+          set(entry "${CMAKE_MATCH_1}")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
           # Check to see if the kernel name starts with "_"
           set(skip FALSE)
@@ -76,19 +87,31 @@ if (${file_text} MATCHES ".+")
 
           # Registers
           if (${entry} MATCHES "reg([ ]+)=([ ]+)([^ ]+)")
+<<<<<<< HEAD
             string(REGEX REPLACE ".*([ ]+)=([ ]+)([^ ]+)" "\\3" entry ${entry})
+=======
+            set(entry "${CMAKE_MATCH_3}")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             message("Registers: ${entry}")
           endif()
 
           # Local memory
           if (${entry} MATCHES "lmem([ ]+)=([ ]+)([^ ]+)")
+<<<<<<< HEAD
             string(REGEX REPLACE ".*([ ]+)=([ ]+)([^ ]+)" "\\3" entry ${entry})
+=======
+            set(entry "${CMAKE_MATCH_3}")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             message("Local:     ${entry}")
           endif()
 
           # Shared memory
           if (${entry} MATCHES "smem([ ]+)=([ ]+)([^ ]+)")
+<<<<<<< HEAD
             string(REGEX REPLACE ".*([ ]+)=([ ]+)([^ ]+)" "\\3" entry ${entry})
+=======
+            set(entry "${CMAKE_MATCH_3}")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             message("Shared:    ${entry}")
           endif()
 

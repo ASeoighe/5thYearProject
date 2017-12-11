@@ -200,9 +200,20 @@ public:
     void multiply(const MatExpr& e, double s, MatExpr& res) const;
 
     static void makeExpr(MatExpr& res, int method, Size sz, int type, double alpha=1);
+<<<<<<< HEAD
 };
 
 static MatOp_Initializer g_MatOp_Initializer;
+=======
+    static void makeExpr(MatExpr& res, int method, int ndims, const int* sizes, int type, double alpha=1);
+};
+
+static MatOp_Initializer* getGlobalMatOpInitializer()
+{
+    static MatOp_Initializer initializer;
+    return &initializer;
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 static inline bool isIdentity(const MatExpr& e) { return e.op == &g_MatOp_Identity; }
 static inline bool isAddEx(const MatExpr& e) { return e.op == &g_MatOp_AddEx; }
@@ -215,7 +226,11 @@ static inline bool isInv(const MatExpr& e) { return e.op == &g_MatOp_Invert; }
 static inline bool isSolve(const MatExpr& e) { return e.op == &g_MatOp_Solve; }
 static inline bool isGEMM(const MatExpr& e) { return e.op == &g_MatOp_GEMM; }
 static inline bool isMatProd(const MatExpr& e) { return e.op == &g_MatOp_GEMM && (!e.c.data || e.beta == 0); }
+<<<<<<< HEAD
 static inline bool isInitializer(const MatExpr& e) { return e.op == &g_MatOp_Initializer; }
+=======
+static inline bool isInitializer(const MatExpr& e) { return e.op == getGlobalMatOpInitializer(); }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1038,14 +1053,22 @@ MatExpr min(const Mat& a, const Mat& b)
 MatExpr min(const Mat& a, double s)
 {
     MatExpr e;
+<<<<<<< HEAD
     MatOp_Bin::makeExpr(e, 'm', a, s);
+=======
+    MatOp_Bin::makeExpr(e, 'n', a, s);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return e;
 }
 
 MatExpr min(double s, const Mat& a)
 {
     MatExpr e;
+<<<<<<< HEAD
     MatOp_Bin::makeExpr(e, 'm', a, s);
+=======
+    MatOp_Bin::makeExpr(e, 'n', a, s);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return e;
 }
 
@@ -1059,14 +1082,22 @@ MatExpr max(const Mat& a, const Mat& b)
 MatExpr max(const Mat& a, double s)
 {
     MatExpr e;
+<<<<<<< HEAD
     MatOp_Bin::makeExpr(e, 'M', a, s);
+=======
+    MatOp_Bin::makeExpr(e, 'N', a, s);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return e;
 }
 
 MatExpr max(double s, const Mat& a)
 {
     MatExpr e;
+<<<<<<< HEAD
     MatOp_Bin::makeExpr(e, 'M', a, s);
+=======
+    MatOp_Bin::makeExpr(e, 'N', a, s);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return e;
 }
 
@@ -1332,6 +1363,7 @@ void MatOp_Bin::assign(const MatExpr& e, Mat& m, int _type) const
         bitwise_xor(e.a, e.s, dst);
     else if( e.flags == '~' && !e.b.data )
         bitwise_not(e.a, dst);
+<<<<<<< HEAD
     else if( e.flags == 'm' && e.b.data )
         cv::min(e.a, e.b, dst);
     else if( e.flags == 'm' && !e.b.data )
@@ -1339,6 +1371,15 @@ void MatOp_Bin::assign(const MatExpr& e, Mat& m, int _type) const
     else if( e.flags == 'M' && e.b.data )
         cv::max(e.a, e.b, dst);
     else if( e.flags == 'M' && !e.b.data )
+=======
+    else if( e.flags == 'm' )
+        cv::min(e.a, e.b, dst);
+    else if( e.flags == 'n' )
+        cv::min(e.a, e.s[0], dst);
+    else if( e.flags == 'M' )
+        cv::max(e.a, e.b, dst);
+    else if( e.flags == 'N' )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cv::max(e.a, e.s[0], dst);
     else if( e.flags == 'a' && e.b.data )
         cv::absdiff(e.a, e.b, dst);
@@ -1551,8 +1592,18 @@ void MatOp_Initializer::assign(const MatExpr& e, Mat& m, int _type) const
 {
     if( _type == -1 )
         _type = e.a.type();
+<<<<<<< HEAD
     m.create(e.a.size(), _type);
     if( e.flags == 'I' )
+=======
+
+    if( e.a.dims <= 2 )
+        m.create(e.a.size(), _type);
+    else
+        m.create(e.a.dims, e.a.size, _type);
+
+    if( e.flags == 'I' && e.a.dims <= 2 )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         setIdentity(m, Scalar(e.alpha));
     else if( e.flags == '0' )
         m = Scalar();
@@ -1570,10 +1621,23 @@ void MatOp_Initializer::multiply(const MatExpr& e, double s, MatExpr& res) const
 
 inline void MatOp_Initializer::makeExpr(MatExpr& res, int method, Size sz, int type, double alpha)
 {
+<<<<<<< HEAD
     res = MatExpr(&g_MatOp_Initializer, method, Mat(sz, type, (void*)0), Mat(), Mat(), alpha, 0);
 }
 
 
+=======
+    res = MatExpr(getGlobalMatOpInitializer(), method, Mat(sz, type, (void*)0), Mat(), Mat(), alpha, 0);
+}
+
+inline void MatOp_Initializer::makeExpr(MatExpr& res, int method, int ndims, const int* sizes, int type, double alpha)
+{
+    res = MatExpr(getGlobalMatOpInitializer(), method, Mat(ndims, sizes, type, (void*)0), Mat(), Mat(), alpha, 0);
+}
+
+
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 MatExpr Mat::t() const
@@ -1632,6 +1696,23 @@ MatExpr Mat::ones(Size size, int type)
     return e;
 }
 
+<<<<<<< HEAD
+=======
+MatExpr Mat::zeros(int ndims, const int* sizes, int type)
+{
+    MatExpr e;
+    MatOp_Initializer::makeExpr(e, '0', ndims, sizes, type);
+    return e;
+}
+
+MatExpr Mat::ones(int ndims, const int* sizes, int type)
+{
+    MatExpr e;
+    MatOp_Initializer::makeExpr(e, '1', ndims, sizes, type);
+    return e;
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 MatExpr Mat::eye(int rows, int cols, int type)
 {
     MatExpr e;

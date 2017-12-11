@@ -1,5 +1,12 @@
 <project>
+<<<<<<< HEAD
   <property file="ant-${opencv.build.type}.properties"/>
+=======
+  <property environment="env"/>
+  <property file="ant-${opencv.build.type}.properties"/>
+  <property name="test.dir" value="testResults"/>
+  <property name="build.dir" value="build"/>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
   <path id="master-classpath">
     <fileset dir="lib">
@@ -12,7 +19,11 @@
 
   <target name="clean">
     <delete dir="build"/>
+<<<<<<< HEAD
     <delete dir="testResults"/>
+=======
+    <delete dir="${test.dir}"/>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   </target>
 
   <target name="compile">
@@ -34,10 +45,17 @@
   </target>
 
   <target name="test">
+<<<<<<< HEAD
     <mkdir dir="testResults"/>
     <junit printsummary="true" haltonfailure="false" haltonerror="false" showoutput="false" logfailedtests="true" maxmemory="256m">
       <sysproperty key="java.library.path" path="${opencv.lib.path}"/>
       <env key="PATH" path="${opencv.lib.path}"/>
+=======
+    <mkdir dir="${test.dir}"/>
+    <junit printsummary="true" haltonfailure="false" haltonerror="false" showoutput="true" logfailedtests="true" maxmemory="256m">
+      <sysproperty key="java.library.path" path="${opencv.lib.path}"/>
+      <env key="PATH" path="${opencv.lib.path}:${env.PATH}:${env.Path}"/>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       <classpath refid="master-classpath"/>
       <classpath>
         <pathelement location="build/classes"/>
@@ -45,12 +63,25 @@
 
       <formatter type="xml"/>
 
+<<<<<<< HEAD
       <batchtest fork="yes" todir="testResults">
+=======
+      <batchtest fork="yes" todir="${test.dir}">
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         <zipfileset src="build/jar/opencv-test.jar" includes="**/*.class" excludes="**/OpenCVTest*">
           <exclude name="**/*$*.class"/>
         </zipfileset>
       </batchtest>
     </junit>
+<<<<<<< HEAD
+=======
+    <junitreport todir="${test.dir}">
+      <fileset dir="${test.dir}">
+        <include name="TEST-*.xml"/>
+      </fileset>
+      <report format="noframes" todir="${test.dir}"/>
+    </junitreport>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   </target>
 
   <target name="build">

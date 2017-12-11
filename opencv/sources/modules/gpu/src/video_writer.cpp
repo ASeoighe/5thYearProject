@@ -42,7 +42,11 @@
 
 #include "precomp.hpp"
 
+<<<<<<< HEAD
 #if !defined(HAVE_CUDA) || defined(CUDA_DISABLER) || !defined(HAVE_NVCUVID) || !defined(WIN32)
+=======
+#if !defined(HAVE_CUDA) || defined(CUDA_DISABLER) || !defined(HAVE_NVCUVENC) || !defined(WIN32)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 class cv::gpu::VideoWriter_GPU::Impl
 {

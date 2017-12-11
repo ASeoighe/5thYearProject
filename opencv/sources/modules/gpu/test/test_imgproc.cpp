@@ -357,11 +357,25 @@ GPU_TEST_P(Canny, Accuracy)
     }
 }
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Canny, testing::Combine(
+    ALL_DEVICES,
+    testing::Values(AppertureSize(3)),
+    testing::Values(L2gradient(false), L2gradient(true)),
+    WHOLE_SUBMAT));
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Canny, testing::Combine(
     ALL_DEVICES,
     testing::Values(AppertureSize(3), AppertureSize(5)),
     testing::Values(L2gradient(false), L2gradient(true)),
     WHOLE_SUBMAT));
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 ////////////////////////////////////////////////////////////////////////////////
 // MeanShift
@@ -681,7 +695,11 @@ PARAM_TEST_CASE(MatchTemplate8U, cv::gpu::DeviceInfo, cv::Size, TemplateSize, Ch
     }
 };
 
+<<<<<<< HEAD
 GPU_TEST_P(MatchTemplate8U, Accuracy)
+=======
+GPU_TEST_P(MatchTemplate8U, DISABLED_Accuracy)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     cv::Mat image = randomMat(size, CV_MAKETYPE(CV_8U, cn));
     cv::Mat templ = randomMat(templ_size, CV_MAKETYPE(CV_8U, cn));
@@ -692,7 +710,22 @@ GPU_TEST_P(MatchTemplate8U, Accuracy)
     cv::Mat dst_gold;
     cv::matchTemplate(image, templ, dst_gold, method);
 
+<<<<<<< HEAD
     EXPECT_MAT_NEAR(dst_gold, dst, templ_size.area() * 1e-1);
+=======
+    cv::Mat h_dst(dst);
+    ASSERT_EQ(dst_gold.size(), h_dst.size());
+    ASSERT_EQ(dst_gold.type(), h_dst.type());
+    for (int y = 0; y < h_dst.rows; ++y)
+    {
+        for (int x = 0; x < h_dst.cols; ++x)
+        {
+            float gold_val = dst_gold.at<float>(y, x);
+            float actual_val = dst_gold.at<float>(y, x);
+            ASSERT_FLOAT_EQ(gold_val, actual_val) << y << ", " << x;
+        }
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 INSTANTIATE_TEST_CASE_P(GPU_ImgProc, MatchTemplate8U, testing::Combine(
@@ -727,7 +760,11 @@ PARAM_TEST_CASE(MatchTemplate32F, cv::gpu::DeviceInfo, cv::Size, TemplateSize, C
     }
 };
 
+<<<<<<< HEAD
 GPU_TEST_P(MatchTemplate32F, Regression)
+=======
+GPU_TEST_P(MatchTemplate32F, DISABLED_Regression)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     cv::Mat image = randomMat(size, CV_MAKETYPE(CV_32F, cn));
     cv::Mat templ = randomMat(templ_size, CV_MAKETYPE(CV_32F, cn));
@@ -738,7 +775,22 @@ GPU_TEST_P(MatchTemplate32F, Regression)
     cv::Mat dst_gold;
     cv::matchTemplate(image, templ, dst_gold, method);
 
+<<<<<<< HEAD
     EXPECT_MAT_NEAR(dst_gold, dst, templ_size.area() * 1e-1);
+=======
+    cv::Mat h_dst(dst);
+    ASSERT_EQ(dst_gold.size(), h_dst.size());
+    ASSERT_EQ(dst_gold.type(), h_dst.type());
+    for (int y = 0; y < h_dst.rows; ++y)
+    {
+        for (int x = 0; x < h_dst.cols; ++x)
+        {
+            float gold_val = dst_gold.at<float>(y, x);
+            float actual_val = dst_gold.at<float>(y, x);
+            ASSERT_FLOAT_EQ(gold_val, actual_val) << y << ", " << x;
+        }
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 INSTANTIATE_TEST_CASE_P(GPU_ImgProc, MatchTemplate32F, testing::Combine(
@@ -765,7 +817,11 @@ PARAM_TEST_CASE(MatchTemplateBlackSource, cv::gpu::DeviceInfo, TemplateMethod)
     }
 };
 
+<<<<<<< HEAD
 GPU_TEST_P(MatchTemplateBlackSource, Accuracy)
+=======
+GPU_TEST_P(MatchTemplateBlackSource, DISABLED_Accuracy)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     cv::Mat image = readImage("matchtemplate/black.png");
     ASSERT_FALSE(image.empty());
@@ -810,7 +866,11 @@ PARAM_TEST_CASE(MatchTemplate_CCOEF_NORMED, cv::gpu::DeviceInfo, std::pair<std::
     }
 };
 
+<<<<<<< HEAD
 GPU_TEST_P(MatchTemplate_CCOEF_NORMED, Accuracy)
+=======
+GPU_TEST_P(MatchTemplate_CCOEF_NORMED, DISABLED_Accuracy)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     cv::Mat image = readImage(imageName);
     ASSERT_FALSE(image.empty());
@@ -859,7 +919,11 @@ struct MatchTemplate_CanFindBigTemplate : testing::TestWithParam<cv::gpu::Device
     }
 };
 
+<<<<<<< HEAD
 GPU_TEST_P(MatchTemplate_CanFindBigTemplate, SQDIFF_NORMED)
+=======
+GPU_TEST_P(MatchTemplate_CanFindBigTemplate, DISABLED_SQDIFF_NORMED)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     cv::Mat scene = readImage("matchtemplate/scene.png");
     ASSERT_FALSE(scene.empty());
@@ -882,7 +946,11 @@ GPU_TEST_P(MatchTemplate_CanFindBigTemplate, SQDIFF_NORMED)
     ASSERT_EQ(0, minLoc.y);
 }
 
+<<<<<<< HEAD
 GPU_TEST_P(MatchTemplate_CanFindBigTemplate, SQDIFF)
+=======
+GPU_TEST_P(MatchTemplate_CanFindBigTemplate, DISABLED_SQDIFF)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     cv::Mat scene = readImage("matchtemplate/scene.png");
     ASSERT_FALSE(scene.empty());

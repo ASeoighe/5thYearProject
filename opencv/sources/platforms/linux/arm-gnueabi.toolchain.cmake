@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_VERSION 1)
 set(CMAKE_SYSTEM_PROCESSOR arm)
@@ -87,3 +88,8 @@ macro( find_host_package )
  set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )
  set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )
 endmacro()
+=======
+set(GCC_COMPILER_VERSION "" CACHE STRING "GCC Compiler version")
+set(GNU_MACHINE "arm-linux-gnueabi" CACHE STRING "GNU compiler triple")
+include("${CMAKE_CURRENT_LIST_DIR}/arm.toolchain.cmake")
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

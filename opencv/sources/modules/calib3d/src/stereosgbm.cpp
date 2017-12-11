@@ -99,7 +99,11 @@ StereoSGBM::~StereoSGBM()
 }
 
 /*
+<<<<<<< HEAD
  For each pixel row1[x], max(-maxD, 0) <= minX <= x < maxX <= width - max(0, -minD),
+=======
+ For each pixel row1[x], max(-maxD, 0) <= minX <= x < maxX <= width - max(0, minD),
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  and for each disparity minD<=d<maxD the function
  computes the cost (cost[(x-minX)*(maxD - minD) + (d - minD)]), depending on the difference between
  row1[x] and row2[x-d]. The subpixel algorithm from
@@ -114,8 +118,13 @@ static void calcPixelCostBT( const Mat& img1, const Mat& img2, int y,
                             int tabOfs, int )
 {
     int x, c, width = img1.cols, cn = img1.channels();
+<<<<<<< HEAD
     int minX1 = max(-maxD, 0), maxX1 = width + min(minD, 0);
     int minX2 = max(minX1 - maxD, 0), maxX2 = min(maxX1 - minD, width);
+=======
+    int minX1 = max(-maxD, 0), maxX1 = width + min(-minD, 0);
+    int minX2 = max(minX1 + minD, 0), maxX2 = min(maxX1 + maxD, width);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int D = maxD - minD, width1 = maxX1 - minX1, width2 = maxX2 - minX2;
     const PixType *row1 = img1.ptr<PixType>(y), *row2 = img2.ptr<PixType>(y);
     PixType *prow1 = buffer + width2*2, *prow2 = prow1 + width*cn*2;
@@ -200,6 +209,22 @@ static void calcPixelCostBT( const Mat& img1, const Mat& img2, int y,
             int u0 = min(ul, ur); u0 = min(u0, u);
             int u1 = max(ul, ur); u1 = max(u1, u);
 
+<<<<<<< HEAD
+=======
+            int minDlocal = max(minD, x-width+1);
+            int maxDlocal = min(maxD, x);
+            int d;
+            for( d = minD; d < minDlocal; d++ )
+            {
+                int v = prow2[0];
+                int v0 = buffer[0];
+                int v1 = buffer[width2];
+                int c0 = max(0, u - v1); c0 = max(c0, v0 - u);
+                int c1 = max(0, v - u1); c1 = max(c1, u0 - v);
+
+                cost[x*D + d] = (CostType)(cost[x*D+d] + (min(c0, c1) >> diff_scale));
+            }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         #if CV_SSE2
             if( useSIMD )
             {
@@ -207,7 +232,11 @@ static void calcPixelCostBT( const Mat& img1, const Mat& img2, int y,
                 __m128i _u1 = _mm_set1_epi8((char)u1), z = _mm_setzero_si128();
                 __m128i ds = _mm_cvtsi32_si128(diff_scale);
 
+<<<<<<< HEAD
                 for( int d = minD; d < maxD; d += 16 )
+=======
+                for( ; d < maxDlocal - 15; d += 16 )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 {
                     __m128i _v = _mm_loadu_si128((const __m128i*)(prow2 + width-x-1 + d));
                     __m128i _v0 = _mm_loadu_si128((const __m128i*)(buffer + width-x-1 + d));
@@ -223,6 +252,7 @@ static void calcPixelCostBT( const Mat& img1, const Mat& img2, int y,
                     _mm_store_si128((__m128i*)(cost + x*D + d + 8), _mm_adds_epi16(c1, _mm_srl_epi16(_mm_unpackhi_epi8(diff,z), ds)));
                 }
             }
+<<<<<<< HEAD
             else
         #endif
             {
@@ -236,6 +266,28 @@ static void calcPixelCostBT( const Mat& img1, const Mat& img2, int y,
 
                     cost[x*D + d] = (CostType)(cost[x*D+d] + (min(c0, c1) >> diff_scale));
                 }
+=======
+        #endif
+            for( ; d < maxDlocal; d++ )
+            {
+                int v = prow2[width-x-1 + d];
+                int v0 = buffer[width-x-1 + d];
+                int v1 = buffer[width-x-1 + d + width2];
+                int c0 = max(0, u - v1); c0 = max(c0, v0 - u);
+                int c1 = max(0, v - u1); c1 = max(c1, u0 - v);
+
+                cost[x*D + d] = (CostType)(cost[x*D+d] + (min(c0, c1) >> diff_scale));
+            }
+            for( ; d < maxD; d++ )
+            {
+                int v = prow2[width-1];
+                int v0 = buffer[width-1];
+                int v1 = buffer[width-1 + width2];
+                int c0 = max(0, u - v1); c0 = max(c0, v0 - u);
+                int c1 = max(0, v - u1); c1 = max(c1, u0 - v);
+
+                cost[x*D + d] = (CostType)(cost[x*D+d] + (min(c0, c1) >> diff_scale));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
         }
     }
@@ -329,7 +381,11 @@ static void computeDisparitySGBM( const Mat& img1, const Mat& img2,
     int disp12MaxDiff = params.disp12MaxDiff > 0 ? params.disp12MaxDiff : 1;
     int P1 = params.P1 > 0 ? params.P1 : 2, P2 = max(params.P2 > 0 ? params.P2 : 5, P1+1);
     int k, width = disp1.cols, height = disp1.rows;
+<<<<<<< HEAD
     int minX1 = max(-maxD, 0), maxX1 = width + min(minD, 0);
+=======
+    int minX1 = max(-maxD, 0), maxX1 = width + min(-minD, 0);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int D = maxD - minD, width1 = maxX1 - minX1;
     int INVALID_DISP = minD - 1, INVALID_DISP_SCALED = INVALID_DISP*DISP_SCALE;
     int SW2 = SADWindowSize.width/2, SH2 = SADWindowSize.height/2;
@@ -377,6 +433,10 @@ static void computeDisparitySGBM( const Mat& img1, const Mat& img2,
 
     // summary cost over different (nDirs) directions
     CostType* Cbuf = (CostType*)alignPtr(buffer.data, ALIGN);
+<<<<<<< HEAD
+=======
+    memset(Cbuf, 0, CSBufSize*sizeof(CostType));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     CostType* Sbuf = Cbuf + CSBufSize;
     CostType* hsumBuf = Sbuf + CSBufSize;
     CostType* pixDiff = hsumBuf + costBufSize*hsumBufNRows;
@@ -913,6 +973,7 @@ namespace
                             T dp = *dpp;
                             int* lpp = labels + width*p.y + p.x;
 
+<<<<<<< HEAD
                             if( p.x < width-1 && !lpp[+1] && dpp[+1] != newVal && std::abs(dp - dpp[+1]) <= maxDiff )
                             {
                                 lpp[+1] = curlabel;
@@ -925,6 +986,8 @@ namespace
                                 *ws++ = Point2s(p.x-1, p.y);
                             }
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                             if( p.y < height-1 && !lpp[+width] && dpp[+dstep] != newVal && std::abs(dp - dpp[+dstep]) <= maxDiff )
                             {
                                 lpp[+width] = curlabel;
@@ -937,6 +1000,21 @@ namespace
                                 *ws++ = Point2s(p.x, p.y-1);
                             }
 
+<<<<<<< HEAD
+=======
+                            if( p.x < width-1 && !lpp[+1] && dpp[+1] != newVal && std::abs(dp - dpp[+1]) <= maxDiff )
+                            {
+                                lpp[+1] = curlabel;
+                                *ws++ = Point2s(p.x+1, p.y);
+                            }
+
+                            if( p.x > 0 && !lpp[-1] && dpp[-1] != newVal && std::abs(dp - dpp[-1]) <= maxDiff )
+                            {
+                                lpp[-1] = curlabel;
+                                *ws++ = Point2s(p.x-1, p.y);
+                            }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                             // pop most recent and propagate
                             // NB: could try least recent, maybe better convergence
                             p = *--ws;

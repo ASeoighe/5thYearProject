@@ -2,6 +2,7 @@
 
 import unittest
 import random
+<<<<<<< HEAD
 import time
 import math
 import sys
@@ -13,10 +14,15 @@ import os
 import getopt
 import operator
 import functools
+=======
+import urllib2
+import hashlib
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 import numpy as np
 import cv2
 import cv2.cv as cv
 
+<<<<<<< HEAD
 class NewOpenCVTests(unittest.TestCase):
 
     def get_sample(self, filename, iscolor = cv.CV_LOAD_IMAGE_COLOR):
@@ -31,6 +37,9 @@ class NewOpenCVTests(unittest.TestCase):
     def hashimg(self, im):
         """ Compute a hash for an image, useful for image comparisons """
         return hashlib.md5(im.tostring()).digest()
+=======
+from tests_common import NewOpenCVTests
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 # Tests to run first; check the handful of basic operations that the later tests rely on
 

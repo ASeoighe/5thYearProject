@@ -17026,14 +17026,22 @@ internal::CartesianProductHolder10<Generator1, Generator2, Generator3,
         GTEST_TEST_CLASS_NAME_(test_case_name, test_name)); \
   }; \
   int GTEST_TEST_CLASS_NAME_(test_case_name, \
+<<<<<<< HEAD
                              test_name)::gtest_registering_dummy_ = \
+=======
+                             test_name)::gtest_registering_dummy_ GTEST_ATTRIBUTE_UNUSED_ = \
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       GTEST_TEST_CLASS_NAME_(test_case_name, test_name)::AddToRegistry(); \
   void GTEST_TEST_CLASS_NAME_(test_case_name, test_name)::TestBody()
 
 # define INSTANTIATE_TEST_CASE_P(prefix, test_case_name, generator) \
   ::testing::internal::ParamGenerator<test_case_name::ParamType> \
       gtest_##prefix##test_case_name##_EvalGenerator_() { return generator; } \
+<<<<<<< HEAD
   int gtest_##prefix##test_case_name##_dummy_ = \
+=======
+  int gtest_##prefix##test_case_name##_dummy_ GTEST_ATTRIBUTE_UNUSED_ = \
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       ::testing::UnitTest::GetInstance()->parameterized_test_registry(). \
           GetTestCasePatternHolder<test_case_name>(\
               #test_case_name, __FILE__, __LINE__)->AddTestCaseInstantiation(\

@@ -28,7 +28,11 @@ PERF_TEST_P(orb, detect, testing::Values(ORB_IMAGES))
     TEST_CYCLE() detector(frame, mask, points);
 
     sort(points.begin(), points.end(), comparators::KeypointGreater());
+<<<<<<< HEAD
     SANITY_CHECK_KEYPOINTS(points);
+=======
+    SANITY_CHECK_KEYPOINTS(points, 1e-7, ERROR_RELATIVE);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 PERF_TEST_P(orb, extract, testing::Values(ORB_IMAGES))
@@ -72,6 +76,10 @@ PERF_TEST_P(orb, full, testing::Values(ORB_IMAGES))
     TEST_CYCLE() detector(frame, mask, points, descriptors, false);
 
     perf::sort(points, descriptors);
+<<<<<<< HEAD
     SANITY_CHECK_KEYPOINTS(points);
+=======
+    SANITY_CHECK_KEYPOINTS(points, 1e-8, ERROR_RELATIVE);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     SANITY_CHECK(descriptors);
 }

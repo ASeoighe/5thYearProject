@@ -153,6 +153,11 @@ def gen(name, args, ty, flags):
       ctype = remap.get(a.ty, a.ty)
       if a.init:
         init = " = %s" % a.init
+<<<<<<< HEAD
+=======
+      elif ctype[-1] == '*':
+        init = ' = NULL'
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       else:
         init = ''
       yield "  %s %s%s;" % (ctype, a.nm, init)

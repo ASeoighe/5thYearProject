@@ -149,6 +149,19 @@ namespace cv { namespace gpu { namespace device
         {
             typedef void (*caller_t)(const PtrStepSzb& src, PtrStepSzb dst, int kernel_size, float sigma_spatial, float sigma_color, cudaStream_t stream);
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+            static caller_t funcs[] =
+            {
+                bilateral_caller<T, BrdReflect101>,
+                bilateral_caller<T, BrdReplicate>,
+                0,
+                0,
+                0,
+            };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             static caller_t funcs[] =
             {
                 bilateral_caller<T, BrdReflect101>,
@@ -157,7 +170,17 @@ namespace cv { namespace gpu { namespace device
                 bilateral_caller<T, BrdReflect>,
                 bilateral_caller<T, BrdWrap>,
             };
+<<<<<<< HEAD
             funcs[borderMode](src, dst, kernel_size, gauss_spatial_coeff, gauss_color_coeff, stream);
+=======
+#endif
+
+            const caller_t caller = funcs[borderMode];
+            if (!caller)
+                cv::gpu::error("Unsupported input parameters for bilateral_filter", __FILE__, __LINE__, "");
+
+            caller(src, dst, kernel_size, gauss_spatial_coeff, gauss_color_coeff, stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
     }
 }}}
@@ -171,6 +194,10 @@ OCV_INSTANTIATE_BILATERAL_FILTER(uchar)
 OCV_INSTANTIATE_BILATERAL_FILTER(uchar3)
 OCV_INSTANTIATE_BILATERAL_FILTER(uchar4)
 
+<<<<<<< HEAD
+=======
+#ifndef OPENCV_TINY_GPU_MODULE
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 //OCV_INSTANTIATE_BILATERAL_FILTER(schar)
 //OCV_INSTANTIATE_BILATERAL_FILTER(schar2)
 //OCV_INSTANTIATE_BILATERAL_FILTER(schar3)
@@ -190,6 +217,10 @@ OCV_INSTANTIATE_BILATERAL_FILTER(ushort4)
 //OCV_INSTANTIATE_BILATERAL_FILTER(int2)
 //OCV_INSTANTIATE_BILATERAL_FILTER(int3)
 //OCV_INSTANTIATE_BILATERAL_FILTER(int4)
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 OCV_INSTANTIATE_BILATERAL_FILTER(float)
 //OCV_INSTANTIATE_BILATERAL_FILTER(float2)

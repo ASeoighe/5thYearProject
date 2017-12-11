@@ -622,7 +622,11 @@ void RNG::fill( InputOutputArray _mat, int disttype,
         int ptype = depth == CV_64F ? CV_64F : CV_32F;
         int esz = (int)CV_ELEM_SIZE(ptype);
 
+<<<<<<< HEAD
         if( _param1.isContinuous() && _param1.type() == ptype )
+=======
+        if( _param1.isContinuous() && _param1.type() == ptype && n1 >= cn)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             mean = _param1.data;
         else
         {
@@ -635,6 +639,7 @@ void RNG::fill( InputOutputArray _mat, int disttype,
             for( j = n1*esz; j < cn*esz; j++ )
                 mean[j] = mean[j - n1*esz];
 
+<<<<<<< HEAD
         if( _param2.isContinuous() && _param2.type() == ptype )
             stddev = _param2.data;
         else
@@ -647,6 +652,20 @@ void RNG::fill( InputOutputArray _mat, int disttype,
         if( n1 < cn )
             for( j = n1*esz; j < cn*esz; j++ )
                 stddev[j] = stddev[j - n1*esz];
+=======
+        if( _param2.isContinuous() && _param2.type() == ptype && n2 >= cn)
+            stddev = _param2.data;
+        else
+        {
+            Mat tmp(_param2.size(), ptype, parambuf + MAX(n1, cn));
+            _param2.convertTo(tmp, ptype);
+            stddev = (uchar*)(parambuf + MAX(n1, cn));
+        }
+
+        if( n2 < cn )
+            for( j = n2*esz; j < cn*esz; j++ )
+                stddev[j] = stddev[j - n2*esz];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         stdmtx = _param2.rows == cn && _param2.cols == cn;
         scaleFunc = randnScaleTab[depth];
@@ -806,6 +825,14 @@ RNG& theRNG()
 
 }
 
+<<<<<<< HEAD
+=======
+void cv::setRNGSeed(int seed)
+{
+    theRNG() = RNG(static_cast<uint64>(seed));
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 void cv::randu(InputOutputArray dst, InputArray low, InputArray high)
 {
     theRNG().fill(dst, RNG::UNIFORM, low, high);

@@ -44,8 +44,11 @@
 namespace cv
 {
 
+<<<<<<< HEAD
 static const double FREAK_SQRT2 = 1.4142135623731;
 static const double FREAK_INV_SQRT2 = 1.0 / FREAK_SQRT2;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 static const double FREAK_LOG2 = 0.693147180559945;
 static const int FREAK_NB_ORIENTATION = 256;
 static const int FREAK_NB_POINTS = 43;
@@ -394,7 +397,11 @@ void FREAK::computeImpl( const Mat& image, std::vector<KeyPoint>& keypoints, Mat
                 (*ptr) = result128;
                 ++ptr;
             }
+<<<<<<< HEAD
             ptr -= 8;
+=======
+            ptr -= (FREAK_NB_PAIRS/128)*2;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #else
             // extracting descriptor preserving the order of SSE version
             int cnt = 0;
@@ -658,7 +665,12 @@ void FREAKImpl::drawPattern()
 FREAK::FREAK( bool _orientationNormalized, bool _scaleNormalized
             , float _patternScale, int _nOctaves, const std::vector<int>& _selectedPairs )
     : orientationNormalized(_orientationNormalized), scaleNormalized(_scaleNormalized),
+<<<<<<< HEAD
     patternScale(_patternScale), nOctaves(_nOctaves), extAll(false), nOctaves0(0), selectedPairs0(_selectedPairs)
+=======
+      patternScale(_patternScale), nOctaves(_nOctaves), extAll(false),
+      patternScale0(0.0), nOctaves0(0), selectedPairs0(_selectedPairs)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
 }
 

@@ -139,12 +139,25 @@ CV_INIT_ALGORITHM(SimpleBlobDetector, "Feature2D.SimpleBlob",
                   obj.info()->addParam(obj, "filterByColor",    obj.params.filterByColor);
                   obj.info()->addParam(obj, "blobColor",        obj.params.blobColor);
                   obj.info()->addParam(obj, "filterByArea",     obj.params.filterByArea);
+<<<<<<< HEAD
                   obj.info()->addParam(obj, "maxArea",          obj.params.maxArea);
                   obj.info()->addParam(obj, "filterByCircularity", obj.params.filterByCircularity);
                   obj.info()->addParam(obj, "maxCircularity",   obj.params.maxCircularity);
                   obj.info()->addParam(obj, "filterByInertia",  obj.params.filterByInertia);
                   obj.info()->addParam(obj, "maxInertiaRatio",  obj.params.maxInertiaRatio);
                   obj.info()->addParam(obj, "filterByConvexity", obj.params.filterByConvexity);
+=======
+                  obj.info()->addParam(obj, "minArea",          obj.params.minArea);
+                  obj.info()->addParam(obj, "maxArea",          obj.params.maxArea);
+                  obj.info()->addParam(obj, "filterByCircularity", obj.params.filterByCircularity);
+                  obj.info()->addParam(obj, "minCircularity",   obj.params.minCircularity);
+                  obj.info()->addParam(obj, "maxCircularity",   obj.params.maxCircularity);
+                  obj.info()->addParam(obj, "filterByInertia",  obj.params.filterByInertia);
+                  obj.info()->addParam(obj, "minInertiaRatio",  obj.params.minInertiaRatio);
+                  obj.info()->addParam(obj, "maxInertiaRatio",  obj.params.maxInertiaRatio);
+                  obj.info()->addParam(obj, "filterByConvexity", obj.params.filterByConvexity);
+                  obj.info()->addParam(obj, "minConvexity",     obj.params.minConvexity);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                   obj.info()->addParam(obj, "maxConvexity",     obj.params.maxConvexity);
                   )
 

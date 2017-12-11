@@ -491,7 +491,11 @@ FaceDetectionList::~FaceDetectionList()
 int FaceDetectionList::AddElem(Face * pFace)
 {
     new FaceDetectionListElem(pFace,m_pHead);
+<<<<<<< HEAD
     return m_FacesCount++;
+=======
+    return (int)m_FacesCount++;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }//FaceDetectionList::AddElem(Face * pFace)
 
 Face * FaceDetectionList::GetData()

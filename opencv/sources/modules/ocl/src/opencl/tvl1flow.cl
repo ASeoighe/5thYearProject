@@ -11,7 +11,11 @@
 //                For Open Source Computer Vision Library
 //
 // Copyright (C) 2010-2012, Multicoreware, Inc., all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010,2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // @Authors
@@ -62,7 +66,11 @@ __kernel void centeredGradientKernel(__global const float* src, int src_col, int
 
 }
 
+<<<<<<< HEAD
 inline float bicubicCoeff(float x_)
+=======
+float bicubicCoeff(float x_)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
 
     float x = fabs(x_);
@@ -156,7 +164,11 @@ __kernel void warpBackwardKernel(__global const float* I0, int I0_step, int I0_c
 
 }
 
+<<<<<<< HEAD
 inline float readImage(__global float *image,  int x,  int y,  int rows,  int cols, int elemCntPerRow)
+=======
+float readImage(__global float *image,  int x,  int y,  int rows,  int cols, int elemCntPerRow)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     int i0 = clamp(x, 0, cols - 1);
     int j0 = clamp(y, 0, rows - 1);
@@ -284,7 +296,11 @@ __kernel void estimateDualVariablesKernel(__global const float* u1, int u1_col, 
 
 }
 
+<<<<<<< HEAD
 inline float divergence(__global const float* v1, __global const float* v2, int y, int x, int v1_step, int v2_step)
+=======
+float divergence(__global const float* v1, __global const float* v2, int y, int x, int v1_step, int v2_step)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
 
     if (x > 0 && y > 0)

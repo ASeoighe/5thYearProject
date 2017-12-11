@@ -49,13 +49,22 @@
 
 #define CV_VERSION_EPOCH    2
 #define CV_VERSION_MAJOR    4
+<<<<<<< HEAD
 #define CV_VERSION_MINOR    9
 #define CV_VERSION_REVISION 0
+=======
+#define CV_VERSION_MINOR    13
+#define CV_VERSION_REVISION 3
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #define CVAUX_STR_EXP(__A)  #__A
 #define CVAUX_STR(__A)      CVAUX_STR_EXP(__A)
 
+<<<<<<< HEAD
 #define CVAUX_STRW_EXP(__A)  L#__A
+=======
+#define CVAUX_STRW_EXP(__A)  L ## #__A
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #define CVAUX_STRW(__A)      CVAUX_STRW_EXP(__A)
 
 #if CV_VERSION_REVISION

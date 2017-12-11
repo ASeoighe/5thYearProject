@@ -10,6 +10,11 @@ if(NOT ANDROID_PACKAGE_PLATFORM)
     else()
       set(ANDROID_PACKAGE_PLATFORM armv7a)
     endif()
+<<<<<<< HEAD
+=======
+  elseif(ARM64_V8A)
+    set(ANDROID_PACKAGE_PLATFORM aarch64)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   elseif(ARMEABI_V6)
     set(ANDROID_PACKAGE_PLATFORM armv6)
   elseif(ARMEABI)
@@ -32,7 +37,10 @@ add_library(opencv_info SHARED info.c)
 set_target_properties(${the_module} PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH}
     RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH}
+<<<<<<< HEAD
     INSTALL_NAME_DIR lib
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   )
 
 get_filename_component(lib_name "libopencv_info.so" NAME)

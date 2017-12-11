@@ -70,5 +70,9 @@ PERF_TEST_P( Image_KernelSize, GaborFilter2d,
         filter2D(sourceImage, filteredImage, CV_32F, gaborKernel);
     }
 
+<<<<<<< HEAD
     SANITY_CHECK(filteredImage, 1e-3);
+=======
+    SANITY_CHECK(filteredImage, 1e-6, ERROR_RELATIVE);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }

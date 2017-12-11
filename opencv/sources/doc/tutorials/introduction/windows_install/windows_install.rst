@@ -46,7 +46,11 @@ You may find the content of this tutorial also inside the following videos: `Par
 
 .. warning:: These videos above are long-obsolete and contain inaccurate information. Be careful, since solutions described in those videos are no longer supported and may even break your install.
 
+<<<<<<< HEAD
 If you are building your own libraries you can take the source files from our `Git repository <https://github.com/Itseez/opencv.git>`_.
+=======
+If you are building your own libraries you can take the source files from our `Git repository <https://github.com/opencv/opencv.git>`_.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 Building the OpenCV library from scratch requires a couple of tools installed beforehand:
 
@@ -55,7 +59,11 @@ Building the OpenCV library from scratch requires a couple of tools installed be
 .. |TortoiseGit| replace:: TortoiseGit
 .. _TortoiseGit: http://code.google.com/p/tortoisegit/wiki/Download
 .. |Python_Libraries| replace:: Python libraries
+<<<<<<< HEAD
 .. _Python_Libraries: http://www.python.org/getit/
+=======
+.. _Python_Libraries: http://www.python.org/downloads/
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 .. |Numpy| replace:: Numpy
 .. _Numpy: http://numpy.scipy.org/
 .. |IntelTBB| replace:: Intel |copy| Threading Building Blocks (*TBB*)
@@ -70,8 +78,17 @@ Building the OpenCV library from scratch requires a couple of tools installed be
 .. _CUDA_Toolkit: http://developer.nvidia.com/cuda-downloads
 .. |OpenEXR| replace:: OpenEXR
 .. _OpenEXR: http://www.openexr.com/downloads.html
+<<<<<<< HEAD
 .. |OpenNI_Framework| replace:: OpenNI Framework
 .. _OpenNI_Framework: http://www.openni.org/
+=======
+.. |OpenNI_prebuilt| replace:: OpenNI prebuilt binaries
+.. _OpenNI_prebuilt: http://structure.io/openni
+.. |OpenNI_github| replace:: OpenNI Github
+.. _OpenNI_github: https://github.com/OpenNI/OpenNI
+.. |OpenNI2_github| replace:: OpenNI2 Github
+.. _OpenNI2_github: https://github.com/OpenNI/OpenNI2
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 .. |Miktex| replace:: Miktex
 .. _Miktex: http://miktex.org/2.9/setup
 .. |Sphinx| replace:: Sphinx
@@ -105,7 +122,11 @@ OpenCV may come in multiple flavors. There is a "core" section that will work on
 
    + |OpenEXR|_ source files are required for the library to work with this high dynamic range (HDR) image file format.
 
+<<<<<<< HEAD
    + The |OpenNI_Framework|_ contains a set of open source APIs that provide support for natural interaction with devices via methods such as voice command recognition, hand gestures and body motion tracking.
+=======
+   + The OpenNI Framework contains a set of open source APIs that provide support for natural interaction with devices via methods such as voice command recognition, hand gestures and body motion tracking. |OpenNI_prebuilt|_ , |OpenNI_github|_ code and |OpenNI2_github|_ code is available.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    + |Miktex|_ is the best `TEX <https://secure.wikimedia.org/wikipedia/en/wiki/TeX>`_ implementation on the Windows OS. It is required to build the *OpenCV documentation*.
 
@@ -128,7 +149,11 @@ Building the library
 
 #. Choose a directory in your file system, where you will download the OpenCV libraries to. I recommend creating a new one that has short path and no special charachters in it, for example :file:`D:/OpenCV`. For this tutorial I'll suggest you do so. If you use your own path and know, what you're doing -- it's OK.
 
+<<<<<<< HEAD
    a) Clone the repository to the selected directory. After clicking *Clone* button, a window will appear where you can select from what repository you want to download source files (https://github.com/Itseez/opencv.git) and to what directory (:file:`D:/OpenCV`).
+=======
+   a) Clone the repository to the selected directory. After clicking *Clone* button, a window will appear where you can select from what repository you want to download source files (https://github.com/opencv/opencv.git) and to what directory (:file:`D:/OpenCV`).
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    #) Push the OK button and be patient as the repository is quite a heavy download. It will take some time depending on your Internet connection.
 
@@ -172,7 +197,11 @@ Building the library
 
    #) Same as above with |OpenEXR|_.
 
+<<<<<<< HEAD
    #) For the |OpenNI_Framework|_ you need to install both the `development build <http://www.openni.org/downloadfiles/opennimodules/openni-binaries/21-stable>`_ and the `PrimeSensor Module <http://www.openni.org/downloadfiles/opennimodules/openni-compliant-hardware-binaries/32-stable>`_.
+=======
+   #) For the |OpenNI_prebuilt|_ you need to install both the `development build <http://www.openni.org/downloadfiles/opennimodules/openni-binaries/21-stable>`_ and the `PrimeSensor Module <http://www.openni.org/downloadfiles/opennimodules/openni-compliant-hardware-binaries/32-stable>`_.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
    #) For the CUDA you need again two modules: the latest |CUDA_Toolkit|_ and the *CUDA Tools SDK*. Download and install both of them with a *complete* option by using the 32 or 64 bit setups according to your OS.
 

@@ -22,5 +22,9 @@ PERF_TEST_P(Size_MatType, dft, TEST_MATS_DFT)
 
     TEST_CYCLE() dft(src, dst);
 
+<<<<<<< HEAD
     SANITY_CHECK(dst, 1e-5);
+=======
+    SANITY_CHECK(dst, 4e-7, ERROR_RELATIVE);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }

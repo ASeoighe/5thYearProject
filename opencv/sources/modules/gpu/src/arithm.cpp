@@ -317,6 +317,14 @@ void cv::gpu::flip(const GpuMat& src, GpuMat& dst, int flipCode, Stream& stream)
 ////////////////////////////////////////////////////////////////////////
 // LUT
 
+<<<<<<< HEAD
+=======
+namespace arithm
+{
+    void lut(PtrStepSzb src, uchar* lut, int lut_cn, PtrStepSzb dst, bool cc30, cudaStream_t stream);
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 void cv::gpu::LUT(const GpuMat& src, const Mat& lut, GpuMat& dst, Stream& s)
 {
     const int cn = src.channels();
@@ -328,6 +336,7 @@ void cv::gpu::LUT(const GpuMat& src, const Mat& lut, GpuMat& dst, Stream& s)
 
     dst.create(src.size(), CV_MAKE_TYPE(lut.depth(), cn));
 
+<<<<<<< HEAD
     NppiSize sz;
     sz.height = src.rows;
     sz.width = src.cols;
@@ -404,6 +413,23 @@ void cv::gpu::LUT(const GpuMat& src, const Mat& lut, GpuMat& dst, Stream& s)
 
     if (stream == 0)
         cudaSafeCall( cudaDeviceSynchronize() );
+=======
+    GpuMat d_lut;
+    d_lut.upload(Mat(1, 256, lut.type(), lut.data));
+
+    int lut_cn = d_lut.channels();
+    bool cc30 = deviceSupports(FEATURE_SET_COMPUTE_30);
+    cudaStream_t stream = StreamAccessor::getStream(s);
+
+    if (lut_cn == 1)
+    {
+        arithm::lut(src.reshape(1), d_lut.data, lut_cn, dst.reshape(1), cc30, stream);
+    }
+    else if (lut_cn == 3)
+    {
+        arithm::lut(src, d_lut.data, lut_cn, dst, cc30, stream);
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 ////////////////////////////////////////////////////////////////////////

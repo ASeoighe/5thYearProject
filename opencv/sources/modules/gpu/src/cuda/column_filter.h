@@ -183,6 +183,189 @@ namespace filter
     {
         typedef void (*caller_t)(PtrStepSz<T> src, PtrStepSz<D> dst, int anchor, int cc, cudaStream_t stream);
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+        static const caller_t callers[5][33] =
+        {
+            {
+                0,
+                0,
+                0,
+                column_filter::caller< 3, T, D, BrdColReflect101>,
+                0,
+                column_filter::caller< 5, T, D, BrdColReflect101>,
+                0,
+                column_filter::caller< 7, T, D, BrdColReflect101>,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+            },
+            {
+                0,
+                0,
+                0,
+                column_filter::caller< 3, T, D, BrdColReplicate>,
+                0,
+                column_filter::caller< 5, T, D, BrdColReplicate>,
+                0,
+                column_filter::caller< 7, T, D, BrdColReplicate>,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+            },
+            {
+                0,
+                0,
+                0,
+                column_filter::caller< 3, T, D, BrdColConstant>,
+                0,
+                column_filter::caller< 5, T, D, BrdColConstant>,
+                0,
+                column_filter::caller< 7, T, D, BrdColConstant>,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+            },
+            {
+                0,
+                0,
+                0,
+                column_filter::caller< 3, T, D, BrdColReflect>,
+                0,
+                column_filter::caller< 5, T, D, BrdColReflect>,
+                0,
+                column_filter::caller< 7, T, D, BrdColReflect>,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+            },
+            {
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            }
+        };
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         static const caller_t callers[5][33] =
         {
             {
@@ -361,12 +544,24 @@ namespace filter
                 column_filter::caller<32, T, D, BrdColWrap>
             }
         };
+<<<<<<< HEAD
+=======
+#endif
+
+        const caller_t caller = callers[brd_type][ksize];
+        if (!caller)
+            cv::gpu::error("Unsupported input parameters for column_filter", __FILE__, __LINE__, "");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         if (stream == 0)
             cudaSafeCall( cudaMemcpyToSymbol(column_filter::c_kernel, kernel, ksize * sizeof(float), 0, cudaMemcpyDeviceToDevice) );
         else
             cudaSafeCall( cudaMemcpyToSymbolAsync(column_filter::c_kernel, kernel, ksize * sizeof(float), 0, cudaMemcpyDeviceToDevice, stream) );
 
+<<<<<<< HEAD
         callers[brd_type][ksize]((PtrStepSz<T>)src, (PtrStepSz<D>)dst, anchor, cc, stream);
+=======
+        caller((PtrStepSz<T>)src, (PtrStepSz<D>)dst, anchor, cc, stream);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }

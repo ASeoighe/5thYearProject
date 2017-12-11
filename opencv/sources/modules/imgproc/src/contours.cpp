@@ -125,7 +125,11 @@ _CvContourInfo;
 
 
 /*
+<<<<<<< HEAD
   Structure that is used for sequental retrieving contours from the image.
+=======
+  Structure that is used for sequential retrieving contours from the image.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   It supports both hierarchical and plane variants of Suzuki algorithm.
 */
 typedef struct _CvContourScanner
@@ -284,10 +288,20 @@ cvStartFindContours( void* _img, CvMemStorage* storage,
                                           scanner->cinfo_storage );
     }
 
+<<<<<<< HEAD
     /* make zero borders */
     int esz = CV_ELEM_SIZE(mat->type);
     memset( img, 0, size.width*esz );
     memset( img + step * (size.height - 1), 0, size.width*esz );
+=======
+    CV_Assert(step >= 0);
+    CV_Assert(size.height >= 1);
+
+    /* make zero borders */
+    int esz = CV_ELEM_SIZE(mat->type);
+    memset( img, 0, size.width*esz );
+    memset( img + static_cast<size_t>(step) * (size.height - 1), 0, size.width*esz );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     img += step;
     for( int y = 1; y < size.height - 1; y++, img += step )
@@ -314,7 +328,11 @@ cvStartFindContours( void* _img, CvMemStorage* storage,
          tree. The retrieved contour itself is removed from the storage.
          Here two cases are possible:
             2a. If one deals with plane variant of algorithm
+<<<<<<< HEAD
                 (hierarchical strucutre is not reconstructed),
+=======
+                (hierarchical structure is not reconstructed),
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 the contour is removed completely.
             2b. In hierarchical case, the header of the contour is not removed.
                 It's marked as "link to contour" and h_next pointer of it is set to
@@ -326,8 +344,13 @@ cvStartFindContours( void* _img, CvMemStorage* storage,
          leaves header if hierarchical (but doesn't mark header as "link").
       ------------------------------------------------------------------------
       The 1st variant can be used to retrieve and store all the contours from the image
+<<<<<<< HEAD
       (with optional convertion from chains to contours using some approximation from
       restriced set of methods). Some characteristics of contour can be computed in the
+=======
+      (with optional conversion from chains to contours using some approximation from
+      restricted set of methods). Some characteristics of contour can be computed in the
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       same pass.
 
       The usage scheme can look like:
@@ -989,6 +1012,11 @@ cvFindNextContour( CvContourScanner scanner )
 {
     if( !scanner )
         CV_Error( CV_StsNullPtr, "" );
+<<<<<<< HEAD
+=======
+    CV_Assert(scanner->img_step >= 0);
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     icvEndProcessContour( scanner );
 
     /* initialize local state */
@@ -1009,7 +1037,11 @@ cvFindNextContour( CvContourScanner scanner )
     if( mode == CV_RETR_FLOODFILL )
     {
         prev = ((int*)img)[x - 1];
+<<<<<<< HEAD
         new_mask = INT_MIN >> 1;
+=======
+        new_mask = INT_MIN / 2;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 
     for( ; y < height; y++, img += step )
@@ -1063,7 +1095,11 @@ cvFindNextContour( CvContourScanner scanner )
                     is_hole = 1;
                 }
 
+<<<<<<< HEAD
                 if( mode == 0 && (is_hole || img0[lnbd.y * step + lnbd.x] > 0) )
+=======
+                if( mode == 0 && (is_hole || img0[lnbd.y * static_cast<size_t>(step) + lnbd.x] > 0) )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     goto resume_scan;
 
                 origin.y = y;
@@ -1077,8 +1113,13 @@ cvFindNextContour( CvContourScanner scanner )
                 else
                 {
                     int lval = (img0_i ?
+<<<<<<< HEAD
                         img0_i[lnbd.y * step_i + lnbd.x] :
                         (int)img0[lnbd.y * step + lnbd.x]) & 0x7f;
+=======
+                        img0_i[lnbd.y * static_cast<size_t>(step_i) + lnbd.x] :
+                        (int)img0[lnbd.y * static_cast<size_t>(step) + lnbd.x]) & 0x7f;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     _CvContourInfo *cur = scanner->cinfo_table[lval];
 
                     /* find the first bounding contour */
@@ -1090,11 +1131,19 @@ cvFindNextContour( CvContourScanner scanner )
                             if( par_info )
                             {
                                 if( (img0_i &&
+<<<<<<< HEAD
                                      icvTraceContour_32s( img0_i + par_info->origin.y * step_i +
                                                           par_info->origin.x, step_i, img_i + lnbd.x,
                                                           par_info->is_hole ) > 0) ||
                                     (!img0_i &&
                                      icvTraceContour( img0 + par_info->origin.y * step +
+=======
+                                     icvTraceContour_32s( img0_i + par_info->origin.y * static_cast<size_t>(step_i) +
+                                                          par_info->origin.x, step_i, img_i + lnbd.x,
+                                                          par_info->is_hole ) > 0) ||
+                                    (!img0_i &&
+                                     icvTraceContour( img0 + par_info->origin.y * static_cast<size_t>(step) +
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                                                       par_info->origin.x, step, img + lnbd.x,
                                                       par_info->is_hole ) > 0) )
                                     break;

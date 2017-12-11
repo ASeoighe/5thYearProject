@@ -73,7 +73,11 @@ class PlaneTracker:
                 descs.append(desc)
         descs = np.uint8(descs)
         self.matcher.add([descs])
+<<<<<<< HEAD
         target = PlanarTarget(image = image, rect=rect, keypoints = points, descrs=descs, data=None)
+=======
+        target = PlanarTarget(image = image, rect=rect, keypoints = points, descrs=descs, data=data)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         self.targets.append(target)
 
     def clear(self):

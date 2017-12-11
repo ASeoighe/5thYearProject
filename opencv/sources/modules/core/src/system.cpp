@@ -157,14 +157,21 @@ std::wstring GetTempFileNameWinRT(std::wstring prefix)
 
 #include <stdarg.h>
 
+<<<<<<< HEAD
 #if defined __linux__ || defined __APPLE__ || defined __EMSCRIPTEN__
+=======
+#if defined __linux__ || defined __APPLE__ || defined __EMSCRIPTEN__ || defined __QNX__
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
 #if defined ANDROID
 #include <sys/sysconf.h>
+<<<<<<< HEAD
 #else
 #include <sys/sysctl.h>
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif
 #endif
 
@@ -253,6 +260,45 @@ struct HWFeatures
             f.have[CV_CPU_AVX]    = (((cpuid_data[2] & (1<<28)) != 0)&&((cpuid_data[2] & (1<<27)) != 0));//OS uses XSAVE_XRSTORE and CPU support AVX
         }
 
+<<<<<<< HEAD
+=======
+    #if defined _MSC_VER && (defined _M_IX86 || defined _M_X64)
+        __cpuidex(cpuid_data, 7, 0);
+    #elif defined __GNUC__ && (defined __i386__ || defined __x86_64__)
+        #ifdef __x86_64__
+        asm __volatile__
+        (
+         "movl $7, %%eax\n\t"
+         "movl $0, %%ecx\n\t"
+         "cpuid\n\t"
+         :[eax]"=a"(cpuid_data[0]),[ebx]"=b"(cpuid_data[1]),[ecx]"=c"(cpuid_data[2]),[edx]"=d"(cpuid_data[3])
+         :
+         : "cc"
+        );
+        #else
+        // We need to preserve ebx since we are compiling PIC code.
+        // This means we cannot use "=b" for the 2nd output register.
+        asm volatile
+        (
+         "pushl %%ebx\n\t"
+         "movl $7,%%eax\n\t"
+         "movl $0,%%ecx\n\t"
+         "cpuid\n\t"
+         "movl %%ebx,%1\n\t"
+         "popl %%ebx\n\t"
+         : "=a"(cpuid_data[0]), "=r"(cpuid_data[1]), "=c"(cpuid_data[2]), "=d"(cpuid_data[3])
+         :
+         : "cc"
+        );
+        #endif
+    #endif
+
+        if( f.x86_family >= 6 )
+        {
+            f.have[CV_CPU_AVX2] = (cpuid_data[1] & (1<<5)) != 0;
+        }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         return f;
     }
 
@@ -423,6 +469,7 @@ string format( const char* fmt, ... )
 
 string tempfile( const char* suffix )
 {
+<<<<<<< HEAD
 #ifdef HAVE_WINRT
     std::wstring temp_dir = L"";
     const wchar_t* opencv_temp_dir = _wgetenv(L"OPENCV_TEMP_PATH");
@@ -432,18 +479,35 @@ string tempfile( const char* suffix )
     const char *temp_dir = getenv("OPENCV_TEMP_PATH");
 #endif
     string fname;
+=======
+    string fname;
+#ifndef HAVE_WINRT
+    const char *temp_dir = getenv("OPENCV_TEMP_PATH");
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #if defined WIN32 || defined _WIN32
 #ifdef HAVE_WINRT
     RoInitialize(RO_INIT_MULTITHREADED);
+<<<<<<< HEAD
     std::wstring temp_dir2;
     if (temp_dir.empty())
         temp_dir = GetTempPathWinRT();
+=======
+    std::wstring temp_dir = L"";
+    const wchar_t* opencv_temp_dir = GetTempPathWinRT().c_str();
+    if (opencv_temp_dir)
+        temp_dir = std::wstring(opencv_temp_dir);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     std::wstring temp_file;
     temp_file = GetTempFileNameWinRT(L"ocv");
     if (temp_file.empty())
+<<<<<<< HEAD
         return std::string();
+=======
+        return string();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     temp_file = temp_dir + std::wstring(L"\\") + temp_file;
     DeleteFileW(temp_file.c_str());
@@ -451,7 +515,11 @@ string tempfile( const char* suffix )
     char aname[MAX_PATH];
     size_t copied = wcstombs(aname, temp_file.c_str(), MAX_PATH);
     CV_Assert((copied != MAX_PATH) && (copied != (size_t)-1));
+<<<<<<< HEAD
     fname = std::string(aname);
+=======
+    fname = string(aname);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     RoUninitialize();
 #else
     char temp_dir2[MAX_PATH] = { 0 };
@@ -876,6 +944,14 @@ int _interlockedExchangeAdd(int* addr, int delta)
 
 #elif defined __APPLE__
 
+<<<<<<< HEAD
+=======
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <libkern/OSAtomic.h>
 
 struct Mutex::Impl
@@ -891,7 +967,15 @@ struct Mutex::Impl
     int refcount;
 };
 
+<<<<<<< HEAD
 #elif defined __linux__ && !defined ANDROID
+=======
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
+
+#elif defined __linux__ && !defined ANDROID && !defined __LINUXTHREADS_OLD__
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 struct Mutex::Impl
 {

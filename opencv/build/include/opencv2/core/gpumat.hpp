@@ -277,10 +277,16 @@ namespace cv { namespace gpu
         template <typename _Tp> operator PtrStep<_Tp>() const;
 
         // Deprecated function
+<<<<<<< HEAD
         __CV_GPU_DEPR_BEFORE__ template <typename _Tp> operator DevMem2D_<_Tp>() const __CV_GPU_DEPR_AFTER__;
         __CV_GPU_DEPR_BEFORE__ template <typename _Tp> operator PtrStep_<_Tp>() const __CV_GPU_DEPR_AFTER__;
         #undef __CV_GPU_DEPR_BEFORE__
         #undef __CV_GPU_DEPR_AFTER__
+=======
+        template <typename _Tp> CV_GPU_DEPRECATED operator DevMem2D_<_Tp>() const;
+        template <typename _Tp> CV_GPU_DEPRECATED operator PtrStep_<_Tp>() const;
+        #undef CV_GPU_DEPRECATED
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         /*! includes several bit-fields:
         - the magic signature
@@ -512,6 +518,10 @@ namespace cv { namespace gpu
         return *this;
     }
 
+<<<<<<< HEAD
+=======
+    /** @cond IGNORED */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     template <class T> inline GpuMat::operator PtrStepSz<T>() const
     {
         return PtrStepSz<T>(rows, cols, (T*)data, step);
@@ -531,6 +541,10 @@ namespace cv { namespace gpu
     {
         return PtrStep_<T>(static_cast< DevMem2D_<T> >(*this));
     }
+<<<<<<< HEAD
+=======
+    /** @endcond */
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     inline GpuMat createContinuous(int rows, int cols, int type)
     {

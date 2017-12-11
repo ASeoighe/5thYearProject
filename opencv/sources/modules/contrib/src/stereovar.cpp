@@ -93,7 +93,11 @@ static Mat diffX(Mat &src)
 
 static Mat getGradient(Mat &src)
 {
+<<<<<<< HEAD
     register int x, y;
+=======
+    int x, y;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     Mat dst(src.size(), src.type());
     dst.setTo(0);
     for (y = 0; y < src.rows - 1; y++) {
@@ -109,10 +113,17 @@ static Mat getGradient(Mat &src)
 static Mat getG_c(Mat &src, float l)
 {
     Mat dst(src.size(), src.type());
+<<<<<<< HEAD
     for (register int y = 0; y < src.rows; y++) {
         float *pSrc = src.ptr<float>(y);
         float *pDst = dst.ptr<float>(y);
         for (register int x = 0; x < src.cols; x++)
+=======
+    for (int y = 0; y < src.rows; y++) {
+        float *pSrc = src.ptr<float>(y);
+        float *pDst = dst.ptr<float>(y);
+        for (int x = 0; x < src.cols; x++)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             pDst[x] = 0.5f*l / sqrtf(l*l + pSrc[x]*pSrc[x]);
     }
     return dst;
@@ -121,10 +132,17 @@ static Mat getG_c(Mat &src, float l)
 static Mat getG_p(Mat &src, float l)
 {
     Mat dst(src.size(), src.type());
+<<<<<<< HEAD
     for (register int y = 0; y < src.rows; y++) {
         float *pSrc = src.ptr<float>(y);
         float *pDst = dst.ptr<float>(y);
         for (register int x = 0; x < src.cols; x++)
+=======
+    for (int y = 0; y < src.rows; y++) {
+        float *pSrc = src.ptr<float>(y);
+        float *pDst = dst.ptr<float>(y);
+        for (int x = 0; x < src.cols; x++)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             pDst[x] = 0.5f*l*l / (l*l + pSrc[x]*pSrc[x]);
     }
     return dst;
@@ -132,7 +150,11 @@ static Mat getG_p(Mat &src, float l)
 
 void StereoVar::VariationalSolver(Mat &I1, Mat &I2, Mat &I2x, Mat &u, int level)
 {
+<<<<<<< HEAD
     register int n, x, y;
+=======
+    int n, x, y;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     float gl = 1, gr = 1, gu = 1, gd = 1, gc = 4;
     Mat g_c, g_p;
     Mat U;
@@ -327,7 +349,11 @@ void StereoVar::FMG(Mat &I1, Mat &I2, Mat &I2x, Mat &u, int level)
 
 void StereoVar::autoParams()
 {
+<<<<<<< HEAD
     int maxD = MAX(labs(maxDisp), labs(minDisp));
+=======
+    int maxD = (int)MAX(labs(maxDisp), labs(minDisp));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     if (!maxD) pyrScale = 0.85;
     else if (maxD < 8) pyrScale = 0.5;
@@ -351,7 +377,11 @@ void StereoVar::operator ()( const Mat& left, const Mat& right, Mat& disp )
 {
     CV_Assert(left.size() == right.size() && left.type() == right.type());
     CvSize imgSize = left.size();
+<<<<<<< HEAD
     int MaxD = MAX(labs(minDisp), labs(maxDisp));
+=======
+    int MaxD = (int)MAX(labs(minDisp), labs(maxDisp));
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int SignD = 1; if (MIN(minDisp, maxDisp) < 0) SignD = -1;
     if (minDisp >= maxDisp) {MaxD = 256; SignD = 1;}
 

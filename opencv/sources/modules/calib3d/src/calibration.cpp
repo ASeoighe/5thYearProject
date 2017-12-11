@@ -1014,7 +1014,11 @@ CV_IMPL void cvProjectPoints2( const CvMat* objectPoints,
         {
             if( dpdc_p )
             {
+<<<<<<< HEAD
                 dpdc_p[0] = 1; dpdc_p[1] = 0;
+=======
+                dpdc_p[0] = 1; dpdc_p[1] = 0; // dp_xdc_x; dp_xdc_y
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 dpdc_p[dpdc_step] = 0;
                 dpdc_p[dpdc_step+1] = 1;
                 dpdc_p += dpdc_step*2;
@@ -1024,7 +1028,11 @@ CV_IMPL void cvProjectPoints2( const CvMat* objectPoints,
             {
                 if( fixedAspectRatio )
                 {
+<<<<<<< HEAD
                     dpdf_p[0] = 0; dpdf_p[1] = xd*aspectRatio;
+=======
+                    dpdf_p[0] = 0; dpdf_p[1] = xd*aspectRatio; // dp_xdf_x; dp_xdf_y
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     dpdf_p[dpdf_step] = 0;
                     dpdf_p[dpdf_step+1] = yd;
                 }
@@ -1078,9 +1086,15 @@ CV_IMPL void cvProjectPoints2( const CvMat* objectPoints,
                     double dicdist2_dt = -icdist2*icdist2*(k[5]*dr2dt + 2*k[6]*r2*dr2dt + 3*k[7]*r4*dr2dt);
                     double da1dt = 2*(x*dydt[j] + y*dxdt[j]);
                     double dmxdt = fx*(dxdt[j]*cdist*icdist2 + x*dcdist_dt*icdist2 + x*cdist*dicdist2_dt +
+<<<<<<< HEAD
                                        k[2]*da1dt + k[3]*(dr2dt + 2*x*dxdt[j]));
                     double dmydt = fy*(dydt[j]*cdist*icdist2 + y*dcdist_dt*icdist2 + y*cdist*dicdist2_dt +
                                        k[2]*(dr2dt + 2*y*dydt[j]) + k[3]*da1dt);
+=======
+                                       k[2]*da1dt + k[3]*(dr2dt + 4*x*dxdt[j]));
+                    double dmydt = fy*(dydt[j]*cdist*icdist2 + y*dcdist_dt*icdist2 + y*cdist*dicdist2_dt +
+                                       k[2]*(dr2dt + 4*y*dydt[j]) + k[3]*da1dt);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     dpdt_p[j] = dmxdt;
                     dpdt_p[dpdt_step+j] = dmydt;
                 }
@@ -1116,9 +1130,15 @@ CV_IMPL void cvProjectPoints2( const CvMat* objectPoints,
                     double dicdist2_dr = -icdist2*icdist2*(k[5]*dr2dr + 2*k[6]*r2*dr2dr + 3*k[7]*r4*dr2dr);
                     double da1dr = 2*(x*dydr + y*dxdr);
                     double dmxdr = fx*(dxdr*cdist*icdist2 + x*dcdist_dr*icdist2 + x*cdist*dicdist2_dr +
+<<<<<<< HEAD
                                        k[2]*da1dr + k[3]*(dr2dr + 2*x*dxdr));
                     double dmydr = fy*(dydr*cdist*icdist2 + y*dcdist_dr*icdist2 + y*cdist*dicdist2_dr +
                                        k[2]*(dr2dr + 2*y*dydr) + k[3]*da1dr);
+=======
+                                       k[2]*da1dr + k[3]*(dr2dr + 4*x*dxdr));
+                    double dmydr = fy*(dydr*cdist*icdist2 + y*dcdist_dr*icdist2 + y*cdist*dicdist2_dr +
+                                       k[2]*(dr2dr + 4*y*dydr) + k[3]*da1dr);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     dpdr_p[j] = dmxdr;
                     dpdr_p[dpdr_step+j] = dmydr;
                 }
@@ -1614,6 +1634,11 @@ CV_IMPL double cvCalibrateCamera2( const CvMat* objectPoints,
     param[4] = k[0]; param[5] = k[1]; param[6] = k[2]; param[7] = k[3];
     param[8] = k[4]; param[9] = k[5]; param[10] = k[6]; param[11] = k[7];
 
+<<<<<<< HEAD
+=======
+    if(flags & CALIB_FIX_ASPECT_RATIO)
+        mask[0] = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if( flags & CV_CALIB_FIX_FOCAL_LENGTH )
         mask[0] = mask[1] = 0;
     if( flags & CV_CALIB_FIX_PRINCIPAL_POINT )

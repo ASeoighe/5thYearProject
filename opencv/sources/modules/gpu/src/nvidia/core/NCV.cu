@@ -40,6 +40,10 @@
 //
 //M*/
 
+<<<<<<< HEAD
+=======
+#include <algorithm>
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #include <iostream>
 #include <string>
 #include <vector>

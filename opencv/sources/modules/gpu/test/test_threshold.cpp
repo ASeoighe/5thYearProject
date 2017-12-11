@@ -83,11 +83,26 @@ GPU_TEST_P(Threshold, Accuracy)
     EXPECT_MAT_NEAR(dst_gold, dst, 0.0);
 }
 
+<<<<<<< HEAD
+=======
+#ifdef OPENCV_TINY_GPU_MODULE
+INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Threshold, testing::Combine(
+    ALL_DEVICES,
+    DIFFERENT_SIZES,
+    testing::Values(MatType(CV_8UC1), MatType(CV_32FC1)),
+    ThreshOp::all(),
+    WHOLE_SUBMAT));
+#else
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 INSTANTIATE_TEST_CASE_P(GPU_ImgProc, Threshold, testing::Combine(
     ALL_DEVICES,
     DIFFERENT_SIZES,
     testing::Values(MatType(CV_8UC1), MatType(CV_16SC1), MatType(CV_32FC1)),
     ThreshOp::all(),
     WHOLE_SUBMAT));
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #endif // HAVE_CUDA

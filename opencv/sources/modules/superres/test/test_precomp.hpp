@@ -60,4 +60,20 @@
 #include "opencv2/superres/superres.hpp"
 #include "input_array_utility.hpp"
 
+<<<<<<< HEAD
+=======
+#if defined(HAVE_XINE)         || \
+    defined(HAVE_GSTREAMER)    || \
+    defined(HAVE_QUICKTIME)    || \
+    defined(HAVE_QTKIT)        || \
+    defined(HAVE_AVFOUNDATION) || \
+    defined(HAVE_FFMPEG)       || \
+    defined(HAVE_MSMF)         || \
+    defined(HAVE_VFW)
+# define BUILD_WITH_VIDEO_INPUT_SUPPORT 1
+#else
+# define BUILD_WITH_VIDEO_INPUT_SUPPORT 0
+#endif
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #endif

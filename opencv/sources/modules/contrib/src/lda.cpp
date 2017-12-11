@@ -1100,6 +1100,7 @@ void LDA::compute(InputArrayOfArrays _src, InputArray _lbls) {
     }
 }
 
+<<<<<<< HEAD
 // Projects samples into the LDA subspace.
 Mat LDA::project(InputArray src) {
    return subspaceProject(_eigenvectors, Mat(), _dataAsRow ? src : src.getMat().t());
@@ -1108,6 +1109,16 @@ Mat LDA::project(InputArray src) {
 // Reconstructs projections from the LDA subspace.
 Mat LDA::reconstruct(InputArray src) {
    return subspaceReconstruct(_eigenvectors, Mat(), _dataAsRow ? src : src.getMat().t());
+=======
+// Projects one or more row aligned samples into the LDA subspace.
+Mat LDA::project(InputArray src) {
+   return subspaceProject(_eigenvectors, Mat(), src);
+}
+
+// Reconstructs projections from the LDA subspace from one or more row aligned samples.
+Mat LDA::reconstruct(InputArray src) {
+   return subspaceReconstruct(_eigenvectors, Mat(), src);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 }

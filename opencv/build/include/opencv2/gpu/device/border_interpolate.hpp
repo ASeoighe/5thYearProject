@@ -626,12 +626,20 @@ namespace cv { namespace gpu { namespace device
 
         __device__ __forceinline__ int idx_row_low(int y) const
         {
+<<<<<<< HEAD
             return (y >= 0) * y + (y < 0) * (y - ((y - height + 1) / height) * height);
+=======
+            return (y >= 0) ? y : (y - ((y - height + 1) / height) * height);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         __device__ __forceinline__ int idx_row_high(int y) const
         {
+<<<<<<< HEAD
             return (y < height) * y + (y >= height) * (y % height);
+=======
+            return (y < height) ? y : (y % height);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         __device__ __forceinline__ int idx_row(int y) const
@@ -641,12 +649,20 @@ namespace cv { namespace gpu { namespace device
 
         __device__ __forceinline__ int idx_col_low(int x) const
         {
+<<<<<<< HEAD
             return (x >= 0) * x + (x < 0) * (x - ((x - width + 1) / width) * width);
+=======
+            return (x >= 0) ? x : (x - ((x - width + 1) / width) * width);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         __device__ __forceinline__ int idx_col_high(int x) const
         {
+<<<<<<< HEAD
             return (x < width) * x + (x >= width) * (x % width);
+=======
+            return (x < width) ? x : (x % width);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
 
         __device__ __forceinline__ int idx_col(int x) const

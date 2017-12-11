@@ -65,13 +65,21 @@ protected:
     virtual void run( int start_from );
     virtual void createModel( const Mat& data ) = 0;
     virtual int findNeighbors( Mat& points, Mat& neighbors ) = 0;
+<<<<<<< HEAD
     virtual int checkGetPoins( const Mat& data );
+=======
+    virtual int checkGetPoints( const Mat& data );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     virtual int checkFindBoxed();
     virtual int checkFind( const Mat& data );
     virtual void releaseModel() = 0;
 };
 
+<<<<<<< HEAD
 int NearestNeighborTest::checkGetPoins( const Mat& )
+=======
+int NearestNeighborTest::checkGetPoints( const Mat& )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
    return cvtest::TS::OK;
 }
@@ -125,11 +133,19 @@ int NearestNeighborTest::checkFind( const Mat& data )
 void NearestNeighborTest::run( int /*start_from*/ ) {
     int code = cvtest::TS::OK, tempCode;
     Mat desc( featuresCount, dims, CV_32FC1 );
+<<<<<<< HEAD
     randu( desc, Scalar(minValue), Scalar(maxValue) );
 
     createModel( desc );
 
     tempCode = checkGetPoins( desc );
+=======
+    ts->get_rng().fill( desc, RNG::UNIFORM, minValue, maxValue );
+
+    createModel( desc );
+
+    tempCode = checkGetPoints( desc );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if( tempCode != cvtest::TS::OK )
     {
         ts->printf( cvtest::TS::LOG, "bad accuracy of GetPoints \n" );
@@ -159,10 +175,17 @@ void NearestNeighborTest::run( int /*start_from*/ ) {
 class CV_KDTreeTest_CPP : public NearestNeighborTest
 {
 public:
+<<<<<<< HEAD
     CV_KDTreeTest_CPP() {}
 protected:
     virtual void createModel( const Mat& data );
     virtual int checkGetPoins( const Mat& data );
+=======
+    CV_KDTreeTest_CPP() : NearestNeighborTest(), tr(NULL) {}
+protected:
+    virtual void createModel( const Mat& data );
+    virtual int checkGetPoints( const Mat& data );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     virtual int findNeighbors( Mat& points, Mat& neighbors );
     virtual int checkFindBoxed();
     virtual void releaseModel();
@@ -175,7 +198,11 @@ void CV_KDTreeTest_CPP::createModel( const Mat& data )
     tr = new KDTree( data, false );
 }
 
+<<<<<<< HEAD
 int CV_KDTreeTest_CPP::checkGetPoins( const Mat& data )
+=======
+int CV_KDTreeTest_CPP::checkGetPoints( const Mat& data )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     Mat res1( data.size(), data.type() ),
         res3( data.size(), data.type() );
@@ -244,7 +271,11 @@ void CV_KDTreeTest_CPP::releaseModel()
 class CV_FlannTest : public NearestNeighborTest
 {
 public:
+<<<<<<< HEAD
     CV_FlannTest() {}
+=======
+    CV_FlannTest() : NearestNeighborTest(), index(NULL) { }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 protected:
     void createIndex( const Mat& data, const IndexParams& params );
     int knnSearch( Mat& points, Mat& neighbors );
@@ -255,6 +286,12 @@ protected:
 
 void CV_FlannTest::createIndex( const Mat& data, const IndexParams& params )
 {
+<<<<<<< HEAD
+=======
+    // release previously allocated index
+    releaseModel();
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     index = new Index( data, params );
 }
 
@@ -321,7 +358,15 @@ int CV_FlannTest::radiusSearch( Mat& points, Mat& neighbors )
 
 void CV_FlannTest::releaseModel()
 {
+<<<<<<< HEAD
     delete index;
+=======
+    if (index)
+    {
+        delete index;
+        index = NULL;
+    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 //---------------------------------------

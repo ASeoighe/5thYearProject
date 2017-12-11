@@ -415,7 +415,11 @@ public:
          * @param orientationNormalized enable orientation normalization
          * @param scaleNormalized enable scale normalization
          * @param patternScale scaling of the description pattern
+<<<<<<< HEAD
          * @param nbOctave number of octaves covered by the detected keypoints
+=======
+         * @param nOctaves number of octaves covered by the detected keypoints
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
          * @param selectedPairs (optional) user defined selected pairs
     */
     explicit FREAK( bool orientationNormalized = true,
@@ -814,6 +818,11 @@ class CV_EXPORTS FastAdjuster: public AdjusterAdapter
 public:
     /**\param init_thresh the initial threshold to start with, default = 20
      * \param nonmax whether to use non max or not for fast feature detection
+<<<<<<< HEAD
+=======
+     * \param min_thresh
+     * \param max_thresh
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      */
     FastAdjuster(int init_thresh=20, bool nonmax=true, int min_thresh=1, int max_thresh=200);
 
@@ -877,7 +886,11 @@ CV_EXPORTS Mat windowedMatchingMask( const vector<KeyPoint>& keypoints1, const v
 /*
  * OpponentColorDescriptorExtractor
  *
+<<<<<<< HEAD
  * Adapts a descriptor extractor to compute descripors in Opponent Color Space
+=======
+ * Adapts a descriptor extractor to compute descriptors in Opponent Color Space
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
  * (refer to van de Sande et al., CGIV 2008 "Color Descriptors for Object Category Recognition").
  * Input RGB image is transformed in Opponent Color Space. Then unadapted descriptor extractor
  * (set in constructor) computes descriptors on each of the three channel and concatenate
@@ -1528,17 +1541,29 @@ CV_EXPORTS void evaluateGenericDescriptorMatcher( const Mat& img1, const Mat& im
 /*
  * Abstract base class for training of a 'bag of visual words' vocabulary from a set of descriptors
  */
+<<<<<<< HEAD
 class CV_EXPORTS BOWTrainer
+=======
+class CV_EXPORTS_W BOWTrainer
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
 public:
     BOWTrainer();
     virtual ~BOWTrainer();
 
+<<<<<<< HEAD
     void add( const Mat& descriptors );
     const vector<Mat>& getDescriptors() const;
     int descripotorsCount() const;
 
     virtual void clear();
+=======
+    CV_WRAP void add( const Mat& descriptors );
+    CV_WRAP const vector<Mat>& getDescriptors() const;
+    CV_WRAP int descripotorsCount() const;
+
+    CV_WRAP virtual void clear();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     /*
      * Train visual words vocabulary, that is cluster training descriptors and
@@ -1547,8 +1572,13 @@ public:
      *
      * descriptors      Training descriptors computed on images keypoints.
      */
+<<<<<<< HEAD
     virtual Mat cluster() const = 0;
     virtual Mat cluster( const Mat& descriptors ) const = 0;
+=======
+    CV_WRAP virtual Mat cluster() const = 0;
+    CV_WRAP virtual Mat cluster( const Mat& descriptors ) const = 0;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 protected:
     vector<Mat> descriptors;
@@ -1558,16 +1588,28 @@ protected:
 /*
  * This is BOWTrainer using cv::kmeans to get vocabulary.
  */
+<<<<<<< HEAD
 class CV_EXPORTS BOWKMeansTrainer : public BOWTrainer
 {
 public:
     BOWKMeansTrainer( int clusterCount, const TermCriteria& termcrit=TermCriteria(),
+=======
+class CV_EXPORTS_W BOWKMeansTrainer : public BOWTrainer
+{
+public:
+    CV_WRAP BOWKMeansTrainer( int clusterCount, const TermCriteria& termcrit=TermCriteria(),
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                       int attempts=3, int flags=KMEANS_PP_CENTERS );
     virtual ~BOWKMeansTrainer();
 
     // Returns trained vocabulary (i.e. cluster centers).
+<<<<<<< HEAD
     virtual Mat cluster() const;
     virtual Mat cluster( const Mat& descriptors ) const;
+=======
+    CV_WRAP virtual Mat cluster() const;
+    CV_WRAP virtual Mat cluster( const Mat& descriptors ) const;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 protected:
 
@@ -1580,6 +1622,7 @@ protected:
 /*
  * Class to compute image descriptor using bag of visual words.
  */
+<<<<<<< HEAD
 class CV_EXPORTS BOWImgDescriptorExtractor
 {
 public:
@@ -1589,12 +1632,31 @@ public:
 
     void setVocabulary( const Mat& vocabulary );
     const Mat& getVocabulary() const;
+=======
+class CV_EXPORTS_W BOWImgDescriptorExtractor
+{
+public:
+    CV_WRAP BOWImgDescriptorExtractor( const Ptr<DescriptorExtractor>& dextractor,
+                               const Ptr<DescriptorMatcher>& dmatcher );
+    virtual ~BOWImgDescriptorExtractor();
+
+    CV_WRAP void setVocabulary( const Mat& vocabulary );
+    CV_WRAP const Mat& getVocabulary() const;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     void compute( const Mat& image, vector<KeyPoint>& keypoints, Mat& imgDescriptor,
                   vector<vector<int> >* pointIdxsOfClusters=0, Mat* descriptors=0 );
     // compute() is not constant because DescriptorMatcher::match is not constant
 
+<<<<<<< HEAD
     int descriptorSize() const;
     int descriptorType() const;
+=======
+    CV_WRAP_AS(compute) void compute2( const Mat& image, vector<KeyPoint>& keypoints, CV_OUT Mat& imgDescriptor )
+    { compute(image,keypoints,imgDescriptor); }
+
+    CV_WRAP int descriptorSize() const;
+    CV_WRAP int descriptorType() const;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 protected:
     Mat vocabulary;

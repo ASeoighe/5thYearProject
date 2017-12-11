@@ -166,6 +166,10 @@ double showFlowAndCalcError(const string& name, const Mat& gray, const Mat& flow
     bool all = true;
     Mat inner = flow(where);
     for(int y = 0; y < inner.rows; ++y)
+<<<<<<< HEAD
+=======
+    {
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         for(int x = 0; x < inner.cols; ++x)
         {
             const Point2f f = inner.at<Point2f>(y, x);
@@ -178,12 +182,23 @@ double showFlowAndCalcError(const string& name, const Mat& gray, const Mat& flow
             double a = atan2(f.y, f.x);
             error += fabs(angle - a);
         }
+<<<<<<< HEAD
         double res = all ? numeric_limits<double>::max() : error / (inner.cols * inner.rows);
 
         if (writeError)
             cout << "Error " + name << " = " << res << endl;
 
         return res;
+=======
+    }
+
+    double res = all ? numeric_limits<double>::max() : error / (inner.cols * inner.rows);
+
+    if (writeError)
+        cout << "Error " + name << " = " << res << endl;
+
+    return res;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 

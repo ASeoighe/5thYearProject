@@ -278,6 +278,10 @@ CvCaptureCAM_DC1394_v2_CPP::CvCaptureCAM_DC1394_v2_CPP()
     dcCam = 0;
     isoSpeed = 400;
     fps = 15;
+<<<<<<< HEAD
+=======
+    // Resetted the value here to 1 in order to ensure only a single frame is stored in the buffer!
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     nDMABufs = 8;
     started = false;
     cameraId = 0;
@@ -664,13 +668,21 @@ double CvCaptureCAM_DC1394_v2_CPP::getProperty(int propId)
         return fps;
     case CV_CAP_PROP_RECTIFICATION:
         return rectify ? 1 : 0;
+<<<<<<< HEAD
     case CV_CAP_PROP_WHITE_BALANCE_BLUE_U:
+=======
+    case CV_CAP_PROP_WHITE_BALANCE_U:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         if (dc1394_feature_whitebalance_get_value(dcCam,
                                                   &feature_set.feature[DC1394_FEATURE_WHITE_BALANCE-DC1394_FEATURE_MIN].BU_value,
                                                   &feature_set.feature[DC1394_FEATURE_WHITE_BALANCE-DC1394_FEATURE_MIN].RV_value) == DC1394_SUCCESS)
         return feature_set.feature[DC1394_FEATURE_WHITE_BALANCE-DC1394_FEATURE_MIN].BU_value;
         break;
+<<<<<<< HEAD
     case CV_CAP_PROP_WHITE_BALANCE_RED_V:
+=======
+    case CV_CAP_PROP_WHITE_BALANCE_V:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         if (dc1394_feature_whitebalance_get_value(dcCam,
                                                   &feature_set.feature[DC1394_FEATURE_WHITE_BALANCE-DC1394_FEATURE_MIN].BU_value,
                                                   &feature_set.feature[DC1394_FEATURE_WHITE_BALANCE-DC1394_FEATURE_MIN].RV_value) == DC1394_SUCCESS)
@@ -685,6 +697,11 @@ double CvCaptureCAM_DC1394_v2_CPP::getProperty(int propId)
         break;
     case CV_CAP_PROP_ISO_SPEED:
         return (double) isoSpeed;
+<<<<<<< HEAD
+=======
+    case CV_CAP_PROP_BUFFERSIZE:
+        return (double) nDMABufs;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     default:
         if (propId<CV_CAP_PROP_MAX_DC1394 && dc1394properties[propId]!=-1
             && dcCam)
@@ -732,6 +749,14 @@ bool CvCaptureCAM_DC1394_v2_CPP::setProperty(int propId, double value)
           return false;
         isoSpeed = cvRound(value);
         break;
+<<<<<<< HEAD
+=======
+    case CV_CAP_PROP_BUFFERSIZE:
+        if(started)
+            return false;
+        nDMABufs = value;
+        break;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         //The code below is based on coriander, callbacks.c:795, refer to case RANGE_MENU_MAN :
          default:
              if (propId<CV_CAP_PROP_MAX_DC1394 && dc1394properties[propId]!=-1
@@ -787,7 +812,11 @@ bool CvCaptureCAM_DC1394_v2_CPP::setProperty(int propId, double value)
                  else
                      act_feature->current_mode=DC1394_FEATURE_MODE_MANUAL;
                  // if property is one of the white balance features treat it in different way
+<<<<<<< HEAD
                  if (propId == CV_CAP_PROP_WHITE_BALANCE_BLUE_U)
+=======
+                 if (propId == CV_CAP_PROP_WHITE_BALANCE_U)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                  {
                      if (dc1394_feature_whitebalance_set_value(dcCam,cvRound(value), act_feature->RV_value)!=DC1394_SUCCESS)
                          return false;
@@ -797,7 +826,11 @@ bool CvCaptureCAM_DC1394_v2_CPP::setProperty(int propId, double value)
                          return true;
                      }
                  }
+<<<<<<< HEAD
                  if (propId == CV_CAP_PROP_WHITE_BALANCE_RED_V)
+=======
+                 if (propId == CV_CAP_PROP_WHITE_BALANCE_V)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                  {
                      if (dc1394_feature_whitebalance_set_value(dcCam, act_feature->BU_value, cvRound(value))!=DC1394_SUCCESS)
                          return false;

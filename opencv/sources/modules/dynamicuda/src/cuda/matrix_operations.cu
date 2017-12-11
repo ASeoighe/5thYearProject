@@ -44,6 +44,10 @@
 #include "opencv2/gpu/device/transform.hpp"
 #include "opencv2/gpu/device/functional.hpp"
 #include "opencv2/gpu/device/type_traits.hpp"
+<<<<<<< HEAD
+=======
+#include "opencv2/gpu/device/vec_traits.hpp"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 namespace cv { namespace gpu { namespace device
 {
@@ -105,6 +109,7 @@ namespace cv { namespace gpu { namespace device
     ////////////////////////////////// SetTo //////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
     __constant__ uchar scalar_8u[4];
     __constant__ schar scalar_8s[4];
     __constant__ ushort scalar_16u[4];
@@ -161,10 +166,30 @@ namespace cv { namespace gpu { namespace device
         {
             size_t idx = y * ( step >> shift_and_sizeof<T>::shift ) + x;
             mat[idx] = readScalar<T>(x % channels);
+=======
+    template<typename T>
+    __global__ void set_to_without_mask(PtrStepSz<T> mat, typename TypeVec<T, 4>::vec_type val, int channels)
+    {
+        const int y = blockIdx.x * blockDim.y + threadIdx.y;
+
+        if (y < mat.rows)
+        {
+            const T vals[] = {
+                val.x, val.y, val.z, val.w
+            };
+
+            T* row = mat.ptr(y);
+
+            for (int x = threadIdx.x; x < mat.cols * channels; x += 32)
+            {
+                row[x] = vals[x % channels];
+            }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         }
     }
 
     template<typename T>
+<<<<<<< HEAD
     __global__ void set_to_with_mask(T* mat, const uchar* mask, int cols, int rows, size_t step, int channels, size_t step_mask)
     {
         size_t x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -186,6 +211,40 @@ namespace cv { namespace gpu { namespace device
         dim3 numBlocks (mat.cols * channels / threadsPerBlock.x + 1, mat.rows / threadsPerBlock.y + 1, 1);
 
         set_to_with_mask<T><<<numBlocks, threadsPerBlock, 0, stream>>>((T*)mat.data, (uchar*)mask.data, mat.cols, mat.rows, mat.step, channels, mask.step);
+=======
+    __global__ void set_to_with_mask(PtrStepSz<T> mat, const PtrStepb mask, typename TypeVec<T, 4>::vec_type val, int channels)
+    {
+        const int y = blockIdx.x * blockDim.y + threadIdx.y;
+
+        if (y < mat.rows)
+        {
+            const T vals[] = {
+                val.x, val.y, val.z, val.w
+            };
+
+            T* row = mat.ptr(y);
+            const uchar* mask_row = mask.ptr(y);
+
+            for (int x = threadIdx.x; x < mat.cols * channels; x += 32)
+            {
+                if (mask_row[x / channels])
+                {
+                    row[x] = vals[x % channels];
+                }
+            }
+        }
+    }
+
+    template <typename T>
+    void set_to_gpu(PtrStepSzb mat, const T* scalar, PtrStepSzb mask, int channels, cudaStream_t stream)
+    {
+        typedef typename TypeVec<T, 4>::vec_type vec_type;
+
+        dim3 block(32, 8);
+        dim3 grid(divUp(mat.rows, block.y));
+
+        set_to_with_mask<T><<<grid, block, 0, stream>>>(PtrStepSz<T>(mat), mask, VecTraits<vec_type>::make(scalar), channels);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cudaSafeCall( cudaGetLastError() );
 
         if (stream == 0)
@@ -203,12 +262,21 @@ namespace cv { namespace gpu { namespace device
     template <typename T>
     void set_to_gpu(PtrStepSzb mat, const T* scalar, int channels, cudaStream_t stream)
     {
+<<<<<<< HEAD
         writeScalar(scalar);
 
         dim3 threadsPerBlock(32, 8, 1);
         dim3 numBlocks (mat.cols * channels / threadsPerBlock.x + 1, mat.rows / threadsPerBlock.y + 1, 1);
 
         set_to_without_mask<T><<<numBlocks, threadsPerBlock, 0, stream>>>((T*)mat.data, mat.cols, mat.rows, mat.step, channels);
+=======
+        typedef typename TypeVec<T, 4>::vec_type vec_type;
+
+        dim3 block(32, 8);
+        dim3 grid(divUp(mat.rows, block.y));
+
+        set_to_without_mask<T><<<grid, block, 0, stream>>>(PtrStepSz<T>(mat), VecTraits<vec_type>::make(scalar), channels);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         cudaSafeCall( cudaGetLastError() );
 
         if (stream == 0)

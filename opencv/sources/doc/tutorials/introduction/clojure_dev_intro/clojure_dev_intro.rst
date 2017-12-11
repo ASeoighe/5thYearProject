@@ -51,7 +51,11 @@ OpenCV on Mac OS X:
 
     cd ~/
     mkdir opt
+<<<<<<< HEAD
     git clone https://github.com/Itseez/opencv.git
+=======
+    git clone https://github.com/opencv/opencv.git
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     cd opencv
     git checkout 2.4
     mkdir build

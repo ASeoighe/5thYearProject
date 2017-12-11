@@ -37,6 +37,24 @@
 #
 # ===================================================================================
 
+<<<<<<< HEAD
+=======
+# Search packages for host system instead of packages for target system.
+# in case of cross compilation thess macro should be defined by toolchain file
+
+if(NOT COMMAND find_host_package)
+    macro(find_host_package)
+        find_package(${ARGN})
+    endmacro()
+endif()
+
+if(NOT COMMAND find_host_program)
+    macro(find_host_program)
+        find_program(${ARGN})
+    endmacro()
+endif()
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 if(NOT DEFINED OpenCV_MODULES_SUFFIX)
   if(ANDROID)
     string(REPLACE - _ OpenCV_MODULES_SUFFIX "_${ANDROID_NDK_ABI_NAME}")
@@ -46,6 +64,16 @@ if(NOT DEFINED OpenCV_MODULES_SUFFIX)
 endif()
 
 if(NOT TARGET opencv_core)
+<<<<<<< HEAD
+=======
+  # Extract directory name from full path of the file currently being processed.
+  # Note that CMake 2.8.3 introduced CMAKE_CURRENT_LIST_DIR. We reimplement it
+  # for older versions of CMake to support these as well.
+  if(CMAKE_VERSION VERSION_LESS "2.8.3")
+    get_filename_component(CMAKE_CURRENT_LIST_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+  endif()
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   include(${CMAKE_CURRENT_LIST_DIR}/OpenCVModules${OpenCV_MODULES_SUFFIX}.cmake)
 endif()
 
@@ -60,7 +88,15 @@ set(OpenCV_USE_CUFFT    @HAVE_CUFFT@)
 set(OpenCV_USE_NVCUVID  @HAVE_NVCUVID@)
 
 # Android API level from which OpenCV has been compiled is remembered
+<<<<<<< HEAD
 set(OpenCV_ANDROID_NATIVE_API_LEVEL @OpenCV_ANDROID_NATIVE_API_LEVEL_CONFIGCMAKE@)
+=======
+if(ANDROID)
+  set(OpenCV_ANDROID_NATIVE_API_LEVEL @OpenCV_ANDROID_NATIVE_API_LEVEL_CONFIGCMAKE@)
+else()
+  set(OpenCV_ANDROID_NATIVE_API_LEVEL 0)
+endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 # Some additional settings are required if OpenCV is built as static libs
 set(OpenCV_SHARED @BUILD_SHARED_LIBS@)
@@ -71,8 +107,13 @@ set(OpenCV_USE_MANGLED_PATHS @OpenCV_USE_MANGLED_PATHS_CONFIGCMAKE@)
 # Extract the directory where *this* file has been installed (determined at cmake run-time)
 get_filename_component(OpenCV_CONFIG_PATH "${CMAKE_CURRENT_LIST_FILE}" PATH CACHE)
 
+<<<<<<< HEAD
 if(NOT WIN32 OR OpenCV_ANDROID_NATIVE_API_LEVEL GREATER 0)
   if(OpenCV_ANDROID_NATIVE_API_LEVEL GREATER 0)
+=======
+if(NOT WIN32 OR ANDROID)
+  if(ANDROID)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     set(OpenCV_INSTALL_PATH "${OpenCV_CONFIG_PATH}/../../..")
   else()
     set(OpenCV_INSTALL_PATH "${OpenCV_CONFIG_PATH}/../..")
@@ -208,6 +249,7 @@ endif()
 foreach(__opttype OPT DBG)
   SET(OpenCV_LIBS_${__opttype} "${OpenCV_LIBS}")
   SET(OpenCV_EXTRA_LIBS_${__opttype} "")
+<<<<<<< HEAD
 
   # CUDA
   if(OpenCV_CUDA_VERSION)
@@ -256,6 +298,56 @@ foreach(__opttype OPT DBG)
     link_directories(${OpenCV_CUDA_LIBS_RELPATH})
   endif()
 endforeach()
+=======
+endforeach()
+
+# Configure CUDA targets
+if(OpenCV_CUDA_VERSION)
+  if(NOT CUDA_FOUND)
+    find_host_package(CUDA ${OpenCV_CUDA_VERSION} EXACT REQUIRED)
+  else()
+    if(NOT CUDA_VERSION_STRING VERSION_EQUAL OpenCV_CUDA_VERSION)
+      message(FATAL_ERROR "OpenCV static library was compiled with CUDA ${OpenCV_CUDA_VERSION} support. Please, use the same version or rebuild OpenCV with CUDA ${CUDA_VERSION_STRING}")
+    endif()
+  endif()
+
+  set(OpenCV_CUDA_LIBS_ABSPATH ${CUDA_LIBRARIES})
+
+  if(${CUDA_VERSION} VERSION_LESS "5.5")
+    list(APPEND OpenCV_CUDA_LIBS_ABSPATH ${CUDA_npp_LIBRARY})
+  else()
+    find_cuda_helper_libs(nppc)
+    find_cuda_helper_libs(nppi)
+    find_cuda_helper_libs(npps)
+    list(APPEND OpenCV_CUDA_LIBS_ABSPATH ${CUDA_nppc_LIBRARY} ${CUDA_nppi_LIBRARY} ${CUDA_npps_LIBRARY})
+  endif()
+
+  if(OpenCV_USE_CUBLAS)
+    list(APPEND OpenCV_CUDA_LIBS_ABSPATH ${CUDA_CUBLAS_LIBRARIES})
+  endif()
+
+  if(OpenCV_USE_CUFFT)
+    list(APPEND OpenCV_CUDA_LIBS_ABSPATH ${CUDA_CUFFT_LIBRARIES})
+  endif()
+
+  if(OpenCV_USE_NVCUVID)
+    list(APPEND OpenCV_CUDA_LIBS_ABSPATH ${CUDA_nvcuvid_LIBRARIES})
+  endif()
+
+  if(WIN32)
+    list(APPEND OpenCV_CUDA_LIBS_ABSPATH ${CUDA_nvcuvenc_LIBRARIES})
+  endif()
+
+  foreach(l ${OpenCV_CUDA_LIBS_ABSPATH})
+    get_filename_component(_tmp "${l}" NAME_WE)
+    string(REGEX REPLACE "^lib" "" _tmp "${_tmp}")
+    if(NOT TARGET "opencv_dep_${_tmp}") # protect against repeated inclusions
+      add_library("opencv_dep_${_tmp}" UNKNOWN IMPORTED)
+      set_target_properties("opencv_dep_${_tmp}" PROPERTIES IMPORTED_LOCATION "${l}")
+    endif()
+  endforeach()
+endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 # ==============================================================
 #  Android camera helper macro

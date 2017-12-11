@@ -41,7 +41,13 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 
 
 
+<<<<<<< HEAD
 @interface CvVideoCamera ()
+=======
+@interface CvVideoCamera () {
+    int recordingCountDown;
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 - (void)createVideoDataOutput;
 - (void)createVideoFileOutput;
@@ -98,10 +104,18 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 
 - (void)start;
 {
+<<<<<<< HEAD
     [super start];
 
     if (self.recordVideo == YES) {
         NSError* error;
+=======
+    recordingCountDown = 10;
+    [super start];
+
+    if (self.recordVideo == YES) {
+        NSError* error = nil;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         if ([[NSFileManager defaultManager] fileExistsAtPath:[self videoFileString]]) {
             [[NSFileManager defaultManager] removeItemAtPath:[self videoFileString] error:&error];
         }
@@ -424,6 +438,11 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
+<<<<<<< HEAD
+=======
+    (void)captureOutput;
+    (void)connection;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if (self.delegate) {
 
         // convert from Core Media to Core Video
@@ -462,9 +481,14 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
         }
 
         // delegate image processing to the delegate
+<<<<<<< HEAD
         cv::Mat image(height, width, format_opencv, bufferAddress, bytesPerRow);
 
         cv::Mat* result = NULL;
+=======
+        cv::Mat image((int)height, (int)width, format_opencv, bufferAddress, bytesPerRow);
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         CGImage* dstImage;
 
         if ([self.delegate respondsToSelector:@selector(processImage:)]) {
@@ -473,7 +497,11 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
 
         // check if matrix data pointer or dimensions were changed by the delegate
         bool iOSimage = false;
+<<<<<<< HEAD
         if (height == image.rows && width == image.cols && format_opencv == image.type() && bufferAddress == image.data && bytesPerRow == image.step) {
+=======
+        if (height == (size_t)image.rows && width == (size_t)image.cols && format_opencv == image.type() && bufferAddress == image.data && bytesPerRow == image.step) {
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             iOSimage = true;
         }
 
@@ -536,7 +564,12 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
         });
 
 
+<<<<<<< HEAD
         if (self.recordVideo == YES) {
+=======
+        recordingCountDown--;
+        if (self.recordVideo == YES && recordingCountDown < 0) {
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             lastSampleTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
 //			CMTimeShow(lastSampleTime);
             if (self.recordAssetWriter.status != AVAssetWriterStatusWriting) {
@@ -556,6 +589,11 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
                                                   withPresentationTime:lastSampleTime] ) {
                     NSLog(@"Video Writing Error");
                 }
+<<<<<<< HEAD
+=======
+                if (pixelBuffer != nullptr)
+                    CVPixelBufferRelease(pixelBuffer);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             }
 
         }
@@ -591,7 +629,11 @@ static CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:[self videoFileURL]]) {
         [library writeVideoAtPathToSavedPhotosAlbum:[self videoFileURL]
+<<<<<<< HEAD
                                     completionBlock:^(NSURL *assetURL, NSError *error){}];
+=======
+                                    completionBlock:^(NSURL *assetURL, NSError *error){ (void)assetURL; (void)error; }];
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }
 

@@ -19,8 +19,31 @@ if(ANDROID)
     set(OPENCV_STATIC_LIBTYPE_CONFIGMAKE ${OPENCV_LIBTYPE_CONFIGMAKE})
   endif()
 
+<<<<<<< HEAD
   # setup lists of camera libs
   foreach(abi ARMEABI ARMEABI_V7A X86 MIPS)
+=======
+  if (NOT COMMAND ANDROID_GET_ABI_RAWNAME)
+    macro( ANDROID_GET_ABI_RAWNAME TOOLCHAIN_FLAG VAR )
+      if( " ${TOOLCHAIN_FLAG}" STREQUAL " ARMEABI" )
+        set( ${VAR} "armeabi" )
+      elseif( " ${TOOLCHAIN_FLAG}" STREQUAL " ARMEABI_V7A" )
+        set( ${VAR} "armeabi-v7a" )
+      elseif( " ${TOOLCHAIN_FLAG}" STREQUAL " ARM64_V8A" )
+        set( ${VAR} "arm64-v8a" )
+      elseif( " ${TOOLCHAIN_FLAG}" STREQUAL " X86" )
+        set( ${VAR} "x86" )
+      elseif( " ${TOOLCHAIN_FLAG}" STREQUAL " MIPS" )
+        set( ${VAR} "mips" )
+      else()
+        set( ${VAR} "unknown" )
+      endif()
+    endmacro()
+  endif()
+
+  # setup lists of camera libs
+  foreach(abi ARMEABI ARMEABI_V7A ARM64_V8A X86 MIPS)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     ANDROID_GET_ABI_RAWNAME(${abi} ndkabi)
     if(BUILD_ANDROID_CAMERA_WRAPPER)
       if(ndkabi STREQUAL ANDROID_NDK_ABI_NAME)
@@ -30,6 +53,10 @@ if(ANDROID)
       endif()
     elseif(HAVE_opencv_androidcamera)
       set(OPENCV_CAMERA_LIBS_${abi}_CONFIGCMAKE "")
+<<<<<<< HEAD
+=======
+      # TODO: add prebuild camera libs for arm64-v8a
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
       file(GLOB OPENCV_CAMERA_LIBS "${OpenCV_SOURCE_DIR}/3rdparty/lib/${ndkabi}/libnative_camera_r*.so")
       if(OPENCV_CAMERA_LIBS)
         list(SORT OPENCV_CAMERA_LIBS)

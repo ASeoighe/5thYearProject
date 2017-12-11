@@ -61,12 +61,15 @@
 /* FFMpeg video library */
 #cmakedefine HAVE_FFMPEG
 
+<<<<<<< HEAD
 /* ffmpeg's libswscale */
 #cmakedefine HAVE_FFMPEG_SWSCALE
 
 /* ffmpeg in Gentoo */
 #cmakedefine HAVE_GENTOO_FFMPEG
 
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 /* GStreamer multimedia framework */
 #cmakedefine HAVE_GSTREAMER
 
@@ -109,6 +112,12 @@
 /* NVidia Video Decoding API*/
 #cmakedefine HAVE_NVCUVID
 
+<<<<<<< HEAD
+=======
+/* NVidia Video Encoding API*/
+#cmakedefine HAVE_NVCUVENC
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 /* OpenCL Support */
 #cmakedefine HAVE_OPENCL
 #cmakedefine HAVE_OPENCL_STATIC

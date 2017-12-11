@@ -67,7 +67,10 @@
 #include "cvconfig.h"
 
 #ifdef HAVE_CUDA
+<<<<<<< HEAD
     #include <cuda.h>
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     #include <cuda_runtime.h>
 
     #include "opencv2/ts/ts.hpp"

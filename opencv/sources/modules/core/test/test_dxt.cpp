@@ -419,9 +419,12 @@ static void fixCCS( Mat& mat, int cols, int flags )
     }
 }
 
+<<<<<<< HEAD
 #if defined _MSC_VER &&  _MSC_VER >= 1700
 #pragma optimize("", off)
 #endif
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 static void mulComplex( const Mat& src1, const Mat& src2, Mat& dst, int flags )
 {
     dst.create(src1.rows, src1.cols, src1.type());
@@ -430,12 +433,35 @@ static void mulComplex( const Mat& src1, const Mat& src2, Mat& dst, int flags )
     CV_Assert( src1.size == src2.size && src1.type() == src2.type() &&
               (src1.type() == CV_32FC2 || src1.type() == CV_64FC2) );
 
+<<<<<<< HEAD
+=======
+    const Mat* src1_ = &src1;
+    Mat src1_tmp;
+    if (dst.data == src1.data)
+    {
+        src1_tmp = src1.clone();
+        src1_ = &src1_tmp;
+    }
+    const Mat* src2_ = &src2;
+    Mat src2_tmp;
+    if (dst.data == src2.data)
+    {
+        src2_tmp = src2.clone();
+        src2_ = &src2_tmp;
+    }
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     for( i = 0; i < dst.rows; i++ )
     {
         if( depth == CV_32F )
         {
+<<<<<<< HEAD
             const float* a = src1.ptr<float>(i);
             const float* b = src2.ptr<float>(i);
+=======
+            const float* a = src1_->ptr<float>(i);
+            const float* b = src2_->ptr<float>(i);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             float* c = dst.ptr<float>(i);
 
             if( !(flags & CV_DXT_MUL_CONJ) )
@@ -459,8 +485,13 @@ static void mulComplex( const Mat& src1, const Mat& src2, Mat& dst, int flags )
         }
         else
         {
+<<<<<<< HEAD
             const double* a = src1.ptr<double>(i);
             const double* b = src2.ptr<double>(i);
+=======
+            const double* a = src1_->ptr<double>(i);
+            const double* b = src2_->ptr<double>(i);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             double* c = dst.ptr<double>(i);
 
             if( !(flags & CV_DXT_MUL_CONJ) )
@@ -484,9 +515,12 @@ static void mulComplex( const Mat& src1, const Mat& src2, Mat& dst, int flags )
         }
     }
 }
+<<<<<<< HEAD
 #if defined _MSC_VER &&  _MSC_VER >= 1700
 #pragma optimize("", on)
 #endif
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 }
 
@@ -778,6 +812,10 @@ public:
 protected:
     void run_func();
     void prepare_to_validation( int test_case_idx );
+<<<<<<< HEAD
+=======
+    double get_success_error_level( int test_case_idx, int i, int j );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 };
 
 
@@ -785,6 +823,22 @@ CxCore_MulSpectrumsTest::CxCore_MulSpectrumsTest() : CxCore_DXTBaseTest( true, t
 {
 }
 
+<<<<<<< HEAD
+=======
+double CxCore_MulSpectrumsTest::get_success_error_level( int test_case_idx, int i, int j )
+{
+    (void)test_case_idx;
+    CV_Assert(i == OUTPUT);
+    CV_Assert(j == 0);
+    int elem_depth = CV_MAT_DEPTH(cvGetElemType(test_array[i][j]));
+    CV_Assert(elem_depth == CV_32F || elem_depth == CV_64F);
+
+    element_wise_relative_error = false;
+    double maxInputValue = 1000; // ArrayTest::get_minmax_bounds
+    double err = 8 * maxInputValue;  // result = A*B + C*D
+    return (elem_depth == CV_32F ? FLT_EPSILON : DBL_EPSILON) * err;
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 void CxCore_MulSpectrumsTest::run_func()
 {
@@ -866,3 +920,27 @@ protected:
 };
 
 TEST(Core_DFT, complex_output) { Core_DFTComplexOutputTest test; test.safe_run(); }
+<<<<<<< HEAD
+=======
+
+TEST(Core_DFT, complex_output2)
+{
+    for (int i = 0; i < 100; i++)
+    {
+        int type = theRNG().uniform(0, 2) ? CV_64F : CV_32F;
+        int m = theRNG().uniform(1, 10);
+        int n = theRNG().uniform(1, 10);
+        Mat x(m, n, type), out;
+        randu(x, -1., 1.);
+        dft(x, out, DFT_ROWS | DFT_COMPLEX_OUTPUT);
+        double nrm = norm(out, NORM_INF);
+        double thresh = n*m * 2;
+        if (nrm > thresh)
+        {
+            cout << "x: " << x << endl;
+            cout << "out: " << out << endl;
+            ASSERT_LT(nrm, thresh);
+        }
+    }
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d

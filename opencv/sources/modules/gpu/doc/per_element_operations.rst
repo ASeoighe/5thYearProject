@@ -289,8 +289,13 @@ Compares elements of two matrices.
     :param cmpop: Flag specifying the relation between the elements to be checked:
 
             * **CMP_EQ:** ``a(.) == b(.)``
+<<<<<<< HEAD
             * **CMP_GT:** ``a(.) < b(.)``
             * **CMP_GE:** ``a(.) <= b(.)``
+=======
+            * **CMP_GT:** ``a(.) > b(.)``
+            * **CMP_GE:** ``a(.) >= b(.)``
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             * **CMP_LT:** ``a(.) < b(.)``
             * **CMP_LE:** ``a(.) <= b(.)``
             * **CMP_NE:** ``a(.) != b(.)``

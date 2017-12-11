@@ -155,6 +155,7 @@ ChPair getConversionInfo(int cvtMode)
     case CV_BGR5552BGR: case CV_BGR5552RGB:
     case CV_BGR5652BGR: case CV_BGR5652RGB:
     case CV_YUV2RGB_UYVY: case CV_YUV2BGR_UYVY:
+<<<<<<< HEAD
     case CV_YUV2RGBA_UYVY: case CV_YUV2BGRA_UYVY:
     case CV_YUV2RGB_YUY2: case CV_YUV2BGR_YUY2:
     case CV_YUV2RGB_YVYU: case CV_YUV2BGR_YVYU:
@@ -163,6 +164,16 @@ ChPair getConversionInfo(int cvtMode)
         return ChPair(2,3);
     case CV_BGR5552BGRA: case CV_BGR5552RGBA:
     case CV_BGR5652BGRA: case CV_BGR5652RGBA:
+=======
+    case CV_YUV2RGB_YUY2: case CV_YUV2BGR_YUY2:
+    case CV_YUV2RGB_YVYU: case CV_YUV2BGR_YVYU:
+        return ChPair(2,3);
+    case CV_BGR5552BGRA: case CV_BGR5552RGBA:
+    case CV_BGR5652BGRA: case CV_BGR5652RGBA:
+    case CV_YUV2RGBA_UYVY: case CV_YUV2BGRA_UYVY:
+    case CV_YUV2RGBA_YUY2: case CV_YUV2BGRA_YUY2:
+    case CV_YUV2RGBA_YVYU: case CV_YUV2BGRA_YVYU:
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         return ChPair(2,4);
     case CV_BGR2GRAY: case CV_RGB2GRAY:
     case CV_RGB2YUV_IYUV: case CV_RGB2YUV_YV12:

@@ -93,7 +93,11 @@ namespace cv
             args.push_back( make_pair( sizeof(cl_int), (void *)&srcstep));
             args.push_back( make_pair( sizeof(cl_int), (void *)&dststep));
 
+<<<<<<< HEAD
             size_t globalThreads[3] = {dst.cols, dst.rows, 1};
+=======
+            size_t globalThreads[3] = {(size_t)dst.cols, (size_t)dst.rows, 1};
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             size_t localThreads[3]  = {16, 16, 1};
 
 

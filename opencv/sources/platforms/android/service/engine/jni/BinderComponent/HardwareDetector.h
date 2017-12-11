@@ -9,7 +9,11 @@
 #define ARCH_ARMv5 67108864L
 #define ARCH_ARMv6 134217728L
 #define ARCH_ARMv7 268435456L
+<<<<<<< HEAD
 #define ARCH_ARMv8 536870912L
+=======
+#define ARCH_AARCH64 536870912L
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #define ARCH_MIPS 1073741824L
 
 #define FEATURES_HAS_VFPv3d16 1L

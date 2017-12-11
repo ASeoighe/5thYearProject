@@ -747,7 +747,11 @@ void HOGCache::normalizeBlockHistogram(float* _hist) const
 
     float sum = 0;
 #ifdef HAVE_IPP
+<<<<<<< HEAD
     ippsDotProd_32f(hist,hist,sz,&sum);
+=======
+    ippsDotProd_32f(hist,hist,(int)sz,&sum);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #else
     for( i = 0; i < sz; i++ )
         sum += hist[i]*hist[i];
@@ -755,9 +759,15 @@ void HOGCache::normalizeBlockHistogram(float* _hist) const
 
     float scale = 1.f/(std::sqrt(sum)+sz*0.1f), thresh = (float)descriptor->L2HysThreshold;
 #ifdef HAVE_IPP
+<<<<<<< HEAD
     ippsMulC_32f_I(scale,hist,sz);
     ippsThreshold_32f_I( hist, sz, thresh, ippCmpGreater );
     ippsDotProd_32f(hist,hist,sz,&sum);
+=======
+    ippsMulC_32f_I(scale,hist,(int)sz);
+    ippsThreshold_32f_I( hist, (int)sz, thresh, ippCmpGreater );
+    ippsDotProd_32f(hist,hist,(int)sz,&sum);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #else
     for( i = 0, sum = 0; i < sz; i++ )
     {
@@ -768,7 +778,11 @@ void HOGCache::normalizeBlockHistogram(float* _hist) const
 
     scale = 1.f/(std::sqrt(sum)+1e-3f);
 #ifdef HAVE_IPP
+<<<<<<< HEAD
     ippsMulC_32f_I(scale,hist,sz);
+=======
+    ippsMulC_32f_I(scale,hist,(int)sz);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 #else
     for( i = 0; i < sz; i++ )
         hist[i] *= scale;
@@ -858,6 +872,10 @@ void HOGDescriptor::detect(const Mat& img,
     Size winStride, Size padding, const vector<Point>& locations) const
 {
     hits.clear();
+<<<<<<< HEAD
+=======
+    weights.clear();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if( svmDetector.empty() )
         return;
 
@@ -2650,7 +2668,11 @@ void HOGDescriptor::groupRectangles(vector<cv::Rect>& rectList, vector<double>& 
 
     vector<cv::Rect_<double> > rrects(nclasses);
     vector<int> numInClass(nclasses, 0);
+<<<<<<< HEAD
     vector<double> foundWeights(nclasses, DBL_MIN);
+=======
+    vector<double> foundWeights(nclasses, -std::numeric_limits<double>::max());
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int i, j, nlabels = (int)labels.size();
 
     for( i = 0; i < nlabels; i++ )

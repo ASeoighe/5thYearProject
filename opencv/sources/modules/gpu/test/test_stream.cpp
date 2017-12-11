@@ -44,9 +44,17 @@
 
 #ifdef HAVE_CUDA
 
+<<<<<<< HEAD
 using namespace cvtest;
 
 #if CUDA_VERSION >= 5000
+=======
+#include "opencv2/gpu/stream_accessor.hpp"
+
+using namespace cvtest;
+
+#if CUDART_VERSION >= 5000
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 struct Async : testing::TestWithParam<cv::gpu::DeviceInfo>
 {
@@ -125,6 +133,28 @@ GPU_TEST_P(Async, Convert)
     stream.waitForCompletion();
 }
 
+<<<<<<< HEAD
+=======
+GPU_TEST_P(Async, WrapStream)
+{
+    cudaStream_t cuda_stream = NULL;
+    ASSERT_EQ(cudaSuccess, cudaStreamCreate(&cuda_stream));
+
+    cv::gpu::Stream stream = cv::gpu::StreamAccessor::wrapStream(cuda_stream);
+
+    stream.enqueueUpload(src, d_src);
+    stream.enqueueConvert(d_src, d_dst, CV_32S);
+    stream.enqueueDownload(d_dst, dst);
+
+    Async* test = this;
+    stream.enqueueHostCallback(checkConvert, test);
+
+    stream.waitForCompletion();
+
+    ASSERT_EQ(cudaSuccess, cudaStreamDestroy(cuda_stream));
+}
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 INSTANTIATE_TEST_CASE_P(GPU_Stream, Async, ALL_DEVICES);
 
 #endif

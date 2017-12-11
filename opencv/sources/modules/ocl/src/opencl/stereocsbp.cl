@@ -12,7 +12,11 @@
 //
 // Copyright (C) 2010-2012, Multicoreware, Inc., all rights reserved.
 // Copyright (C) 2010-2012, Institute Of Software Chinese Academy Of Science, all rights reserved.
+<<<<<<< HEAD
 // Copyright (C) 2010-2012, Advanced Micro Devices, Inc., all rights reserved.
+=======
+// Copyright (C) 2010,2014, Advanced Micro Devices, Inc., all rights reserved.
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 // Third party copyrights are property of their respective owners.
 //
 // @Authors
@@ -242,7 +246,11 @@ __kernel void get_first_k_initial_local_1(__global float *data_cost_selected_, _
 /////////////////////// init data cost ////////////////////////
 ///////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 inline float compute_3(__global uchar* left, __global uchar* right,
+=======
+float compute_3(__global uchar* left, __global uchar* right,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     float cdata_weight,  float cmax_data_term)
 {
     float tb = 0.114f * abs((int)left[0] - right[0]);
@@ -252,13 +260,21 @@ inline float compute_3(__global uchar* left, __global uchar* right,
     return fmin(cdata_weight * (tr + tg + tb), cdata_weight * cmax_data_term);
 }
 
+<<<<<<< HEAD
 inline float compute_1(__global uchar* left, __global uchar* right,
+=======
+float compute_1(__global uchar* left, __global uchar* right,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     float cdata_weight,  float cmax_data_term)
 {
     return fmin(cdata_weight * abs((int)*left - (int)*right), cdata_weight * cmax_data_term);
 }
 
+<<<<<<< HEAD
 inline short round_short(float v)
+=======
+short round_short(float v)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     return convert_short_sat_rte(v);
 }
@@ -1000,7 +1016,11 @@ __kernel void compute_data_cost_reduce_1(__global const float *selected_disp_pyr
 //////////////////////// init message /////////////////////////
 ///////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 inline void get_first_k_element_increase_0(__global short* u_new, __global short *d_new, __global short *l_new,
+=======
+void get_first_k_element_increase_0(__global short* u_new, __global short *d_new, __global short *l_new,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     __global short *r_new, __global const short *u_cur, __global const short *d_cur,
     __global const short *l_cur, __global const short *r_cur,
     __global short *data_cost_selected, __global short *disparity_selected_new,
@@ -1165,7 +1185,11 @@ __kernel void init_message_1(__global float *u_new_, __global float *d_new_, __g
 ////////////////////  calc all iterations /////////////////////
 ///////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 inline void message_per_pixel_0(__global const short *data, __global short *msg_dst, __global const short *msg1,
+=======
+void message_per_pixel_0(__global const short *data, __global short *msg_dst, __global const short *msg1,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     __global const short *msg2, __global const short *msg3,
     __global const short *dst_disp, __global const short *src_disp,
     int nr_plane, __global short *temp,
@@ -1202,7 +1226,11 @@ inline void message_per_pixel_0(__global const short *data, __global short *msg_
         msg_dst[d * cdisp_step1] = convert_short_sat_rte(temp[d * cdisp_step1] - sum);
 }
 
+<<<<<<< HEAD
 inline void message_per_pixel_1(__global const float *data, __global float *msg_dst, __global const float *msg1,
+=======
+void message_per_pixel_1(__global const float *data, __global float *msg_dst, __global const float *msg1,
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     __global const float *msg2, __global const float *msg3,
     __global const float *dst_disp, __global const float *src_disp,
     int nr_plane, __global float *temp,

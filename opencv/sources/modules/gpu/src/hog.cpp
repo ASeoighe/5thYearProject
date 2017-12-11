@@ -127,9 +127,12 @@ cv::gpu::HOGDescriptor::HOGDescriptor(Size win_size_, Size block_size_, Size blo
 
     Size cells_per_block = Size(block_size.width / cell_size.width, block_size.height / cell_size.height);
     CV_Assert(cells_per_block == Size(2, 2));
+<<<<<<< HEAD
 
     cv::Size blocks_per_win = numPartsWithin(win_size, block_size, block_stride);
     hog::set_up_constants(nbins, block_stride.width, block_stride.height, blocks_per_win.width, blocks_per_win.height);
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 size_t cv::gpu::HOGDescriptor::getDescriptorSize() const
@@ -221,6 +224,12 @@ void cv::gpu::HOGDescriptor::computeGradient(const GpuMat& img, GpuMat& _grad, G
 
 void cv::gpu::HOGDescriptor::computeBlockHistograms(const GpuMat& img)
 {
+<<<<<<< HEAD
+=======
+    cv::Size blocks_per_win = numPartsWithin(win_size, block_size, block_stride);
+    hog::set_up_constants(nbins, block_stride.width, block_stride.height, blocks_per_win.width, blocks_per_win.height);
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     computeGradient(img, grad, qangle);
 
     size_t block_hist_size = getBlockHistogramSize();

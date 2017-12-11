@@ -119,8 +119,13 @@ public:
     void compute_descriptors_gpu(const oclMat &descriptors, const oclMat &keypoints, int nFeatures);
     // end of kernel callers declarations
 
+<<<<<<< HEAD
     SURF_OCL_Invoker(SURF_OCL &surf, const oclMat &img, const oclMat &mask) :
         surf_(surf),
+=======
+    SURF_OCL_Invoker(SURF_OCL &theSurf, const oclMat &img, const oclMat &mask) :
+        surf_(theSurf),
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         img_cols(img.cols), img_rows(img.rows),
         use_mask(!mask.empty()), counters(oclMat()),
         imgTex(NULL), sumTex(NULL), maskSumTex(NULL), _img(img)
@@ -139,7 +144,11 @@ public:
         CV_Assert(layer_rows - 2 * min_margin > 0);
         CV_Assert(layer_cols - 2 * min_margin > 0);
 
+<<<<<<< HEAD
         maxFeatures   = std::min(static_cast<int>(img.size().area() * surf.keypointsRatio), 65535);
+=======
+        maxFeatures   = std::min(static_cast<int>(img.size().area() * theSurf.keypointsRatio), 65535);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         maxCandidates = std::min(static_cast<int>(1.5 * maxFeatures), 65535);
 
         CV_Assert(maxFeatures > 0);
@@ -273,11 +282,15 @@ private:
 
     const oclMat _img; // make a copy for non-image2d_t supported platform
 
+<<<<<<< HEAD
     SURF_OCL_Invoker &operator= (const SURF_OCL_Invoker &right)
     {
         (*this) = right;
         return *this;
     } // remove warning C4512
+=======
+    SURF_OCL_Invoker &operator= (const SURF_OCL_Invoker &right); // = delete;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 };
 
 cv::ocl::SURF_OCL::SURF_OCL()
@@ -396,9 +409,15 @@ void cv::ocl::SURF_OCL::operator()(const oclMat &img, const oclMat &mask, oclMat
 {
     if (!img.empty())
     {
+<<<<<<< HEAD
         SURF_OCL_Invoker surf(*this, img, mask);
 
         surf.detectKeypoints(keypoints);
+=======
+        SURF_OCL_Invoker theSurf(*this, img, mask);
+
+        theSurf.detectKeypoints(keypoints);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }
 
@@ -407,6 +426,7 @@ void cv::ocl::SURF_OCL::operator()(const oclMat &img, const oclMat &mask, oclMat
 {
     if (!img.empty())
     {
+<<<<<<< HEAD
         SURF_OCL_Invoker surf(*this, img, mask);
 
         if (!useProvidedKeypoints)
@@ -417,6 +437,18 @@ void cv::ocl::SURF_OCL::operator()(const oclMat &img, const oclMat &mask, oclMat
         }
 
         surf.computeDescriptors(keypoints, descriptors, descriptorSize());
+=======
+        SURF_OCL_Invoker theSurf(*this, img, mask);
+
+        if (!useProvidedKeypoints)
+            theSurf.detectKeypoints(keypoints);
+        else if (!upright)
+        {
+            theSurf.findOrientation(keypoints);
+        }
+
+        theSurf.computeDescriptors(keypoints, descriptors, descriptorSize());
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
 }
 
@@ -482,23 +514,37 @@ void cv::ocl::SURF_OCL::operator()(InputArray img, InputArray mask, vector<KeyPo
             _mask.upload(mask.getMat());
     }
 
+<<<<<<< HEAD
     SURF_OCL_Invoker surf((SURF_OCL&)*this, _img, _mask);
+=======
+    SURF_OCL_Invoker theSurf((SURF_OCL&)*this, _img, _mask);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     oclMat keypointsGPU;
 
     if (!useProvidedKeypoints || !upright)
         ((SURF_OCL*)this)->uploadKeypoints(keypoints, keypointsGPU);
 
     if (!useProvidedKeypoints)
+<<<<<<< HEAD
         surf.detectKeypoints(keypointsGPU);
     else if (!upright)
         surf.findOrientation(keypointsGPU);
+=======
+        theSurf.detectKeypoints(keypointsGPU);
+    else if (!upright)
+        theSurf.findOrientation(keypointsGPU);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if(keypointsGPU.cols*keypointsGPU.rows != 0)
         ((SURF_OCL*)this)->downloadKeypoints(keypointsGPU, keypoints);
 
     if( descriptors.needed() )
     {
         oclMat descriptorsGPU;
+<<<<<<< HEAD
         surf.computeDescriptors(keypointsGPU, descriptorsGPU, descriptorSize());
+=======
+        theSurf.computeDescriptors(keypointsGPU, descriptorsGPU, descriptorSize());
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         Size sz = descriptorsGPU.size();
         if( descriptors.kind() == _InputArray::STD_VECTOR )
         {

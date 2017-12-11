@@ -699,7 +699,10 @@ public:
 private:
     Mat src;
     Mat dst;
+<<<<<<< HEAD
     int nStripes;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     double thresh;
     double maxval;

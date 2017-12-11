@@ -3,7 +3,11 @@
 #
 # ----------------------------------------------------------------------------
 
+<<<<<<< HEAD
 if(NEON)
+=======
+if(ARM AND ENABLE_NEON AND NOT AARCH64)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   project(${PNG_LIBRARY} ASM)
 else()
   project(${PNG_LIBRARY})
@@ -14,9 +18,17 @@ ocv_include_directories("${CMAKE_CURRENT_SOURCE_DIR}" ${ZLIB_INCLUDE_DIR})
 file(GLOB lib_srcs *.c)
 file(GLOB lib_hdrs *.h)
 
+<<<<<<< HEAD
 if(NEON)
   list(APPEND lib_srcs arm/filter_neon.S)
   add_definitions(-DPNG_ARM_NEON)
+=======
+if(ARM AND ENABLE_NEON AND NOT AARCH64)
+  list(APPEND lib_srcs arm/filter_neon.S arm/arm_init.c)
+  add_definitions(-DPNG_ARM_NEON_OPT=2)
+else()
+  add_definitions(-DPNG_ARM_NEON_OPT=0)
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 endif()
 
 # ----------------------------------------------------------------------------------
@@ -47,6 +59,11 @@ ocv_warnings_disable(CMAKE_C_FLAGS -Wcast-align)
 set_target_properties(${PNG_LIBRARY}
   PROPERTIES OUTPUT_NAME ${PNG_LIBRARY}
   DEBUG_POSTFIX "${OPENCV_DEBUG_POSTFIX}"
+<<<<<<< HEAD
+=======
+  COMPILE_PDB_NAME ${PNG_LIBRARY}
+  COMPILE_PDB_NAME_DEBUG "${PNG_LIBRARY}${OPENCV_DEBUG_POSTFIX}"
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
   ARCHIVE_OUTPUT_DIRECTORY ${3P_LIBRARY_OUTPUT_PATH}
   )
 

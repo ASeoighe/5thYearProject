@@ -260,7 +260,11 @@ namespace
 
 Ptr<FrameSource> cv::superres::createFrameSource_Video_GPU(const string& fileName)
 {
+<<<<<<< HEAD
     return new VideoFrameSource(fileName);
+=======
+    return new VideoFrameSource_GPU(fileName);
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 }
 
 #endif // HAVE_OPENCV_GPU

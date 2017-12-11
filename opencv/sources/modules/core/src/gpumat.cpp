@@ -700,7 +700,11 @@ void cv::gpu::GpuMat::create(int _rows, int _cols, int _type)
 
         size_t esz = elemSize();
 
+<<<<<<< HEAD
         void* devPtr;
+=======
+        void* devPtr = NULL;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         gpuFuncTable()->mallocPitch(&devPtr, &step, esz * cols, rows);
 
         // Single row must be continuous

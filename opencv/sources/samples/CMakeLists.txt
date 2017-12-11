@@ -19,6 +19,18 @@ if(ANDROID AND BUILD_ANDROID_EXAMPLES)
   add_subdirectory(android)
 endif()
 
+<<<<<<< HEAD
+=======
+if(INSTALL_C_EXAMPLES)
+  install(FILES "CMakeLists.txt"
+          DESTINATION ${OPENCV_SAMPLES_SRC_INSTALL_PATH}
+          PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ COMPONENT samples)
+endif()
+
+if(INSTALL_PYTHON_EXAMPLES)
+  add_subdirectory(python2)
+endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #
 # END OF BUILD CASE 1: Build samples with library sources
@@ -59,8 +71,19 @@ endif()
 
 add_subdirectory(c)
 add_subdirectory(cpp)
+<<<<<<< HEAD
 add_subdirectory(ocl)
 # FIXIT: can't use cvconfig.h in samples: add_subdirectory(gpu)
+=======
+ocv_check_dependencies(opencv_ocl)
+if (OCV_DEPENDENCIES_FOUND)
+  add_subdirectory(ocl)
+endif()
+ocv_check_dependencies(opencv_gpu)
+if (OCV_DEPENDENCIES_FOUND)
+  add_subdirectory(gpu)
+endif()
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 #
 # END OF BUILD CASE 2: Build samples with library binaries

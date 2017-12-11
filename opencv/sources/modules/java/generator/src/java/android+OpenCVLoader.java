@@ -1,12 +1,21 @@
 package org.opencv.android;
 
 import android.content.Context;
+<<<<<<< HEAD
+=======
+import android.util.Log;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
 /**
  * Helper class provides common initialization methods for OpenCV library.
  */
 public class OpenCVLoader
 {
+<<<<<<< HEAD
+=======
+    private static final String TAG = "OpenCVLoader";
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     /**
      * OpenCV Library version 2.4.2.
      */
@@ -48,6 +57,29 @@ public class OpenCVLoader
     public static final String OPENCV_VERSION_2_4_9 = "2.4.9";
 
     /**
+<<<<<<< HEAD
+=======
+     * OpenCV Library version 2.4.10.
+     */
+    public static final String OPENCV_VERSION_2_4_10 = "2.4.10";
+
+    /**
+     * OpenCV Library version 2.4.11.
+     */
+    public static final String OPENCV_VERSION_2_4_11 = "2.4.11";
+
+    /**
+     * OpenCV Library version 2.4.12.
+     */
+    public static final String OPENCV_VERSION_2_4_12 = "2.4.12";
+
+    /**
+     * OpenCV Library version 2.4.13.
+     */
+    public static final String OPENCV_VERSION_2_4_13 = "2.4.13";
+
+    /**
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
      * Loads and initializes OpenCV library from current application package. Roughly, it's an analog of system.loadLibrary("opencv_java").
      * @return Returns true is initialization of OpenCV was successful.
      */
@@ -76,6 +108,14 @@ public class OpenCVLoader
     public static boolean initAsync(String Version, Context AppContext,
             LoaderCallbackInterface Callback)
     {
+<<<<<<< HEAD
+=======
+        if (initDebug()) {
+            Callback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+            return true;
+        }
+        Log.w(TAG, "OpenCV binaries are not packaged with application. Trying to use OpenCV Manager...");
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         return AsyncServiceHelper.initOpenCV(Version, AppContext, Callback);
     }
 }

@@ -136,10 +136,18 @@ bool CvCascadeClassifier::train( const string _cascadeDirName,
                                 const CvCascadeParams& _cascadeParams,
                                 const CvFeatureParams& _featureParams,
                                 const CvCascadeBoostParams& _stageParams,
+<<<<<<< HEAD
                                 bool baseFormatSave )
 {
     // Start recording clock ticks for training time output
     const clock_t begin_time = clock();
+=======
+                                bool baseFormatSave,
+                                double acceptanceRatioBreakValue)
+{
+    // Start recording clock ticks for training time output
+    double time = (double)getTickCount();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     if( _cascadeDirName.empty() || _posFilename.empty() || _negFilename.empty() )
         CV_Error( CV_StsBadArg, "_cascadeDirName or _bgfileName or _vecFileName is NULL" );
@@ -169,6 +177,16 @@ bool CvCascadeClassifier::train( const string _cascadeDirName,
         featureEvaluator = CvFeatureEvaluator::create(cascadeParams.featureType);
         featureEvaluator->init( (CvFeatureParams*)featureParams, numPos + numNeg, cascadeParams.winSize );
         stageClassifiers.reserve( numStages );
+<<<<<<< HEAD
+=======
+    }else{
+        // Make sure that if model parameters are preloaded, that people are aware of this,
+        // even when passing other parameters to the training command
+        cout << "---------------------------------------------------------------------------------" << endl;
+        cout << "Training parameters are pre-loaded from the parameter file in data folder!" << endl;
+        cout << "Please empty this folder if you want to use a NEW set of training parameters." << endl;
+        cout << "---------------------------------------------------------------------------------" << endl;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     }
     cout << "PARAMETERS:" << endl;
     cout << "cascadeDirName: " << _cascadeDirName << endl;
@@ -179,9 +197,17 @@ bool CvCascadeClassifier::train( const string _cascadeDirName,
     cout << "numStages: " << numStages << endl;
     cout << "precalcValBufSize[Mb] : " << _precalcValBufSize << endl;
     cout << "precalcIdxBufSize[Mb] : " << _precalcIdxBufSize << endl;
+<<<<<<< HEAD
     cascadeParams.printAttrs();
     stageParams->printAttrs();
     featureParams->printAttrs();
+=======
+    cout << "acceptanceRatioBreakValue : " << acceptanceRatioBreakValue << endl;
+    cascadeParams.printAttrs();
+    stageParams->printAttrs();
+    featureParams->printAttrs();
+    cout << "Number of unique features given windowSize [" << _cascadeParams.winSize.width << "," << _cascadeParams.winSize.height << "] : " << featureEvaluator->getNumFeatures() << "" << endl;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
     int startNumStages = (int)stageClassifiers.size();
     if ( startNumStages > 1 )
@@ -198,18 +224,36 @@ bool CvCascadeClassifier::train( const string _cascadeDirName,
         cout << endl << "===== TRAINING " << i << "-stage =====" << endl;
         cout << "<BEGIN" << endl;
 
+<<<<<<< HEAD
         if ( !updateTrainingSet( tempLeafFARate ) )
         {
             cout << "Train dataset for temp stage can not be filled. "
                 "Branch training terminated." << endl;
+=======
+        if ( !updateTrainingSet( requiredLeafFARate, tempLeafFARate ) )
+        {
+            cout << "Train dataset for temp stage can not be filled. "
+                    "Branch training terminated." << endl;
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             break;
         }
         if( tempLeafFARate <= requiredLeafFARate )
         {
             cout << "Required leaf false alarm rate achieved. "
+<<<<<<< HEAD
                  "Branch training terminated." << endl;
             break;
         }
+=======
+                    "Branch training terminated." << endl;
+            break;
+        }
+        if( (tempLeafFARate <= acceptanceRatioBreakValue) && (acceptanceRatioBreakValue >= 0) ){
+            cout << "The required acceptanceRatio for the model has been reached to avoid overfitting of trainingdata. "
+                    "Branch training terminated." << endl;
+            break;
+}
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
         CvCascadeBoost* tempStage = new CvCascadeBoost;
         bool isStageTrained = tempStage->train( (CvFeatureEvaluator*)featureEvaluator,
@@ -253,7 +297,11 @@ bool CvCascadeClassifier::train( const string _cascadeDirName,
         fs << "}";
 
         // Output training time up till now
+<<<<<<< HEAD
         float seconds = float( clock () - begin_time ) / CLOCKS_PER_SEC;
+=======
+        double seconds = ( (double)getTickCount() - time)/ getTickFrequency();
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         int days = int(seconds) / 60 / 60 / 24;
         int hours = (int(seconds) / 60 / 60) % 24;
         int minutes = (int(seconds) / 60) % 60;
@@ -284,17 +332,29 @@ int CvCascadeClassifier::predict( int sampleIdx )
     return 1;
 }
 
+<<<<<<< HEAD
 bool CvCascadeClassifier::updateTrainingSet( double& acceptanceRatio)
 {
     int64 posConsumed = 0, negConsumed = 0;
     imgReader.restart();
     int posCount = fillPassedSamples( 0, numPos, true, posConsumed );
+=======
+bool CvCascadeClassifier::updateTrainingSet( double minimumAcceptanceRatio, double& acceptanceRatio)
+{
+    int64 posConsumed = 0, negConsumed = 0;
+    imgReader.restart();
+    int posCount = fillPassedSamples( 0, numPos, true, 0, posConsumed );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if( !posCount )
         return false;
     cout << "POS count : consumed   " << posCount << " : " << (int)posConsumed << endl;
 
     int proNumNeg = cvRound( ( ((double)numNeg) * ((double)posCount) ) / numPos ); // apply only a fraction of negative samples. double is required since overflow is possible
+<<<<<<< HEAD
     int negCount = fillPassedSamples( posCount, proNumNeg, false, negConsumed );
+=======
+    int negCount = fillPassedSamples( posCount, proNumNeg, false, minimumAcceptanceRatio, negConsumed );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     if ( !negCount )
         return false;
 
@@ -304,7 +364,11 @@ bool CvCascadeClassifier::updateTrainingSet( double& acceptanceRatio)
     return true;
 }
 
+<<<<<<< HEAD
 int CvCascadeClassifier::fillPassedSamples( int first, int count, bool isPositive, int64& consumed )
+=======
+int CvCascadeClassifier::fillPassedSamples( int first, int count, bool isPositive, double minimumAcceptanceRatio, int64& consumed )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 {
     int getcount = 0;
     Mat img(cascadeParams.winSize, CV_8UC1);
@@ -312,6 +376,12 @@ int CvCascadeClassifier::fillPassedSamples( int first, int count, bool isPositiv
     {
         for( ; ; )
         {
+<<<<<<< HEAD
+=======
+            if( consumed != 0 && ((double)getcount+1)/(double)(int64)consumed <= minimumAcceptanceRatio )
+                return getcount;
+
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             bool isGetImg = isPositive ? imgReader.getPos( img ) :
                                            imgReader.getNeg( img );
             if( !isGetImg )
@@ -319,7 +389,11 @@ int CvCascadeClassifier::fillPassedSamples( int first, int count, bool isPositiv
             consumed++;
 
             featureEvaluator->setImage( img, isPositive ? 1 : 0, i );
+<<<<<<< HEAD
             if( predict( i ) == 1.0F )
+=======
+            if( predict( i ) == 1 )
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             {
                 getcount++;
                 printf("%s current samples: %d\r", isPositive ? "POS":"NEG", getcount);

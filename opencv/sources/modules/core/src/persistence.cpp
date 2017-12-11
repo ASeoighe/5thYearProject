@@ -1208,7 +1208,11 @@ force_int:
                         int val, is_hex = d == 'x';
                         c = ptr[3];
                         ptr[3] = '\0';
+<<<<<<< HEAD
                         val = strtol( ptr + is_hex, &endptr, is_hex ? 8 : 16 );
+=======
+                        val = (int)strtol( ptr + is_hex, &endptr, is_hex ? 8 : 16 );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                         ptr[3] = c;
                         if( endptr == ptr + is_hex )
                             buf[len++] = 'x';
@@ -2683,7 +2687,10 @@ CV_IMPL CvFileStorage*
 cvOpenFileStorage( const char* filename, CvMemStorage* dststorage, int flags, const char* encoding )
 {
     CvFileStorage* fs = 0;
+<<<<<<< HEAD
     char* xml_buf = 0;
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     int default_block_size = 1 << 18;
     bool append = (flags & 3) == CV_STORAGE_APPEND;
     bool mem = (flags & CV_STORAGE_MEMORY) != 0;
@@ -2724,7 +2731,14 @@ cvOpenFileStorage( const char* filename, CvMemStorage* dststorage, int flags, co
             (dot_pos[3] == '\0' || (cv_isdigit(dot_pos[3]) && dot_pos[4] == '\0')) )
         {
             if( append )
+<<<<<<< HEAD
                 CV_Error(CV_StsNotImplemented, "Appending data to compressed file is not implemented" );
+=======
+            {
+                cvReleaseFileStorage( &fs );
+                CV_Error(CV_StsNotImplemented, "Appending data to compressed file is not implemented" );
+            }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             isGZ = true;
             compression = dot_pos[3];
             if( compression )
@@ -2745,6 +2759,10 @@ cvOpenFileStorage( const char* filename, CvMemStorage* dststorage, int flags, co
             if( !fs->gzfile )
                 goto _exit_;
             #else
+<<<<<<< HEAD
+=======
+            cvReleaseFileStorage( &fs );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             CV_Error(CV_StsNotImplemented, "There is no compressed file storage support in this configuration");
             #endif
         }
@@ -2797,7 +2815,14 @@ cvOpenFileStorage( const char* filename, CvMemStorage* dststorage, int flags, co
                     if( strcmp( encoding, "UTF-16" ) == 0 ||
                         strcmp( encoding, "utf-16" ) == 0 ||
                         strcmp( encoding, "Utf-16" ) == 0 )
+<<<<<<< HEAD
                         CV_Error( CV_StsBadArg, "UTF-16 XML encoding is not supported! Use 8-bit encoding\n");
+=======
+                    {
+                        cvReleaseFileStorage( &fs );
+                        CV_Error( CV_StsBadArg, "UTF-16 XML encoding is not supported! Use 8-bit encoding\n");
+                    }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
 
                     CV_Assert( strlen(encoding) < 1000 );
                     char buf[1100];
@@ -2815,11 +2840,19 @@ cvOpenFileStorage( const char* filename, CvMemStorage* dststorage, int flags, co
                 int last_occurence = -1;
                 xml_buf_size = MIN(xml_buf_size, int(file_size));
                 fseek( fs->file, -xml_buf_size, SEEK_END );
+<<<<<<< HEAD
                 xml_buf = (char*)cvAlloc( xml_buf_size+2 );
                 // find the last occurence of </opencv_storage>
                 for(;;)
                 {
                     int line_offset = ftell( fs->file );
+=======
+                char* xml_buf = (char*)cvAlloc( xml_buf_size+2 );
+                // find the last occurence of </opencv_storage>
+                for(;;)
+                {
+                    int line_offset = (int)ftell( fs->file );
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                     char* ptr0 = icvGets( fs, xml_buf, xml_buf_size ), *ptr;
                     if( !ptr0 )
                         break;
@@ -2833,8 +2866,17 @@ cvOpenFileStorage( const char* filename, CvMemStorage* dststorage, int flags, co
                         ptr += strlen(substr);
                     }
                 }
+<<<<<<< HEAD
                 if( last_occurence < 0 )
                     CV_Error( CV_StsError, "Could not find </opencv_storage> in the end of file.\n" );
+=======
+                cvFree( &xml_buf );
+                if( last_occurence < 0 )
+                {
+                    cvReleaseFileStorage( &fs );
+                    CV_Error( CV_StsError, "Could not find </opencv_storage> in the end of file.\n" );
+                }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
                 icvCloseFile( fs );
                 fs->file = fopen( fs->filename, "r+t" );
                 fseek( fs->file, last_occurence, SEEK_SET );
@@ -2908,10 +2950,25 @@ cvOpenFileStorage( const char* filename, CvMemStorage* dststorage, int flags, co
 
         //mode = cvGetErrMode();
         //cvSetErrMode( CV_ErrModeSilent );
+<<<<<<< HEAD
         if( fs->fmt == CV_STORAGE_FORMAT_XML )
             icvXMLParse( fs );
         else
             icvYMLParse( fs );
+=======
+        try
+        {
+            if( fs->fmt == CV_STORAGE_FORMAT_XML )
+                icvXMLParse( fs );
+            else
+                icvYMLParse( fs );
+        }
+        catch (...)
+        {
+            cvReleaseFileStorage( &fs );
+            throw;
+        }
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
         //cvSetErrMode( mode );
 
         // release resources that we do not need anymore
@@ -2936,7 +2993,10 @@ _exit_:
         }
     }
 
+<<<<<<< HEAD
     cvFree( &xml_buf );
+=======
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
     return  fs;
 }
 
@@ -5231,7 +5291,11 @@ FileStorage& operator << (FileStorage& fs, const string& str)
     }
     else if( fs.state == NAME_EXPECTED + INSIDE_MAP )
     {
+<<<<<<< HEAD
         if( !cv_isalpha(*_str) )
+=======
+        if (!cv_isalpha(*_str) && *_str != '_')
+>>>>>>> 4a5a6cfc1ba26f73cbd6c6fcaf561ca6dbced81d
             CV_Error_( CV_StsError, ("Incorrect element name %s", _str) );
         fs.elname = str;
         fs.state = VALUE_EXPECTED + INSIDE_MAP;
