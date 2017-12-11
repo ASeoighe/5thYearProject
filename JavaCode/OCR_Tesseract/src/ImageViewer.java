@@ -32,6 +32,7 @@ import javax.swing.border.LineBorder;
 import java.awt.SystemColor;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
 
 public class ImageViewer {
 	File chosenFile;
@@ -165,8 +166,8 @@ public class ImageViewer {
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBackground(SystemColor.controlShadow);
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
 		panel.setBounds(0, 114, 664, 447);
 		frame.getContentPane().add(panel);
@@ -184,7 +185,7 @@ public class ImageViewer {
 		panel.add(outputPanel);
 		
 		imageViewPanel = new JPanel();
-		imageViewPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		imageViewPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		imageViewPanel.setBackground(Color.WHITE);
 		imageViewPanel.setBounds(0, 0, 325, 366);
 		inputImage = new JLabel("", null, JLabel.CENTER);
@@ -194,7 +195,7 @@ public class ImageViewer {
 		outputPanel.add(imageViewPanel);
 		
 		textOutputPanel = new JPanel();
-		textOutputPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		textOutputPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		textOutputPanel.setBackground(Color.WHITE);
 		textOutputPanel.setBounds(325, 0, 315, 366);
 		outputPanel.add(textOutputPanel);
@@ -232,7 +233,7 @@ public class ImageViewer {
 		ErrorPanel.add(errorLabel);
 		
 		progressBarPanel = new JPanel();
-		progressBarPanel.setBackground(SystemColor.controlShadow);
+		progressBarPanel.setBackground(Color.WHITE);
 		progressBarPanel.setLayout(null);
 		progressBarPanel.setBounds(284, 39, 257, 23);
 		panel.add(progressBarPanel);
@@ -292,8 +293,8 @@ public class ImageViewer {
 		panel.add(btnReadImage);
 		
 		SQL_Panel = new JPanel();
-		SQL_Panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		SQL_Panel.setBackground(SystemColor.controlShadow);
+		SQL_Panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		SQL_Panel.setBackground(Color.WHITE);
 		SQL_Panel.setBounds(0, 0, 664, 113);
 		frame.getContentPane().add(SQL_Panel);
 		SQL_Panel.setLayout(null);

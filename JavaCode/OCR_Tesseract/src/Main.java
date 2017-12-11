@@ -36,7 +36,7 @@ public static void writeToFile(String input) {
 
 	 File file = new File("C:\\Users\\Aaron\\Documents\\GitHub\\5thYearProject\\testImages\\OutputFiles\\outPut.txt");
 
-	 File file = new File("C:\\Users\\Aaron Scally Seoighe\\Documents\\Code\\5thYrProject\\testImages\\OutputFiles\\outPut.txt");
+	// File file = new File("C:\\Users\\Aaron Scally Seoighe\\Documents\\Code\\5thYrProject\\testImages\\OutputFiles\\outPut.txt");
 
 	 /* This logic will make sure that the file 
 	  * gets created if it is not present at the
