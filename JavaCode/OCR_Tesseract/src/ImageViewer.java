@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +28,10 @@ import javax.swing.JProgressBar;
 
 import java.awt.Color;
 import javax.swing.JTextPane;
+import javax.swing.border.LineBorder;
+import java.awt.SystemColor;
+import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
 
 public class ImageViewer {
 	File chosenFile;
@@ -42,6 +48,7 @@ public class ImageViewer {
 	JTextPane outPutTextPane;
 	JLabel lblTextReadFrom;
 	JLabel errorLabel;
+	static JTextArea sqlStatus;
 	
 	JPanel progressBarPanel;
 	private static String IMG_PATH = null;
@@ -49,6 +56,9 @@ public class ImageViewer {
 	ITesseract instance = new Tesseract();
 	writeToFile fileWriter = new writeToFile();
 	static sqlInsert mySQL ;
+	private JPanel SQL_Panel;
+	private static JTextField SQLUrl;
+	JButton btnConnectToDatabase;
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +66,7 @@ public class ImageViewer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mySQL = new sqlInsert();
+					
 					ImageViewer window = new ImageViewer();
 					window.frame.setVisible(true);
   
@@ -92,6 +102,7 @@ public class ImageViewer {
 			 outPutTextPane.setText(result);
 			 System.out.println(result);
 			 fileWriter.writeToFile(result);
+			 
 			 if(mySQL.insertPlate(result)) {
 				 errorLabel.setVisible(true);
 				 errorLabel.setForeground(Color.GREEN);
@@ -109,6 +120,18 @@ public class ImageViewer {
 			}
      
 		}
+      });
+	}
+	public void connectDatabase() {
+		SwingUtilities.invokeLater(new Runnable() {
+	      public void run() {
+	    	  try {
+				mySQL = new sqlInsert(sqlStatus, SQLUrl);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 }
       });
 	}
         
@@ -136,14 +159,16 @@ public class ImageViewer {
 		}
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 680, 480);
+		frame.setBounds(100, 100, 680, 600);
+		frame.setTitle("LicensePlate Reader");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel.setBackground(SystemColor.controlShadow);
 		panel.setLayout(null);
-		panel.setBounds(0, 0, 670, 447);
+		panel.setBounds(0, 114, 664, 447);
 		frame.getContentPane().add(panel);
 		
 		directoryText = new JTextField();
@@ -155,10 +180,11 @@ public class ImageViewer {
 		outputPanel = new JPanel();
 		outputPanel.setBackground(Color.WHITE);
 		outputPanel.setLayout(null);
-		outputPanel.setBounds(10, 70, 650, 366);
+		outputPanel.setBounds(10, 70, 644, 366);
 		panel.add(outputPanel);
 		
 		imageViewPanel = new JPanel();
+		imageViewPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		imageViewPanel.setBackground(Color.WHITE);
 		imageViewPanel.setBounds(0, 0, 325, 366);
 		inputImage = new JLabel("", null, JLabel.CENTER);
@@ -168,15 +194,16 @@ public class ImageViewer {
 		outputPanel.add(imageViewPanel);
 		
 		textOutputPanel = new JPanel();
+		textOutputPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		textOutputPanel.setBackground(Color.WHITE);
-		textOutputPanel.setBounds(325, 0, 325, 366);
+		textOutputPanel.setBounds(325, 0, 315, 366);
 		outputPanel.add(textOutputPanel);
 		textOutputPanel.setLayout(null);
 		
 		outPutTextPane = new JTextPane();
 		outPutTextPane.setEditable(false);
 		outPutTextPane.setVisible(false);
-		outPutTextPane.setBounds(10, 41, 305, 314);
+		outPutTextPane.setBounds(10, 41, 295, 314);
 		textOutputPanel.add(outPutTextPane);
 		
 		lblTextReadFrom = new JLabel("Text Read From Image");
@@ -185,16 +212,17 @@ public class ImageViewer {
 		textOutputPanel.add(lblTextReadFrom);
 		
 		JPanel ErrorPanel = new JPanel();
+		ErrorPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		ErrorPanel.setBackground(Color.WHITE);
 		ErrorPanel.setLayout(null);
 		ErrorPanel.setBounds(10, 39, 264, 20);
 		panel.add(ErrorPanel);
 		
-		JLabel error = new JLabel("Errors : ");
+		JLabel error = new JLabel("Status: ");
 		error.setForeground(Color.RED);
 		//error.setEnabled(false);
 		error.setVisible(false);
-		error.setBounds(0, 0, 46, 14);
+		error.setBounds(10, 0, 46, 14);
 		ErrorPanel.add(error);
 		
 		errorLabel = new JLabel("");
@@ -204,7 +232,7 @@ public class ImageViewer {
 		ErrorPanel.add(errorLabel);
 		
 		progressBarPanel = new JPanel();
-		progressBarPanel.setBackground(Color.WHITE);
+		progressBarPanel.setBackground(SystemColor.controlShadow);
 		progressBarPanel.setLayout(null);
 		progressBarPanel.setBounds(284, 39, 257, 23);
 		panel.add(progressBarPanel);
@@ -262,6 +290,51 @@ public class ImageViewer {
 		});
 		btnReadImage.setBounds(551, 36, 109, 23);
 		panel.add(btnReadImage);
+		
+		SQL_Panel = new JPanel();
+		SQL_Panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		SQL_Panel.setBackground(SystemColor.controlShadow);
+		SQL_Panel.setBounds(0, 0, 664, 113);
+		frame.getContentPane().add(SQL_Panel);
+		SQL_Panel.setLayout(null);
+		
+		SQLUrl = new JTextField();
+		/*
+		SQLUrl.addFocusListener(new FocusListener() {
+		    public void focusGained(FocusEvent e) {
+		    	SQLUrl.setText("");
+		    }
+
+		    public void focusLost(FocusEvent e) {
+		    	SQLUrl.setText("Example: http://127.0.0.1/database");
+		    }
+		});
+		*/
+		//SQLUrl.setText("Example: http://127.0.0.1/database");
+		SQLUrl.setBounds(170, 11, 370, 20);
+		SQL_Panel.add(SQLUrl);
+		SQLUrl.setColumns(10);
+		
+		btnConnectToDatabase = new JButton("Connect");
+		btnConnectToDatabase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				connectDatabase();
+			}
+		});
+		btnConnectToDatabase.setBounds(550, 10, 104, 62);
+		SQL_Panel.add(btnConnectToDatabase);
+		
+		JLabel lblEnterSqlUrl = new JLabel("Enter SQL URL");
+		lblEnterSqlUrl.setBounds(71, 11, 89, 17);
+		SQL_Panel.add(lblEnterSqlUrl);
+		
+		JLabel lblSqlFeedback = new JLabel("SQL FeedBack");
+		lblSqlFeedback.setBounds(71, 37, 89, 20);
+		SQL_Panel.add(lblSqlFeedback);
+		
+		sqlStatus = new JTextArea();
+		sqlStatus.setBounds(170, 42, 370, 60);
+		SQL_Panel.add(sqlStatus);
 		
 		//Updates look and feel for all components
 		SwingUtilities.updateComponentTreeUI(frame);
