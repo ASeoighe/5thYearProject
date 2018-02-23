@@ -1,5 +1,6 @@
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import net.sourceforge.tess4j.ITesseract;
@@ -21,8 +22,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.lang.String;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
 
@@ -34,6 +40,17 @@ import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
+import org.opencv.core.Core;
+//import org.opencv.*;
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.imgproc.*;
+import org.opencv.objdetect.*;
+import org.opencv.imgcodecs.Imgcodecs;
+//import org.opencv.highgui.Highgui;
+
+import ch.qos.logback.classic.filter.ThresholdFilter;
+
 public class ImageViewer {
 	File chosenFile;
 	String result =null;
@@ -41,6 +58,7 @@ public class ImageViewer {
 	private JFrame frame;
 	private JTextField directoryText;
 	
+	List<String> Config = new ArrayList<String>();
 	private JLabel inputImage;
 	private JPanel outputPanel;
 	private JPanel imageViewPanel;
@@ -67,8 +85,9 @@ public class ImageViewer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+					System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 					ImageViewer window = new ImageViewer();
+					
 					window.frame.setVisible(true);
   
 				} catch (Exception e) {
@@ -91,13 +110,45 @@ public class ImageViewer {
 	         //progressBar.updateBar(percent);
 			 try {     
 			 BufferedImage img;
-			
-				img = ImageIO.read(new File(IMG_PATH));
-			
+			 
+			 //img = ImageIO.read(new File(IMG_PATH));
+			 
+			 //Mat aSrc , aDst = new Mat();
+			 
+			 Mat grayscaleResult = new Mat();
+			 Mat Gray = Imgcodecs.imread(IMG_PATH, Imgcodecs.IMREAD_GRAYSCALE);
+			 //Imgproc.adaptiveThreshold(Gray, grayscaleResult, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C, Imgproc.THRESH_BINARY, 65, 3);
+			 Square sq = new Square();
+			 try {
+				sq.findRectangle(Gray);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+			// Values 3 and 4are the LowerThreshold and UpperThreshold.
+			 //Imgproc.Canny(Gray, grayscaleResult, 80, 100);
+
+			 // Otsu's thresholding after Gaussian filtering
+			 Mat blur = new Mat();
+			 //Imgproc.GaussianBlur(Gray,blur,new Size(5,5),0);
+			 
+			 Imgproc.threshold(Gray,grayscaleResult,0,255,Imgproc.THRESH_BINARY+Imgproc.THRESH_OTSU);
+			 
+			 grayscaleResult = blur(grayscaleResult,2);
+
+			 img = (BufferedImage) toBufferedImage(grayscaleResult);
+			 
 			 ImageIcon image = new ImageIcon(img);
 			 inputImage.setIcon(image);
-			 result = instance.doOCR(chosenFile);
 			 
+			 
+			 List<String> configs = Arrays.asList("bazaar");
+		     instance.setConfigs(configs);
+			 
+		     //result = instance.doOCR(chosenFile);
+		     result = instance.doOCR(img);
+		     
 			 lblTextReadFrom.setVisible(true);
 			 outPutTextPane.setVisible(true);
 			 outPutTextPane.setText(result);
@@ -115,7 +166,7 @@ public class ImageViewer {
 				 errorLabel.setText("Databse Insert Failed!");
 			 }
 			 
-		 } catch (IOException | TesseractException e) {
+		 } catch (TesseractException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -340,4 +391,28 @@ public class ImageViewer {
 		//Updates look and feel for all components
 		SwingUtilities.updateComponentTreeUI(frame);
 	}
+	
+	public Image toBufferedImage(Mat m){
+	        int type = BufferedImage.TYPE_BYTE_GRAY;
+	        if ( m.channels() > 1 ) {
+	            type = BufferedImage.TYPE_3BYTE_BGR;
+	        }
+	        int bufferSize = m.channels()*m.cols()*m.rows();
+	        byte [] b = new byte[bufferSize];
+	        m.get(0,0,b); // get all the pixels
+	        BufferedImage image = new BufferedImage(m.cols(),m.rows(), type);
+	        final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+	        System.arraycopy(b, 0, targetPixels, 0, b.length);  
+	        return image;
+	
+	    }
+	public Mat blur(Mat input, int numberOfTimes){
+        Mat sourceImage = new Mat();
+        Mat destImage = input.clone();
+        for(int i=0;i<numberOfTimes;i++){
+            sourceImage = destImage.clone();
+            Imgproc.GaussianBlur(sourceImage, destImage, new Size(3.0,3.0), 0);
+        }
+        return destImage;
+    }
 }
