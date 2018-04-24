@@ -1,4 +1,4 @@
-# Aaron Scally
+# [Aaron Scally](https://www.linkedin.com/in/aaronscallyjoyce/)
 # 5th Year Project
 # BEng(Hons) Computer & Electronic Engineering
 
