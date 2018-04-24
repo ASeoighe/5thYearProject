@@ -1,0 +1,5 @@
+﻿  imageCrop.cpp
+c:\users\user\onedrive - gmit\5thyearproject-threshold-objectdetection\c++code\platecropper\platecrop\platecrop\imagecrop.cpp(100): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\user\onedrive - gmit\5thyearproject-threshold-objectdetection\c++code\platecropper\platecrop\platecrop\imagecrop.cpp(101): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  PlateCrop.vcxproj -> C:\Users\User\OneDrive - GMIT\5thYearProject-Threshold-ObjectDetection\C++Code\PlateCropper\PlateCrop\x64\Debug\PlateCrop.exe
+  PlateCrop.vcxproj -> C:\Users\User\OneDrive - GMIT\5thYearProject-Threshold-ObjectDetection\C++Code\PlateCropper\PlateCrop\x64\Debug\PlateCrop.pdb (Full PDB)

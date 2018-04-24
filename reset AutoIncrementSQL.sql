@@ -1,0 +1,1 @@
+ALTER TABLE platedata AUTO_INCREMENT = 1;
