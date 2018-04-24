@@ -1,6 +1,6 @@
 # Aaron Scally
 # 5th Year Project
-#BEng(Hons) Computer & Electronic Engineering
+# BEng(Hons) Computer & Electronic Engineering
 
 Access Control Project, using ANPR for Optical Character Recognition(O.C.R)  using MySQL, rPI, Java, Python
 
@@ -42,8 +42,8 @@ As of: 24/04/2018
 -------------------------------------------------------
 - Been going good, alo of work to get the Client program UI to work on the Pi and when it does its very laggy due to the low resources available. I have an earlier version runnning and the current version runnin on the DesktopPC.
 I have acheived live Streaming from the pi to the browser and came up with a solution to get live feed into the gui. originally i was reading the page data separated by the --BoundaryString which separates each JPEG data file of the stream but this was unreliable and was reading in corrupt images. A succesful workaround with roughly 1 FPS is runnin a script on the Camera server to take a snapshot every 1 second. it then saves that file to a static directory wh9ch is then accessed by the gui constantly in a background procesws using SFTP to transfer the Image file. this is working very well and stores the Images without a hitch.
-- I also retrained Tesseract OCR with a specifin license plate font as well as created a Haar_Cascade XMl for successful plate detection.
-- It is working with a live video input but incorporating it into the Java Gui isnt working out well, an had to reWrite it for the 50th time to work with saticimages instead of a live video due to the SFTP File stream simulation live feed.
+ I also retrained Tesseract OCR with a specifin license plate font as well as created a Haar_Cascade XMl for successful plate detection.
+ - It is working with a live video input but incorporating it into the Java Gui isnt working out well, an had to reWrite it for the 50th time to work with saticimages instead of a live video due to the SFTP File stream simulation live feed.
 -------------------------------------------------------------------------------------------------------------------
 Functionality Includes:
   - Camera server Stream into GUI
