@@ -1,0 +1,1 @@
+INDEX VERSION 1.130+C:\Users\G00314077\OneDrive - GMIT\5thYearProject-Threshold-ObjectDetection\JavaCode\OCR_Tesseract\.metadata\.plugins\org.eclipse.jdt.core

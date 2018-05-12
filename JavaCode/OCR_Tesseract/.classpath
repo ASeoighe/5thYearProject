@@ -26,14 +26,10 @@
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.25.jar"/>
 	<classpathentry kind="lib" path="lib/tess4j-3.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/xmlgraphics-commons-1.5.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCv300">
+	<classpathentry kind="lib" path="lib/opencv-300.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="OCR_Tesseract/lib/opencv300/build/java/x64"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="OCR_Tesseract/src/src/Gui"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="mysql-connector-java-3.0.10-stable-bin.jar"/>
-	<classpathentry kind="lib" path="lib/opencv-300.jar"/>
-	<classpathentry kind="lib" path="lib/jsch-0.1.54.jar"/>
-	<classpathentry kind="lib" path="lib/synthetica.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

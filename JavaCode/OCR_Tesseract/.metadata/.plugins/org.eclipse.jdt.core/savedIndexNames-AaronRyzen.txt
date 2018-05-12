@@ -1,0 +1,13 @@
+INDEX VERSION 1.130+C:\Users\User\OneDrive - GMIT\5thYearProject-Threshold-ObjectDetection\JavaCode\OCR_Tesseract\.metadata\.plugins\org.eclipse.jdt.core
+401892571.index
+3562458022.index
+2114575291.index
+2257542629.index
+2861139855.index
+374985064.index
+3739200268.index
+797160259.index
+3298074711.index
+1005145741.index
+2140351226.index
+2535054089.index

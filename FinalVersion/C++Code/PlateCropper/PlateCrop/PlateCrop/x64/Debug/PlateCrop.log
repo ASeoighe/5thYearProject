@@ -1,0 +1,5 @@
+﻿  imageCrop.cpp
+d:\5thyearproject\workspace\c++code\platecropper\platecrop\platecrop\imagecrop.cpp(104): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\5thyearproject\workspace\c++code\platecropper\platecrop\platecrop\imagecrop.cpp(105): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  PlateCrop.vcxproj -> D:\5thYearProject\workspace\C++Code\PlateCropper\PlateCrop\x64\Debug\PlateCrop.exe
+  PlateCrop.vcxproj -> D:\5thYearProject\workspace\C++Code\PlateCropper\PlateCrop\x64\Debug\PlateCrop.pdb (Full PDB)

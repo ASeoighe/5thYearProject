@@ -1,0 +1,8 @@
+﻿  Source.cpp
+c:\users\g00314077\onedrive - gmit\project\squarecroptest\squarecroptest\source.cpp(112): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\g00314077\onedrive - gmit\project\squarecroptest\squarecroptest\source.cpp(113): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\g00314077\onedrive - gmit\project\squarecroptest\squarecroptest\source.cpp(114): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\g00314077\onedrive - gmit\project\squarecroptest\squarecroptest\source.cpp(115): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\g00314077\onedrive - gmit\project\squarecroptest\squarecroptest\source.cpp(136): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  SquareCropTest.vcxproj -> C:\Users\G00314077\OneDrive - GMIT\Project\SquareCropTest\x64\Debug\SquareCropTest.exe
+  SquareCropTest.vcxproj -> C:\Users\G00314077\OneDrive - GMIT\Project\SquareCropTest\x64\Debug\SquareCropTest.pdb (Partial PDB)
